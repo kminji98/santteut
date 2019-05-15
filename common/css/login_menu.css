@@ -1,0 +1,23 @@
+body {margin:0;}
+body #wrap{width: 100%; height:100%;}
+#menus{ display: inline-block;}
+div #top_menu li{font-size: 18px; font-weight: bold; display: inline; margin-left: 50px; }
+div #top_menu a{text-decoration: none; color: #363636;}
+#login_menu{float: right; margin-right: 25px; margin-top: 10px;}
+#login_menu a{margin-right: 15px; text-decoration: none; font-size: 13px;}
+#logo img{width: 100px; height: 50px; margin-left: 200px;}
+#logo a{margin-top: 150px;}
+#main_search{background-image: url("../img/tree.jpg"); height: 400px;}
+#main_search input{border: 5px solid black; height: 40px; font-size: 20px; width: 500px; text-align: center; margin-left: 33%;}
+#main_search button{ color: white; background-color: black; border: 10px solid black; font-size: 20px; border-radius: 15px; font-weight: bold;}
+#main_big3 h1{text-align: center;}
+footer{background-color: #363c48; height: 200px;}
+footer h2{color: #999999;}
+#footer1{color: white; margin-left: 30px; float: left; clear: both; font-size: 15px;}
+#footer1 b{font-size: 25px;}
+#footer2{color: white; float: left; margin-left: 250px; font-size: 15px;}
+#footer2 li {display: inline-block; text-decoration: none;}
+#footer2 a {display: inline-block; text-decoration: none; color: white;}
+#footer3{color: white; float: right; margin-right: 400px; font-size: 15px;}
+#footer3 li {display: inline-block; text-decoration: none;}
+#footer3 a {display: inline-block; text-decoration: none; color: white;}

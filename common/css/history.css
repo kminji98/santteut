@@ -1,0 +1,11 @@
+#history h2{
+  padding: 5px 5px;
+}
+#title_history li{
+  list-style: none;
+  color: gray;
+  font-size: 20px;
+}
+legend{
+  text-align: center;
+}
