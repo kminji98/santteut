@@ -2,7 +2,7 @@
 <html lang="ko" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css?ver=0">
+    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/introduction/css/history.css">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/member/login/css/login.css">
     <title>로그인</title>
@@ -12,6 +12,7 @@
     <header>
       <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/login_menu.php";?>
     </header>
+    <section id="login">
     <h2>로그인</h2>
     <hr>
     <div class="login_form">
@@ -26,8 +27,17 @@
           <th><label>비밀번호</label> </th>
           <td><input type="password" name="login_passwd"></td>
         </tr>
-        <tr><td colspan="3"><input type="checkbox" name="id_storage">아이디저장&nbsp;&nbsp;<a href="#">회원가입</a></td></tr>
-        <tr><td colspan="3"><a href="#">Forgot ID</a>&nbsp; / &nbsp;<a href="#">Password?</a></td></tr>
+        <tr>
+          <td id="empty_row" colspan="3"><br></td>
+        </tr>
+        <tr><td id="id_storage" colspan="3"><input type="checkbox" name="id_storage">아이디저장&nbsp;&nbsp;<a href="#"><b>회원가입</b></a></td></tr>
+        <tr>
+          <td id="empty_row" colspan="3"><br></td>
+        </tr>
+        <tr><td colspan="3">&nbsp;&nbsp;<a href="#">아이디 찾기</a>&nbsp; / &nbsp;<a href="#">패스워드찾기</a></td></tr>
+        <tr>
+          <td id="empty_row" colspan="3"><br></td>
+        </tr>
         <tr>
           <td colspan="3">
             <a href="#"><img src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/member/login/img/naver.jpg" alt="네이버계정로그인"></a>
@@ -38,6 +48,7 @@
         </tr>
       </table>
     </div>
+    </section>
   <br>
     <footer>
       <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/footer.php";?>
