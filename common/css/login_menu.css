@@ -20,18 +20,18 @@ div #top_menu a{text-decoration: none; color: #363636;}
 #main_search button{ color: white; background-color: black; border: 10px solid black; font-size: 20px; border-radius: 8px; font-weight: bold; cursor:pointer;}
 #main_big3 h1{text-align: center;}
 footer{background-color: #363c48; height: 200px;}
-footer h2{color: #999999; border: 1px solid black;}
-#footer1{color: white; margin-left: 30px; float: left; clear: both; font-size: 15px; border: 1px solid black; height:200px;}
-#footer1 b{font-size: 25px; border: 1px solid black;}
-#footer2{color: white; float: left; margin-left: 500px; font-size: 15px; border: 1px solid black;}
-#footer2 h2{text-align: center; border: 1px solid black;}
-#footer2 ul{margin-right: 40px; border: 1px solid black;}
-#footer2 li {display: inline-block; text-decoration: none; border: 1px solid black;}
-#footer2 a {display: inline-block; text-decoration: none; color: white; border: 1px solid black;}
-#footer3{color: white; float: left; margin-left: 200px; font-size: 15px;  border: 1px solid black;}
-#bottom_menu2{padding-left: 30px; border: 1px solid black;}
-#footer3 h2{text-align: center; border: 1px solid black;}
-#footer3 ul{margin-right: 20px; border: 1px solid black;}
-#footer3 li {display: inline-block; text-decoration: none; padding: 5px 0; text-align: center; border: 1px solid black;}
-#footer3 a {display: inline-block; text-decoration: none; color: white; margin-right: 50%;width: 100px; border: 1px solid black;}
-.riight_fotter{float: left; border: 1px solid black; height:200px; width: 1000px;}
+footer h2{color: #999999;}
+#footer1{color: white; margin-left: 30px; float: left; clear: both; font-size: 15px; height:200px;}
+#footer1 b{font-size: 25px;}
+#footer2{color: white; float: left; margin-left: 500px; font-size: 15px; }
+#footer2 h2{text-align: center;}
+#footer2 ul{margin-right: 40px;}
+#footer2 li {display: inline-block; text-decoration: none; }
+#footer2 a {display: inline-block; text-decoration: none; color: white; }
+#footer3{color: white; float: left; margin-left: 200px; font-size: 15px; }
+#bottom_menu2{padding-left: 30px; }
+#footer3 h2{text-align: center; }
+#footer3 ul{margin-right: 20px; }
+#footer3 li {display: inline-block; text-decoration: none; padding: 5px 0; text-align: center; }
+#footer3 a {display: inline-block; text-decoration: none; color: white; margin-right: 50%;width: 100px; }
+.riight_fotter{float: left; height:200px; width: 1000px;}
