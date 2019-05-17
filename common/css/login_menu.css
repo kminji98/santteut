@@ -1,23 +1,37 @@
-body {margin:0;}
-body #wrap{width: 100%; height:100%;}
+body{margin: 0;}
+a{text-decoration: none;}
+a:visited{color: inherit;}
+#wrap{width: 100%; height:100%;}
+header{height: 135px;}
 #menus{ display: inline-block;}
+#login_menu_ul > li {list-style: none; display: inline-block; font-size:14px;}
 div #top_menu li{font-size: 18px; font-weight: bold; display: inline; margin-left: 50px; }
 div #top_menu a{text-decoration: none; color: #363636;}
-#login_menu{float: right; margin-right: 25px; margin-top: 10px;}
-#login_menu a{margin-right: 15px; text-decoration: none; font-size: 13px;}
-#logo img{width: 100px; height: 50px; margin-left: 200px;}
-#logo a{margin-top: 150px;}
-#main_search{background-image: url("../img/tree.jpg"); height: 400px;}
-#main_search input{border: 5px solid black; height: 40px; font-size: 20px; width: 500px; text-align: center; margin-left: 33%;}
-#main_search button{ color: white; background-color: black; border: 10px solid black; font-size: 20px; border-radius: 15px; font-weight: bold;}
+#login_menu{float: right; margin-right: 25px;}
+#login_menu a.hov{margin-right: 15px; text-decoration: none; font-size: 14px;}
+#top_my_content{display: none;   background-color: white;box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);width : 100px;}
+#top_my:hover #top_my_content{display: block; position: absolute;}
+#top_my_content_ul{padding:0;}
+#top_my_content_ul li{list-style: none;}
+#top_my_content_ul li:hover{color: black; background-color: rgb(212, 212, 212);}
+#logo img{width: 150px; height: 100px; margin-left: 200px; padding-top: 20px;}
+#main_search{background-image: url("../img/111.jpg"); width: 100%; height: 400px;}
+#main_search input{border: 5px solid black; height: 40px; font-size: 20px; width: 500px; text-align: center; margin-left: 35%;}
+#main_search button{ color: white; background-color: black; border: 10px solid black; font-size: 20px; border-radius: 8px; font-weight: bold; cursor:pointer;}
 #main_big3 h1{text-align: center;}
 footer{background-color: #363c48; height: 200px;}
-footer h2{color: #999999;}
-#footer1{color: white; margin-left: 30px; float: left; clear: both; font-size: 15px;}
-#footer1 b{font-size: 25px;}
-#footer2{color: white; float: left; margin-left: 250px; font-size: 15px;}
-#footer2 li {display: inline-block; text-decoration: none;}
-#footer2 a {display: inline-block; text-decoration: none; color: white;}
-#footer3{color: white; float: right; margin-right: 400px; font-size: 15px;}
-#footer3 li {display: inline-block; text-decoration: none;}
-#footer3 a {display: inline-block; text-decoration: none; color: white;}
+footer h2{color: #999999; border: 1px solid black;}
+#footer1{color: white; margin-left: 30px; float: left; clear: both; font-size: 15px; border: 1px solid black; height:200px;}
+#footer1 b{font-size: 25px; border: 1px solid black;}
+#footer2{color: white; float: left; margin-left: 500px; font-size: 15px; border: 1px solid black;}
+#footer2 h2{text-align: center; border: 1px solid black;}
+#footer2 ul{margin-right: 40px; border: 1px solid black;}
+#footer2 li {display: inline-block; text-decoration: none; border: 1px solid black;}
+#footer2 a {display: inline-block; text-decoration: none; color: white; border: 1px solid black;}
+#footer3{color: white; float: left; margin-left: 200px; font-size: 15px;  border: 1px solid black;}
+#bottom_menu2{padding-left: 30px; border: 1px solid black;}
+#footer3 h2{text-align: center; border: 1px solid black;}
+#footer3 ul{margin-right: 20px; border: 1px solid black;}
+#footer3 li {display: inline-block; text-decoration: none; padding: 5px 0; text-align: center; border: 1px solid black;}
+#footer3 a {display: inline-block; text-decoration: none; color: white; margin-right: 50%;width: 100px; border: 1px solid black;}
+.riight_fotter{float: left; border: 1px solid black; height:200px; width: 1000px;}
