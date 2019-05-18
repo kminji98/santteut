@@ -1,4 +1,4 @@
-body{margin: 0;}
+body{margin: 0; min-width: 1300px;}
 a{text-decoration: none;}
 a:visited{color: inherit;}
 #wrap{width: 100%; height:100%;}
@@ -33,5 +33,5 @@ footer h2{color: #999999;}
 #footer3 h2{text-align: center; }
 #footer3 ul{margin-right: 20px; }
 #footer3 li {display: inline-block; text-decoration: none; padding: 5px 0; text-align: center; }
-#footer3 a {display: inline-block; text-decoration: none; color: white; margin-right: 50%;width: 100px; }
-.riight_fotter{float: left; height:200px; width: 1000px;}
+#footer3 a {display: inline-block; text-decoration: none; color: white; margin-right:50%;width: 100px; }
+.right_footer{float: left; height:200px; width: 1000px;position:absolute; left:30%;}

@@ -5,7 +5,7 @@ session_start();
 <html lang="ko" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css?ver=0">
+    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css?ver=1">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/customer_support/faq/css/faq.css?ver=1">
     <title>산뜻 :: 즐거운 산행</title>
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
@@ -26,15 +26,17 @@ session_start();
   </head>
   <body>
     <div id="wrap">
+
     <header>
       <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/login_menu.php";?>
     </header>
+    <hr>
     <!--FAQ 자주 찾는 질문 페이지-->
     <div id="faq_main">
      <br>
      <h1 style="margin-left:15%;"></h1>
      <table id="table1">
-       <tr id="faq"><td id="faq_td1"><b>FAQ</b></td><td width="650px"><br></td></tr>
+       <tr id="faq"><td id="faq_td1"><b>자주찾는질문</b></td><td width="650px"><br></td></tr>
        <tr><td></br></td><td></td></tr>
        <!-- slidetoggle 액션  -->
        <tr><td>➊&nbsp;</td><td id="li1">여권에 이름은 띄어쓰기가 되어 있는데 괜찮나요?</td></tr>
