@@ -3,8 +3,8 @@
 #con2{margin-left: 41%;}
 #con3{margin-left: 61%;}
 .container .content {position: absolute; background: #d10e0e; color: #f1f1f1; width: 10%; padding: 15px; top: 0px; right: 50px;}
-.image {display: block; width: 90%; height: auto;}
-.overlay {position: absolute; bottom: 0; left: 0; right: 0; background-color: white; overflow: hidden; width: 84.5%; height: 25%; transition: height 0.5s; border: 1px solid #ddd; padding: 10px;}
+.image {cursor:pointer; display: block; width: 90%; height: auto;}
+.overlay {cursor:pointer; position: absolute; bottom: 0; left: 0; right: 0; background-color: white; overflow: hidden; width: 84.5%; height: 25%; transition: height 0.5s; border: 1px solid #ddd; padding: 10px;}
 .container:hover .overlay {height: 70%;}
 button{border: 1px solid #d10e0e; font-size: 15px; color: white; background-color: #d10e0e; cursor: pointer; border-radius: 5px; padding: 10px;}
 button:hover{background-color: #d10e0e; opacity: 0.5;}

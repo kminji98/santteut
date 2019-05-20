@@ -33,7 +33,6 @@ session_start();
     #list_tbl_head td:hover {cursor: pointer; text-decoration: underline;}
 
 
-
     #list_tbl_body {-webkit-border-horizontal-spacing: 0px;-webkit-border-vertical-spacing: 0px;border-top-width: 0px;border-right-width: 0px;border-bottom-width: 0px;border-left-width: 0px;font-size: 0.89em; margin: 20px 0; border-collapse: separate; border: 1px solid #3d3d3d; border-bottom-color:#dedede; text-align: center;}
     #list_tbl_body tr:first-child{font-weight:bolder; color:#3d3d3d; background-color:#f2f2f2; }
     #list_tbl_body td{width: 120px; padding:12px; border-left:1px solid #dedede;border-bottom:1px solid #dedede;}
@@ -54,43 +53,10 @@ session_start();
               $("#list_head_tr").children('td').css('border', '1px solid #dedede');
               $(this).css('background-color', 'white');
               $(this).css('border', '1px solid black');
-              $(this).css('border-bottom-color', 'white');
             }
           });
         }
-        // $("#list_head1").click(function(){
-        //   if($("#list_head1").css("background-color")!="white"){
-        //     $("#list_head1").css('background-color', 'white');
-        //     $("#list_head1").css('border', '1px solid #3d3d3d');
-        //     $("#list_head1").css('border-bottom-color', 'white');
-        //     $("#list_head2").css('background-color', '#f2f2f2');
-        //     $("#list_head2").css('border', '1px solid #dedede');
-        //     $("#list_head1").css('border-right-color', '#3d3d3d');
-        //   }
-        // });
-        // $("#list_head2").click(function(){
-        //   if($("#list_head2").css('background-color')!="white"){
-        //     $("#list_head2").css('background-color', 'white');
-        //     $("#list_head2").css('border', '1px solid #3d3d3d');
-        //     $("#list_head2").css('border-bottom-color', 'white');
-        //     $("#list_head1").css('background-color', '#f2f2f2');
-        //     $("#list_head1").css('border', '1px solid #dedede');
-        //     $("#list_head1").css('border-right-color', '#3d3d3d');
-        //   }
-        // });
-        // $("#list_head3").click(function(){
-        //   if($("#list_head3").css('background-color')!="white"){
-        //     $("#list_head3").css('background-color', 'white');
-        //     $("#list_head3").css('border', '1px solid #3d3d3d');
-        //     $("#list_head2").css('border-bottom-color', 'white');
-        //     $("#list_head1").css('background-color', '#f2f2f2');
-        //     $("#list_head1").css('border', '1px solid #dedede');
-        //     $("#list_head1").css('border-right-color', '#3d3d3d');
-        //     $("#list_head2").css('background-color', '#f2f2f2');
-        //     $("#list_head2").css('border', '1px solid #dedede');
-        //     $("#list_head2").css('border-right-color', '#3d3d3d');
-        //   }
-        // });
+        
       });
     </script>
 
