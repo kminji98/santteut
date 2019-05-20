@@ -1,0 +1,14 @@
+#side_bar{text-align: center; margin-top: 0.6%; border: 2px solid #D5D5D5; margin-left: 91%;background-color: #F6F6F6; width: 9.5%; height: 540px; position: fixed;}
+#side_bar_top{font-size:0.9em; border-bottom: 1px solid #D5D5D5; float: left; margin: 0; padding: 0; display: inline-block;}
+#side_bar_cart_img{border-right: 1px solid #D5D5D5; padding: 0; float: left; width: 59px; height: 30px;}
+#side_bar_confirm_img{padding: 0; float: left; width: 60px; height: 30px;}
+#side_bar_recent{border-bottom: 1px solid #D5D5D5; font-size: 14px; color :#8C8C8C; padding: 0;}
+.side_bar_recent_val{font-size: 12px; color :#ED0000; padding: 0;}
+.side_bar_recent_img{border: 1px solid #D5D5D5; width: 100px; height: 80px;}
+.side_bar_bottom{margin-top:9%;font-size: 12px; margin-bottom:0%;}
+.side_bar_bottom p{display: inline;}
+#side_bar_top_btn, #side_bar_cancel_btn{text-align: center;width: 30px; height: 25px; border:1px solid #D5D5D5; background-color:#FFFFFF; cursor:pointer;}
+#side_bar_open_btn{border:1px solid #D5D5D5; padding: 0;font-size: 14px; text-align: center;width: 30px; height: 25px; background-color:#FFFFFF; cursor:pointer;}
+.side_bar_middle{font-size: 14px; color :#8C8C8C; padding: 0; border-bottom: 1px solid #D5D5D5;}
+.side_bar_qna:hover{color :black;}
+#side_bar_control{ margin-top: 0.6%;text-align: center; border: 2px solid #D5D5D5; margin-left: 97.5%; background-color: #F6F6F6;position: fixed;}
