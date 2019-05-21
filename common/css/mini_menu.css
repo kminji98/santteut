@@ -1,0 +1,4 @@
+#minu_menu{list-style: none; color: gray; font-size: 20px; margin-left: 16%;}
+#minu_menu li{list-style: none; display: inline; padding: 15px; text-decoration: none; color: gray;}
+#minu_menu a{text-decoration: none; color: gray;}
+#minu_menu a:hover{color: gray; text-decoration: none;}
