@@ -1,6 +1,6 @@
 #content h2{text-align: center;}
 #insert_form{margin-left: 23%; width: 850px; background-color: #eeeeee;}
 #insert_form td{border: 1px solid grey; border-radius: 5px;}
-#insert_form input,select{margin-left: 20px; border: 1px solid #dddddd; border-radius: 5px; height: 25px;}
+#insert_form input,select{margin-left: 20px; border: 1px solid #dddddd; border-radius: 5px; height: 25px; text-align: center;}
 #insert_form b{margin-left: 20px;}
 #insert_form p{text-align: center; font-weight: bold; font-size: 15px; padding:0px 10px; color: #363c48;}

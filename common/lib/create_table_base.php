@@ -16,10 +16,10 @@ function create_table($conn, $table_name){
       //멤버테이블
       case 'member' :
           $sql = "CREATE TABLE `member` (
-          `id` char(15) NOT NULL,
+          `id` char(20) NOT NULL,
           `passwd` char(15) DEFAULT NULL,
           `passwd_confirm` char(15) DEFAULT NULL,
-          `name` varchar(6) NOT NULL,
+          `name` varchar(10) NOT NULL,
           `zip` char(5)  DEFAULT NULL,
           `address1` varchar(45) DEFAULT NULL,
           `address2` varchar(45) DEFAULT NULL,
@@ -27,6 +27,32 @@ function create_table($conn, $table_name){
           `hp2` char(12) DEFAULT NULL,
           `email` varchar(45) DEFAULT NULL,
           PRIMARY KEY (`id`)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+        ";
+        break;
+
+      case 'package' :
+          $sql = "CREATE TABLE `package` (
+          `p_code` char(10) NOT NULL,
+          `p_name` varchar(10) NOT NULL,
+          `p_period` varchar(30) NOT NULL,
+          `p_dp_date` varchar(20) NOT NULL,
+          `p_dp_time` varchar(20) NOT NULL,
+          `p_arr_time` varchar(20) NOT NULL,
+          `p_pay` int(15)  NOT NULL,
+          `p_add_pay` char(1) NOT NULL,
+          `p_free_time` char(1) NOT NULL,
+          `p_dp_city` varchar(20) NOT NULL,
+          `p_arr_mt` varchar(20) NOT NULL,
+          `p_detail_content` text NOT NULL,
+          `p_main_img1` varchar(50) NOT NULL,
+          `p_main_img2` varchar(50) NOT NULL,
+          `p_main_img3` varchar(50) NOT NULL,
+          `p_main_img_copy1` varchar(50) NOT NULL,
+          `p_main_img_copy2` varchar(50) NOT NULL,
+          `p_main_img_copy3` varchar(50) NOT NULL,
+          `p_airplane_num` varchar(30) NOT NULL,
+          PRIMARY KEY (`p_code`)
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
         ";
         break;

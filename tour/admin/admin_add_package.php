@@ -6,16 +6,9 @@ session_start();
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css">
-    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/tour/admin/css/admin_add_package.css?ver=0">
+    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/tour/admin/css/admin_add_package.css?ver=1">
     <title>산뜻 :: 즐거운 산행</title>
-    <!-- <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
-    <script type="text/javascript">
-     $(document).ready(function() {
-       $("#dept").click(function(event) {
-         window.open();
-       });
-     });
-    </script> -->
+
     <script type="text/javascript">
       function select_area(){
         var popupX = (window.screen.width / 2) - (800 / 2);
@@ -23,6 +16,17 @@ session_start();
       	window.open('../../common/lib/google3.php', '', 'status=no, width=800, height=500, left='+ popupX + ', top='+ popupY + ', screenX='+ popupX + ', screenY= '+ popupY);
       }
     </script>
+
+    <!-- 패키지 코드 랜덤 생성 -->
+    <?php
+    $package_str = "";
+        for($i=0;$i<2;$i++) {
+            $capi = rand()%26+65;
+            $package_str .= chr($capi);
+        }
+    $package_num = mt_rand(100000, 999999);
+    $package_number = $package_str . $package_num;
+    ?>
   </head>
 
   <body>
@@ -38,7 +42,7 @@ session_start();
       <table id="insert_form">
         <tr>
           <td><p>패키지 코드</p></td>
-          <td> <input type="text" name="" value="" readonly> </td>
+          <td> <input type="text" name="" value="<?=$package_number?>" readonly> </td>
         </tr>
 
         <tr>
