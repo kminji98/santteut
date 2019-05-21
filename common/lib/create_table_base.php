@@ -41,13 +41,6 @@ function create_table($conn, $table_name){
       echo "실패원인".mysqli_error($conn);
     }
 
-    if(!empty($sql_insert)){
-      if(mysqli_query($conn,$sql_insert)){
-        echo "<script>alert('survey 초기값 설정이 되었습니다.');</script>";
-      }else{
-        echo "실패원인".mysqli_error($conn);
-      }
-    }
 
   }//end of if flag
 
