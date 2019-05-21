@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/introduction/css/history.css">
-    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/member/login/css/login.css">
+    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/member/login/css/login.css?ver=0.2">
     <title>로그인</title>
   </head>
   <body>
@@ -16,7 +16,7 @@
     <h2>로그인</h2>
     <hr>
     <div class="login_form">
-      <h3>로그인</h3>
+      <b>로그인</b>
       <table>
         <tr>
           <th><label>아이디</label></th>
@@ -41,7 +41,8 @@
         <tr>
           <td colspan="3">
             <a href="#"><img src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/member/login/img/naver.jpg" alt="네이버계정로그인"></a>
-            <a href="#"><img src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/member/login/img/facebook.jpg" alt="페이스북계정로그인"></a><br>
+            <?php include_once './facebook.php'; ?>
+            <?php 	echo '<a href="' . $loginUrl . '">'; ?><img src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/member/login/img/facebook.jpg" alt="페이스북계정로그인"></a><br>
               <a href="kakao.php"><img src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/member/login/img/kakao.jpg" alt="카카오계정로그인"></a>
             <a href="#"><img src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/member/login/img/google.jpg" alt="구글계정로그인"></a>
           </td>

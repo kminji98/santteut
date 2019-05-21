@@ -11,7 +11,7 @@
   <div id="login_menu">
     <ul id="login_menu_ul" >
     <?php
-    if(!isset($_SESSION['id'])){
+    if(!isset($_SESSION['id']) || empty($_SESSION['id'])){
       echo ('<li ><a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/member/login/login.php" class="hov">로그인</a></li>');
       echo ('<li><a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/member/join/join_member.php" class="hov">회원가입</a></li>');
       echo ('<li id="top_my" class="hov">커뮤니티<small>▼</small>
