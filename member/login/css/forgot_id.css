@@ -1,13 +1,17 @@
-.login_form{text-align: center; width: 500px; height: 430px; margin-left: 36.5%; margin-top: 2%; margin-bottom: 2%;}
-.login_form table{margin-left: 11.5%; border-collapse: collapse;}
-.login_form td{height: 30px;}
-.login_form input{height: 30px; font-size: 20px; }
-.login_form button{height: 36px; font-size: 15px; }
-#login_button{width: 85px; height: 85px; font-size: 20px;}
+.login_form{width: 50%; height: 700px;  margin-top: 1%; margin-bottom: 0.5%;}
+.login_form table{margin-left: 37%; border-collapse: collapse; background-color:rgba(189, 189, 189, 0.3); height: 30%; width: 25%; border-top: 1px solid #BDBDBD; border-bottom: 1px solid #BDBDBD;}
+.login_form td{ width: 9%; border-top: 1px solid #BDBDBD;}
+.login_form th{ width: 4%; border-top: 1px solid #BDBDBD;}
+.login_form h3{ margin-left: 47%;}
+
+.login_form input{ font-size: 20px; }
+.login_form button{height: 36px; font-size: 15px; font-weight: bold; border: 1px solid black; background-color: white;}
+.login_form button:hover{height: 36px; font-size: 15px; font-weight: bold; border: 1px solid black; background-color: #EAEAEA;}
+#login_button{width: 85%; height: 85px; font-size: 20px;}
 a:hover{color: black;}
 a{color: black; text-decoration: none;}
 #login h2{margin-left: 12.5%;}
-.login_form h3 {margin-left: 4%;}
 #id_storage input{height: 13px;}
 #empty_row{height: 10px}
 #id_storage b{font-size: 18px;}
+.login_form{background-image: url("../img/forgot_id.jpg"); width: 100%; height: 515px;}

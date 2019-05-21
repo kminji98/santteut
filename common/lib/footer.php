@@ -23,9 +23,9 @@
       <td></td>
       <td>
         <ul id="bottom_menu_customer">
-          <li><a href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/customer_support/faq/faq.php">자주찾는질문</a></li><br>
-          <li><a href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/introduction/history.php">1:1문의하기</a></li><br>
-          <li><a href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/introduction/history.php">공지사항</a></li>
+          <li><a href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/customer_support/faq/faq.php">FAQ</a></li><br>
+          <li><a href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/customer_support/qna/qna_list.php">문의하기</a></li><br>
+          <li><a href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/customer_support/notice/notice_list.php">공지사항</a></li>
         </ul>
       </td>
     </tr>

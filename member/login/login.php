@@ -30,7 +30,7 @@
         <tr>
           <td id="empty_row" colspan="3"><br></td>
         </tr>
-        <tr><td id="id_storage" colspan="3"><input type="checkbox" name="id_storage">아이디저장&nbsp;&nbsp;<a href="#"><b>회원가입</b></a></td></tr>
+        <tr><td id="id_storage" colspan="3"><input type="checkbox" name="id_storage">아이디저장&nbsp;&nbsp;<a href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/member/join/join_member.php"><b>회원가입</b></a></td></tr>
         <tr>
           <td id="empty_row" colspan="3"><br></td>
         </tr>
