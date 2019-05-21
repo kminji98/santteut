@@ -35,14 +35,13 @@ session_start();
           <th>조회</th>
           <th>답변</th>
         </tr>
-
       </table>
     <br>
     <button id="admin_write_btn" type="button" name="button">글쓰기</button>
     <br>
       <div class="page_button_group">
-        <button type="button" name="button"><</button>
         <button type="button" name="button"><<</button>
+        <button type="button" name="button"><</button>
         <button type="button" name="button">1</button>
         <button type="button" name="button">2</button>
         <button type="button" name="button">3</button>
@@ -57,7 +56,7 @@ session_start();
         <button type="button" name="button">>></button>
       </div>
     </section>
-<br>
+    <br>
     <footer>
       <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/footer.php";?>
     </footer>
