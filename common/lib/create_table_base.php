@@ -52,6 +52,7 @@ function create_table($conn, $table_name){
           `p_main_img_copy2` varchar(50) NOT NULL,
           `p_main_img_copy3` varchar(50) NOT NULL,
           `p_airplane_num` varchar(30) NOT NULL,
+          `p_bus` int(10) NOT NULL,
           PRIMARY KEY (`p_code`)
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
         ";

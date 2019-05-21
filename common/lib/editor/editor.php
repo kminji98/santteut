@@ -395,7 +395,7 @@
     				<textarea id="tx_canvas_source" rows="30" cols="30"></textarea>
     			</div>
     		</div>
-    		<div id="tx_canvas_text_holder" class="tx-holder">
+    		<div id="tx_canvas_text_holder" class="tx-holder" name="p_detail_content">
     			<textarea id="tx_canvas_text" rows="30" cols="30"></textarea>
     		</div>
     	</div>
