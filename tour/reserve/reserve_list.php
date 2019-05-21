@@ -2,21 +2,30 @@
 /*
 =================================================================
 + [DESC] 예약/결제 목록 확인
-+ [DATE] 2019-05-18
++ [DATE] 2019-05-21
 + [NAME] 김민지
 =================================================================
 */
 session_start();
 ?>
+<?php
+  $now = new DateTime();
+  $Y = $now -> format("Y");
+  $m = $now -> format("m");
+  $d = $now -> format("d");
+  //t = the number of days in the given month
+  $t = $now -> format("t");
+ ?>
 <!DOCTYPE html>
 <html lang="ko" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css?ver=1">
-    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/tour/reserve/css/reserve_list.css?ver=1">
+    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css?ver=2">
+    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/tour/reserve/css/reserve_list.css?ver=2">
     <title>산뜻 :: 즐거운 산행</title>
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
     <script type="text/javascript">
+    // 예약내역 취소내역 선택 부분
       $(document).ready(function() {
         $("#list_head1").click(function(){
           if($("#list_head1").css("background-color")!="white"){
@@ -38,9 +47,22 @@ session_start();
             $("#list_head1").css('border-right-color', '#3d3d3d');
           }
         });
+        //월 클릭 -> days 변화 이벤트
+        $("#month1").click(function(event) {
+          var days = lastday($("#year1").val(), $(this).val());
+          $("#day1").html("<option value="+days+">"+days+"</option>");
+        });
+        $("#month2").click(function(event) {
+          var days = lastday($("#year2").val(), $(this).val());
+          $("#day2").html("<option value="+days+">"+days+"</option>");
+        });
       });
+      function lastday(year, month){
+        var res = new Date(year, month,0);
+        res = res.getDate();
+        return res;
+      }
     </script>
-
   </head>
   <body>
     <div id="wrap">
@@ -61,26 +83,82 @@ session_start();
         </div>
       </fieldset>
       <br>
-      <fieldset id="search_field" >
+      <fieldset id="search_field" width="min-width: 1000px;">
         <span id="search_date">출발일</span>&nbsp;&nbsp;&nbsp;
-        <select class="date_select" name="year1" >
-          <option value="">2019</option>
+        <select class="date_select" name="year1" id="year1" >
+        <?php
+          // 현재 연도 +- 2
+          for ($i=$Y+2; $i > $Y-2 ; $i--) {
+            if($i==$Y){
+              echo '<option value="'.$i.'" selected >'.$i.'</option>';
+            }else {
+              echo '<option value="'.$i.'">'.$i.'</option>';
+            }
+          }
+        ?>
         </select>년
-        <select class="date_select" name="month1" >
-          <option value="">05</option>
+        <select class="date_select" name="month1" id="month1">
+          <?php
+            // MONTH
+            for ($i=1; $i <= 12 ; $i++) {
+              if($i==$m){
+                echo '<option value="'.$i.'" selected >'.$i.'</option>';
+              }else {
+                echo '<option value="'.$i.'">'.$i.'</option>';
+              }
+            }
+          ?>
         </select>월
-        <select class="date_select" name="day1" >
-          <option value="">20</option>
+
+        <select class="date_select" name="day1" id="day1">
+          <?php
+            // DAYS
+            for ($i=1; $i <= $t ; $i++) {
+              if($i==$d){
+                echo '<option value="'.$i.'" selected >'.$i.'</option>';
+              }else {
+                echo '<option value="'.$i.'">'.$i.'</option>';
+              }
+            }
+          ?>
         </select>일
         &nbsp;~&nbsp;
-        <select class="date_select" name="year1" >
-          <option value="">2019</option>
+
+        <select class="date_select" name="year2" id="year2" >
+        <?php
+          // 현재 연도 +- 2
+          for ($i=$Y+2; $i > $Y-2 ; $i--) {
+            if($i==$Y){
+              echo '<option value="'.$i.'" selected >'.$i.'</option>';
+            }else {
+              echo '<option value="'.$i.'">'.$i.'</option>';
+            }
+          }
+        ?>
         </select>년
-        <select class="date_select" name="month1" >
-          <option value="">05</option>
+        <select class="date_select" name="month2" id="month2">
+          <?php
+            // MONTH
+            for ($i=1; $i <= 12 ; $i++) {
+              if($i==$m){
+                echo '<option value="'.$i.'" selected >'.$i.'</option>';
+              }else {
+                echo '<option value="'.$i.'">'.$i.'</option>';
+              }
+            }
+          ?>
         </select>월
-        <select class="date_select" name="day1" >
-          <option value="">20</option>
+        <select class="date_select" name="day2" id="day2" >
+          <?php
+            // DAYS
+            for ($i=1; $i <= $t ; $i++) {
+              if($i==$d){
+                echo '<option value="'.$i.'" selected >'.$i.'</option>';
+              }else {
+                echo '<option value="'.$i.'">'.$i.'</option>';
+              }
+            }
+          ?>
         </select>일
           &nbsp;&nbsp;
         <input type="button" id="search_btn" name="" value="검색하기" >
