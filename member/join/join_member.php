@@ -9,15 +9,15 @@
     <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
 
-    <!-- 아이디중복확인 -->
+    <!-- 아이디/비밀번호중복확인 -->
     <script type="text/javascript">
+    var final_email_che=false;
     $(document).ready(function(){
+      //아이디 자동확인
      $("#join_id").keyup(function(e){
-       var sendid = document.getElementById("sendid");
        var possibility = document.getElementById("possibility");
        var join_id = document.getElementById("join_id");
        var idPattern = /^[a-zA-Z0-9]{3,15}$/;
-       //나이 검증
        if(!idPattern.test(join_id.value)){
          if(possibility=='아이디가 이미 존재합니다.'){
            $("#possibility").text('아이디가 이미 존재합니다.');
@@ -30,7 +30,6 @@
          }
 
        }
-
        $.ajax({
          url: 'check_id2.php?mode=id_check',
          type: 'GET',
@@ -54,8 +53,113 @@
          console.log("complete");
        });
      });
-   });
+
+     //비밀번호 자동확인
+     $("#join_passwd").keyup(function(e){
+       var possibility_pw1 = document.getElementById("possibility_pw1");
+       var join_passwd = document.getElementById("join_passwd");
+       var join_passwd_Patt = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
+       if(!join_passwd_Patt.test(join_passwd.value)){
+           $("#possibility_pw1").text('특수문자/문자/숫자 모두포함(8~15)');
+           $("#possibility_pw1").css('color', 'red');
+           return false;
+         }else{
+           $("#possibility_pw1").text("사용가능합니다.");
+           $("#possibility_pw1").css('color', 'blue');
+           return false;
+         }
+       });
+
+       //비밀번호확인 자동확인
+       $("#join_passwdconfirm").keyup(function(e){
+         var possibility_pw2 = document.getElementById("possibility_pw2");
+         var join_passwd = document.getElementById("join_passwd");
+         var join_passwdconfirm = document.getElementById("join_passwdconfirm");
+         var join_passwd_Patt = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
+         if(!join_passwd_Patt.test(join_passwdconfirm.value)){
+             $("#possibility_pw2").text('특수문자/문자/숫자 모두포함(8~15)');
+             $("#possibility_pw2").css('color', 'red');
+             return false;
+           }else{
+              if(join_passwd.value!=join_passwdconfirm.value){
+                $("#possibility_pw2").text("비밀번호가 일치하지 않습니다.");
+                $("#possibility_pw2").css('color', 'red');
+              }else{
+                $("#possibility_pw2").text("사용가능합니다.");
+                $("#possibility_pw2").css('color', 'blue');
+              }
+             return false;
+           }
+         });
+
+     });
     </script>
+
+
+    <!-- 이메일인증 -->
+    <script type="text/javascript">
+    var code="";
+    $(document).ready(function(){
+          $("#email_btn").click(function(e){
+            var e_mail_id = document.getElementById("e_mail_id");
+            var e_mail_adress_1 = document.getElementById("e_mail_adress_1");
+            var e_mail_adress_2 = document.getElementById("e_mail_adress_2");
+            var check_email1 = document.getElementsByName("check_email1")[0];
+            var check_email2 = document.getElementsByName("check_email2")[0];
+            var e_mailPatt = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+            var e_mail_id_value=e_mail_id.value.concat('@'+e_mail_adress_2.value);
+
+
+            if(!e_mail_id.value){
+              alert("이메일 아이디를 입력해주세요");
+              e_mail_id.focus();
+              e_mail_id.value="";
+              return false;
+            }else if(!e_mailPatt.test(e_mail_id_value)){
+              alert("이메일 형식을 확인해주세요");
+              e_mail_adress_1.focus();
+              return false;
+            }
+
+
+            // alert(email1.value);
+            $.ajax({
+              url: 'check_email.php',
+              type: 'POST',
+              data: {email: e_mail_id_value}
+            })
+            .done(function(result) {
+              code=result;
+              alert("인증 번호가 발송되었습니다.");
+               check_email1.setAttribute('type', 'text');
+               check_email2.setAttribute('type', 'button');
+            })
+            .fail(function() {
+              alert("인증 번호 발송실패!");
+              console.log("error");
+            })
+            .always(function() {
+              console.log("complete");
+           });
+         });
+         $("#check_email2").click(function(e){
+           var email1 = document.getElementById("check_email1");
+           if(email1.value==code){
+             alert("인증 완료");
+             final_email_che=true;
+             $("#email_final_alert").text("인증완료");
+             $("#email_final_alert").css('color', 'blue');
+           }else{
+             alert("인증 실패");
+             final_email_che=false;
+             $("#email_final_alert").text("인증실패");
+             $("#email_final_alert").css('color', 'red');
+           }
+           });
+        });
+    </script>
+
+
 
 
 
@@ -63,7 +167,6 @@
 
     <!-- 다음 주소찾기 -->
     <script>
-      var final_email_che=false;
       function execDaumPostcode() {/* 폼은 다음 주소찾기 빌리면서 입력값은 여기서 받고 처리하네?  */
             new daum.Postcode({
                 oncomplete: function(data) {
@@ -114,7 +217,17 @@
       var e_mail_adress_1 = document.getElementById("e_mail_adress_1");
       var e_mail_adress_2 = document.getElementById("e_mail_adress_2");
       // e_mail_adress_1.options[e_mail_adress_1.selectedIndex].text
-      e_mail_adress_2.value=e_mail_adress_1.options[e_mail_adress_1.selectedIndex].text;
+      if(e_mail_adress_1.options[e_mail_adress_1.selectedIndex].text!="직접입력"){
+        e_mail_adress_2.value=e_mail_adress_1.options[e_mail_adress_1.selectedIndex].text;
+        e_mail_adress_2.readOnly=true;
+      }else{
+        e_mail_adress_2.value=null;
+        e_mail_adress_2.placeholder="";
+        e_mail_adress_2.readOnly=false;
+
+      }
+
+
     }
     </script>
 
@@ -137,16 +250,11 @@
          var cellphone_authentication = document.getElementById("cellphone_authentication");
 
          var join_id_Patt = /^[a-zA-Z0-9]{3,15}$/;
-         var join_passwd_Patt = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}/;
+         var join_passwd_Patt = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
          var join_name_Patt = /^[가-힣]{2,5}$/;
-         var e_mailPatt = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
-         // var phoneNumberPatt = /^[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}$/;
+         var e_mailPatt = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 
-         var e_mail_id_value1=e_mail_id.value.concat('@'+e_mail_adress_1.options[e_mail_adress_1.selectedIndex].text);
-         var e_mail_id_value2=e_mail_id.value.concat('@'+e_mail_adress_2.value);
-
-         // alert(e_mail_id_value1);
-         // alert(e_mail_id_value2);
+         var e_mail_id_value=e_mail_id.value.concat('@'+e_mail_adress_2.value);
 
         if(!join_id_Patt.test(join_id.value)){
            alert("아이디 형식이 잘못 되었습니다");
@@ -154,7 +262,7 @@
            join_id.value="";
            return false;
          }else if(!join_passwd_Patt.test(join_passwd.value)){
-           alert("비밀번호:적어도 소문자 하나, 대문자 하나,숫자 하나가 포함되어 있는 문자열(8~15)");
+           alert("특수문자/문자/숫자 모두포함(8~15");
            join_passwd.focus();
            join_passwd.value="";
            return false;
@@ -183,8 +291,14 @@
            e_mail_id.focus();
            e_mail_id.value="";
            return false;
-         }
+         }else if(!e_mailPatt.test(e_mail_id_value)){
+           alert("이메일 형식을 확인해주세요");
+           e_mail_adress_1.focus();
+           return false;
+         }else if (!final_email_che) {
 
+         }
+         alert("성공");
       }
     </script>
 
@@ -220,19 +334,19 @@
             <!--아이디-->
             <tr>
               <th><label>아이디</label>&nbsp;<span>*</span></th>
-              <td  colspan="3"><input id="join_id" type="text" name="join_id" placeholder="대/소문자/숫자 3글자 이상 15글자이하" size="40">&nbsp;&nbsp;<p id="possibility" style="display:inline;">z</p></td>
+              <td  colspan="3"><input id="join_id" type="text" name="join_id" placeholder="대/소문자/숫자 3글자 이상 15글자이하" size="40"><p id="possibility" style="display:inline; font-size:13px;"></p></td>
             </tr>
 
             <!--비밀번호-->
             <tr>
               <th><label>비밀번호</label>&nbsp;<span>*</span></th>
-              <td  colspan="3"><input id="join_passwd" type="password" name="join_passwd" placeholder="소,대문자/숫자 모두포함(8~15)" size="40"></td>
+              <td  colspan="3"><input id="join_passwd" type="password" name="join_passwd" placeholder="특수문자/문자/숫자 모두포함(8~15)" size="40"><p id="possibility_pw1" style="display:inline; font-size:13px;"></td>
             </tr>
 
             <!--비밀번호확인-->
             <tr>
               <th>&nbsp;<label>비밀번호확인</label>&nbsp;<span>*</span></th>
-              <td colspan="3"><input id="join_passwdconfirm" type="password" name="join_passwdconfirm" placeholder="소,대문자/숫자 모두포함(8~15)" size="40"></td>
+              <td colspan="3"><input id="join_passwdconfirm" type="password" name="join_passwdconfirm" placeholder="특수문자/문자/숫자 모두포함(8~15)" size="40"><p id="possibility_pw2" style="display:inline; font-size:13px;"></p>
             </tr>
 
             <!--이름-->
@@ -261,7 +375,7 @@
             </tr>
             <tr>
               <th><label>이메일</label></th>
-              <td>
+              <td id="e_mail_box">
                 <input id="e_mail_id" type="text" name="e_mail_id" size="17"> @
                 <select onclick="choice_email()" id="e_mail_adress_1" class="" name="e_mail_adress_1" style=" padding: 9px; font-size:13px;">
                   <option value="" >naver.com</option>
@@ -271,8 +385,11 @@
                   <option value="" >yahoo.com</option>
                   <option value="" >직접입력</option>
                 </select>
-                <input readonly id="e_mail_adress_2" placeholder="naver.com" type="text" name="e_mail_adress_2" size="13" style="text-align: center;">
-                <button id="e_btn" type="button" name="button">인증하기</button>
+                <input readonly id="e_mail_adress_2" value="naver.com"  placeholder="naver.com" type="text" name="e_mail_adress_2" size="13" style="text-align: center;">
+                <button id="email_btn" type="button" name="email_btn">인증하기</button>
+                <input type="hidden" name="check_email1" size="8" placeholder="인증번호" id="check_email1">
+                <input type="hidden" name="check_email2" value="확인" style="background-color: #FFFFFF" id="check_email2"></button>
+                <p id="email_final_alert" style="display:inline;"></p>
               </td>
             </tr>
             <!--일반전화-->

@@ -19,6 +19,10 @@
 #email_btn:hover{background-color: #EAEAEA;}
 #hp_btn{height: 35px;background-color: white; border: 1px solid #464646;font-weight: bold; cursor: pointer;}
 #hp_btn:hover{background-color: #EAEAEA;}
+#check_email2{background-color: white; border: 1px solid #464646;}
+
+
+
 #hp_btn_done{height: 35px;background-color: white; border: 1px solid #464646;font-weight: bold; cursor: pointer; width: 7%;}
 #hp_btn_done:hover{background-color: #EAEAEA;}
 #end_btn{height: 50px; width: 70px; padding:5px; font-size: 18px; margin-left: -8%; font-weight: bold; background-color: white; border: 1px solid #464646; cursor: pointer;}

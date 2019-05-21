@@ -18,7 +18,7 @@ if(isset($_GET["mode"]) && $_GET["mode"]=='id_check'){
       if ($rowcount) {
         $s = '아이디가 이미 존재합니다.';
        } else {
-        $s = '사용 가능한 아이디 입니다.';
+        $s = '사용가능합니다.';
        }
        echo $s;
   }
