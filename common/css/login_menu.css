@@ -3,17 +3,19 @@ a{text-decoration: none;}
 a:visited{color: inherit;}
 #wrap{width: 100%; height:100%; max-height: 10000px;}
 header{height: 135px;}
+.hov{cursor:pointer;}
 #menus{ display: inline-block;}
-#login_menu_ul > li {list-style: none; display: inline-block; font-size:14px;}
+#login_menu_ul > li {list-style: none; display: inline-block; font-size:13px;width:100px; text-align: center;}
 div #top_menu li{font-size: 18px; font-weight: bold; display: inline; margin-left: 50px;}
 div #top_menu a{text-decoration: none; color: #363636;}
-#login_menu{float: right; margin-right: 25px;}
-#login_menu a.hov{margin-right: 15px; text-decoration: none; font-size: 14px;}
+#login_menu{float: right; margin-right: 10%;}
+#login_menu a.hov{text-decoration: none; font-size: 14px;}
 #top_my_content{display: none;   background-color: white;box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);width : 100px;}
 #top_my:hover #top_my_content{display: block; position: absolute;}
-#top_my_content_ul{padding:0;}
+#top_my_content_ul{padding:0; text-align: center;}
+#top_my_content_ul a:link, #top_my_content_ul a:visited {color:#5d5d5d;}
 #top_my_content_ul li{list-style: none;}
-#top_my_content_ul li:hover{color: black; background-color: rgb(212, 212, 212);}
+#top_my_content_ul li:hover{color: black; background-color: #eee;}
 #logo img{width: 150px; height: 100px; margin-left: 17%; padding-top: 20px;}
 #main_search{background-image: url("../img/index.jpg"); width: 100%; height: 400px;}
 #main_search input{border: 4px solid #373737; height: 34px; font-size: 20px; width: 500px; text-align: center; margin-left: 31.5%;}
@@ -24,7 +26,6 @@ footer h2, footer h3{color: #999999; }
 footer h3 {text-align: center;}
 #footer_wrap{color: white; margin-left: 30px; float: left; clear: both; font-size: 15px; height:200px;}
 #footer_wrap b{font-size: 25px;}
-
 #footer_wrap  tr > td{width : 10%; }
 #footer_wrap  tr > td:first-child{width : 70%;}
 #bottom_menu_history, #bottom_menu_customer{padding:0; list-style: none; text-align: center;}

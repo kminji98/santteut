@@ -5,29 +5,27 @@ html{scroll-behavior:smooth;}
 #top_text2{padding-top: 50px;}
 #tbl_div2 b{margin-left: 14%; font-size: 21px;}
 #top_text3{padding-top: 20px;}
-.left2{font-size: 13px; font-weight: bold; background-color: #f2f2f2; width: 100px; }
-.left3{font-size: 13px; font-weight: bold; background-color: #f2f2f2; width: 100px; text-align: center; padding: 0 10px;}
-.left4{font-size: 13px; font-weight: bold; background-color: #f2f2f2; text-align: center; padding: 0 10px; border-right: 1px solid #dddddd;}
+.left2, .left3, .left4{font-size: 13px; font-weight: bold; background-color: #f2f2f2; width: 100px; }
+.left3{text-align: center; padding: 0 10px;}
+.left4{text-align: center; padding: 0 10px; border-right: 1px solid #dddddd;}
 .gb2{ background-color: #1ae134; color: white; width: 65px; height: 20px; text-align: center; margin-left: 15px; font-size: 12px; font-weight: bold; padding-top: 5px; border-radius: 3px;}
 #pac_name2{padding-left: 15px; font-weight: bold; border-bottom: 1px solid #dddddd;}
 #pac_code2{padding-left: 15px; font-size: 13px; border-bottom: 1px solid #dddddd;}
 #period1{padding-left: 15px; font-size:15px; font-weight: bold;}
-#pac_name{padding: 15px 8px; border-bottom: 1px solid #dddddd; }
-#pac_code{padding: 15px 8px; border-bottom: 1px solid #dddddd;}
+#pac_name,#pac_name{padding: 15px 8px; border-bottom: 1px solid #dddddd; }
 #sch1{padding: 10px 8px;}
-#tbl1{margin-top: 15px; margin-left: 14%; width: 82%; height: 210px;  border: 1px solid #dddddd; margin-bottom: 20px; border-collapse: collapse;}
-#tbl2{margin-top: 15px; margin-left: 14%; width: 82%; height: 130px;  border: 1px solid #dddddd; margin-bottom: 20px; border-collapse: collapse;}
-#tbl3{margin-top: 30px; margin-left: 14%; width: 82%; height: 65px;  border: 1px solid #dddddd; margin-bottom: 20px; border-collapse: collapse;}
-#tbl4{margin-top: 3px; margin-left: 14%; width: 82%; height: 100px;  border: 1px solid #dddddd; margin-bottom: 20px; border-collapse: collapse;}
+#tbl1, #tbl2,#tbl3,#tbl4{margin-top: 15px; margin-left: 14%; width: 82%; height: 210px;  border: 1px solid #dddddd; margin-bottom: 20px; border-collapse: collapse;}
+#tbl2{height: 130px;}
+#tbl3{margin-top: 30px; height: 65px;}
+#tbl4{margin-top: 3px;  height: 100px; }
 .in1{width: 20px;}
-.inputs1{width: 70px; height: 24px; margin-left: 15px; border-radius: 5px; border: 1px solid #cccccc;}
+.inputs1{width: 80%; height: 24px; margin-left: 3%; border-radius: 5px; border: 1px solid #cccccc;}
 #input1{margin-left: 5px;}
-#inputs2{width: 90px; height: 24px; margin-left: 15px; border-radius: 5px; border: 1px solid #cccccc;}
-#phone_num{width: 130px; height: 24px; margin-left: 24px; border-radius: 5px; border: 1px solid #cccccc;}
+#inputs2, #phone_num{width: 90%; height: 24px; margin-left: 3%; border-radius: 5px; border: 1px solid #cccccc;}
 .inputs{border-right: 1px solid #dddddd;}
 .inputs label{font-size: 13px;}
-.inputs b{font-size: 13px; margin-left: 15px;}
-#male{margin-left: 20px;}
+.inputs b{font-size: 13px; margin-left: 10px;}
+#male{margin-left: 17%;}
 #tour_text1{border-bottom: 2px solid black; width: 82%; margin-left: 14%; padding-bottom: 7px; padding-top: 25px;}
 #tour_text1 b{ font-size: 21px;}
 #tour_text2{margin-left: 14%; padding-top: 15px; height: 3px;}
@@ -36,25 +34,24 @@ html{scroll-behavior:smooth;}
 #sel_text{display: inline-block; margin-left: 20px; }
 #sel_seat{display: inline-block; margin-left: 20px; }
 #res_name1{padding-left: 14px; border-bottom: 1px solid #dddddd;}
-#res_phone1{padding-left: 14px; border-bottom:1px solid #dddddd;}
+#res_phone1{ border-bottom:1px solid #dddddd;}
 #res_email0{padding-left: 14px; }
 .star{display: inline-block; color: red;}
 #res_name{ margin-left: 10px; width: 80%; height: 26px; border-radius: 3px; border: 1px solid #cccccc;}
 #res_phone{ margin-left: 10px; height: 26px; width:  80%; margin-right: 130px; border-radius: 3px; border: 1px solid #cccccc;}
-#res_email1{ margin-left: 10px; width: 120px; height: 26px; border-radius: 3px; border: 1px solid #cccccc;}
+#res_email1{ margin-left: 1%; width: 120px; height: 26px; border-radius: 3px; border: 1px solid #cccccc;}
 #res_email2{ width: 120px; height: 29px; border-radius: 3px; border: 1px solid #cccccc;}
 #res_name_td{border-bottom: 1px solid #dddddd;}
 #res_phone_td{border-bottom:1px solid #dddddd;}
 .in1{ text-align: center; width: 40px; height: 27px; border-top: 1px solid #dddddd; border-bottom: 1px solid #dddddd; border-right: 0.3px solid #dddddd; border-left: 0.3px solid #dddddd;}
 .minus{width: 29px; height: 31px; margin-left: 10%; background-color: #f2f2f2; border: 1px solid #dddddd; border-right: 0.4px solid #dddddd; }
 .plus{width: 29px; height: 31px; background-color: #f2f2f2; border: 1px solid #dddddd; border-left: 0.4px solid #dddddd; }
-#check_eql{margin-top:20px; font-size: 13.5px; margin-left: 70%; color: #535353;}
+#check_eql{margin-top:20px; font-size: 13.5px; margin-left: 75%; color: #535353;}
 #check_eql p{display: inline-block; position: absolute; margin: 2px;}
 #box1{width: 17px; height: 17px;}
 #bus_form{margin-left: 14%; margin-top: 25px;}
 #bus_seat{width: 100%; height: 200px; margin-left: 14%; margin-top: 30px; background-image: url("../img/bus.jpg"); background-repeat: no-repeat;}
 #seat_box{margin-left: 150px; padding-top: 30px;}
-
 #middle2{float: left; margin-left: 5%; width: 64.5%;}
 #reserve_detail_menu{ min-height: 430px; border: 2px solid #6e7689; border-top:1.5px solid #6e7689; width: 240px; height: 420px; position:sticky; top: 15px; margin-top: 140px; margin-left: 68.5%;}
 #reserve_total_pay{margin-left: 10px; font-size: 16px; font-weight: bold; margin-bottom: 0px;}
@@ -71,27 +68,8 @@ html{scroll-behavior:smooth;}
 #all_agree{}
 #term_btn{ float: left;  border: 1px solid #bdbdbd; display: inline; width: 82%; }
 .tablink{ outline: none; background-color: white; padding: 1.5% 0; margin: 0; border: none; display: inline; float: left; width: 25%; cursor: pointer; font-size: 0.em;}
-/* .tablink {
-  background-color: #555;
-  color: white;
-  float: left;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  padding: 14px 16px;
-  font-size: 13px;
-  width: 8%;
-} */
-
-.tablink:hover {
-  background-color: #bdbdbd;
-}
-
-/* Style the tab content (and add height:100% for full page content) */
-.tabcontent {
-  color: #5d5d5d;
-  display: none;
-  border-left: 1px solid #bdbdbd;
-  width: 82%;
-}
-#Home{width:85%; height: 350px; overflow:scroll;}
+.tablink:hover {background-color: #bdbdbd;}
+.choice_value{font-size:13px;}
+.tabcontent {color: #5d5d5d;  display: none;  border-left: 1px solid #bdbdbd;  width: 82%;  height: 350px;  overflow:scroll;}
+.information_collect{ font-size:15px; text-align:left;}
+#News p ,#Home p {font-size:12px; text-align:left;}
