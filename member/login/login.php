@@ -34,7 +34,7 @@
         <tr>
           <td id="empty_row" colspan="3"><br></td>
         </tr>
-        <tr><td colspan="3">&nbsp;&nbsp;<a href="#">아이디 찾기</a>&nbsp; / &nbsp;<a href="#">패스워드찾기</a></td></tr>
+        <tr><td colspan="3">&nbsp;&nbsp;<a href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/member/login/forgot_id.php">아이디 찾기</a>&nbsp; / &nbsp;<a href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/member/login/forgot_passwd.php">패스워드 찾기</a></td></tr>
         <tr>
           <td id="empty_row" colspan="3"><br></td>
         </tr>

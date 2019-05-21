@@ -2,30 +2,49 @@
 <html lang="ko" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>로그인</title>
-    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/member/login/css/login.css">
+    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css">
+    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/member/login/css/forgot_id.css">
+    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/introduction/css/history.css">
+    <title>비밀번호찾기</title>
   </head>
   <body>
+    <header>
+      <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/login_menu.php";?>
+    </header>
+    <section id="login">
+    <h2>로그인</h2>
+    <hr>
     <div class="login_form">
-      <h3>로그인</h3>
-      <table>
+      <h3>비밀번호찾기</h3>
+      <table border="1">
         <tr>
-          <th><label>아이디</label></th>
-          <td><input type="text" name="login_id"></td>
-          <th rowspan="2"><button type="button" name="button" id="login_button">로그인</button> </th>
+          <th>&nbsp;<a href="#">이메일로 찾기</a>&nbsp;</th>
+          <th><a href="#">핸드폰으로 찾기</a></th>
         </tr>
         <tr>
-          <th><label>비밀번호</label> </th>
-          <td><input type="password" name="login_passwd"></td>
+          <td colspan="2"><br></td>
         </tr>
-        <tr><td colspan="3"><input type="checkbox" name="id_storage">아이디저장&nbsp;&nbsp;<a href="#">회원가입</a></td></tr>
-        <tr><td colspan="3"><a href="#">Forgot ID</a>&nbsp; / &nbsp;<a href="#">Password?</a></td></tr>
         <tr>
-          <td colspan="3">
-            <a href="#"><img src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/member/login/img/naver.png" alt="네이버계정로그인"></a>
+          <th>아이디</th>
+          <td>
+            <input type="text" name="" value="">
           </td>
+        </tr>
+        <tr>
+          <th>이메일</th>
+          <td><input type="email" name="" value="">
+            <button type="button" name="button">보내기</button>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2"><br>이메일로 아이디를 가르켜드립니다.<br><br></td>
         </tr>
       </table>
     </div>
+    </section>
+  <br>
+    <footer>
+      <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/footer.php";?>
+    </footer>
   </body>
 </html>
