@@ -1,7 +1,8 @@
 <?php
 include './Sendmail.php';
-srand((double)microtime()*1000000); //난수값 초기화
+
 $email =$_POST["email"];
+srand((double)microtime()*1000000); //난수값 초기화
 $code=rand(100000,999999);
 echo $code;
 $count=1;

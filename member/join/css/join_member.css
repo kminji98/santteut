@@ -5,7 +5,9 @@
 #table2 span{color: red;}
 #join_title{margin-left: 12%;}
 #join_tr1{text-align: right; font-size: 15px; }
-#cellphone_authentication{margin-left: 32.7%;}
+#cellphone_authentication{height: 28px; font-size: 13px; text-align: center; margin-top: 2px;}
+/* #table1 #last_td1{border-bottom: 1px none #464646; width: 200px;}
+#table1 #last_td2{border-bottom: 1px none #464646; width: 200px;} */
 #table1 th{padding-top: 2%; padding-bottom: 2%; text-align: center; border-top: 1px solid #464646; border-bottom: 1px solid #464646; width: 200px;}
 .join_form #table1{text-align: left; border-collapse: collapse; width: 730px; }
 .join_form #table2{text-align: left; border-collapse: collapse; width: 730px;}
@@ -23,7 +25,7 @@
 
 
 
-#hp_btn_done{height: 35px;background-color: white; border: 1px solid #464646;font-weight: bold; cursor: pointer; width: 7%;}
+#hp_btn_done{ margin-top: 3px;height: 35px;background-color: white; border: 1px solid #464646;font-weight: bold; cursor: pointer;}
 #hp_btn_done:hover{background-color: #EAEAEA;}
 #end_btn{height: 50px; width: 70px; padding:5px; font-size: 18px; margin-left: -8%; font-weight: bold; background-color: white; border: 1px solid #464646; cursor: pointer;}
 #end_btn:hover{background-color: #EAEAEA;}

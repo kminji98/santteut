@@ -9,9 +9,38 @@
     <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
 
+
+
+    <!-- 약관모두체크 -->
+    <script type="text/javascript">
+      var check_val=false;
+      var final_phone_check=false;
+      var final_email_check=false;
+      var id_check=false;
+      function all_choice_value(){
+        var check_1= document.getElementById('check_1');
+        var check_2= document.getElementById('check_2');
+        var check_3= document.getElementById('check_3');
+        if(check_val==false){
+          check_1.checked=true;
+          check_2.checked=true;
+          check_3.checked=true;
+          check_val=true;
+        }else{
+          check_1.checked=false;
+          check_2.checked=false;
+          check_3.checked=false;
+          check_val=false;
+        }
+
+      }
+    </script>
+
+
+
+
     <!-- 아이디/비밀번호중복확인 -->
     <script type="text/javascript">
-    var final_email_che=false;
     $(document).ready(function(){
       //아이디 자동확인
      $("#join_id").keyup(function(e){
@@ -22,10 +51,12 @@
          if(possibility=='아이디가 이미 존재합니다.'){
            $("#possibility").text('아이디가 이미 존재합니다.');
            $("#possibility").css('color', 'red');
+           id_check=false;
            return false;
          }{
            $("#possibility").text("영문,숫자만 입력/3~15글자");
            $("#possibility").css('color', 'red');
+           id_check=false;
            return false;
          }
 
@@ -40,9 +71,11 @@
          if(result=='아이디가 이미 존재합니다.'){
           $("#possibility").text(result);
           $("#possibility").css('color', 'red');
+          id_check=false;
         }else{
           $("#possibility").text(result);
           $("#possibility").css('color', 'blue');
+          id_check=true;
         }
 
        })
@@ -130,6 +163,7 @@
             })
             .done(function(result) {
               code=result;
+              alert(code);
               alert("인증 번호가 발송되었습니다.");
                check_email1.setAttribute('type', 'text');
                check_email2.setAttribute('type', 'button');
@@ -142,18 +176,84 @@
               console.log("complete");
            });
          });
+
          $("#check_email2").click(function(e){
            var email1 = document.getElementById("check_email1");
            if(email1.value==code){
              alert("인증 완료");
-             final_email_che=true;
+             final_email_check=true;
              $("#email_final_alert").text("인증완료");
              $("#email_final_alert").css('color', 'blue');
            }else{
              alert("인증 실패");
-             final_email_che=false;
+             final_email_check=false;
              $("#email_final_alert").text("인증실패");
              $("#email_final_alert").css('color', 'red');
+           }
+           });
+        });
+    </script>
+
+
+  <!-- 휴대폰 인증 -->
+    <script type="text/javascript">
+    var h_code="";
+    $(document).ready(function(){
+          $("#hp_btn").click(function(e){
+            var join_phone_write = document.getElementById("join_phone_write");
+            var join_select = document.getElementById("join_select");
+            var cellphone_authentication_form = document.getElementById("cellphone_authentication_form");
+            var join_phone_write_Patt =/^[0-9]*$/;
+            var phone_val=join_select.options[join_select.selectedIndex].text+join_phone_write.value;
+            if (!join_phone_write_Patt.test(join_phone_write.value)) {
+              alert("전화번호를 확인해주세요");
+              join_phone_write.focus();
+              join_phone_write.value="";
+              return false;
+            }else if (!join_phone_write.value) {
+              alert("전화번호를 확인해주세요");
+              join_phone_write.focus();
+              join_phone_write.value="";
+              return false;
+            }else if (join_phone_write.value.length<8) {
+              alert("전화번호를 확인해주세요");
+              join_phone_write.value="";
+              join_phone_write.focus();
+              return false;
+            }
+
+            $.ajax({
+              url: 'send_message.php',
+              type: 'POST',
+              data: {phone: phone_val}
+            })
+            .done(function(result) {
+              h_code=result;
+              alert("문자인증 번호가 발송되었습니다.");
+              $("#hp_btn_done").css('display', 'inline');
+              $("#cellphone_authentication").css('display', 'inline');
+            })
+            .fail(function() {
+              alert("문자인증 번호 발송실패!");
+              console.log("error");
+            })
+            .always(function() {
+              console.log("complete");
+           });
+         });
+         $("#hp_btn_done").click(function(e){
+           var cellphone_authentication = document.getElementById("cellphone_authentication");
+           alert(h_code);
+           if(cellphone_authentication.value==h_code){
+             alert("인증 완료");
+             final_phone_check=true;
+             $("#final_phone_check").text("인증완료");
+             $("#final_phone_check").css('color', 'blue');
+           }else{
+             alert("인증 실패");
+             final_phone_check=false;
+             $("#final_phone_check").text("인증실패");
+             $("#final_phone_check").css('color', 'red');
            }
            });
         });
@@ -236,6 +336,7 @@
     <script type="text/javascript">
       function goto_join(){
          var join_id = document.getElementById("join_id");
+         var possibility = document.getElementById("possibility");
          var join_passwd = document.getElementById("join_passwd");
          var join_passwdconfirm = document.getElementById("join_passwdconfirm");
          var join_name = document.getElementById("join_name");
@@ -247,17 +348,26 @@
          var e_mail_adress_2 = document.getElementById("e_mail_adress_2");
          var join_select = document.getElementById("join_select");
          var join_phone_write = document.getElementById("join_phone_write");
-         var cellphone_authentication = document.getElementById("cellphone_authentication");
+         var check_1 = document.getElementById("check_1");
+         var check_2 = document.getElementById("check_2");
+         var check_3 = document.getElementById("check_3");
 
          var join_id_Patt = /^[a-zA-Z0-9]{3,15}$/;
          var join_passwd_Patt = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
          var join_name_Patt = /^[가-힣]{2,5}$/;
          var e_mailPatt = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+         var join_phone_write_Patt =/^[0-9]*$/;
+
 
          var e_mail_id_value=e_mail_id.value.concat('@'+e_mail_adress_2.value);
 
         if(!join_id_Patt.test(join_id.value)){
            alert("아이디 형식이 잘못 되었습니다");
+           join_id.focus();
+           join_id.value="";
+           return false;
+         }else if(id_check==false){
+           alert("아이디가 이미 존재합니다.");
            join_id.focus();
            join_id.value="";
            return false;
@@ -295,9 +405,52 @@
            alert("이메일 형식을 확인해주세요");
            e_mail_adress_1.focus();
            return false;
-         }else if (!final_email_che) {
-
+         }else if (!final_email_check) {
+           alert("이메일을 인증해주세요");
+           e_mail_adress_1.focus();
+           return false;
+         }else if (!join_phone_write_Patt.test(join_phone_write.value)) {
+           alert("전화번호를 확인해주세요");
+           join_phone_write.focus();
+           join_phone_write.value="";
+           return false;
+         }else if (!join_phone_write.value) {
+           alert("전화번호를 확인해주세요");
+           join_phone_write.focus();
+           join_phone_write.value="";
+           return false;
+         }else if (join_phone_write.value.length<8) {
+           alert("전화번호를 확인해주세요");
+           join_phone_write.focus();
+           join_phone_write.value="";
+           return false;
          }
+         else
+         if (!final_phone_check) {
+           alert("문자인증을 해주세요");
+           join_phone_write.focus();
+           join_phone_write.value="";
+           return false;
+         }else if(!check_1.checked){
+          alert("약관에 동의해주세요");
+          check_1.focus();
+          return false;
+         }else if(!check_2.checked){
+           alert("약관에 동의해주세요");
+           check_2.focus();
+           return false;
+         }else if(!check_3.checked){
+           alert("약관에 동의해주세요");
+           check_3.focus();
+           return false;
+         }
+
+
+         // 여기1
+
+
+
+
          alert("성공");
       }
     </script>
@@ -397,14 +550,13 @@
               <th><label>일반전화</label></th>
               <td colspan="3" id="join_tr7">
                 <input id="join_landline1" type="tel" name="join_landline1" size="8">-<input id="join_landline2" type="tel" name="join_landline2" size="10">-<input id="join_landline3" type="tel" name="join_landline3" size="10">
-
               </td>
             </tr>
 
             <!--휴대전화-->
             <tr>
-              <th>&nbsp;&nbsp;&nbsp;<label>휴대전화</label>&nbsp;<span>*</span></th>
-              <td colspan="3">
+              <th id="last_td1">&nbsp;&nbsp;&nbsp;<label>휴대전화</label>&nbsp;<span>*</span></th>
+              <td id="last_td2"  colspan="3">
                 <select id="join_select">
                   <option value="선택">선택</option>
                   <option value="010">010</option>
@@ -415,19 +567,15 @@
                   <option value="019">019</option>
                 </select>
 
-              <input id="join_phone_write" type="tel" name="join_cellphone" size="19">
-              <button id="hp_btn" type="button" name="button">인증하기</button>
+              <input id="join_phone_write" type="tel" name="join_cellphone" size="19" maxlength="8">
+              <button id="hp_btn" type="button" name="button" >인증하기</button> <br>
+              <input id="cellphone_authentication" type="text" name="cellphone_authentication" placeholder="인증번호를 입력하세요." size="25" style="display:none; ">
+              <button id="hp_btn_done" type="button" name="button" style="display:none; ">확인</button><p id="final_phone_check" style="display:inline; "></p>
               </td>
-            </tr>
-
-            <!--인증번호입력-->
-            <tr>
-              <td colspan="4"><input id="cellphone_authentication" type="text" name="cellphone_authentication" placeholder="인증번호를 입력하세요." size="25">
-              <button id="hp_btn_done" type="button" name="button">확인</button>
-              </td>
-
             </tr>
           </table>
+          <!--인증번호입력-->
+
 
           <br>
 
@@ -439,7 +587,7 @@
 
             <!--이용약관_모두동의-->
             <tr>
-              <td id="table_tr1" colspan="4"> <input type="checkbox" name="" value=""> <b>약관 모두 동의</b></td>
+              <td id="table_tr1" colspan="4"> <input id="check_all" type="checkbox" name="check_all" value="" onclick="all_choice_value()"> <b>약관 모두 동의</b></td>
             </tr>
 
             <!--이용약관1-->
@@ -468,7 +616,7 @@
             <!--이용약관1 동의?-->
             <tr>
               <td colspan="4">
-              <input type="checkbox" name="" value=""> <b>동의</b>
+              <input id="check_1"  type="checkbox" name="check_1" value=""> <b>동의</b>
             </tr>
 
             <!--이용약관2-->
@@ -495,7 +643,7 @@
 
             <!--이용약관2 동의?-->
             <tr>
-              <td colspan="4"><input type="checkbox" name="" value=""> <b>동의</b>
+              <td colspan="4"><input id="check_2" type="checkbox" name="check_2" value=""> <b>동의</b>
             </tr>
 
             <!--이용약관3-->
@@ -522,7 +670,7 @@
 
             <!--이용약관3 동의?-->
             <tr>
-              <td colspan="4"><input type="checkbox" name="" value=""> <b>동의</b></td>
+              <td colspan="4"><input id="check_3" type="checkbox" name="check_3" value=""> <b>동의</b></td>
             </tr>
           </table>
           <br>

@@ -1,7 +1,11 @@
-
 <?php
 
-$mode = "send";
+  $mode = 'send';
+  if(isset($_POST["phone"])){
+    $phone =$_POST["phone"];
+  }else{
+    return false;
+  }
 
 function SocketPost($posts) {
    $host = "jmunja.com";
@@ -33,10 +37,14 @@ function SocketPost($posts) {
 
 if($mode == "send") {
    //UTF-8로 데이터를 전송해야 합니다.
-   $hp = "01055949559";
-   $name = "오성훈";
-   $title = "잘됩니다";
-   $message = "api로 보내는 문자입니다 감사합니다";
+
+   srand((double)microtime()*1000000); //난수값 초기화
+   $code=rand(100000,999999);
+
+   $hp = $phone;
+   $name = "산뜻";
+   $title = "산뜻 인증문자";
+   $message = "산뜻 인증번호는".$code."입니다.";
    $id = "tjdgns0523";
    $pw = "04e169271c5af54309c84650187d86" ;
 
@@ -49,7 +57,7 @@ if($mode == "send") {
 
    $ret = SocketPost($array);
    if($ret){
-     echo "{$ret}건 발송 성공";
+     echo $code;
    } else echo "발송 실패";
    exit;
 }
