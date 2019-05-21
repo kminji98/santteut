@@ -65,9 +65,12 @@ session_start();
     </header>
     <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/side_bar.php";?>
     <hr>
+    <div id="head_text">
+      <h2>국내산행</h2>
+    </div>
     <!--인기 산행 일정 TOP3-->
     <div id="best3">
-      <div >
+      <div id="best_text">
         <h1>인기 산행 일정 TOP3</h1>
       </div>
     </div>
@@ -87,7 +90,7 @@ session_start();
           <button id="package_search_btn" type="button" name="button"><b>검색</b></button>
           <strong  id="package_search_detail_control" onclick="control_display2()">상세검색▼</strong>
       </div>
-      <br><br>
+      <br>
       <div id="package_search_detail_control_sub" style="display :none">
         <table id="package_search_detail_top">
           <tr>

@@ -19,7 +19,7 @@
 #middle{float: left; margin-left: 5%;  width: 56%;}
 #detail_view1{border:1px dotted black; height:1000px;  margin-left: 12%; width: 100%; clear: both;}
 .d1{font-size: 50px; font-weight: bold; margin-left: 45%;}
-#detail_menu{border: 2px solid grey; border-top:1.5px solid grey; width: 19%; position:sticky; top: 15px;  margin-top: 30px; margin-left: 69%;}
+#detail_menu{border: 2px solid grey; border-top:1.5px solid grey; width: 17%; position:sticky; top: 15px;  margin-top: 30px; margin-left: 69%;}
 #select_people{background-color: #f2f2f2;}
 #select_people p{font-size: 13px; color:#444444; display: inline-block; font-weight: bold; margin-bottom: 1px; margin-top: 5px;}
 #adult{margin-left: 37px;}
@@ -32,6 +32,6 @@
 #money{font-size: 30px; color: #e85581; margin-left: 100px;}
 #won{font-size: 16px; color: #e85581;  display: inline-block;}
 .subtext1{font-size: 9px; color: #6e6e6e; text-align: right; margin-right: 10px;}
-#line{font-size: 9px; color: #cccccc;}
+#line{font-size: 9px; color: #cccccc; margin-left: 2%;}
 #reserve_status{background-color: #aaaaaa; color: white; font-size: 15px; font-weight: bold; width: 200px; margin-left: 23px; text-align: center; padding: 14px 5px;}
 #go_cart{ border: 1px solid #e85581; color: #e85581; font-size: 15px; font-weight: bold; width: 200px; margin-left: 23px; text-align: center; padding: 13px 4px; margin-bottom: 15px;}
