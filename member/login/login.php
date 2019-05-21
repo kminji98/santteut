@@ -30,7 +30,7 @@
         <tr>
           <td id="empty_row" colspan="3"><br></td>
         </tr>
-        <tr><td id="id_storage" colspan="3"><input type="checkbox" name="id_storage">아이디저장&nbsp;&nbsp;<a href="#"><b>회원가입</b></a></td></tr>
+        <tr><td id="id_storage" colspan="3"><input type="checkbox" name="id_storage">아이디저장&nbsp;&nbsp;<a href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/member/join/join_member.php"><b>회원가입</b></a></td></tr>
         <tr>
           <td id="empty_row" colspan="3"><br></td>
         </tr>
@@ -42,7 +42,7 @@
           <td colspan="3">
             <a href="#"><img src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/member/login/img/naver.jpg" alt="네이버계정로그인"></a>
             <a href="#"><img src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/member/login/img/facebook.jpg" alt="페이스북계정로그인"></a><br>
-            <a href="#"><img src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/member/login/img/kakao.jpg" alt="카카오계정로그인"></a>
+              <a href="kakao.php"><img src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/member/login/img/kakao.jpg" alt="카카오계정로그인"></a>
             <a href="#"><img src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/member/login/img/google.jpg" alt="구글계정로그인"></a>
           </td>
         </tr>

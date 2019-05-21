@@ -13,32 +13,36 @@
     </header>
     <section id="login">
     <h2>로그인</h2>
-    <hr>
     <div class="login_form">
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
       <h3>아이디찾기</h3>
-      <table border="1">
+      <table>
         <tr>
-          <th>&nbsp;<a href="#">아이디로 찾기</a>&nbsp;</th>
+          <th>&nbsp;<a href="#">이메일로 찾기</a>&nbsp;</th>
           <th><a href="#">핸드폰으로 찾기</a></th>
+
         </tr>
+
         <tr>
-          <td colspan="2"><br></td>
-        </tr>
-        <tr>
-          <th>이메일</th>
+          <th style="height:1%;">이메일</th>
           <td>
-            <input type="email" name="" value="">
-            <button type="button" name="button">보내기</button>
+            <input type="text" name="" value="" size="7"> @
+            <input type="text" name="" value="" size="7">
+            <button type="button" name="button" style="font-size: 13px;">인증하기</button>
           </td>
+
         </tr>
-        <!--문구수정요망-->
         <tr>
-          <td colspan="2"><br>이메일로 아이디를 가르켜드립니다.<br><br></td>
+          <td colspan="2">본인확인 이메일 주소와 입력한 이메일 주소가 같아야,<br>
+            인증번호를 받을 수 있습니다.</td>
         </tr>
       </table>
     </div>
     </section>
-  <br>
     <footer>
       <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/footer.php";?>
     </footer>
