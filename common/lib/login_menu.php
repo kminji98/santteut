@@ -11,9 +11,8 @@
   <div id="login_menu">
     <ul id="login_menu_ul" >
       <?php
-
       // 비회원일때
-      if(!isset($id)){
+      if(!isset($_SESSION['id'])){
          echo ('<li ><a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/member/login/login.php" class="hov">로그인</a></li>');
         echo ('<li><a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/member/join/join_member.php" class="hov">회원가입</a></li>');
         echo ('<li id="top_my" class="hov">커뮤니티<small>▼</small>
@@ -29,7 +28,7 @@
         //관리자일때
       }else if(!($_SESSION['id']=="admin")){
         echo (" {$_SESSION['name']} 님 환영합니다. ");
-        echo ('<li><a href="#">로그아웃</a></li> ');
+        echo ('<li><a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/member/login/logout.php">로그아웃</a></li> ');
         echo ('<li id="top_my" class="hov">관리자모드<small>▼</small>
           <div id="top_my_content">
             <ul id="top_my_content_ul">
