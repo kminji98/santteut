@@ -16,7 +16,7 @@
     <h2>로그인</h2>
     <hr>
     <div class="login_form">
-      <b>로그인</b>
+      <h3>로그인</h3>
       <table>
         <tr>
           <th><label>아이디</label></th>
