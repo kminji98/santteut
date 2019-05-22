@@ -12,7 +12,7 @@ Trex.FormProxy =Trex.Class.create( {
 		this.editor = editor;
 		this.sidebar = sidebar;
 		this.config = config;
-		
+
 		var _elForm = this.elForm = _DOC.forms[config.form] || _DOC.getElementById(config.form);
 		if(!_elForm) {
 			throw new Error("[Exception]Trex.Form : not exist element - " + config.form);
@@ -36,7 +36,7 @@ Trex.FormProxy =Trex.Class.create( {
 	},
 	getFormField: function() {
 		var _formfield = {};
-		
+
 		var _fields = this.getElements();
 		var _field;
 		for(var i=0; i<_fields.length; i++) {
@@ -99,4 +99,3 @@ Trex.FormProxy =Trex.Class.create( {
 		}
 	}
 });
-		
