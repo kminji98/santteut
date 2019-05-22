@@ -21,9 +21,11 @@
             <div class="text1">
               미서부에서 가장 오랫동안 사랑 받아온 부동의 인기 NO.1 미서부 대표 .
             </div>
+            <br>
             <div class="button1">
               <button type="button" name="button">상품보기></button>
             </div>
+
           </div>
         </div>
         <div class="container" id="con2">
@@ -42,6 +44,7 @@
                 <div class="text1">
                   미서부에서 가장 오랫동안 사랑 받아온 부동의 인기 NO.1 미서부 대표 .
                 </div>
+                <br>
                 <div class="button1">
                   <button type="button" name="button">상품보기></button>
                 </div>
@@ -63,6 +66,7 @@
             <div class="text1">
               미서부에서 가장 오랫동안 사랑 받아온 부동의 인기 NO.1 미서부 대표 .
             </div>
+            <br>
             <div class="button1">
               <button type="button" name="button">상품보기></button>
             </div>
