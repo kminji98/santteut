@@ -1,10 +1,10 @@
 <?php
 session_start();
 //0-0. 인클루드 디비
-// include "../lib/db_connector.php";
+include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
 
 //0-1. 인클루드 크리테이블
-// include "../lib/create_table.php";
+include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/create_table_base.php";
 
 //0-2. 공지사항테이블생성
 create_table($conn,'notice');
@@ -36,9 +36,9 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="search"){
     exit;
   }
 
-  $sql="SELECT * from `notice` where $_option like '%$q_find_input%';";
+  $sql="SELECT * from `notice` where $find_option like '%$q_find_input%';";
 }else{
-  $sql="SELECT * from 'notice' order by num desc";
+  $sql="SELECT * from `notice` order by num desc";
 }
 
 // 쿼리문실행문장
@@ -52,8 +52,6 @@ $total_pages=ceil($total_record/ROW_SCALE);
 // 페이지가 없으면 디폴트 페이지 1페이지
 // if(empty($_GET['present_page'])){$present_page=1; }else{ $present_page=$_GET['present_page']; }
 $present_page=(empty($_GET['present_page']))?1:$_GET['present_page'];
-
-
 
 // 현재 블럭의 시작 페이지 = (ceil(현재페이지/블럭당 페이지 제한 수)-1) * 블럭당 페이지 제한 수 +1
 //[[  EX) 현재 페이지 5일 때 => ceil(5/3)-1 * 3  +1 =  (2-1)*3 +1 = 4 ]]
@@ -81,7 +79,7 @@ $view_num = $total_record - $start_record;
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css">
-    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/customer_support/notice/css/notice_list.css">
+    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/customer_support/notice/css/notice_list.css?ver=0">
     <title>공지사항</title>
   </head>
   <body>
@@ -90,9 +88,11 @@ $view_num = $total_record - $start_record;
       <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/mini_menu.php";?>
     </header>
     <br><br><br>
+    <div id="wrap" style="height:auto;">
     <section id="notice">
-      <form name="notice_form" action="notice_list?mode=find_input" method="post">
-      <div class="notice_list_find_input">
+
+      <form name="notice_form" action="notice_list?mode=search" method="post">
+      <div class="notice_list_search">
         <select>
           <option value="">제목</option>
           <option value="">내용</option>
@@ -101,13 +101,13 @@ $view_num = $total_record - $start_record;
         <button type="button" name="button">검색</button>
       </div>
       </form>
-      <br>
+
       <div class="total_title">
         <h4>total<?=$total_record?>개</h4>
       </div>
 
       <!--게시물 제목-->
-      <table border="1">
+      <table id="list_tbl">
         <tr>
           <th>번호</th>
           <th id="notice_list_title" style="width:600px;">제목</th>
@@ -129,50 +129,33 @@ $view_num = $total_record - $start_record;
           $title=str_replace("\n", "<br>",$title);
           $title=str_replace(" ", "&nbsp;",$title);
       ?>
-            <tr>
-              <!--번호-->
-              <td><?=$view_num?></td>
-              <!--제목-->
-              <td><a href="./notice_view.php?num=<?=$num?>&present_page=<?=$present_page?>&hit=<?=$hit+1?>"><?=$title?></a></td>
-              <!--작성자-->
-              <td><?=$name?></td>
-              <!--작성일-->
-              <td><?=$regist_day?></td>
-              <!--조회-->
-              <td><?=$hit?></td>
-            </tr>
-          </table>
+        <tr>
+          <!--번호-->
+          <td><?=$view_num?></td>
+          <!--제목-->
+          <td><a href="./notice_view.php?num=<?=$num?>&present_page=<?=$present_page?>&hit=<?=$hit+1?>"><?=$title?></a></td>
+          <!--작성자-->
+          <td><?=$name?></td>
+          <!--작성일-->
+          <td><?=$regist_day?></td>
+          <!--조회-->
+          <td><?=$hit?></td>
+        </tr>
+      <br>
         <?php
           $view_num--;
          }//end of for
         ?>
-        <br>
+      </table>
+
 <?php
-if(!empty($_SESSION['userid'])){
+if(!empty($_SESSION['id'])){
   echo '<a href="notice_form.php"><button id="admin_write_btn" type="button" name="button">
   글쓰기</button></a>';
 }
 ?>
 <br>
 <!--$page 는 현재페이지를 의미 x / 각 페이지를 의미-->
-        <!--바꾸기 -->
-        <!-- <div id="page_button">
-          <div id="page_num">이전◀ &nbsp;&nbsp;&nbsp;&nbsp;
-          <?php
-            // for ($page=1; $page <= $total_pages ; $page++) {
-            //   if($present_page==$page){
-            //     echo "<b>&nbsp;$page&nbsp;</b>";
-            //   }else{
-            //     echo "<a href='./list.php?page=$page'>&nbsp;$page&nbsp;</a>";
-            //   }
-            // }
-          ?>
-          &nbsp;&nbsp;&nbsp;&nbsp;▶ 다음
-          <br><br><br><br><br><br><br>
-        </div> -->
-        <!--end of page num -->
-      <!--바꾸기의 끝-->
-
       <div class="page_button_group">
         <?php
         //현재 블럭의 시작 페이지가 페이지 스케일 보다 클 때 -> 처음으로 버튼 생성 + 이전 블럭 존재
@@ -185,7 +168,7 @@ if(!empty($_SESSION['userid'])){
           // 현재 6 page 인 경우 '<(이전블럭)' 클릭 -> $pre_page = 6-PAGE_SCALE  -> 1 페이지로 이동
           $pre_block= $start_page - PAGE_SCALE;
           if(isset($_GET['mode']) && $_GET['mode']=="search"){
-            echo( '<button type="button" name="button" title="이전"><a href="notice_list.php?mode=search&find=$find&search=$search&page='.$pre_block.'"><</a></button>' );
+            echo( '<button type="button" name="button" title="이전"><a href="notice_list.php?mode=search&find_option=$find_option&find_input=$find_input&page='.$pre_block.'"><</a></button>' );
           }else{
             echo( '<button type="button" name="button" title="이전"><a href="notice_list.php?page='.$pre_block.'"><</a></button>' );
           }
@@ -195,13 +178,13 @@ if(!empty($_SESSION['userid'])){
         for( $page = $start_page; $page <= $end_page; $page++ ){
             //현재 블럭에 현재 페이지인 버튼
             if ( $page == $present_page ){
-  //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$background-color => 연두  color=> white
-  //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ inline 스타일 넣어야 함
-              echo( '<button type="button" name="button" ><a href="#">'.$page.'</a></button>' );
+  //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$background-color => 연두  color=> white(ok)
+  //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ inline 스타일 넣어야 함(ok)
+              echo( '<button type="button" name="button" style="background-color: #2F9D27; color: white; text-align: center;"><a href="#">'.$page.'</a></button>' );
             }else if(isset($_GET['mode']) && $_GET['mode']=="search"){
               echo( '<button type="button" name="button"><a href="notice_list.php?mode=search&find=$find&search=$search&page='.$page.'">'.$page.'</a></button>' );
             }else{
-              echo( '<button type="button" name="button" ><a href="notice_list.php?page='.$page.'">'.$page.'</a></button>' );
+              echo( '<button type="button" name="button" style="background-color: white; color: black; text-align: center;"><a href="notice_list.php?page='.$page.'">'.$page.'</a></button>' );
             }
         }
 
@@ -216,8 +199,8 @@ if(!empty($_SESSION['userid'])){
           echo( '<button type="button" name="button" title="다음"><a href="notice_list.php?page='.$next_block.'">></a></button>' );
 
           if(isset($_GET['mode']) && $_GET['mode']=="search"){
-//$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ 변수명 변경
-            echo( '<button type="button" name="button"><a href="notice_list.php?mode=search&find=$find&search=$search&page='.$next_block.'">></a></button>' );
+//$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ 변수명 변경(ok)
+            echo( '<button type="button" name="button"><a href="notice_list.php?mode=search&find_option=$find_option&find_input=$find_input&page='.$next_block.'">></a></button>' );
           }else{
             echo( '<button type="button" name="button"><a href="notice_list.php?page='.$next_block.'">></a></button>' );
           }
@@ -226,26 +209,13 @@ if(!empty($_SESSION['userid'])){
           echo( '<button type="button" name="button" title="맨끝으로"><a href="notice_list.php?page='.$total_pages.'">>></a></button>' );
         }
         ?>
-        <!-- <button type="button" name="button" title="맨첨으로"><<</button>
-        <button type="button" name="button" title="앞으로"><</button>
-        <button type="button" name="button"><a>1</a></button>
-        <button type="button" name="button">2</button>
-        <button type="button" name="button">3</button>
-        <button type="button" name="button">4</button>
-        <button type="button" name="button">5</button>
-        <button type="button" name="button">6</button>
-        <button type="button" name="button">7</button>
-        <button type="button" name="button">8</button>
-        <button type="button" name="button">9</button>
-        <button type="button" name="button">10</button>
-        <button type="button" name="button" title="뒤로">></button>
-        <button type="button" name="button" title="맨뒤로">>></button> -->
+        dsfefeefee
       </div>
-
     </section>
-    <br>
-    <footer>
-      <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/footer.php";?>
-    </footer>
+  </div><!--end of wrap-->
+
+  <footer>
+    <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/footer.php";?>
+  </footer>
   </body>
 </html>

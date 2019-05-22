@@ -15,7 +15,7 @@ session_start();
       <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/login_menu.php";?>
       <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/mini_menu.php";?>
     </header>
-    <br><br><br>
+    <br><br><br><br>
 
     <section id="notice">
       <table border="1">
@@ -41,7 +41,6 @@ session_start();
       <button id="admin_write_btn" type="button" name="button">삭제</button>
       <button id="admin_write_btn" type="button" name="button">목록</button>
     </div>
-
 
     </section>
     <br>
