@@ -113,32 +113,32 @@ if(!empty($_FILES['p_main_img1'])){
 
     //1. $_FILES['upfile']로부터 5가지 배열명을 가져와서 저장한다.
     $main_img_copy1 = $_FILES['p_main_img1'];//한개파일업로드정보(5가지정보배열로들어있음)
-    $main_img_copy1_name= $_FILES['p_main_img1']['name'];//f03.jpg
-    $main_img_copy1_type= $_FILES['p_main_img1']['type'];//image/gif  file/txt
-    $main_img_copy1_tmp_name= $_FILES['p_main_img1']['tmp_name'];
-    $main_img_copy1_error= $_FILES['p_main_img1']['error'];
-    $main_img_copy1_size= $_FILES['p_main_img1']['size'];
+    $main_img_copy_name1= $_FILES['p_main_img1']['name'];//f03.jpg
+    $main_img_copy_type1= $_FILES['p_main_img1']['type'];//image/gif  file/txt
+    $main_img_copy_tmp_name1= $_FILES['p_main_img1']['tmp_name'];
+    $main_img_copy_error1= $_FILES['p_main_img1']['error'];
+    $main_img_copy_size1= $_FILES['p_main_img1']['size'];
     // echo "<script>alert('$upfile_tmp_name');history.go(-1);</script>";
     //2. 파일명과 확장자를 구분해서 저장한다.
-    $file = explode(".", $main_img_copy1_name); //파일명과 확장자구분에서 배열저장
-    $file_name = $file[0];              //파일명
-    $file_extension = $file[1];         //확장자
+    $file1 = explode(".", $main_img_copy_name1); //파일명과 확장자구분에서 배열저장
+    $file_name1 = $file1[0];              //파일명
+    $file_extension1 = $file1[1];         //확장자
 
     //3.업로드될 폴더를 지정한다.
     $upload_dir ="../../common/lib/editor/data/"; //업로드된파일을 저장하는장소지정
 
     //4.파일업로드가성공되었는지 점검한다. 성공:0 실패:1
     //파일명이 중복되지 않도록 임의파일명을 정한다.
-    if(!$main_img_copy1_error){
-      $new_file_name=date("Y_m_d_H_i_s");
-      $new_file_name = $new_file_name."_"."0";
-      $copied_file_name= $new_file_name.".".$file_extension;
-      $uploaded_file = $upload_dir.$copied_file_name;
+    if(!$main_img_copy_error1){
+      $new_file_name1=date("Y_m_d_H_i_s");
+      $new_file_name1 = $new_file_name1."_"."0";
+      $copied_file_name1= $new_file_name1.".".$file_extension1;
+      $uploaded_file1 = $upload_dir.$copied_file_name1;
       // $uploaded_file = "./data/2019_04_22_15_09_30_0.jpg";
     }
 
     //5 업로드된 파일확장자를 체크한다.  "image/gif"
-    $type=explode("/", $main_img_copy1_type);
+    $type=explode("/", $main_img_copy_type1);
 
     if($type[0]=='image'){
       switch ($type[1]) {
@@ -147,18 +147,18 @@ if(!empty($_FILES['p_main_img1'])){
           default:alert_back('3. gif jpg png 확장자가아닙니다.');
         }
         //6 업로드된 파일사이즈(2mb)를 체크해서 넘어버리면 돌려보낸다.
-        if($main_img_copy1_size>2000000){
+        if($main_img_copy_size1>2000000){
           alert_back('2. 이미지파일사이즈가 2MB이상입니다.');
         }
     }else{
         //5 업로드된 파일사이즈(500kb)를 체크해서 넘어버리면 돌려보낸다.
-        if($main_img_copy1_size>500000){
+        if($main_img_copy_size1>500000){
             alert_back('2. 파일사이즈가 500KB이상입니다.');
         }
     }
 
     //7. 임시저장소에 있는 파일을 서버에 지정한 위치로 이동한다.
-    if(!move_uploaded_file($main_img_copy1_tmp_name, $uploaded_file)){
+    if(!move_uploaded_file($main_img_copy_tmp_name1, $uploaded_file1)){
       alert_back('4. 서버 전송에러!!');
     }
 
@@ -330,22 +330,22 @@ if(!empty($_POST['p_bus'])){
     return false;
 }
 
-  echo "코드".$code; echo "<br>";
-  echo "패키지명 ".$name; echo "<br>";
-  echo "기간".$period; echo "<br>";
-  echo "출발일".$dp_date; echo "<br>";
-  echo "출발시간".$dp_time; echo "<br>";
-  echo "도착시간".$arr_time; echo "<br>";
-  echo "요금".$pay; echo "<br>";
-  echo "추가요금".$add_pay; echo "<br>";
-  echo "자유시간".$free_time; echo "<br>";
-  echo "출발도시".$dp_city; echo "<br>";
-  echo "도착도시".$arr_mt;echo "<br>";
-  echo "내용".$detail_content; echo "<br>";
-  echo "메인이미지1".$main_img1; echo "<br>";
-  echo "메인이미지2".$main_img2; echo "<br>";
-  echo "메인이미지3".$main_img3; echo "<br>";
-  echo "버스".$bus; echo "<br>";
+  // echo "코드".$code; echo "<br>";
+  // echo "패키지명 ".$name; echo "<br>";
+  // echo "기간".$period; echo "<br>";
+  // echo "출발일".$dp_date; echo "<br>";
+  // echo "출발시간".$dp_time; echo "<br>";
+  // echo "도착시간".$arr_time; echo "<br>";
+  // echo "요금".$pay; echo "<br>";
+  // echo "추가요금".$add_pay; echo "<br>";
+  // echo "자유시간".$free_time; echo "<br>";
+  // echo "출발도시".$dp_city; echo "<br>";
+  // echo "도착도시".$arr_mt;echo "<br>";
+  // echo "내용".$detail_content; echo "<br>";
+  // echo "메인이미지1".$main_img1; echo "<br>";
+  // echo "메인이미지2".$main_img2; echo "<br>";
+  // echo "메인이미지3".$main_img3; echo "<br>";
+  // echo "버스".$bus; echo "<br>";
 
 
   $package_str = "";
@@ -356,7 +356,7 @@ if(!empty($_POST['p_bus'])){
   $package_num = mt_rand(100000, 999999);
   $airplane_number = $package_str . $package_num;
 
-    echo "항공".$airplane_number; echo "<br>";
+    // echo "항공".$airplane_number; echo "<br>";
 // alert($content);
 // alert($name);
 $sql= "insert into package (`p_code`,
@@ -381,15 +381,17 @@ $sql= "insert into package (`p_code`,
 `p_bus`) ";
 // $sql.= "values ('$code', '$name', '$period', '$dp_date', '$dp_time', '$arr_time', '$pay', '$add_pay, '$free_time', '$dp_city',
 //  '$arr_mt', '$detail_content', '$main_img1', '$main_img2', '$main_img3', '$main_img_copy1', '$main_img_copy2', '$main_img_copy3', '$bus')";
-$sql.= "values ('$code', '$name', '$period', '$dp_date', '$dp_time', '$arr_time', $pay, '$add_pay', '$free_time', '$dp_city','$arr_mt', '$detail_content', '$main_img1', '$main_img2', '$main_img3', '$new_file_name', '$new_file_name2', '$new_file_name3', '$airplane_number', '$bus')";
+$sql.= "values ('$code', '$name', '$period', '$dp_date', '$dp_time', '$arr_time', $pay, '$add_pay', '$free_time', '$dp_city','$arr_mt', '$detail_content', '$main_img_copy_name1', '$main_img_copy_name2', '$main_img_copy_name3', '$copied_file_name1', '$copied_file_name2', '$copied_file_name3', '$airplane_number', '$bus')";
 
 
 
 mysqli_query($conn, $sql) or die(mysqli_error($conn));
 
 
-mysqli_close($conn);
 
+mysqli_close($conn);
 echo "<script>alert('패키지가 등록되었습니다.')</script>";
+echo '<script>location.href="admin_add_package.php";</script>';
+
 
 ?>

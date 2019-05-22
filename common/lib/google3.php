@@ -161,7 +161,7 @@ function codeLatLng(lat, lng) {
           // alert(city.long_name + " || " + region.long_name + " || " + country.long_name);
           // alert(location_val);
           document.getElementsByName('location_val').value=location_val;
-          alert(document.getElementsByName('location_val').value);
+          // alert(document.getElementsByName('location_val').value);
           } else {
             alert("No results found");
           }

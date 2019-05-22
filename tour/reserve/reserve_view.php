@@ -1,5 +1,6 @@
 <?php
 session_start();
+include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
 ?>
 <!DOCTYPE html>
 <html lang="ko" dir="ltr">
@@ -88,25 +89,25 @@ session_start();
       <table id="tbl1">
         <tr>
           <td class="left2" id="pac_name" >상품명</td>
-          <td id="pac_name2">백두산이다아아아아아아아이야아아아아아앙</td>
+          <td id="pac_name2"><?=$p_name?></td>
         </tr>
 
         <tr>
           <td class="left2" id="pac_code">상품코드</td>
-          <td id="pac_code2">ABC123455</td>
+          <td id="pac_code2"><?=$p_code?></td>
         </tr>
         <tr>
           <td rowspan="3" class="left2" id="sch1">일정</td>
-          <td id="period1">6일</td>
+          <td id="period1"><?=$p_period?>일</td>
         </tr>
 
         <tr>
-          <td id="go"><div class="gb2">한국출발</div> </td>
+          <td id="go"><div class="gb2" style="display:inline-block;">한국출발</div>  <?php echo $dp_date[0]."년 ".$dp_date[1]."월 ".$dp_date[2]."일 "." (".$day.") ".$p_dp_time ?></td>
 
         </tr>
 
         <tr>
-          <td id="back"><div class="gb2" >한국도착</div> </td>
+          <td id="back"><div class="gb2" style="display:inline-block;">한국도착</div> <?php echo $dp_date2[0]."년 ".$dp_date2[1]."월 ".$dp_date2[2]."일 "." (".$day2.") ".$p_arr_time ?></td>
 
         </tr>
       </table>
@@ -388,7 +389,7 @@ session_start();
         </div>
         <div id="reserve_pay_view">
           <p id="reserve_total_pay">최종결제금액</p>
-          <b id="reserve_money">999,000</b> <p id="won">원</p>
+          <b id="reserve_money"><?=$p_pay?></b> <p id="won">원</p>
           <p class="subtext2">유류할증료,제세공과금 포함</p>
           <p class="subtext2">※발권일/환율에 따라 변경 가능합니다</p>
           <p class="line">-----------------------------------------------------------</p>

@@ -35,7 +35,7 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="search"){
     echo ("<script>window.alert('검색할 단어를 입력해 주세요')history.go(-1)</script>");
     exit;
   }
-
+//
   $sql="SELECT * from `notice` where $find_option like '%$q_find_input%';";
 }else{
   $sql="SELECT * from `notice` order by num desc";
