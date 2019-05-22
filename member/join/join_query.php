@@ -51,7 +51,6 @@ if($rowcount){
   //kakao OR facebook OR naver
   if(isset($_POST['mode'])){
     $_SESSION['name'] =$join_name;
-    $_SESSION['email'] =$email;
     $_SESSION['id'] =$q_id;
 
     if($_POST['mode']==='naver'){
@@ -73,7 +72,6 @@ if (!$result) {
 }
 mysqli_close($conn);
 $_SESSION['name'] =$join_name;
-$_SESSION['email'] =$email;
 $_SESSION['id'] =$q_id;
 echo "<script>location.href='../../index.php';</script>";
 

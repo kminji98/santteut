@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/introduction/css/history.css">
-    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/member/login/css/login.css?ver=0.2">
+    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/member/login/css/login.css?ver=1.1">
     <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
     <script type="text/javascript">
       window.addEventListener('load', function() {
@@ -16,6 +16,21 @@
         naver_id_login.setPopup();
         naver_id_login.init_naver_id_login();
       });
+
+      function login_action(){
+        if(login_form.login_id.value == ''){
+          alert('ID를 입력하세요.');
+          login_form.login_id.focus();
+          return false;
+        }
+        if(login_form.login_passwd.value == ''){
+          alert('패스워드를 입력하세요.');
+          login_form.login_passwd.focus();
+          return false;
+        }
+
+        document.login_form.submit();
+      }
     </script>
     <title>로그인</title>
   </head>
@@ -25,20 +40,25 @@
       <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/login_menu.php";?>
     </header>
     <section id="login">
+    <hr>
     <h2>로그인</h2>
     <hr>
-    <div class="login_form">
-      <h3>로그인</h3>
+    <div class="login_div">
+      <h3> 로그인</h3>
+
       <table>
+       <form name="login_form" action="login_query.php" method="post">
+         <input type="hidden" name="mode" value="login">
         <tr>
           <th><label>아이디</label></th>
           <td><input type="text" name="login_id"></td>
-          <th rowspan="2"><button type="button" name="button" id="login_button">로그인</button> </th>
+          <th rowspan="2"><button type="button" name="button" id="login_button" onclick="login_action()">로그인</button> </th>
         </tr>
         <tr>
           <th><label>비밀번호</label> </th>
           <td><input type="password" name="login_passwd"></td>
         </tr>
+      </form>
         <tr>
           <td id="empty_row" colspan="3"><br></td>
         </tr>
