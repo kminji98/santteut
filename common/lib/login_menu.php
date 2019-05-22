@@ -26,7 +26,7 @@
         </li> ');
 
         //관리자일때
-      }else if(!($_SESSION['id']=="admin")){
+      }else if($_SESSION['id']=="admin"){
         echo (" {$_SESSION['name']} 님 환영합니다. ");
         echo ('<li><a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/member/login/logout.php">로그아웃</a></li> ');
         echo ('<li id="top_my" class="hov">관리자모드<small>▼</small>
