@@ -10,18 +10,19 @@ session_start();
 create_table($conn,'notice');
 
 //1. 게시물수 정의
-define('SCALE', 10);
+define('ROW_SCALE', 10);
+define('PAGE_SCALE', 5);
 
 //2. 변수정의
 // $view_num 보여지는번호, $num은 DB에서 프라이머리키 번호
 // $total_record 전체 게시물수, $start_record 한 페이지의 처음 게시물
 // $record 는 게시물1개, $total_pages는 전체 페이지를 의미
-$sql=$result=$total_record=$total_page=$start_record=$row="";
+$sql=$result=$total_record=$total_pages=$start_record=$row="";
 $total_record=0;
 
 
 //3. 검색모드를 세팅(제목,내용)
-if(isset($_GET["mode"])&&$_GET["mode"]=="find_input"){
+if(isset($_GET["mode"])&&$_GET["mode"]=="search"){
 
   // find_option 는 select의 값들 문자열로 받아옴
   $find_option = test_input($_POST["find_option"]);
@@ -46,19 +47,31 @@ $result=mysqli_query($conn,$sql);
 $total_record=mysqli_num_rows($result);
 
 // 조건?참:거짓
-$total_page=($total_record % SCALE == 0 )?($total_record/SCALE):(ceil($total_record/SCALE));
+$total_pages=ceil($total_record/ROW_SCALE);
 
 // 페이지가 없으면 디폴트 페이지 1페이지
-if(empty($_GET['present_page'])){
-  $present_page=1;
-}else{
-  $present_page=$_GET['present_page'];
-}
+// if(empty($_GET['present_page'])){$present_page=1; }else{ $present_page=$_GET['present_page']; }
+$present_page=(empty($_GET['present_page']))?1:$_GET['present_page'];
 
-// 현재페이지 시작번호계산함.
-$start_record=($present_page -1) * SCALE;
+
+
+// 현재 블럭의 시작 페이지 = (ceil(현재페이지/블럭당 페이지 제한 수)-1) * 블럭당 페이지 제한 수 +1
+//[[  EX) 현재 페이지 5일 때 => ceil(5/3)-1 * 3  +1 =  (2-1)*3 +1 = 4 ]]
+$start_page= (ceil($present_page / PAGE_SCALE ) -1 ) * PAGE_SCALE +1 ;
+
+// 현재페이지 시작번호 계산함.
+//[[  EX) 현재 페이지 1일 때 => (1 - 1)*10 -> 0   ]]
+//[[  EX) 현재 페이지 5일 때 => (5 - 1)*10 -> 40  ]]
+$start_record=($present_page -1) * ROW_SCALE;
+
+// 현재 블럭 마지막 페이지
+// 전체 페이지가 (시작 페이지+페이지 스케일) 보다 크거나 같으면 마지막 페이지는 (시작페이지 + 페이지 스케일) -1 / 아니면 전체페이지 수 .
+//[[  EX) 현재 블럭 시작 페이지가 6/ 전체페이지 : 10 -> '10 >= (6+10)' 성립하지 않음 -> 10이 현재블럭의 가장 마지막 페이지 번호  ]]
+$end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCALE-1 : $total_pages;
+
 
 // 리스트에 보여줄 번호를 최근순으로 부여함.
+// 출력될 숫자
 $view_num = $total_record - $start_record;
 
 ?>
@@ -105,7 +118,7 @@ $view_num = $total_record - $start_record;
 
       <!--게시물 내용-->
       <?php
-        for ($record = $start_record; $record  < $start_record+SCALE && $record<$total_record; $record++){
+        for ($record = $start_record; $record  < $start_record+ROW_SCALE && $record<$total_record; $record++){
           mysqli_data_seek($result,$record);
           $row=mysqli_fetch_array($result);
           $num=$row['num'];
@@ -141,28 +154,81 @@ if(!empty($_SESSION['userid'])){
 }
 ?>
 <br>
-<!--$page 는 현재페이지가 아닌 다른페이지를 의미함-->
+<!--$page 는 현재페이지를 의미 x / 각 페이지를 의미-->
         <!--바꾸기 -->
-        <div id="page_button">
+        <!-- <div id="page_button">
           <div id="page_num">이전◀ &nbsp;&nbsp;&nbsp;&nbsp;
           <?php
-            for ($page=1; $page <= $total_page ; $page++) {
-              if($present_page==$page){
-                echo "<b>&nbsp;$page&nbsp;</b>";
-              }else{
-                echo "<a href='./list.php?page=$page'>&nbsp;$page&nbsp;</a>";
-              }
-            }
+            // for ($page=1; $page <= $total_pages ; $page++) {
+            //   if($present_page==$page){
+            //     echo "<b>&nbsp;$page&nbsp;</b>";
+            //   }else{
+            //     echo "<a href='./list.php?page=$page'>&nbsp;$page&nbsp;</a>";
+            //   }
+            // }
           ?>
           &nbsp;&nbsp;&nbsp;&nbsp;▶ 다음
           <br><br><br><br><br><br><br>
-        </div><!--end of page num -->
+        </div> -->
+        <!--end of page num -->
       <!--바꾸기의 끝-->
 
       <div class="page_button_group">
-        <button type="button" name="button" title="맨첨으로"><<</button>
+        <?php
+        //현재 블럭의 시작 페이지가 페이지 스케일 보다 클 때 -> 처음으로 버튼 생성 + 이전 블럭 존재
+        //[ex]  page가 9개 있고 현재 페이지가 6페이지인 경우  / 12345/ 6789     =>  <<(처음으로) <(이전) 6 7 8 9
+        if( $start_page > PAGE_SCALE ){
+          // echo( '<a href='notice_list.php?page=1'> << </a>' );
+          echo( '<button type="button" name="button" title="처음으로"><a href="notice_list.php?page=1"><<</a></button>' );
+
+          // 이전 블럭 클릭 시 -> 현재 블럭의 시작 페이지 - 페이지 스케일
+          // 현재 6 page 인 경우 '<(이전블럭)' 클릭 -> $pre_page = 6-PAGE_SCALE  -> 1 페이지로 이동
+          $pre_block= $start_page - PAGE_SCALE;
+          if(isset($_GET['mode']) && $_GET['mode']=="search"){
+            echo( '<button type="button" name="button" title="이전"><a href="notice_list.php?mode=search&find=$find&search=$search&page='.$pre_block.'"><</a></button>' );
+          }else{
+            echo( '<button type="button" name="button" title="이전"><a href="notice_list.php?page='.$pre_block.'"><</a></button>' );
+          }
+        }
+
+        //현재 블럭에 해당하는 페이지 나열
+        for( $page = $start_page; $page <= $end_page; $page++ ){
+            //현재 블럭에 현재 페이지인 버튼
+            if ( $page == $present_page ){
+  //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$background-color => 연두  color=> white
+  //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ inline 스타일 넣어야 함
+              echo( '<button type="button" name="button" ><a href="#">'.$page.'</a></button>' );
+            }else if(isset($_GET['mode']) && $_GET['mode']=="search"){
+              echo( '<button type="button" name="button"><a href="notice_list.php?mode=search&find=$find&search=$search&page='.$page.'">'.$page.'</a></button>' );
+            }else{
+              echo( '<button type="button" name="button" ><a href="notice_list.php?page='.$page.'">'.$page.'</a></button>' );
+            }
+        }
+
+        // 현재 블럭의 마지막 페이지 보다 총 페이지 수가 큰 경우, >(다음) 버튼 / >>(맨끝으로) 버튼 생성
+        //[ex]  page가 9개 있고 현재 페이지가 6페이지인 경우  / 12345/ 6789     =>  <<(처음으로) <(이전) 6 7 8 9
+        //[ex]  page가 9개 있고 현재 페이지가 1페이지인 경우  / 12345/ 6789     =>  1 2 3 4 5 >(다음) >>(맨끝으로)
+        if( $total_pages > $end_page ){
+          // 다음블럭 => 현재 블럭의 시작페이지 + 스케일
+          // 클릭 시 다음 블럭의 첫 번째 페이지로 이동
+          // [ex]  총 page 9개 있고 페이지가 3인  경우 / >(다음) 버튼 누르면 '6'으로 이동
+          $next_block= $start_page + PAGE_SCALE;
+          echo( '<button type="button" name="button" title="다음"><a href="notice_list.php?page='.$next_block.'">></a></button>' );
+
+          if(isset($_GET['mode']) && $_GET['mode']=="search"){
+//$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ 변수명 변경
+            echo( '<button type="button" name="button"><a href="notice_list.php?mode=search&find=$find&search=$search&page='.$next_block.'">></a></button>' );
+          }else{
+            echo( '<button type="button" name="button"><a href="notice_list.php?page='.$next_block.'">></a></button>' );
+          }
+
+          //맨끝페이지로 이동
+          echo( '<button type="button" name="button" title="맨끝으로"><a href="notice_list.php?page='.$total_pages.'">>></a></button>' );
+        }
+        ?>
+        <!-- <button type="button" name="button" title="맨첨으로"><<</button>
         <button type="button" name="button" title="앞으로"><</button>
-        <button type="button" name="button">1</button>
+        <button type="button" name="button"><a>1</a></button>
         <button type="button" name="button">2</button>
         <button type="button" name="button">3</button>
         <button type="button" name="button">4</button>
@@ -173,7 +239,7 @@ if(!empty($_SESSION['userid'])){
         <button type="button" name="button">9</button>
         <button type="button" name="button">10</button>
         <button type="button" name="button" title="뒤로">></button>
-        <button type="button" name="button" title="맨뒤로">>></button>
+        <button type="button" name="button" title="맨뒤로">>></button> -->
       </div>
 
     </section>
