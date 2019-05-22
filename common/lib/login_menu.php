@@ -44,7 +44,7 @@
         //회원일때
       }else{
         echo (" {$_SESSION['name']} 님 환영합니다. ");
-        echo ('<li><a href="#">로그아웃</a></li> ');
+        echo ('<li><a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/member/login/logout.php">로그아웃</a></li> ');
         echo ('<li id="top_my" class="hov">My<small>▼</small>
           <div id="top_my_content">
             <ul id="top_my_content_ul">
