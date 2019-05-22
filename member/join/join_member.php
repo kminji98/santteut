@@ -62,8 +62,8 @@
 
        }
        $.ajax({
-         url: 'check_id2.php?mode=id_check',
-         type: 'GET',
+         url: 'check_id2.php',
+         type: 'POST',
          data: {id: $("#join_id").val()}
        })
        .done(function(result) {
@@ -76,6 +76,7 @@
           $("#possibility").text(result);
           $("#possibility").css('color', 'blue');
           id_check=true;
+          console.log("ok");
         }
 
        })
@@ -139,10 +140,11 @@
             var e_mail_adress_2 = document.getElementById("e_mail_adress_2");
             var check_email1 = document.getElementsByName("check_email1")[0];
             var check_email2 = document.getElementsByName("check_email2")[0];
+            var hidden_email = document.getElementsByName("hidden_email")[0];
             var e_mailPatt = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
             var e_mail_id_value=e_mail_id.value.concat('@'+e_mail_adress_2.value);
-
-
+            hidden_email.value = e_mail_id.value.concat('@'+e_mail_adress_2.value);
+            console.log(hidden_email.value);
             if(!e_mail_id.value){
               alert("이메일 아이디를 입력해주세요");
               e_mail_id.focus();
@@ -162,11 +164,12 @@
               data: {email: e_mail_id_value}
             })
             .done(function(result) {
-              code=result;
-              alert(code);
-              alert("인증 번호가 발송되었습니다.");
-               check_email1.setAttribute('type', 'text');
-               check_email2.setAttribute('type', 'button');
+              done=result;
+              alert(done);
+              if (done!="존재하는 이메일입니다.") {
+                check_email1.setAttribute('type', 'text');
+                check_email2.setAttribute('type', 'button');
+              }     
             })
             .fail(function() {
               alert("인증 번호 발송실패!");
@@ -202,9 +205,11 @@
           $("#hp_btn").click(function(e){
             var join_phone_write = document.getElementById("join_phone_write");
             var join_select = document.getElementById("join_select");
+            var hidden_phone = document.getElementsByName("hidden_phone")[0];
             var cellphone_authentication_form = document.getElementById("cellphone_authentication_form");
             var join_phone_write_Patt =/^[0-9]*$/;
             var phone_val=join_select.options[join_select.selectedIndex].text+join_phone_write.value;
+            hidden_phone.value=join_select.options[join_select.selectedIndex].text+join_phone_write.value;
             if (!join_phone_write_Patt.test(join_phone_write.value)) {
               alert("전화번호를 확인해주세요");
               join_phone_write.focus();
@@ -229,6 +234,7 @@
             })
             .done(function(result) {
               h_code=result;
+              alert(h_code);
               alert("문자인증 번호가 발송되었습니다.");
               $("#hp_btn_done").css('display', 'inline');
               $("#cellphone_authentication").css('display', 'inline');
@@ -351,6 +357,8 @@
          var check_1 = document.getElementById("check_1");
          var check_2 = document.getElementById("check_2");
          var check_3 = document.getElementById("check_3");
+         var hidden_email = document.getElementsByName("hidden_email")[0];
+         var hidden_phone = document.getElementsByName("hidden_phone")[0];
 
          var join_id_Patt = /^[a-zA-Z0-9]{3,15}$/;
          var join_passwd_Patt = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
@@ -358,7 +366,7 @@
          var e_mailPatt = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
          var join_phone_write_Patt =/^[0-9]*$/;
 
-
+         var phone_value=join_select.value.concat(join_phone_write.value);
          var e_mail_id_value=e_mail_id.value.concat('@'+e_mail_adress_2.value);
 
         if(!join_id_Patt.test(join_id.value)){
@@ -401,13 +409,20 @@
            e_mail_id.focus();
            e_mail_id.value="";
            return false;
-         }else if(!e_mailPatt.test(e_mail_id_value)){
+         }else if(e_mail_id_value!=hidden_email.value){
+           alert("이메일이 바뀌었습니다");
+           return false;
+         }
+         else if(!e_mailPatt.test(e_mail_id_value)){
            alert("이메일 형식을 확인해주세요");
            e_mail_adress_1.focus();
            return false;
          }else if (!final_email_check) {
            alert("이메일을 인증해주세요");
            e_mail_adress_1.focus();
+           return false;
+         }else if(phone_value!=hidden_phone.value){
+           alert("전화번호가 바뀌었습니다");
            return false;
          }else if (!join_phone_write_Patt.test(join_phone_write.value)) {
            alert("전화번호를 확인해주세요");
@@ -450,7 +465,7 @@
 
 
 
-
+         document.join_member_form.submit();
          alert("성공");
       }
     </script>
@@ -474,7 +489,8 @@
     <section>
       <!-- <form name="member_form" action="check_id.php?mode=insert" method="post"> -->
 
-      <form name="join_member_form" action="" method="">
+      <form name="join_member_form" action="join_query.php" method="post">
+        <input type="hidden" name="mode" value="id_check">
         <div class="join_form">
           <h3>회원가입</h3>
 
@@ -531,15 +547,16 @@
               <td id="e_mail_box">
                 <input id="e_mail_id" type="text" name="e_mail_id" size="17"> @
                 <select onclick="choice_email()" id="e_mail_adress_1" class="" name="e_mail_adress_1" style=" padding: 9px; font-size:13px;">
-                  <option value="" >naver.com</option>
-                  <option value="" >gmail.com</option>
-                  <option value="" >daum.net</option>
-                  <option value="" >nate.com</option>
-                  <option value="" >yahoo.com</option>
-                  <option value="" >직접입력</option>
+                  <option value="naver.com" >naver.com</option>
+                  <option value="gmail.com" >gmail.com</option>
+                  <option value="daum.net" >daum.net</option>
+                  <option value="nate.com" >nate.com</option>
+                  <option value="yahoo.com" >yahoo.com</option>
+                  <option value="직접입력" >직접입력</option>
                 </select>
                 <input readonly id="e_mail_adress_2" value="naver.com"  placeholder="naver.com" type="text" name="e_mail_adress_2" size="13" style="text-align: center;">
                 <button id="email_btn" type="button" name="email_btn">인증하기</button>
+                <input type="hidden" name="hidden_email" >
                 <input type="hidden" name="check_email1" size="8" placeholder="인증번호" id="check_email1">
                 <input type="hidden" name="check_email2" value="확인" style="background-color: #FFFFFF" id="check_email2"></button>
                 <p id="email_final_alert" style="display:inline;"></p>
@@ -557,7 +574,7 @@
             <tr>
               <th id="last_td1">&nbsp;&nbsp;&nbsp;<label>휴대전화</label>&nbsp;<span>*</span></th>
               <td id="last_td2"  colspan="3">
-                <select id="join_select">
+                <select id="join_select" name="join_select">
                   <option value="선택">선택</option>
                   <option value="010">010</option>
                   <option value="011">011</option>
@@ -568,6 +585,7 @@
                 </select>
 
               <input id="join_phone_write" type="tel" name="join_cellphone" size="19" maxlength="8">
+              <input type="hidden" name="hidden_phone">
               <button id="hp_btn" type="button" name="button" >인증하기</button> <br>
               <input id="cellphone_authentication" type="text" name="cellphone_authentication" placeholder="인증번호를 입력하세요." size="25" style="display:none; ">
               <button id="hp_btn_done" type="button" name="button" style="display:none; ">확인</button><p id="final_phone_check" style="display:inline; "></p>
