@@ -25,11 +25,20 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
 $q_id = mysqli_real_escape_string($conn, $id);
 
 
-
-if(isset($_POST['mode']) && $_POST['mode']=='facebook'){
-  $q_id = $q_id."@f";
-}else if(isset($_POST['mode']) && $_POST['mode']=='kakao'){
-  $q_id = $q_id."@k";
+if(isset($_POST['mode'])){
+  switch ($_POST['mode']) {
+    case 'facebook':
+      $q_id = $q_id."@f";
+      break;
+    case 'kakao':
+      $q_id = $q_id."@f";
+      break;
+    case 'naver':
+      $q_id = $q_id."@n";
+      break;
+    default:
+      break;
+  }
 }
 $sql="select * from member where id = '$q_id'";
 $result = mysqli_query($conn,$sql);
@@ -39,11 +48,16 @@ if (!$result) {
 $rowcount=mysqli_num_rows($result);
 
 if($rowcount){
-  //kakao OR facebook login
+  //kakao OR facebook OR naver
   if(isset($_POST['mode'])){
     $_SESSION['name'] =$join_name;
     $_SESSION['email'] =$email;
     $_SESSION['id'] =$q_id;
+
+    if($_POST['mode']==='naver'){
+      echo '<script>window.close();window.opener.location.replace("http://localhost/santteut/index.php"); </script>';
+    }
+
     echo "<script>location.href='../../index.php';</script>";
     exit;
   }
