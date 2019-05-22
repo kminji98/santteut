@@ -6,7 +6,7 @@ session_start();
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css?ver=6">
-    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/tour/reserve/css/reserve_view.css?ver=0.1">
+    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/tour/reserve/css/reserve_view.css?ver=0.2">
 
     <title>산뜻 :: 즐거운 산행</title>
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
@@ -397,8 +397,8 @@ session_start();
 
         </div>
         <div id="reserve_button">
-          <!-- <a href="#"><div id="reserve_finish"> <b>예약마감</b></div></a><br> -->
-          <input type="button" id="reserve_finish" value="예약마감">
+          <a href="reserve_complete.php"><div id="reserve_finish"> <b>예약마감</b></div></a><br>
+          <!-- <input type="button" id="reserve_finish" value="예약마감"> -->
         </div>
         <div id="right_footer"></div>
       </div>

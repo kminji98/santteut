@@ -3,9 +3,9 @@
     <img src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/img/sanlogo.png" border=0></a>
   <div id="menus">
   <ul id="top_menu">
-    <li><a href="#">국내산행</a></li>
-    <li><a href="#">해외산행</a></li>
-    <li><a href="#">날짜별 산행</a></li>
+    <li><a href="./tour/package/package_list.php">국내산행</a></li>
+    <li><a href="./tour/package/package_list.php">해외산행</a></li>
+    <li><a href="./tour/package/package_list.php">날짜별 산행</a></li>
   </ul>
   </div>
   <div id="login_menu">

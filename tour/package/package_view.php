@@ -132,8 +132,8 @@ session_start();
         <p id="line">-------------------------------------------------------------------</p>
       </div>
       <div id="button">
-        <a href="#"><div id="reserve_status"> <b>예약마감</b></div></a><br>
-        <a href="#"><div id="go_cart"> <b>장바구니</b></div></a>
+        <a href="../reserve/reserve_view.php"><div id="reserve_status"> <b>예약마감</b></div></a><br>
+        <a href="../cart/cart_list.php"><div id="go_cart"> <b>장바구니</b></div></a>
       </div>
       <div id="right_footer"></div>
     </div>

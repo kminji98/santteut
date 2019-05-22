@@ -199,7 +199,7 @@ session_start();
               <output>05/28 (화) 07:45</output>
             </td>
             <td class="package_list_period_value">3일</td>
-            <td class="package_list_view_name_value"><a href="#">[라스트미닛][세미팩][1일자유]싱가포르 5일-3성호텔 ▶호텔업그레이드+샹그릴라뷔페+루지</a></td>
+            <td class="package_list_view_name_value"><a href="package_view.php">[라스트미닛][세미팩][1일자유]싱가포르 5일-3성호텔 ▶호텔업그레이드+샹그릴라뷔페+루지</a></td>
             <td class="package_list_view_pay_value">743,700원</td>
             <td>
               <output class="package_list_view_state_value">예약가능</output>
@@ -215,7 +215,7 @@ session_start();
               <output>05/30 (목) 07:45</output>
             </td>
             <td class="package_list_period_value">7일</td>
-            <td class="package_list_view_name_value"><a href="#">[슈퍼세이브][세미팩][1일자유]싱가포르 5일-4성급+마리나베이샌즈1박 ▶샹그릴라뷔페+루지◀
+            <td class="package_list_view_name_value"><a href="package_view.php">[슈퍼세이브][세미팩][1일자유]싱가포르 5일-4성급+마리나베이샌즈1박 ▶샹그릴라뷔페+루지◀
 1,129,900원+루지</a></td>
             <td class="package_list_view_pay_value">999,900원</td>
             <td>
@@ -232,7 +232,7 @@ session_start();
               <output>06/01 (토) 07:45</output>
             </td>
             <td class="package_list_period_value">당일</td>
-            <td class="package_list_view_name_value"><a href="#">[홈쇼핑따라잡기][미식][맛있는]싱가포르완전일주 5일-4성(2)+스탬포드(1)◐타이거비어+슈퍼트리쇼+루지◑루지</a></td>
+            <td class="package_list_view_name_value"><a href="package_view.php">[홈쇼핑따라잡기][미식][맛있는]싱가포르완전일주 5일-4성(2)+스탬포드(1)◐타이거비어+슈퍼트리쇼+루지◑루지</a></td>
             <td class="package_list_view_pay_value">849,900원</td>
             <td>
               <output class="package_list_view_state_value">예약가능</output>
