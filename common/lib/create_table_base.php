@@ -37,6 +37,7 @@ function create_table($conn, $table_name){
           `p_name` varchar(10) NOT NULL,
           `p_period` varchar(30) NOT NULL,
           `p_dp_date` varchar(20) NOT NULL,
+          `p_dp_day`  char(1) NOT NULL,
           `p_dp_time` varchar(20) NOT NULL,
           `p_arr_time` varchar(20) NOT NULL,
           `p_pay` int(15)  NOT NULL,
