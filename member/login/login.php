@@ -5,6 +5,39 @@
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/introduction/css/history.css">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/member/login/css/login.css?ver=1.1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+      function checkLoginStatus() {
+        var loginBtn = document.querySelector('#loginBtn');
+        if (gauth.isSignedIn.get()) {
+          console.log('logined');
+          loginBtn.value = 'Logout';
+          var profile = gauth.currentUser.get().getBasicProfile();
+          document.member_form.join_id.value = profile.getId();
+          document.member_form.join_name.value = profile.getName();
+          document.member_form.email.value = profile.getEmail();
+          document.member_form.submit();
+        } else{
+          console.log('logouted');
+          loginBtn.value = 'Login';
+        }
+      }
+      function init() {
+        console.log('init');
+        gapi.load('auth2', function() {
+              console.log('auth2');
+                window.gauth = gapi.auth2.init({
+                  client_id: '301409044099-3qn245369bseosmhocbttg3sdof9rbe9.apps.googleusercontent.com'
+                })
+                gauth.then(function() {
+                  console.log('googleAuth success');
+                  checkLoginStatus();
+                }, function() {
+                  console.log('googleAuth fail');
+                });
+              });
+            }
+    </script>
     <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
     <script type="text/javascript">
       window.addEventListener('load', function() {
@@ -48,7 +81,7 @@
 
       <table>
        <form name="login_form" action="login_query.php" method="post">
-         <input type="hidden" name="mode" value="login">
+         <!-- <input type="hidden" name="mode" value="login"> -->
         <tr>
           <th><label>아이디</label></th>
           <td><input type="text" name="login_id"></td>
@@ -72,6 +105,7 @@
         </tr>
         <tr>
           <td colspan="3">
+            <!-- 네이버계정로그인 -->
             <div id="naver_id_login" style="display:inline;">
             </div>
             <script type="text/javascript">
@@ -83,10 +117,36 @@
               naver_id_login.setPopup();
               naver_id_login.init_naver_id_login();
             </script>
+            <!-- 페이스북계정 로그인 -->
             <?php include_once './facebook.php'; ?>
             <?php 	echo '<a href="' . $loginUrl . '">'; ?><img src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/member/login/img/facebook.jpg" alt="페이스북계정로그인"></a><br>
-              <a href="kakao.php"><img src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/member/login/img/kakao.jpg" alt="카카오계정로그인"></a>
-            <a href="#"><img src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/member/login/img/google.jpg" alt="구글계정로그인"></a>
+            <!-- 카카오계정로그인 -->
+            <a href="kakao.php"><img src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/member/login/img/kakao.jpg" alt="카카오계정로그인"></a>
+            <!-- 구글계정로그인 -->
+            <input type="image" style="height:41px;" src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/member/login/img/google.jpg" id="loginBtn" value="login" onclick="
+              if(this.value === 'Login'){
+                gauth.signIn().then(function(){
+                  console.log('gauth.signIn()');
+                  checkLoginStatus();
+                });
+              }else{
+                gauth.disconnect().then(function(){
+                  console.log('gauth.signOut()');
+                  checkLoginStatus();
+                });
+                gauth.signOut().then(function(){
+                  console.log('gauth.signOut()');
+                  checkLoginStatus();
+                });
+              }
+            ">
+            <form name="member_form" action="../join/join_query.php" method="post">
+              <input type="hidden" name="mode" value="google">
+              <input type="hidden" name="join_id" id="id" value="">
+              <input type="hidden" name="join_name" id="name"  value="">
+              <input type="hidden" name="email" id="email"  value="">
+            </form>
+            <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
           </td>
         </tr>
       </table>

@@ -23,8 +23,6 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
     $email = $email1."@".$email2;
   }
 $q_id = mysqli_real_escape_string($conn, $id);
-
-
 if(isset($_POST['mode'])){
   switch ($_POST['mode']) {
     case 'facebook':
@@ -35,6 +33,11 @@ if(isset($_POST['mode'])){
       break;
     case 'naver':
       $q_id = $q_id."@n";
+      break;
+    case 'google':
+    // 21자리 아이디 -> too long
+      $q_id = substr($q_id,0,15);
+      $q_id = $q_id."@g";
       break;
     default:
       break;
@@ -48,7 +51,7 @@ if (!$result) {
 $rowcount=mysqli_num_rows($result);
 
 if($rowcount){
-  //kakao OR facebook OR naver
+  //kakao OR facebook OR naver OR google
   if(isset($_POST['mode'])){
     $_SESSION['name'] =$join_name;
     $_SESSION['id'] =$q_id;
@@ -56,13 +59,13 @@ if($rowcount){
     if($_POST['mode']==='naver'){
       echo '<script>window.close();window.opener.location.replace("http://localhost/santteut/index.php"); </script>';
     }
-
     echo "<script>location.href='../../index.php';</script>";
     exit;
   }
   echo "<script>alert('존재하는 아이디입니다.');history.go(-1);</script>";
   exit;
 }
+var_dump($q_id);
 
 $sql="INSERT INTO member (id,passwd,passwd_confirm,name,zip,address1,address2,hp1,hp2,email) ";
 $sql.=" VALUES ('$q_id','$join_passwd','$join_passwdconfirm','$join_name','$join_zip','$join_foundational','$join_detail','$hp1','$hp','$email')";
