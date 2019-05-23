@@ -1,5 +1,18 @@
 <?php
 session_start();
+/////////테스트
+$_SESSION['name']="관리자";
+$_SESSION['id']="admin";
+
+// isset함수는 불리언값을 리턴 true or false
+// 회원 or 비회원이면 권한없음, 관리자일때만 입장
+if(!(isset($_SESSION['id']) &&  $_SESSION['id']=="admin")){
+  echo "<script>alert('권한없음!');history.go(-1);</script>";
+  exit;
+}
+
+$name = $_SESSION['name'];
+
 //0-0. 인클루드 디비
 include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
 
@@ -103,7 +116,7 @@ $view_num = $total_record - $start_record;
       </form>
 
       <div class="total_title">
-        <h4>total<?=$total_record?>개</h4>
+        <h4>total <?=$total_record?></h4>
       </div>
 
       <!--게시물 제목-->
@@ -122,9 +135,8 @@ $view_num = $total_record - $start_record;
           mysqli_data_seek($result,$record);
           $row=mysqli_fetch_array($result);
           $num=$row['num'];
-          $name=$row['name'];
           $title=$row['title'];
-          $date= substr($row['regist_day'],0,10);
+          $regist_day= substr($row['regist_day'],0,10);
           $hit=$row['hit'];
           $title=str_replace("\n", "<br>",$title);
           $title=str_replace(" ", "&nbsp;",$title);
@@ -182,7 +194,7 @@ if(!empty($_SESSION['id'])){
   //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ inline 스타일 넣어야 함(ok)
               echo( '<button type="button" name="button" style="background-color: #2F9D27; color: white; text-align: center;"><a href="#">'.$page.'</a></button>' );
             }else if(isset($_GET['mode']) && $_GET['mode']=="search"){
-              echo( '<button type="button" name="button"><a href="notice_list.php?mode=search&find=$find&search=$search&page='.$page.'">'.$page.'</a></button>' );
+              echo( '<button type="button" name="button"><a href="notice_list.php?mode=search&find_option=$find_option&find_input=$find_input&page='.$page.'">'.$page.'</a></button>' );
             }else{
               echo( '<button type="button" name="button" style="background-color: white; color: black; text-align: center;"><a href="notice_list.php?page='.$page.'">'.$page.'</a></button>' );
             }
@@ -209,7 +221,6 @@ if(!empty($_SESSION['id'])){
           echo( '<button type="button" name="button" title="맨끝으로"><a href="notice_list.php?page='.$total_pages.'">>></a></button>' );
         }
         ?>
-        dsfefeefee
       </div>
     </section>
   </div><!--end of wrap-->

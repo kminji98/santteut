@@ -1,7 +1,13 @@
 <?php
 //세션아이디가 관리자인지 확인
 session_start();
-if(!isset($_SESSION['id']=="admin")){
+
+$_SESSION['name']="관리자";
+$_SESSION['id']="admin";
+
+// isset함수는 불리언값을 리턴 true or false
+// 회원 or 비회원이면 권한없음, 관리자일때만 입장
+if(!(isset($_SESSION['id']) &&  $_SESSION['id']=="admin")){
   echo "<script>alert('권한없음!');history.go(-1);</script>";
   exit;
 }
@@ -12,15 +18,17 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
 // 변수선언(번호 관리자 제목 내용 작성일 조회수 파일이름 파일실제주소 파일확장자)
 $num=$name=$title=$content=$regist_day=$hit=$file_name=$file_copied=$file_type="";
 
+// 체크
 $checked="";
+
+// 액션
+$actaction="";
 
 // 모드가 기본적으로 insert일때,
 $mode="insert";
 
 // 관리자이름 가져옴
 $name=$_SESSION['name'];
-
-// 모드가 수정일때
 if (isset($_GET["mode"]) && $_GET["mode"]=="update") {
   $mode="update";
 
@@ -69,7 +77,7 @@ if (isset($_GET["mode"]) && $_GET["mode"]=="update") {
     <!-- include summernote css/js -->
     <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.css" rel="stylesheet">
     <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.js"></script>
-<script src="./js/notice_form.js?ver=0"></script>
+    <script src="./js/notice_form.js?ver=0"></script>
     <title>공지사항</title>
   </head>
   <body>
@@ -80,13 +88,13 @@ if (isset($_GET["mode"]) && $_GET["mode"]=="update") {
     <br><br><br>
 
     <section id="notice">
-      <form class="notice_insert_form" action="notice_view.php?mode=<?$mode?>" method="post" enctype="multipart/form-data">
+      <form class="notice_insert_form" action="notice_query.php?mode=<?php echo $mode; ?>" method="post" enctype="multipart/form-data">
         <input type="hidden" name="num" value="<?$num?>">
         <input type="hidden" name="hit" value="<?$hit?>">
       <table border="1">
         <tr>
           <th>작성자</th>
-          <td style="width:600px; text-align:center;"><?$name?></td>
+          <td style="width:600px; text-align:center;"><?php echo $name; ?></td>
         </tr>
         <tr>
           <th>제목</th>
@@ -104,25 +112,26 @@ if (isset($_GET["mode"]) && $_GET["mode"]=="update") {
                 echo '<input type="file" name="upfile" value="<?$file_name?>">';
               }else{
             ?>
-              <input type="file" name="upfile" onclick='document.getElementById("del_file").checked=true; document.getElementById("del_file").disabled=true'>
+              <input type="file" name="upfile" onclick='document.getElementById("del_file").checked=true;'>
             <?php
               }
             ?>
             <?php
               if($mode=="update" && !empty($file_name)){
                 echo "$file_name 파일등록";
-                echo '<input type="checkbox" id="del_file" name="del_file" value="1">삭제';
-                echo '<div class="clear"></div>';
+                echo '<input type="checkbox" id="del_file" name="del_file" value="1" '.$checked.' >삭제';
               }
             ?>
           </td>
         </tr>
       </table>
-      <!--서브밋 완료를 추가 다큐멘트쩜..-->
         <div class="admin">
-          <!-- <input type="image" onclick='document.getElementById("del_file").disabled=false' src="../img/ok.png">&nbsp; -->
-          <!-- <a href="./list.php"><img src="../img/list.png"></a> -->
-          <button id="admin_write_btn" onclick='document.getElementById("del_file").disabled=false' type="button" name="button"><a href="./notice_view.php">완료</a></button>
+          <?php
+            if (isset($_GET["mode"]) && $_GET["mode"]=="update") {
+              $action='document.getElementById("del_file").disabled=false;';
+            }
+           ?>
+          <button id="admin_write_btn" onclick='<?$action?> document.notice_insert_form.submit();" type="button" name="button'>완료</button>
           <button id="admin_write_btn" type="button" name="button"><a href="./notice_list.php">목록</a></button>
         </div>
       </form>

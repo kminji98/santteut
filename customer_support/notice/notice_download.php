@@ -1,6 +1,11 @@
 <?php
 session_start();
-if(!isset($_SESSION['id']=="admin")){
+$_SESSION['name']="관리자";
+$_SESSION['id']="admin";
+
+// isset함수는 불리언값을 리턴 true or false
+// 회원 or 비회원이면 권한없음, 관리자일때만 입장
+if(!(isset($_SESSION['id']) &&  $_SESSION['id']=="admin")){
   echo "<script>alert('권한없음!');history.go(-1);</script>";
   exit;
 }
@@ -10,6 +15,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
 // 변수선언
 $row=$file_name=$file_copied=$file_type="";
 
+// 모드가 다운로드일때
 if(isset($_GET["mode"]) && $_GET["mode"]=="download"){
     $num = test_input($_GET["num"]);
     $q_num = mysqli_real_escape_string($conn, $num);
@@ -38,7 +44,7 @@ $file_path = "./data/$file_copied";
 if(file_exists($file_path)){
   $fp=fopen($file_path,"rb");  //$fp 파일 핸들값
   //지정된 파일타입일경우에는 모든 브라우저 프로토콜 규약이 되어있음.
-  if($file_type_0){
+  if($file_type){
     Header("Content-type: application/x-msdownload");
     Header("Content-Length: ".filesize($file_path));
     Header("Content-Disposition: attachment; filename=$file_name");

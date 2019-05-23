@@ -1,6 +1,16 @@
 <?php
-// 인클루드 디비코넥터
-// 인클루드 세숀콜
+include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
+
+session_start();
+$_SESSION['name']="관리자";
+$_SESSION['id']="admin";
+
+// isset함수는 불리언값을 리턴 true or false
+// 회원 or 비회원이면 권한없음, 관리자일때만 입장
+if(!(isset($_SESSION['id']) &&  $_SESSION['id']=="admin")){
+  echo "<script>alert('권한없음!');history.go(-1);</script>";
+  exit;
+}
 ?>
 <meta charset="utf-8">
 <?php
@@ -28,8 +38,8 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="insert"){
     //include 파일업로드기능
     include $_SERVER['DOCUMENT_ROOT']."/santteut/customer_support/notice/notice_file_upload.php";
 
-    // 파일의 실제명과 저장되는 명을 삽입한다.
-    $sql="INSERT INTO `notice` VALUES (null,$q_title,'$q_name','$q_content','$regist_day','$hit','$file_name','$file_copied','$file_type');";
+    // 파일의 실제명과 저장되는 명을 삽입한다. 디비변수명 적지x
+    $sql="INSERT INTO `notice` VALUES (null,'$q_title','$q_content','$regist_day','$hit','$file_name','$copied_file_name','$file_extension');";
     $result = mysqli_query($conn,$sql);
     if (!$result) {
       alert_back('Error:5 ' . mysqli_error($conn));
@@ -80,7 +90,7 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="insert"){
   $content = trim($_POST["content"]);
   $title = trim($_POST["title"]);
   if(empty($content)||empty($title)){
-    echo "<script>alert('내용이나제목입력요망!');history.go(-1);</script>";
+    echo "<script>alert('내용이나제목수정요망!');history.go(-1);</script>";
     exit;
   }
   $title = test_input($_POST["title"]);
@@ -96,7 +106,7 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="insert"){
 
   //삭제할게 있으면 삭제하라.
   if(isset($_POST['del_file']) && $_POST['del_file'] =='1'){
-    //삭제할 게시물의 이미지파일명을 가져와서 삭제한다.
+    //삭제할 게시물의 텍스트파일명을 가져와서 삭제한다.
     $sql="SELECT `file_copied` from `notice` where num ='$q_num';";
     $result = mysqli_query($conn,$sql);
     if (!$result) {
