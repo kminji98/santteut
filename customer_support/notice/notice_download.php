@@ -25,7 +25,6 @@ if(isset($_GET["mode"]) && $_GET["mode"]=="download"){
     $result = mysqli_query($conn,$sql);
     if (!$result) {
       alert_back('Error: 1' . mysqli_error($conn));
-      // die('Error: ' . mysqli_error($conn));
     }
     $row=mysqli_fetch_array($result);
     $file_name=$row['file_name'];

@@ -3,16 +3,15 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css">
-    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/member/login/css/forgot_id.css">
+    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/member/login/css/forgot_id.css?ver=0">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/introduction/css/history.css">
-    <title>아이디찾기</title>
+    <title>아이디/패스워드 찾기</title>
   </head>
   <body>
     <header>
       <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/login_menu.php";?>
     </header>
     <section id="login">
-    <h2>로그인</h2>
     <div class="login_form">
       <br>
       <br>
@@ -30,8 +29,8 @@
         <tr>
           <th style="height:1%;">이메일</th>
           <td>
-            <input type="text" name="" value="" size="7"> @
-            <input type="text" name="" value="" size="7">
+            <input type="text" name="email1" value="" size="7"> @
+            <input type="text" name="email2" value="" size="7">
             <button type="button" name="button" style="font-size: 13px;">인증하기</button>
           </td>
 
