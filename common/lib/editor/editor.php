@@ -13,9 +13,96 @@
     		@decsription
     		등록하기 위한 Form으로 상황에 맞게 수정하여 사용한다. Form 이름은 에디터를 생성할 때 설정값으로 설정한다.
     	-->
-    	<form name="tx_editor_form" id="tx_editor_form" action="./view.php" method="post" accept-charset="utf-8">
+    	<form name="tx_editor_form" id="tx_editor_form" action="../../tour/admin/admin_add_package_query.php" method="post" enctype="multipart/form-data" accept-charset="utf-8">
+  <!-- 작성폼 -->
+        <table id="insert_form">
+          <tr>
+            <td><p>패키지 코드</p></td>
+            <td> <input type="text" name="p_code" value="<?=$package_number?>" readonly> </td>
+          </tr>
 
-    		<!-- 에디터 컨테이너 시작 -->
+          <tr>
+            <td><p>메인 이미지</p></td>
+            <td>  <input type="file" class="up_img" name="p_main_img1"> <input type="file" class="up_img" name="p_main_img2"> <input type="file" class="up_img" name="p_main_img3"> </td>
+          </tr>
+
+          <tr>
+            <td><p>패키지 이름</p></td>
+            <td> <input type="text" name="p_name" value="" size="50"> </td>
+
+          </tr>
+
+          <tr>
+            <td><p>패키지 기간</p></td>
+            <td> <select  name="p_period">
+              <option value="">기간선택</option>;
+              <?php
+                for($i=1;$i<=9;$i++){
+              ?>
+              <option value="<?=$i?>"><?=$i?>일</option>;
+              <?php
+                if($i==9){
+              ?>
+              <option value="">10일 이상</option>;
+              <?php
+                }
+              }
+              ?>
+            </select> </td>
+          </tr>
+
+          <tr>
+            <td><p>출발일</p></td>
+            <td> <input type="date" name="p_dp_date" value="" > </td>
+          </tr>
+
+          <tr>
+            <td><p>출발 시간</p></td>
+            <td> <input type="time" name="p_dp_time" value=""> </td>
+          </tr>
+
+          <tr>
+            <td><p>도착 시간</p></td>
+            <td> <input type="time" name="p_arr_time" value=""> </td>
+          </tr>
+
+          <tr>
+            <td><p>패키지 요금</p></td>
+            <td> <input type="text" name="p_pay" value=""><b>원</b> </td>
+          </tr>
+
+          <tr>
+            <td><p>추가요금</p></td>
+            <td> <b>Y</b><input type="radio" name="p_add_pay" value="Y"> <b>N</b><input type="radio" name="p_add_pay" value="N"> </td>
+          </tr>
+
+          <tr>
+            <td><p>자유일정</p></td>
+            <td> <b>Y</b><input type="radio" name="p_free_time" value="Y"> <b>N</b><input type="radio" name="p_free_time" value="N"> </td>
+          </tr>
+
+          <tr>
+            <td><p>출발지</p></td>
+            <td> <input id="p_dp_city" type="text" name="p_dp_city" value="" onclick="select_area()"> </td>
+          </tr>
+
+          <tr>
+            <td><p>도착지</p></td>
+            <td> <input id="p_arr_mt" type="text" name="p_arr_mt" value="" onclick="select_area()"> </td>
+          </tr>
+
+          <tr>
+            <td><p>버스선택</p></td>
+            <td><b>일반</b><input type="radio" name="p_bus" value="28"><b>우등</b><input type="radio" name="p_bus" value="41"></td>
+          </tr>
+
+
+
+
+
+    <!-- 다음에디터 -->
+      <tr><td><p>상세페이지</p></td><td>
+        <!-- 에디터 컨테이너 시작 -->
     		<div id="tx_trex_container" class="tx-editor-container">
     			<!-- 사이드바 -->
     			<div id="tx_sidebar" class="tx-sidebar">
@@ -247,9 +334,9 @@
     							</div>
     							<div class="tx-menu-footer">
     								<img class="tx-menu-confirm"
-    									 src="./detail/images/icon/editor/btn_confirm.gif?rv=1.0.1" alt=""/>
+                       src="../../common/lib/editor/images/icon/editor/btn_confirm.gif?rv=1.0.1" alt=""/>
     								<img class="tx-menu-cancel" hspace="3"
-    									 src="./detail/images/icon/editor/btn_cancel.gif?rv=1.0.1" alt=""/>
+    									 src="../../common/lib/editor/images/icon/editor/btn_cancel.gif?rv=1.0.1" alt=""/>
     							</div>
     						</div>
     					</li>
@@ -432,6 +519,14 @@
     				<!-- 첨부박스 끝 -->
     		</div>
     		<!-- 에디터 컨테이너 끝 -->
+         </td></tr>
+         <tr>
+           <td colspan="2" id="insert_btn_td">
+             <input type="button" id="insert_btn" onclick="check_input()" value="패키지등록하기">
+           </td>
+         </tr>
+        </table><br><br><br>
+
     	</form>
     </div>
     <!-- 에디터 끝 -->
@@ -489,10 +584,21 @@
 
     <!-- Sample: Saving Contents -->
     <script type="text/javascript">
+    var map_window;
+    function select_area(){
+      var popupX = (window.screen.width / 2) - (800 / 2);
+      var popupY= (window.screen.height /2) - (500 / 2);
+      window.open('../../common/lib/google3.php', '', 'status=no, width=800, height=500, left='+ popupX + ', top='+ popupY + ', screenX='+ popupX + ', screenY= '+ popupY);
+
+}
+      // function parent1(){
+      //   // var location_val=map_window.document.getElementById("location_val").value;
+      //   // alert('ㅋ'+location_val);
+      //   alert('성공');
+      // }
     	/* 예제용 함수 */
     	function saveContent() {
     		Editor.save(); // 이 함수를 호출하여 글을 등록하면 된다
-        // location.href='view.php';
     	}
 
     	/**
@@ -563,7 +669,7 @@
             return true;
     	}
     </script>
-    <div><button onclick='saveContent()' id="btn_submit">등록</button></div>
+    <!-- <div><button onclick='saveContent()' id="btn_submit">저장</button></div> -->
     <!-- End: Saving Contents -->
 
     <!-- Sample: Loading Contents -->

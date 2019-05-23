@@ -1,5 +1,19 @@
 <?php
 session_start();
+/////////테스트
+$_SESSION['name']="관리자";
+$_SESSION['id']="admin";
+/////////테스트
+
+// isset함수는 불리언값을 리턴 true or false
+// 회원 or 비회원이면 권한없음, 관리자일때만 입장
+if(!(isset($_SESSION['id']) &&  $_SESSION['id']=="admin")){
+  echo "<script>alert('권한없음!');history.go(-1);</script>";
+  exit;
+}
+
+$name = $_SESSION['name'];
+
 //0-0. 인클루드 디비
 include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
 
@@ -50,8 +64,8 @@ $total_record=mysqli_num_rows($result);
 $total_pages=ceil($total_record/ROW_SCALE);
 
 // 페이지가 없으면 디폴트 페이지 1페이지
-// if(empty($_GET['present_page'])){$present_page=1; }else{ $present_page=$_GET['present_page']; }
-$present_page=(empty($_GET['present_page']))?1:$_GET['present_page'];
+// if(empty($_GET['page'])){$present_page=1; }else{ $present_page=$_GET['page']; }
+$present_page=(empty($_GET['page']))?1:$_GET['page'];
 
 // 현재 블럭의 시작 페이지 = (ceil(현재페이지/블럭당 페이지 제한 수)-1) * 블럭당 페이지 제한 수 +1
 //[[  EX) 현재 페이지 5일 때 => ceil(5/3)-1 * 3  +1 =  (2-1)*3 +1 = 4 ]]
@@ -88,7 +102,6 @@ $view_num = $total_record - $start_record;
       <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/mini_menu.php";?>
     </header>
     <br><br><br>
-    <div id="wrap" style="height:auto;">
     <section id="notice">
 
       <form name="notice_form" action="notice_list?mode=search" method="post">
@@ -102,8 +115,9 @@ $view_num = $total_record - $start_record;
       </div>
       </form>
 
+      <!--총 게시물-->
       <div class="total_title">
-        <h4>total<?=$total_record?>개</h4>
+        <h4>total <?=$total_record?></h4>
       </div>
 
       <!--게시물 제목-->
@@ -122,9 +136,8 @@ $view_num = $total_record - $start_record;
           mysqli_data_seek($result,$record);
           $row=mysqli_fetch_array($result);
           $num=$row['num'];
-          $name=$row['name'];
           $title=$row['title'];
-          $date= substr($row['regist_day'],0,10);
+          $regist_day= substr($row['regist_day'],0,10);
           $hit=$row['hit'];
           $title=str_replace("\n", "<br>",$title);
           $title=str_replace(" ", "&nbsp;",$title);
@@ -141,7 +154,6 @@ $view_num = $total_record - $start_record;
           <!--조회-->
           <td><?=$hit?></td>
         </tr>
-      <br>
         <?php
           $view_num--;
          }//end of for
@@ -162,15 +174,15 @@ if(!empty($_SESSION['id'])){
         //[ex]  page가 9개 있고 현재 페이지가 6페이지인 경우  / 12345/ 6789     =>  <<(처음으로) <(이전) 6 7 8 9
         if( $start_page > PAGE_SCALE ){
           // echo( '<a href='notice_list.php?page=1'> << </a>' );
-          echo( '<button type="button" name="button" title="처음으로"><a href="notice_list.php?page=1"><<</a></button>' );
+          echo( '<a href="notice_list.php?page=1"><button type="button" name="button" title="처음으로"><<</button></a>' );
 
           // 이전 블럭 클릭 시 -> 현재 블럭의 시작 페이지 - 페이지 스케일
           // 현재 6 page 인 경우 '<(이전블럭)' 클릭 -> $pre_page = 6-PAGE_SCALE  -> 1 페이지로 이동
           $pre_block= $start_page - PAGE_SCALE;
           if(isset($_GET['mode']) && $_GET['mode']=="search"){
-            echo( '<button type="button" name="button" title="이전"><a href="notice_list.php?mode=search&find_option=$find_option&find_input=$find_input&page='.$pre_block.'"><</a></button>' );
+            echo( '<a href="notice_list.php?mode=search&find_option=$find_option&find_input=$find_input&page='.$pre_block.'"><button type="button" name="button" title="이전"><</button></a>' );
           }else{
-            echo( '<button type="button" name="button" title="이전"><a href="notice_list.php?page='.$pre_block.'"><</a></button>' );
+            echo( '<a href="notice_list.php?page='.$pre_block.'"><button type="button" name="button" title="이전"><</button></a>' );
           }
         }
 
@@ -178,13 +190,11 @@ if(!empty($_SESSION['id'])){
         for( $page = $start_page; $page <= $end_page; $page++ ){
             //현재 블럭에 현재 페이지인 버튼
             if ( $page == $present_page ){
-  //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$background-color => 연두  color=> white(ok)
-  //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ inline 스타일 넣어야 함(ok)
-              echo( '<button type="button" name="button" style="background-color: #2F9D27; color: white; text-align: center;"><a href="#">'.$page.'</a></button>' );
+              echo( '<a href="#"><button type="button" name="button" style="background-color: #2F9D27; border: 1px solid #2F9D27; color: white;">'.$page.'</button></a>' );
             }else if(isset($_GET['mode']) && $_GET['mode']=="search"){
-              echo( '<button type="button" name="button"><a href="notice_list.php?mode=search&find=$find&search=$search&page='.$page.'">'.$page.'</a></button>' );
+              echo( '<a href="notice_list.php?mode=search&find_option=$find_option&find_input=$find_input&page='.$page.'"><button type="button" name="button">'.$page.'</button></a>' );
             }else{
-              echo( '<button type="button" name="button" style="background-color: white; color: black; text-align: center;"><a href="notice_list.php?page='.$page.'">'.$page.'</a></button>' );
+              echo( '<a href="notice_list.php?page='.$page.'"><button type="button" name="button">'.$page.'</button></a>' );
             }
         }
 
@@ -196,23 +206,19 @@ if(!empty($_SESSION['id'])){
           // 클릭 시 다음 블럭의 첫 번째 페이지로 이동
           // [ex]  총 page 9개 있고 페이지가 3인  경우 / >(다음) 버튼 누르면 '6'으로 이동
           $next_block= $start_page + PAGE_SCALE;
-          echo( '<button type="button" name="button" title="다음"><a href="notice_list.php?page='.$next_block.'">></a></button>' );
 
           if(isset($_GET['mode']) && $_GET['mode']=="search"){
-//$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ 변수명 변경(ok)
-            echo( '<button type="button" name="button"><a href="notice_list.php?mode=search&find_option=$find_option&find_input=$find_input&page='.$next_block.'">></a></button>' );
+            echo( '<a href="notice_list.php?mode=search&find_option=$find_option&find_input=$find_input&page='.$next_block.'"><button type="button" name="button">></button></a>' );
           }else{
-            echo( '<button type="button" name="button"><a href="notice_list.php?page='.$next_block.'">></a></button>' );
+            echo( '<a href="notice_list.php?page='.$next_block.'"><button type="button" name="button" title="다음">></button></a>' );
           }
 
           //맨끝페이지로 이동
-          echo( '<button type="button" name="button" title="맨끝으로"><a href="notice_list.php?page='.$total_pages.'">>></a></button>' );
+          echo( '<a href="notice_list.php?page='.$total_pages.'"><button type="button" name="button" title="맨끝으로">>></button></a>' );
         }
         ?>
-        dsfefeefee
       </div>
     </section>
-  </div><!--end of wrap-->
 
   <footer>
     <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/footer.php";?>

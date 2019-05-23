@@ -62,9 +62,9 @@
 
        }
        $.ajax({
-         url: 'check_id2.php',
+         url: 'check_id.php',
          type: 'POST',
-         data: {id: $("#join_id").val()}
+         data: {join_id: $("#join_id").val()}
        })
        .done(function(result) {
          // alert(result);
@@ -169,7 +169,7 @@
               if (done!="존재하는 이메일입니다.") {
                 check_email1.setAttribute('type', 'text');
                 check_email2.setAttribute('type', 'button');
-              }     
+              }
             })
             .fail(function() {
               alert("인증 번호 발송실패!");

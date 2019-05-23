@@ -23,13 +23,25 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
     $email = $email1."@".$email2;
   }
 $q_id = mysqli_real_escape_string($conn, $id);
-
-
-
-if(isset($_POST['mode']) && $_POST['mode']=='facebook'){
-  $q_id = $q_id."@f";
-}else if(isset($_POST['mode']) && $_POST['mode']=='kakao'){
-  $q_id = $q_id."@k";
+if(isset($_POST['mode'])){
+  switch ($_POST['mode']) {
+    case 'facebook':
+      $q_id = $q_id."@f";
+      break;
+    case 'kakao':
+      $q_id = $q_id."@f";
+      break;
+    case 'naver':
+      $q_id = $q_id."@n";
+      break;
+    case 'google':
+    // 21자리 아이디 -> too long
+      $q_id = substr($q_id,0,15);
+      $q_id = $q_id."@g";
+      break;
+    default:
+      break;
+  }
 }
 $sql="select * from member where id = '$q_id'";
 $result = mysqli_query($conn,$sql);
@@ -39,17 +51,21 @@ if (!$result) {
 $rowcount=mysqli_num_rows($result);
 
 if($rowcount){
-  //kakao OR facebook login
+  //kakao OR facebook OR naver OR google
   if(isset($_POST['mode'])){
     $_SESSION['name'] =$join_name;
-    $_SESSION['email'] =$email;
     $_SESSION['id'] =$q_id;
+
+    if($_POST['mode']==='naver'){
+      echo '<script>window.close();window.opener.location.replace("http://localhost/santteut/index.php"); </script>';
+    }
     echo "<script>location.href='../../index.php';</script>";
     exit;
   }
   echo "<script>alert('존재하는 아이디입니다.');history.go(-1);</script>";
   exit;
 }
+var_dump($q_id);
 
 $sql="INSERT INTO member (id,passwd,passwd_confirm,name,zip,address1,address2,hp1,hp2,email) ";
 $sql.=" VALUES ('$q_id','$join_passwd','$join_passwdconfirm','$join_name','$join_zip','$join_foundational','$join_detail','$hp1','$hp','$email')";
@@ -59,7 +75,6 @@ if (!$result) {
 }
 mysqli_close($conn);
 $_SESSION['name'] =$join_name;
-$_SESSION['email'] =$email;
 $_SESSION['id'] =$q_id;
 echo "<script>location.href='../../index.php';</script>";
 

@@ -38,7 +38,8 @@
     </style>
   </head>
   <body>
-    <input type="button" name="" value="등록">
+    <input type="button" name="" value="출발지 등록" onclick="input_value()">
+    <input type="button" name="" value="도착지 등록" onclick="input_value2()">
     <div style="display: none">
       <input id="pac-input"
              class="controls"
@@ -57,6 +58,7 @@
 // This sample requires the Places library. Include the libraries=places
 // parameter when you first load the API. For example:
 <script>
+var location_val="";
   var geocoder;
 function initMap() {
   var map = new google.maps.Map(
@@ -113,6 +115,7 @@ function initMap() {
       codeLatLng(results[0].geometry.location.lat(),results[0].geometry.location.lng());
 
       infowindowContent.children['place-name'].textContent = place.name;
+      location_val=place.name;
       infowindowContent.children['place-id'].textContent = place.place_id;
       infowindowContent.children['place-address'].textContent =
           results[0].formatted_address;
@@ -155,8 +158,10 @@ function codeLatLng(lat, lng) {
       }
 
           //city data
-          alert(city.long_name + " || " + region.long_name + " || " + country.long_name)
-
+          // alert(city.long_name + " || " + region.long_name + " || " + country.long_name);
+          // alert(location_val);
+          document.getElementsByName('location_val').value=location_val;
+          // alert(document.getElementsByName('location_val').value);
           } else {
             alert("No results found");
           }
@@ -166,8 +171,17 @@ function codeLatLng(lat, lng) {
     }
   });
 }
+  function input_value(){
+    opener.parent.document.getElementById('p_dp_city').value=location_val;
+    window.close();
+  }
+  function input_value2(){
+    opener.parent.document.getElementById('p_arr_mt').value=location_val;
+    window.close();
+  }
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDMwbXKZznKzOyuROSANOPHrrQdd8-wRI&libraries=places&callback=initMap"
         async defer></script>
+        <input id="location_val" type="hidden" name="location_val" value="">
   </body>
 </html>

@@ -1,5 +1,6 @@
 <?php
 session_start();
+include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
 ?>
 <!DOCTYPE html>
 <html lang="ko" dir="ltr">
@@ -23,12 +24,12 @@ session_start();
     <div id="head" >
       <div id="top_box">
 
-      <div id="code"><p>상품코드:11111</p></div>
-      <div id="name"><b>패키지 이름</b> <p>간단설명</p> </div>
+      <div id="code"><p>상품코드:<?= $p_code?></p></div>
+      <div id="name"><b><?= $p_name?></b> <p>간단설명</p> </div>
       <div id="image_zone">
-        <img src="../../common/img/lights.jpg" alt="">
-        <img src="../../common/img/lights.jpg" alt="">
-        <img src="../../common/img/lights.jpg" alt="">
+        <img src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/lib/editor/data/<?=$p_main_img_copy1?>" alt="">
+        <img src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/lib/editor/data/<?=$p_main_img_copy2?>" alt="">
+        <img src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/lib/editor/data/<?=$p_main_img_copy3?>" alt="">
       </div>
       </div>
     </div>
@@ -38,22 +39,21 @@ session_start();
       <table id="toptbl">
         <tr>
           <td rowspan="3" class="left" id="sch">일정</td>
-          <td id="period">6일</td>
+          <td id="period"><?=$p_period?>일</td>
         </tr>
 
         <tr>
-          <td id="go"><div class="gb">한국출발</div> </td>
-
+          <td id="go"><div class="gb" style="display:inline-block;">한국출발</div> <?php echo $dp_date[0]."년 ".$dp_date[1]."월 ".$dp_date[2]."일 "." (".$day.") ".$p_dp_time ?></td>
         </tr>
 
         <tr>
-          <td id="back"><div class="gb" >한국도착</div> </td>
+          <td id="back"><div class="gb" style="display:inline-block;" >한국도착</div> <?php echo $dp_date2[0]."년 ".$dp_date2[1]."월 ".$dp_date2[2]."일 "." (".$day2.") ".$p_arr_time ?> </td>
 
         </tr>
 
         <tr>
           <td class="left" id="arr" >도착산</td>
-          <td id="arr_mt">???</td>
+          <td id="arr_mt"><?=$p_arr_mt?></td>
         </tr>
 
         <tr>
@@ -63,14 +63,7 @@ session_start();
       </table>
 
       <div id="detail_view1">
-        <p class="d1">상</p>
-        <p class="d1">세</p>
-        <p class="d1">페</p>
-        <p class="d1">이</p>
-        <p class="d1">지</p>
-        <p class="d1">입</p>
-        <p class="d1">니</p>
-        <p class="d1">다</p>
+        <?=$p_detail_content?>
       </div>
     </div>
 
@@ -122,7 +115,7 @@ session_start();
       </div>
       <div id="pay_view">
         <p id="total_pay">총 예정금액</p>
-        <b id="money">999,000</b> <p id="won">원</p>
+        <b id="money"><?=$p_pay?></b> <p id="won">원</p>
         <p class="subtext1">유류할증료,제세공과금 포함</p>
         <p class="subtext1">※유류할증료 및 제세공과금은 유가와 환율에</p>
         <p class="subtext1">따라 변동될 수 있습니다.</p>
@@ -132,7 +125,7 @@ session_start();
         <p id="line">-------------------------------------------------------------------</p>
       </div>
       <div id="button">
-        <a href="../reserve/reserve_view.php"><div id="reserve_status"> <b>예약마감</b></div></a><br>
+        <a href="../reserve/reserve_view.php?mode=<?=$p_code?>"><div id="reserve_status"> <b>예약마감</b></div></a><br>
         <a href="../cart/cart_list.php"><div id="go_cart"> <b>장바구니</b></div></a>
       </div>
       <div id="right_footer"></div>

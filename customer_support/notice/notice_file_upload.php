@@ -20,8 +20,8 @@ $upload_dir ="./data/"; //업로드된파일을 저장하는장소지정
 if(!$upfile_error){
   $new_file_name=date("Y_m_d_H_i_s");
   $new_file_name = $new_file_name."_"."0";
-  $copied_file_name= $new_file_name.".".$file_extension;
-  $uploaded_file = $upload_dir.$copied_file_name;
+  $file_copied= $new_file_name.".".$file_extension;
+  $uploaded_file = $upload_dir.$file_copied;
   // $uploaded_file = "./data/2019_04_22_15_09_30_0.jpg";
 }
 
@@ -33,11 +33,11 @@ if($upfile_size>500000){
 //6 업로드된 파일확장자를 체크한다.  "image/gif"
 // $type=explode("/", $upfile_type);
 $file_type = $upfile_type;
-// switch ($type[1]) {
-//   case 'gif': case 'jpg': case 'png': case 'jpeg':
-//   case 'pjpeg': break;
-//   default:alert_back('3. gif jpg png 확장자가아닙니다.');
-// }
+
+$type=explode("/", $upfile_type);
+if($type[0]=='image'){
+  alert_back('이미지가 오면 안돼');
+}
 
 //7. 임시저장소에 있는 파일을 서버에 지정한 위치로 이동한다.
 if(!move_uploaded_file($upfile_tmp_name, $uploaded_file)){

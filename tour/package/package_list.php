@@ -1,5 +1,7 @@
 <?php
 session_start();
+
+include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php";
 ?>
 
 <!DOCTYPE html>
@@ -57,6 +59,7 @@ session_start();
   }
   </script>
   <body>
+
     <!-- <div id="kCalendar"></div> -->
     <!--로그인 회원가입 로그아웃-->
     <div id="wrap">
@@ -92,7 +95,9 @@ session_start();
       </div>
       <br>
       <div id="package_search_detail_control_sub" style="display :none">
+
         <table id="package_search_detail_top">
+
           <tr>
             <td class="package_search_detail_option" >출발일</td>
                   <td><input type="date" name="" value=""></td>
@@ -190,54 +195,49 @@ session_start();
             <td id="package_list_view_pay">가격</td>
             <td id="package_list_view_state">상태</td>
           </tr>
+
+          <?php
+          for ($record = $start_record; $record  < $start_record+ROW_SCALE && $record<$total_record; $record++){
+            mysqli_data_seek($result,$record);
+            $row=mysqli_fetch_array($result);
+            $p_code=$row['p_code'];
+            $p_name=$row['p_name'];
+            $p_dp_date=$row['p_dp_date'];
+            $p_dp_time=$row['p_dp_time'];
+            $p_arr_time=$row['p_arr_time'];
+            $p_pay=$row['p_pay'];
+            $p_main_img_copy1=$row['p_main_img_copy1'];
+            $p_period=$row['p_period'];
+            $timestamp = strtotime("$p_dp_date +$p_period days");
+            $p_arr_date1 = date('y-m-d', $timestamp);
+            $p_arr_date2 = "20".$p_arr_date1;
+            $yoil = array("일","월","화","수","목","금","토");
+            $day = $yoil[date('w', strtotime($p_dp_date))];
+            $day2 = $yoil[date('w', strtotime($p_arr_date2))];
+            $p_pay=number_format($p_pay);
+
+
+
+           ?>
+
           <tr class="package_list_view_value">
             <td>
-              <img class="package_list_view_img_value" src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/img/백두산.jpg">
+              <img class="package_list_view_img_value" src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/lib/editor/data/<?=$p_main_img_copy1?>">
             </td>
             <td class="package_list_view_time" >
-              <output class="package_list_view_time_s" >05/17 (금) 09:00</output><br><br>
-              <output>05/28 (화) 07:45</output>
+              <output class="package_list_view_time_s" > &nbsp; <?=$p_dp_date?> (<?=$day?>)<?=$p_dp_time?> </output><br><br>
+              <output><?php echo $p_arr_date2." "."(".$day2.")".$p_arr_time; ?></output>
             </td>
-            <td class="package_list_period_value">3일</td>
-            <td class="package_list_view_name_value"><a href="package_view.php">[라스트미닛][세미팩][1일자유]싱가포르 5일-3성호텔 ▶호텔업그레이드+샹그릴라뷔페+루지</a></td>
-            <td class="package_list_view_pay_value">743,700원</td>
+            <td class="package_list_period_value"><?=$p_period?>일</td>
+            <td class="package_list_view_name_value"><a href="package_view.php?mode=<?=$p_code?>"><?=$p_name?></a></td>
+            <td class="package_list_view_pay_value"><?=$p_pay?></td>
             <td>
               <output class="package_list_view_state_value">예약가능</output>
             </td>
           </tr>
-
-          <tr class="package_list_view_value">
-            <td>
-              <img class="package_list_view_img_value" src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/img/한라산.jpg">
-            </td>
-            <td class="package_list_view_time">
-              <output class="package_list_view_time_s">05/26 (일) 16:40</output><br><br>
-              <output>05/30 (목) 07:45</output>
-            </td>
-            <td class="package_list_period_value">7일</td>
-            <td class="package_list_view_name_value"><a href="package_view.php">[슈퍼세이브][세미팩][1일자유]싱가포르 5일-4성급+마리나베이샌즈1박 ▶샹그릴라뷔페+루지◀
-1,129,900원+루지</a></td>
-            <td class="package_list_view_pay_value">999,900원</td>
-            <td>
-              <output class="package_list_view_state_value">예약가능</output>
-            </td>
-          </tr>
-
-          <tr class="package_list_view_value">
-            <td>
-              <img class="package_list_view_img_value" src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/img/지리산.jpg">
-            </td>
-            <td class="package_list_view_time">
-              <output class="package_list_view_time_s">05/28 (화) 09:00</output><br><br>
-              <output>06/01 (토) 07:45</output>
-            </td>
-            <td class="package_list_period_value">당일</td>
-            <td class="package_list_view_name_value"><a href="package_view.php">[홈쇼핑따라잡기][미식][맛있는]싱가포르완전일주 5일-4성(2)+스탬포드(1)◐타이거비어+슈퍼트리쇼+루지◑루지</a></td>
-            <td class="package_list_view_pay_value">849,900원</td>
-            <td>
-              <output class="package_list_view_state_value">예약가능</output>
-            </td>
-          </tr>
+          <?php
+            }
+           ?>
         </table>
     </div>
       <br><br><br><br><br><br><br><br><br><br>

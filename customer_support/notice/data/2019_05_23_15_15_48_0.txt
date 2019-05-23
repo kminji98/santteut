@@ -1,0 +1,33 @@
+package sec01.FileStream;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+public class FileStreamTest {
+
+	public static void main(String[] args) {
+		FileInputStream fin = null;
+		FileOutputStream fout = null;
+		int readData = 0;
+
+		try {
+			fin = new FileInputStream("C:\\Test/img.jpg");
+			fout = new FileOutputStream("C:\\Test/내가좋아하는연기자.jpg");
+			while ((fin.read()) != -1) {
+				fout.write(readData);
+			}
+			System.out.println("복사가 끝났어요");
+		} catch (FileNotFoundException e) {
+		} catch (Exception e1) {
+		} finally {
+			System.out.println("마무리");
+			try {
+				fin.close();
+				fout.close();
+			} catch (IOException e) {
+			}
+		}
+	}
+}
