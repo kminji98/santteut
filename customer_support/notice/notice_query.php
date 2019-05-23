@@ -27,11 +27,10 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="insert"){
       alert_back('1. 내용이나제목입력요망!');
     }
     $title = test_input($_POST["title"]);
-    $content = test_input($_POST["content"]);
+    $q_content = $_POST["content"];
     $name = test_input($name);
     $hit = 0;
     $q_title = mysqli_real_escape_string($conn, $title);
-    $q_content = mysqli_real_escape_string($conn, $content);
     $q_name = mysqli_real_escape_string($conn, $name);
     $regist_day=date("Y-m-d (H:i)");
 
@@ -47,7 +46,7 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="insert"){
     }
 
     //등록된사용자가 최근 입력한 notice_list를 보여주기 위하여 num 찾아서 전달하기 위함이다.
-    $sql="SELECT num from `notice` where name ='$name' order by num desc limit 1;";
+    $sql="SELECT num from `notice` order by num desc limit 1;";
     $result = mysqli_query($conn,$sql);
     if (!$result) {
       alert_back('Error: 6' . mysqli_error($conn));

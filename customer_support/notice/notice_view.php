@@ -38,14 +38,13 @@ if(isset($_GET["num"]) && !empty($_GET["num"])){
       die('Error: ' . mysqli_error($conn));
     }
     $row=mysqli_fetch_array($result);
-    $name=$row['name'];
     $hit=$row['hit'];
     $title= htmlspecialchars($row['title']);
-    $content= htmlspecialchars($row['content']);
+    $content= $row['content'];
     $title=str_replace("\n", "<br>",$title);
     $title=str_replace(" ", "&nbsp;",$title);
-    $content=str_replace("\n", "<br>",$content);
-    $content=str_replace(" ", "&nbsp;",$content);
+    // $content=str_replace("\n", "<br>",$content);
+    // $content=str_replace(" ", "&nbsp;",$content);
     $file_name=$row['file_name'];
     $file_copied=$row['file_copied'];
     $file_type=$row['file_type'];
@@ -76,6 +75,9 @@ if(isset($_GET["num"]) && !empty($_GET["num"])){
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/customer_support/notice/css/notice_view.css">
     <script type="text/javascript" src="./js/notice_view.js?ver=1"></script>
+    <script type="text/javascript">
+
+</script>
 
     <title>공지사항</title>
   </head>
@@ -90,11 +92,11 @@ if(isset($_GET["num"]) && !empty($_GET["num"])){
       <table border="1">
         <tr>
           <th>작성자</th>
-          <td style="width:600px; text-align:center;"><?$_SESSION['name']?></td>
+          <td style="width:600px; text-align:center;"><?=$_SESSION['name']?></td>
         </tr>
         <tr>
           <th>제목</th>
-          <td><?$title?></td>
+          <td><?=$title?></td>
         </tr>
 
         <!--여기서 다시 수정-->
@@ -109,11 +111,7 @@ if(isset($_GET["num"]) && !empty($_GET["num"])){
                 $file_size = filesize($file_path);
                 //2. 업로드된 이름을 보여주고 [저장] 할것인지 선택한다.
 
-                echo ("
-                  첨부파일 : $file_name &nbsp; [ $file_size Byte ]
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  <a href='notice_download.php?mode=download&num=$q_num'>저장</a><br><br>
-                ");
+
               }
             ?>
             <!--다른 내용 보여줌-->
@@ -122,7 +120,15 @@ if(isset($_GET["num"]) && !empty($_GET["num"])){
         </tr>
         <tr>
           <th>파일</th>
-          <td style="text-align:center;"></td>
+          <td style="text-align:center;">
+<?php
+            echo ("
+              첨부파일 : $file_name &nbsp; [ $file_size Byte ]
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <a href='notice_download.php?mode=download&num=$q_num'>저장</a><br>
+            ");
+             ?>
+          </td>
         </tr>
       </table>
     <div class="admin">
