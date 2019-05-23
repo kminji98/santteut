@@ -27,6 +27,10 @@ if(!empty($_POST['p_period'])){
 }
 if(!empty($_POST['p_dp_date'])){
     $dp_date = $_POST['p_dp_date'];
+    $yoil = array("0","1","2","3","4","5","6");
+    $day = $yoil[date('w', strtotime($dp_date))];
+    $dp_day=$day;
+    // alert($dp_day);
 }else{
     $dp_date = "";
     echo "<script>alert('출발일을 입력하세요');history.go(-1);</script>";
@@ -359,10 +363,12 @@ if(!empty($_POST['p_bus'])){
     // echo "항공".$airplane_number; echo "<br>";
 // alert($content);
 // alert($name);
-$sql= "insert into package (`p_code`,
+$sql= "INSERT INTO `package`
+(`p_code`,
 `p_name`,
 `p_period`,
 `p_dp_date`,
+`p_dp_day`,
 `p_dp_time`,
 `p_arr_time`,
 `p_pay`,
@@ -378,10 +384,10 @@ $sql= "insert into package (`p_code`,
 `p_main_img_copy2`,
 `p_main_img_copy3`,
 `p_airplane_num`,
-`p_bus`) ";
+`p_bus`)";
 // $sql.= "values ('$code', '$name', '$period', '$dp_date', '$dp_time', '$arr_time', '$pay', '$add_pay, '$free_time', '$dp_city',
 //  '$arr_mt', '$detail_content', '$main_img1', '$main_img2', '$main_img3', '$main_img_copy1', '$main_img_copy2', '$main_img_copy3', '$bus')";
-$sql.= "values ('$code', '$name', '$period', '$dp_date', '$dp_time', '$arr_time', $pay, '$add_pay', '$free_time', '$dp_city','$arr_mt', '$detail_content', '$main_img_copy_name1', '$main_img_copy_name2', '$main_img_copy_name3', '$copied_file_name1', '$copied_file_name2', '$copied_file_name3', '$airplane_number', '$bus')";
+$sql.= "values ('$code', '$name', '$period', '$dp_date', '$dp_day', '$dp_time', '$arr_time', $pay, '$add_pay', '$free_time', '$dp_city','$arr_mt', '$detail_content', '$main_img_copy_name1', '$main_img_copy_name2', '$main_img_copy_name3', '$copied_file_name1', '$copied_file_name2', '$copied_file_name3', '$airplane_number', '$bus')";
 
 
 

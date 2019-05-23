@@ -8,10 +8,10 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
 <html lang="ko" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css?ver=3">
-    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/tour/package/css/package_list.css?ver=3">
-    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/side_bar.css?ver=0.1">
-    <link href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/lib/calendar/css/style.css?ver=6" rel="stylesheet">
+    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css">
+    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/tour/package/css/package_list.css">
+    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/side_bar.css">
+    <link href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/lib/calendar/css/style.css" rel="stylesheet">
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
     <script src="http://127.0.0.1/santteut/common/lib/calendar/js/script.js"></script>
     <script type="text/javascript">
@@ -86,10 +86,11 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
 
 
         $.ajax({
-          url: 'package_list_query.php',
+          url: 'package_list_detail.php',
           type: 'POST',
           data: {
-            dp_date_value:dp_date_value.value
+            mode:'detail'
+            ,dp_date_value:dp_date_value.value
             ,city: package_search_detail_option_city.value
             ,period_value: period_value
             ,pay_value:pay_value
@@ -100,14 +101,19 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
           }
         })
         .done(function(result) {
-         alert(result);
+         var sql=document.getElementById('sql');
+         sql.value=result;
+         document.query_form.submit();
+
         })
         .fail(function() {
           console.log("error");
         })
         .always(function() {
           console.log("complete");
+
         });
+
       }
 
 
@@ -163,6 +169,10 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
   </script>
   <body>
 
+    <form id="query_form" name="query_form" action="package_list.php" method="post">
+      <input id="sql" type="hidden" name="sql" value="">
+    </form>
+
     <!-- <div id="kCalendar"></div> -->
     <!--로그인 회원가입 로그아웃-->
     <div id="wrap">
@@ -194,7 +204,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
           </select><!-- 산 이름일 때에 placeholder ->산 이름을 입력하세요 -->
           <input id="package_search_input" placeholder="패키지명을 입력하세요" type="text" name="" value="">
           <button id="package_search_btn" type="button" name="button"><b>검색</b></button>
-          <strong  id="package_search_detail_control" onclick="control_display2()">상세검색▼</strong>
+          <strong  id="package_search_detail_control" onclick="control_display2();">상세검색▼</strong>
       </div>
       <br>
       <div id="package_search_detail_control_sub" style="display :none">
@@ -204,7 +214,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
           <tr>
             <td class="package_search_detail_option" >출발일</td>
 
-                  <td><input type="date" name=""  id="dp_date_value"></td>
+                  <td><input type="date" name="" value=""  id="dp_date_value"></td>
             <td id="nbsp"></td><td id="nbsp">
             <td id="nbsp"></td><td id="nbsp">
             <td class="package_search_detail_option">출발도시</td>
@@ -293,13 +303,13 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
           <tr>
             <td class="package_search_detail_option">출발요일</td>
             <td onclick="detail_function('day_1','day_div','')"><div id="day_1" name="day_div" class="package_search_detail_option_all">전체</div></td>
-            <td onclick="detail_function('day_2','day_div','월')"><div id="day_2" name="day_div" class="package_search_detail_option_all">월</div></td>
-            <td onclick="detail_function('day_3','day_div','화')"><div id="day_3" name="day_div" class="package_search_detail_option_all">화</div></td>
-            <td onclick="detail_function('day_4','day_div','수')"><div id="day_4" name="day_div" class="package_search_detail_option_all">수</div></td>
-            <td onclick="detail_function('day_5','day_div','목')"><div id="day_5" name="day_div" class="package_search_detail_option_all">목</div></td>
-            <td onclick="detail_function('day_6','day_div','금')"><div id="day_6" name="day_div" class="package_search_detail_option_all">금</div></td>
-            <td onclick="detail_function('day_7','day_div','토')"><div id="day_7" name="day_div" class="package_search_detail_option_all">토</div></td>
-            <td onclick="detail_function('day_8','day_div','일')"><div id="day_8" name="day_div" class="package_search_detail_option_all">일</div></td>
+            <td onclick="detail_function('day_2','day_div','and `p_dp_day` = 1')"><div id="day_2" name="day_div" class="package_search_detail_option_all">월</div></td>
+            <td onclick="detail_function('day_3','day_div','and `p_dp_day` = 2')"><div id="day_3" name="day_div" class="package_search_detail_option_all">화</div></td>
+            <td onclick="detail_function('day_4','day_div','and `p_dp_day` = 3')"><div id="day_4" name="day_div" class="package_search_detail_option_all">수</div></td>
+            <td onclick="detail_function('day_5','day_div','and `p_dp_day` = 4')"><div id="day_5" name="day_div" class="package_search_detail_option_all">목</div></td>
+            <td onclick="detail_function('day_6','day_div','and `p_dp_day` = 5')"><div id="day_6" name="day_div" class="package_search_detail_option_all">금</div></td>
+            <td onclick="detail_function('day_7','day_div','and `p_dp_day` = 6')"><div id="day_7" name="day_div" class="package_search_detail_option_all">토</div></td>
+            <td onclick="detail_function('day_8','day_div','and `p_dp_day` = 0')"><div id="day_8" name="day_div" class="package_search_detail_option_all">일</div></td>
             </td></td><td id="nbsp"></td></td></td><td id="nbsp"></td>
           </tr>
           <tr>
@@ -316,7 +326,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
           </tr>
         </table>
         <br>
-       <button id="package_search_detail_btn" type="button" name="button" onclick="detail_search_function()"><b>상세검색</b></button>
+       <button id="package_search_detail_btn" type="button" name="button" onclick="detail_search_function();"><b>상세검색</b></button>
         <button id="package_search_detail_reset" type="button" name="button" ><b>초기화</b></button>
 
 
