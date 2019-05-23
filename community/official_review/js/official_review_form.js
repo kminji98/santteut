@@ -21,7 +21,7 @@ function sendFile(file,editor,welEditable){
     contentType: false,
     processData: false,
     success: function(url){
-      var html = '<img src="'+url+'">';
+      var html = '<img src="'+url+'" style="width:650px; height:450px;">';
       $('#summernote').summernote('pasteHTML',html);
       $('#summernote').summernote('insertImage',url,filename);
     }

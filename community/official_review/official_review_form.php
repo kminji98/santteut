@@ -1,5 +1,14 @@
 <?php
-include $_SERVER['DOCUMENT_ROOT']."santteut/lib/db_connector.php";
+//**********************************************************************
+$mode=$num=$q_num=$sql=$result=$row="";
+$file_name_0=$file_copied_0=$file_type_0="";
+$file_name_1=$file_copied_1=$file_type_1="";
+$file_name_2=$file_copied_2=$file_type_2="";
+$file_name_3=$file_copied_3=$file_type_3="";
+$file_name_4=$file_copied_4=$file_type_4="";
+$title=$content=$regist_day=$checked="";
+//**********************************************************************
+include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
 $mode="insert";
 if(isset($_GET["mode"]) && $_GET["mode"]=='update'){
   $mode = "update";
@@ -15,6 +24,18 @@ if(isset($_GET["mode"]) && $_GET["mode"]=='update'){
   $file_name_0 = $row['file_name_0'];
   $file_copied_0 = $row['file_copied_0'];
   $file_type_0 = $row['file_type_0'];
+  $file_name_1 = $row['file_name_1'];
+  $file_copied_1 = $row['file_copied_1'];
+  $file_type_1 = $row['file_type_1'];
+  $file_name_2 = $row['file_name_2'];
+  $file_copied_2 = $row['file_copied_2'];
+  $file_type_2 = $row['file_type_2'];
+  $file_name_3 = $row['file_name_3'];
+  $file_copied_3 = $row['file_copied_3'];
+  $file_type_3 = $row['file_type_3'];
+  $file_name_4 = $row['file_name_4'];
+  $file_copied_4 = $row['file_copied_4'];
+  $file_type_4 = $row['file_type_4'];
 
   //script 오류 방어
   $title = htmlspecialchars($row['title']);
@@ -25,7 +46,6 @@ if(isset($_GET["mode"]) && $_GET["mode"]=='update'){
   $content = str_replace("\n","<br>",$content);
   $content = str_replace(" ","&nbsp;",$content);
   $regist_day = $row['regist_day'];
-  $hit = $row['hit'];
   mysqli_close($conn);
 }
 ?>
@@ -57,7 +77,7 @@ if(isset($_GET["mode"]) && $_GET["mode"]=='update'){
     <br>
     <br>
     <section id="notice">
-      <form name="board_form" action="official_review_dml_board.php?mode=<?=$mode?>" method="post" enctype="multipart/form-data">
+      <form name="board_form" action="official_review_query.php?mode=<?=$mode?>" method="post" enctype="multipart/form-data">
       <table border="1">
         <tr>
           <th>작성자</th>
@@ -65,25 +85,29 @@ if(isset($_GET["mode"]) && $_GET["mode"]=='update'){
         </tr>
         <tr>
           <th>제목</th>
-          <td><input type="text" name="title" value="<?=$title?>" style="font-size:15px; width:400px;"></td>
+          <td><input type="text" name="title" value="" style="font-size:15px; width:400px;"></td>
         </tr>
         <tr style="height:300px;">
           <th>내용</th>
-          <td><textarea name="content" id="summernote"><?=$content?></textarea></td>
+          <td><textarea name="content" id="summernote"></textarea></td>
         </tr>
         <tr>
           <th>파일</th>
           <td>
             <?php
             if($mode=="insert"){
-             echo '<input type="file" name="upfile1">';
-              echo '<input type="file" name="upfile2">';
-              echo '<input type="file" name="upfile3">';
-              echo '<input type="file" name="upfile4">';
-              echo '<input type="file" name="upfile5">';
+             echo '<input type="file" name="upfile[]">';
+              echo '<input type="file" name="upfile[]">';
+              echo '<input type="file" name="upfile[]">';
+              echo '<input type="file" name="upfile[]">';
+              echo '<input type="file" name="upfile[]">';
             }else{
              ?>
-             <input type="file" name="upfile1" onclick='document.getElementById("del_file").checked=true; document.getElementById("del_file").disabled=true;'>
+             <input type="file" name="upfile[]" onclick='document.getElementById("del_file").checked=true; document.getElementById("del_file").disabled=true;'>
+             <input type="file" name="upfile[]" onclick='document.getElementById("del_file").checked=true; document.getElementById("del_file").disabled=true;'>
+             <input type="file" name="upfile[]" onclick='document.getElementById("del_file").checked=true; document.getElementById("del_file").disabled=true;'>
+             <input type="file" name="upfile[]" onclick='document.getElementById("del_file").checked=true; document.getElementById("del_file").disabled=true;'>
+             <input type="file" name="upfile[]" onclick='document.getElementById("del_file").checked=true; document.getElementById("del_file").disabled=true;'>
              <?php
               }
               ?>

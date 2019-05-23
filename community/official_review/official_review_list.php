@@ -1,7 +1,11 @@
 <?php
+//******************************************************************
+$mode=$find=$search=$q_search=$sql=$result=$total_record=$total_page="";
+$page=$start=$number=$i=$row=$num=$title=$content=$regist_day=$main_img="";
+//******************************************************************
 session_start();
-include $_SERVER['DOCUMENT_ROOT']."/santteut/lib/create_table.php";
-include $_SERVER['DOCUMENT_ROOT']."/santteut/lib/db_connector.php";
+include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/create_table_base.php";
+include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
 
 create_table($conn, 'official_review');//공식산행후기 메인 테이블 생성
 define('SCALE', 10);
@@ -53,18 +57,18 @@ $number=$total_record - $start;
           $sql = "SELECT * FROM `official_review` ORDER BY regist_day DESC;";
           $result = mysqli_query($conn, $sql) or die(mysqli_error($con));
 
-          for($i=1;$i<10;$i++){
+          for($i=1;$i<$total_record;$i++){
             $row = mysqli_fetch_array($result);
             $num = $row['num'];
             $title = $row['title'];
             $content = $row['content'];
             $regist_day = $row['regist_day'];
-            $hit = $row['hit'];
+            $main_img = $row['main_img'];
             ?>
             <a href="./official_review_view.php?num=<?=$num?>" id="review_a">
               <div class="review">
-              <div class="review_img"><img src="../../common/img/mountains.jpg" width="350px" height="400px"></div>
-              <div class="review_title"><b>2019년 5월 북한산 산행후기</b></div><br>
+              <div class="review_img"><img src="./img/<?=$main_img?>" width="350px" height="400px"></div>
+              <div class="review_title"><b><?=$title?></b></div><br>
               </div>
             </a>
             <?php

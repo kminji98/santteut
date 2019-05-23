@@ -1,6 +1,12 @@
 <?php
+//***************************************************************************
+$page=$num=$q_num=$sql=$result=$row=$title=$content=$file_name_0=$file_copied_0=$file_type_0="";
+$file_name_1=$file_copied_1=$file_type_1=$file_name_2=$file_copied_2=$file_type_2="";
+$file_name_3=$file_copied_3=$file_type_3=$file_name_4=$file_copied_4=$file_type_4="";
+$regist_day="";
+//***************************************************************************
 session_start();
-include $_SERVER['DOCUMENT_ROOT']."santteut/lib/db_connector.php";
+include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
 
 if(empty($_GET['page'])){
   $page=1;
@@ -10,14 +16,7 @@ if(empty($_GET['page'])){
 
 if(isset($_GET["num"])&&!empty($_GET["num"])){
   $num = test_input($_GET["num"]);
-  $hit = test_input($_GET["hit"]);
   $q_num = mysqli_real_escape_string($conn, $num);
-
-  $sql = "UPDATE `official_review` SET `hit`=$hit WHERE `num`=`$q_num`;";
-  $result = mysqli_query($conn,$sql);
-  if(!$result){
-    die('Error: '.mysqli_error($conn));
-  }
 
   $sql = "SELECT * FROM `official_review` WHERE num='$q_num';";
   $result = mysqli_query($conn,$sql);
@@ -25,31 +24,27 @@ if(isset($_GET["num"])&&!empty($_GET["num"])){
     die('Error: ' . mysqli_error($conn));
   }
   $row=mysqli_fetch_array($result);
-  $hit=$row['hit'];
   $title=htmlspecialchars($row['title']);
   $title=str_replace("\n","<br>",$title);
   $title=str_replace(" ","&nbsp;",$title);
 
-  $content=htmlspecialchars($row['content']);
-  $content=str_replace("\n","<br>",$content);
-  $content=str_replace(" ","&nbsp;",$content);
+  $content=$row['content'];
   $file_name_0=$row['file_name_0'];
   $file_copied_0=$row['file_copied_0'];
   $file_type_0=$row['file_type_0'];
+  $file_name_1=$row['file_name_1'];
+  $file_copied_1=$row['file_copied_1'];
+  $file_type_1=$row['file_type_1'];
+  $file_name_2=$row['file_name_2'];
+  $file_copied_2=$row['file_copied_2'];
+  $file_type_2=$row['file_type_2'];
+  $file_name_3=$row['file_name_3'];
+  $file_copied_3=$row['file_copied_3'];
+  $file_type_3=$row['file_type_3'];
+  $file_name_4=$row['file_name_4'];
+  $file_copied_4=$row['file_copied_4'];
+  $file_type_4=$row['file_type_4'];
   $regist_day=$row['regist_day'];
-
-  if(!empty($file_copied_0)&&$file_type_0=="image"){
-    //이미지 정보를 가져오기 위한 함수 width, height, type
-    $image_info=getimagesize("./data/".$file_copied_0);
-    $image_width=$image_info[0];
-    $image_height=$image_info[1];
-    $image_type=$image_info[2];
-    if($image_width>400) $image_width=400;
-  }else{
-    $image_width=0;
-    $image_height=0;
-    $image_type="";
-  }
 }
 ?>
 
@@ -80,9 +75,10 @@ if(isset($_GET["num"])&&!empty($_GET["num"])){
           <th>내용</th>
           <td>
             <?php
-              if($file_type_0=="image"){
-                echo "<img src='./img/$file_copied_0' width='$image_width'><br>";
-              }else if(!empty($_SESSION['userid'])&&!empty($file_copied_0)){
+            $content=str_replace('<p>','', $content);
+            $content=str_replace('</p>','', $content);
+            echo $content;
+            if(!empty($file_copied_0)){
                 //1. 해당된 가입자이고, 파일이 있으면, 파일명, 파일사이즈, 실제위치 정보확인
                 $file_path = "./data/".$file_copied_0;
                 $file_size = filesize($file_path);
@@ -90,11 +86,54 @@ if(isset($_GET["num"])&&!empty($_GET["num"])){
                 echo ("
                   첨부파일 : $file_name_0 ($file_size Byte)
                   &nbsp;
-                  <a href='download.php?mode=download&num=$q_num'>저장</a><br>
+                  <a href='official_review_download.php?mode=download&num=$q_num'>저장</a><br>
                 ");
               }
+              if(!empty($file_copied_1)){
+                  //1. 해당된 가입자이고, 파일이 있으면, 파일명, 파일사이즈, 실제위치 정보확인
+                  $file_path = "./data/".$file_copied_1;
+                  $file_size = filesize($file_path);
+                  //2. 업로드된 이름을 보여주고 [저장] 할 것인지 선택한다.
+                  echo ("
+                    첨부파일 : $file_name_1 ($file_size Byte)
+                    &nbsp;
+                    <a href='official_review_download.php?mode=download&num=$q_num'>저장</a><br>
+                  ");
+                }
+                if(!empty($file_copied_2)){
+                    //1. 해당된 가입자이고, 파일이 있으면, 파일명, 파일사이즈, 실제위치 정보확인
+                    $file_path = "./data/".$file_copied_2;
+                    $file_size = filesize($file_path);
+                    //2. 업로드된 이름을 보여주고 [저장] 할 것인지 선택한다.
+                    echo ("
+                      첨부파일 : $file_name_2 ($file_size Byte)
+                      &nbsp;
+                      <a href='official_review_download.php?mode=download&num=$q_num'>저장</a><br>
+                    ");
+                  }
+                  if(!empty($file_copied_3)){
+                      //1. 해당된 가입자이고, 파일이 있으면, 파일명, 파일사이즈, 실제위치 정보확인
+                      $file_path = "./data/".$file_copied_3;
+                      $file_size = filesize($file_path);
+                      //2. 업로드된 이름을 보여주고 [저장] 할 것인지 선택한다.
+                      echo ("
+                        첨부파일 : $file_name_3 ($file_size Byte)
+                        &nbsp;
+                        <a href='official_review_download.php?mode=download&num=$q_num'>저장</a><br>
+                      ");
+                    }
+                    if(!empty($file_copied_4)){
+                        //1. 해당된 가입자이고, 파일이 있으면, 파일명, 파일사이즈, 실제위치 정보확인
+                        $file_path = "./data/".$file_copied_4;
+                        $file_size = filesize($file_path);
+                        //2. 업로드된 이름을 보여주고 [저장] 할 것인지 선택한다.
+                        echo ("
+                          첨부파일 : $file_name_4 ($file_size Byte)
+                          &nbsp;
+                          <a href='official_review_download.php?mode=download&num=$q_num'>저장</a><br>
+                        ");
+                      }
              ?>
-             <?=$content?>
           </td>
         </tr>
       </table>
