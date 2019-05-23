@@ -15,7 +15,8 @@ if(!(isset($_SESSION['id']) &&  $_SESSION['id']=="admin")){
 <meta charset="utf-8">
 <?php
 // 변수선언
-$content= $q_content = $sql= $result = $name="";
+$content = $sql= $result = $name="";
+$q_title=$q_content=$regist_day=$hit=$file_name=$file_copied=$file_extension="";
 $name = $_SESSION['name'];
 
 //mode가 insert일때
@@ -38,7 +39,8 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="insert"){
     include $_SERVER['DOCUMENT_ROOT']."/santteut/customer_support/notice/notice_file_upload.php";
 
     // 파일의 실제명과 저장되는 명을 삽입한다. 디비변수명 적지x
-    $sql="INSERT INTO `notice` VALUES (null,'$q_title','$q_content','$regist_day','$hit','$file_name','$copied_file_name','$file_extension');";
+    $sql="INSERT INTO `notice` VALUES (null,'$q_title','$q_content','$regist_day','$hit','$file_name','$file_copied','$file_extension');";
+
     $result = mysqli_query($conn,$sql);
     if (!$result) {
       alert_back('Error:5 ' . mysqli_error($conn));
@@ -88,17 +90,17 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="insert"){
 }else if(isset($_GET["mode"])&&$_GET["mode"]=="update"){
   $content = trim($_POST["content"]);
   $title = trim($_POST["title"]);
+
   if(empty($content)||empty($title)){
     echo "<script>alert('내용이나제목수정요망!');history.go(-1);</script>";
     exit;
   }
   $title = test_input($_POST["title"]);
-  $content = test_input($_POST["content"]);
+  $q_content = $_POST["content"];
   $name = test_input($name);
   $num = test_input($_POST["num"]);
   $hit = test_input($_POST["hit"]);
   $q_title = mysqli_real_escape_string($conn, $title);
-  $q_content = mysqli_real_escape_string($conn, $content);
   $q_name = mysqli_real_escape_string($conn, $name);
   $q_num = mysqli_real_escape_string($conn, $num);
   $regist_day=date("Y-m-d (H:i)");
@@ -127,15 +129,24 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="insert"){
   }
 
   //파일첨부
+  // 첨부되어있을때
+  //empty는 isset함수와 반대 비어있다면 true 비어있지않다면 false
   if(!empty($_FILES['upfile']['name'])){
     //include 파일업로드기능
     include $_SERVER['DOCUMENT_ROOT']."/santteut/customer_support/notice/notice_file_upload.php";
-
     $sql="UPDATE `notice` SET `title`='$q_title',`content`='$q_content',`regist_day`='$regist_day',`hit`='$hit',`file_name`= '$file_name', `file_copied` ='$file_copied',`file_type`='$file_type' WHERE `num`=$q_num;";
-    $result = mysqli_query($conn,$sql);
-    if (!$result) {
-      die('Error: ' . mysqli_error($conn));
-    }
+
+    // 이미지는 안대
+
+
+  //첨부되어있지 않을때
+  }else{
+    $sql="UPDATE `notice` SET `title`='$q_title',`content`='$q_content',`regist_day`='$regist_day',`hit`='$hit' WHERE `num`=$q_num;";
+  }
+
+  $result = mysqli_query($conn,$sql);
+  if (!$result) {
+    die('Error: ' . mysqli_error($conn));
   }
   echo "<script>location.href='./notice_view.php?num=$num&hit=$hit';</script>";
 }//end of if insert

@@ -3,6 +3,7 @@ session_start();
 /////////테스트
 $_SESSION['name']="관리자";
 $_SESSION['id']="admin";
+/////////테스트
 
 // isset함수는 불리언값을 리턴 true or false
 // 회원 or 비회원이면 권한없음, 관리자일때만 입장
@@ -48,7 +49,7 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="search"){
     echo ("<script>window.alert('검색할 단어를 입력해 주세요')history.go(-1)</script>");
     exit;
   }
-//
+
   $sql="SELECT * from `notice` where $find_option like '%$q_find_input%';";
 }else{
   $sql="SELECT * from `notice` order by num desc";
@@ -101,7 +102,6 @@ $view_num = $total_record - $start_record;
       <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/mini_menu.php";?>
     </header>
     <br><br><br>
-    <div id="wrap" style="height:auto;">
     <section id="notice">
 
       <form name="notice_form" action="notice_list?mode=search" method="post">
@@ -115,6 +115,7 @@ $view_num = $total_record - $start_record;
       </div>
       </form>
 
+      <!--총 게시물-->
       <div class="total_title">
         <h4>total <?=$total_record?></h4>
       </div>
@@ -153,7 +154,6 @@ $view_num = $total_record - $start_record;
           <!--조회-->
           <td><?=$hit?></td>
         </tr>
-      <br>
         <?php
           $view_num--;
          }//end of for
@@ -219,7 +219,6 @@ if(!empty($_SESSION['id'])){
         ?>
       </div>
     </section>
-  </div><!--end of wrap-->
 
   <footer>
     <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/footer.php";?>

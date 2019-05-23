@@ -49,7 +49,7 @@ if (isset($_GET["mode"]) && $_GET["mode"]=="update") {
 
   $row=mysqli_fetch_array($result);
 
-  $id=$row['name'];
+  // $id=$row['name'];
   $title= htmlspecialchars($row['title']);
   $title=str_replace("\n", "<br>",$title);
   $title=str_replace(" ", "&nbsp;",$title);
@@ -89,8 +89,8 @@ if (isset($_GET["mode"]) && $_GET["mode"]=="update") {
 
     <section id="notice">
       <form class="notice_insert_form" action="notice_query.php?mode=<?php echo $mode; ?>" method="post" enctype="multipart/form-data">
-        <input type="hidden" name="num" value="<?$num?>">
-        <input type="hidden" name="hit" value="<?$hit?>">
+        <input type="hidden" name="num" value="<?=$num?>">
+        <input type="hidden" name="hit" value="<?=$hit?>">
       <table border="1">
         <tr>
           <th>작성자</th>
@@ -98,7 +98,7 @@ if (isset($_GET["mode"]) && $_GET["mode"]=="update") {
         </tr>
         <tr>
           <th>제목</th>
-          <td><input type="text" style="font-size:15px; width:100px;" name="title"><?$title?></td>
+          <td><input type="text" style="font-size:15px; width:100px;" name="title" value="<?=$title?>"></td>
         </tr>
         <tr style="height:400px;">
           <th>내용</th>
@@ -109,7 +109,7 @@ if (isset($_GET["mode"]) && $_GET["mode"]=="update") {
           <td style="text-align:center;">
             <?php
               if($mode=="insert"){
-                echo '<input type="file" name="upfile" value="<?$file_name?>">';
+                echo '<input type="file" name="upfile" value="<?=$file_name?>">';
               }else{
             ?>
               <input type="file" name="upfile" onclick='document.getElementById("del_file").checked=true;'>
@@ -131,7 +131,7 @@ if (isset($_GET["mode"]) && $_GET["mode"]=="update") {
               $action='document.getElementById("del_file").disabled=false;';
             }
            ?>
-          <button id="admin_write_btn" onclick='<?$action?> document.notice_insert_form.submit();" type="button" name="button'>완료</button>
+          <button id="admin_write_btn" onclick='<?=$action?> document.notice_insert_form.submit();" type="button" name="button'>완료</button>
           <button id="admin_write_btn" type="button" name="button"><a href="./notice_list.php">목록</a></button>
         </div>
       </form>
