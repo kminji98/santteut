@@ -73,12 +73,12 @@
 
           <tr>
             <td><p>추가요금</p></td>
-            <td> <b>Y</b><input type="radio" name="p_add_pay" value="Y"> <b>N</b><input type="radio" name="p_add_pay" value="N"> </td>
+            <td> <b>Y</b><input type="radio" name="p_add_pay" value="1"> <b>N</b><input type="radio" name="p_add_pay" value="2"> </td>
           </tr>
 
           <tr>
             <td><p>자유일정</p></td>
-            <td> <b>Y</b><input type="radio" name="p_free_time" value="Y"> <b>N</b><input type="radio" name="p_free_time" value="N"> </td>
+            <td> <b>Y</b><input type="radio" name="p_free_time" value="1"> <b>N</b><input type="radio" name="p_free_time" value="2"> </td>
           </tr>
 
           <tr>

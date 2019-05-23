@@ -12,3 +12,4 @@
 #kCalendar tr:first-child td.sun{background-color: #cc6e6e;}
 #kCalendar tr:first-child td.sat{background-color: rgb(112, 131, 186);}
 #kCalendar caption {display: none;}
+#kCalendar table a {color: grey;}

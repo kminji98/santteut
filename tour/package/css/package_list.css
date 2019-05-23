@@ -8,17 +8,18 @@
 #package_search_btn:hover{cursor:pointer; background-color:  #2F9D27;}
 #package_search_detail_control{color: #429161; font-size: 0.85em;padding:1%;}
 #package_search_detail_control:hover{text-decoration: underline;cursor:pointer; color: #2F9D27;}
-#package_search_detail_control_sub{margin-left: 20.8%;}
-#package_search_detail_top{width:73%; text-align: center; border-collapse: collapse;border-top: 2px solid #5D5D5D;background-color: #FFFFFF; font-size: 13px;}
+#package_search_detail_control_sub{margin-left: 18%;}
+#package_search_detail_top{width:77%; text-align: center; border-collapse: collapse;border-top: 2px solid #5D5D5D;background-color: #FFFFFF; font-size: 13px;}
 #package_search_detail_top td{height: 35px; width:10%; border-bottom: 1px solid #BDBDBD; padding:1%;}
 #package_search_detail{ height: auto; width:70%; text-align: center; border-collapse: collapse;background-color: #FFFFFF; font-size: 13px;}
 #package_search_detail td{height: 35px; width:10%; border-bottom: 1px solid #BDBDBD; padding:1%;}
-.package_search_detail_option{font-size: 12px; font-weight: bold; width:50px; border-bottom: 1px solid #BDBDBD; background-color: #F6F6F6;}
+.package_search_detail_option{font-size: 12px; font-weight: bold; width:70px; border-bottom: 1px solid #BDBDBD; background-color: #F6F6F6;}
 #package_search_detail_btn, #package_search_detail_reset { border: 1px solid #429161;border-radius: 3px;font-size:0.8em; height: 5%; width:8%; padding-bottom:3px; background-color: #2F9D27; color: #FFFFFF;}
 #package_search_detail_btn{margin-left:27%; margin-bottom: 2%; margin-right: 1%;}
 #package_search_detail_btn:hover, #package_search_detail_reset:hover {cursor:pointer; background-color: #2F9D27;}
 #package_search_detail_option_city{padding:1px; font-size:13px; width: 105px; }
-.package_search_detail_option_all{padding-top:1px; padding-bottom:4px; text-align: center; width:50px;height:16px;background-color:#429161; color:#FFFFFF; border-radius:100px; border: 1px solid #2F9D27;}
+#package_search_detail{width:77%;}
+.package_search_detail_option_all{padding-top:1px; padding-bottom:4px; text-align: center; width:65px;height:16px;background-color:#429161; color:#FFFFFF; border-radius:100px; border: 1px solid #2F9D27;}
 #package_list_view_btn{margin-left:68.7%;}
 .package_list_view_btn_value{border-radius: 3px;  background-color: inherit; border:0;}
 .package_list_view_btn_value:hover{ cursor:pointer; text-decoration: none; background-color: #429161;}
