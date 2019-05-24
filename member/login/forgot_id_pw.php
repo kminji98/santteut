@@ -11,13 +11,15 @@
     $(document).ready(function(){
       $("#forgot_id").click(function(){
         $("#id").css('display', 'none');
+        $("#id2").css('display', 'none');
+        $("#id3").css('display', 'none');
       });
       $("#forgot_pw").click(function(){
-        $("#id").css('display', 'inherit');
-        document.getElementById("id_input").colSpan = "2";
+        $("#id").css('display', 'inline');
+        $("#id2").css('display', 'inline');
+        $("#id3").css('display', 'inline');
       });
     });
-
     </script>
   </head>
   <body>
@@ -40,23 +42,26 @@
         <tr>
           <td id="find_by_email">이메일로 찾기</td>
           <td id="find_by_phone">핸드폰으로 찾기</td>
-          <td></td>
-        </tr>
-        <tr id="id">
-          <td>ID</td>
-          <td colspan="2" id="id_input"><input type="text" name="" value="">  </td>
-        </tr>
-        <tr>
-          <td style="height:1%;">이메일</td>
-          <td colspan="2">
-            <input type="text" name="email1" value="" size="7"> @
-            <input type="text" name="email2" value="" size="7">
-            <button type="button" name="button" style="font-size: 13px;">인증하기</button>
-          </td>
 
         </tr>
+
+        <tr >
+
+        </tr>
+
         <tr>
-          <td colspan="3">본인확인 이메일 주소와 입력한 이메일 주소가 같아야,
+          <td colspan="2" style="height:1%;">
+          <p id="id" style="display:none">아이디</p>
+          <input id="id2" size="14" style="display:none"> <br id="id3" style="display:none">
+          이메일
+          <input  style="display:inline; margin-left:3%;" type="text" name="email1" value="" size="7">  @
+          <input type="text" name="email2" value="" size="7">
+          <button type="button" name="button" style="font-size: 13px; margin-left:3%;" >인증하기</button>
+
+        </td>
+        </tr>
+        <tr>
+          <td colspan="2">본인확인 이메일 주소와 입력한 이메일 주소가 같아야,
             인증번호를 받을 수 있습니다.</td>
         </tr>
       </table>
