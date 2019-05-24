@@ -34,7 +34,8 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
       default_detail_value('day_div');
       default_detail_value('add_div');
       default_detail_value('free_div');
-
+      document.getElementsByName('output')[0].value=<?=json_encode($output)?>;
+      document.getElementsByName('sql')[0].value=<?=json_encode($sql)?>;
     };
 
 
@@ -107,9 +108,9 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
             output+= "자유일정 : " + keyword.id+" | ";
           }
         }
-        alert(output);
+        // alert(output);
         document.getElementsByName('output')[0].value=output;
-        alert(document.getElementsByName('output')[0].value);
+        // alert(document.getElementsByName('output')[0].value);
         $.ajax({
           url: 'package_list_detail.php',
           type: 'POST',
@@ -128,7 +129,6 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
         .done(function(result) {
          var sql=document.getElementById('sql');
          sql.value=result;
-
          document.query_form.submit();
         })
         .fail(function() {
@@ -137,6 +137,28 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
         .always(function() {
           console.log("complete");
 
+        });
+
+      }
+
+    //[PAGE BUTTON ACTION]
+    function detail_search_mv_page(p){
+        $.ajax({
+          url: 'package_list_post_page.php',
+          type: 'POST',
+          data: {
+            page: p
+          }
+        })
+        .done(function(result) {
+         document.query_form.page.value = result;
+         document.query_form.submit();
+        })
+        .fail(function() {
+          console.log("error");
+        })
+        .always(function() {
+          console.log("complete");
         });
 
       }
@@ -224,14 +246,13 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
       </div>
     </div>
     <div id="main_big3">
+      <!-- ///@@@@@@ MINJI 테스트중 BEST3 수정 중 -->
       <div id="best3" >
-        <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/best3.php";?>
+        <?php // include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/best3.php";?>
       </div>
     </div>
       <div id="kCalendar" onclick="KCalendar_go()"></div>
       <!-- 검색/상세검색 -->
-      <!-- ///@@@@@@ MINJI 테스트중 시작  -->
-
       <div id="package_search" >
         <form name="search_form" action="package_list.php" method="get">
           <input type="hidden" name="mode" value="search">
@@ -245,18 +266,17 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
         </form>
       </div>
 
-      <!-- ///@@@@@@ MINJI 테스트중  -->
       <!-- [DETAIL] 상세 검색 버튼 액션 -->
-      <form id="query_form" name="query_form" action="package_list.php?mode=detail&page=<?=$page?>" method="post">
+      <form id="query_form" name="query_form" action="package_list.php?mode=detail" method="post">
         <input id="sql" type="hidden" name="sql" value="">
-        <input id="value00" type="hidden" name="value00" value="">
+        <input id="page" type="hidden" name="page" value="">
+        <input type="hidden" name="output" value="">
       <br>
       <div id="package_search_detail_control_sub" style="display :none">
         <table id="package_search_detail_top">
-
           <tr>
             <td class="package_search_detail_option">출발일</td>
-                  <td><input type="date" name="" value=""  id="dp_date_value"></td>
+            <td><input type="date" name="" value=""  id="dp_date_value"></td>
             <td id="nbsp"></td><td id="nbsp">
             <td id="nbsp"></td><td id="nbsp">
             <td class="package_search_detail_option">출발도시</td>
@@ -291,11 +311,6 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
           </tr>
         <!-- 상세검색 함수 -->
           <script type="text/javascript">
-
-           function after_detail_search(){
-
-           }
-
 
             function detail_function(id, name ,value){
               var detail_id =document.getElementById(id);
@@ -375,7 +390,6 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
 
       </div>
       <p style="position: relative; margin-top: auto; margin-left: auto;text-align:center; font-weight: bold; font-size:13px;"><?=$output?></p>
-      <input type="hidden" name="output" value="">
     </form>
       <div id="package_list_view_btn">
         <form class="" action="index.html" method="post">
@@ -458,37 +472,51 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
               }
             }
 
+
             //현재 블럭에 해당하는 페이지 나열
             for( $i = $start_page; $i <= $end_page; $i++ ){
                 //현재 블럭에 현재 페이지인 버튼
                 if ( $i == $page ){
                   echo( '<a href="#"><button type="button" name="button" style="background-color: #2F9D27; border: 1px solid #2F9D27; color: white;">'.$i.'</button></a>' );
-                }else if(isset($_GET['mode']) && $_GET['mode']=="search"){
-                  echo( '<a href="package_list.php?mode=search&find_option='.$find_option.'&find_input='.$find_input.'&page='.$i.'"><button type="button" name="button">'.$i.'</button></a>' );
+                }else if(isset($_GET['mode'])){
+                  switch ($_GET['mode']) {
+                    case 'search':
+                      echo( '<a href="package_list.php?mode=search&find_option='.$find_option.'&find_input='.$find_input.'&page='.$i.'"><button type="button" name="button">'.$i.'</button></a>' );
+                      break;
+                    case 'detail':
+                      echo( '<button type="button" onclick="detail_search_mv_page('.$i.')">'.$i.'</button>' );
+                      break;
+                    default:
+                      break;
+                  }
                 }else{
                   echo( '<a href="package_list.php?page='.$i.'"><button type="button" name="button">'.$i.'</button></a>' );
                 }
             }
 
-            // 현재 블럭의 마지막 페이지 보다 총 페이지 수가 큰 경우, >(다음) 버튼 / >>(맨끝으로) 버튼 생성
-            //[ex]  page가 9개 있고 현재 페이지가 6페이지인 경우  / 12345/ 6789     =>  <<(처음으로) <(이전) 6 7 8 9
-            //[ex]  page가 9개 있고 현재 페이지가 1페이지인 경우  / 12345/ 6789     =>  1 2 3 4 5 >(다음) >>(맨끝으로)
             if( $total_pages > $end_page ){
-              // 다음블럭 => 현재 블럭의 시작페이지 + 스케일
-              // 클릭 시 다음 블럭의 첫 번째 페이지로 이동
-              // [ex]  총 page 9개 있고 페이지가 3인  경우 / >(다음) 버튼 누르면 '6'으로 이동
               $next_block= $start_page + PAGE_SCALE;
-
-              if(isset($_GET['mode']) && $_GET['mode']=="search"){
-                echo( '<a href="package_list.php?mode=search&find_option='.$find_option.'&find_input='.$find_input.'&page='.$next_block.'"><button type="button" name="button">></button></a>' );
+              if(isset($_GET['mode'])){
+                switch ($_GET['mode']) {
+                  case 'search':
+                    echo( '<a href="package_list.php?mode=search&find_option='.$find_option.'&find_input='.$find_input.'&page='.$next_block.'"><button type="button" name="button">></button></a>' );
+                    echo( '<a href="package_list.php?mode=search&find_option='.$find_option.'&find_input='.$find_input.'&page='.$total_pages.'"><button type="button" name="button">>></button></a>' );
+                    break;
+                  case 'detail':
+                    echo( '<button type="button" title="다음" onclick="detail_search_mv_page('.$next_block.')">></button>' );
+                    echo( '<button type="button" title="맨끝으로" onclick="detail_search_mv_page('.$total_pages.')">>></button>' );
+                    break;
+                  default:
+                    break;
+                }
               }else{
                 echo( '<a href="package_list.php?page='.$next_block.'"><button type="button" name="button" title="다음">></button></a>' );
+                echo( '<a href="package_list.php?page='.$total_pages.'"><button type="button" name="button" title="맨끝으로">>></button></a>' );
               }
-              //맨끝페이지로 이동
-              echo( '<a href="package_list.php?page='.$total_pages.'"><button type="button" name="button" title="맨끝으로">>></button></a>' );
             }
             ?>
           </div>
+
       <br><br><br><br><br><br><br><br><br><br>
 </div>
 </body>
