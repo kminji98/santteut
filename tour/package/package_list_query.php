@@ -25,6 +25,7 @@ if(isset($_GET['mode'])){
     //b. [DETAIL] 상세검색 : 조건이 sql값으로 넘어옴(POST)
     case 'detail':
     $sql=$_POST['sql'];
+    $output=$_POST['output'];
 
     break;
 
