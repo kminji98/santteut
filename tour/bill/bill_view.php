@@ -2,10 +2,10 @@
 <html lang="ko" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut2/common/css/login_menu.css">
-    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut2/tour/package/css/package_list.css">
-    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut2/tour/bill/css/bill_view.css">
-    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut2/common/css/side_bar.css">
+    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css">
+    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/tour/package/css/package_list.css">
+    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/tour/bill/css/bill_view.css">
+    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/side_bar.css">
 
     <title>산뜻 :: 즐거운 산행</title>
     <!--보험/결제   -->
@@ -51,7 +51,7 @@
         var var3 ='<p>· 본인명의 휴대폰에서 본인명의 카드 등록 후 사용 가능합니다.</p>';
         var3=var3+'<p>· 카카오페이 무이자할부/제휴카드 혜택은 카카오페이 규정에 따르며 해당App에서 확인 가능합니다.</p>';
         con.innerHTML="카카오페이";
-        con2.innerHTML='<img class="kakopay_img" src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut2/common/img/kakaopay.jpg">';
+        con2.innerHTML='<img class="kakopay_img" src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/img/kakaopay.jpg">';
         con3.innerHTML=var3;
 
     }
@@ -60,8 +60,8 @@
   <body>
     <div id="wrap">
     <header>
-      <?php include $_SERVER['DOCUMENT_ROOT']."/santteut2/common/lib/login_menu.php";?>
-      <?php include $_SERVER['DOCUMENT_ROOT']."/santteut2/common/lib/side_bar.php";?>
+      <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/login_menu.php";?>
+      <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/side_bar.php";?>
     </header>
     </div>
     <div id="top_text"><b>결제하기</b></div>
@@ -283,7 +283,7 @@
             <input id="kakopay_radiobtn" type="radio" name="pay" value="" onclick="kakopay_radiobtn_click()">
           </td>
           <td id="payment_choice_kakaopay_img">
-            <img class="kakopay_img" src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut2/common/img/kakaopay.jpg">
+            <img class="kakopay_img" src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/img/kakaopay.jpg">
           </td>
         </tr>
 
@@ -316,6 +316,6 @@
   </body>
   <br><br><br><br><br>
   <footer>
-    <?php include $_SERVER['DOCUMENT_ROOT']."/santteut2/common/lib/footer.php";?>
+    <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/footer.php";?>
   </footer>
 </html>
