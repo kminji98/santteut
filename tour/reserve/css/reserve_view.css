@@ -8,13 +8,15 @@ html{scroll-behavior:smooth;}
 .left2, .left3, .left4{font-size: 13px; font-weight: bold; background-color: #f2f2f2; width: 100px; }
 .left3{text-align: center; padding: 0 10px;}
 .left4{text-align: center; padding: 0 10px; border-right: 1px solid #dddddd;}
+/* .add_hidden_member{font-size: 13px; font-weight: bold; background-color: #f2f2f2; width: 100px; text-align: center; padding: 0 10px; border-right: 1px solid #dddddd;}} */
+
 .gb2{ background-color: #1ae134; color: white; width: 65px; height: 20px; text-align: center; margin-left: 15px; font-size: 12px; font-weight: bold; padding-top: 5px; border-radius: 3px;}
 #pac_name2{padding-left: 15px; font-weight: bold; border-bottom: 1px solid #dddddd;}
 #pac_code2{padding-left: 15px; font-size: 13px; border-bottom: 1px solid #dddddd;}
 #period1{padding-left: 15px; font-size:15px; font-weight: bold;}
 #pac_name,#pac_name{padding: 15px 8px; border-bottom: 1px solid #dddddd; }
 #sch1{padding: 10px 8px;}
-#tbl1, #tbl2,#tbl3,#tbl4{margin-top: 15px; margin-left: 14%; width: 82%; height: 210px;  border: 1px solid #dddddd; margin-bottom: 20px; border-collapse: collapse;}
+#tbl1, #tbl2,#tbl3,#tbl4{margin-top: 15px; margin-left: 14%; width: 82%; height: 210px;  border: 1px solid #dddddd;border-collapse: collapse;}
 #tbl2{height: 130px;}
 #tbl3{margin-top: 30px; height: 65px;}
 #tbl4{margin-top: 3px;  height: 100px; }
@@ -22,7 +24,7 @@ html{scroll-behavior:smooth;}
 .inputs1{width: 80%; height: 24px; margin-left: 3%; border-radius: 5px; border: 1px solid #cccccc;}
 #input1{margin-left: 5px;}
 #inputs2, #phone_num{width: 90%; height: 24px; margin-left: 3%; border-radius: 5px; border: 1px solid #cccccc;}
-.inputs{border-right: 1px solid #dddddd;}
+.inputs{border-right: 1px solid #dddddd; }
 .inputs label{font-size: 13px;}
 .inputs b{font-size: 13px; margin-left: 10px;}
 #male{margin-left: 17%;}
@@ -73,3 +75,6 @@ html{scroll-behavior:smooth;}
 .tabcontent {color: #5d5d5d;  display: none;  border-left: 1px solid #bdbdbd;  width: 82%;  height: 350px;  overflow:scroll;}
 .information_collect{ font-size:15px; text-align:left;}
 #News p ,#Home p {font-size:12px; text-align:left;}
+/* .test_table1{margin-top: 15px; margin-left: 14%; width: 82%; height: 210px;  border: 1px solid #dddddd; margin-bottom: 20px; border-collapse: collapse;} */
+.test_table1{height: 50px; display:none; margin-left:14%; width: 82%; border-bottom: 1px solid #dddddd;}
+.test_class{font-size: 13px; font-weight: bold; width: 100px;text-align: center; padding: 0 10px;}

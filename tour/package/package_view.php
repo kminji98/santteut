@@ -1,6 +1,7 @@
 <?php
 session_start();
 include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
+
 ?>
 <!DOCTYPE html>
 <html lang="ko" dir="ltr">
@@ -72,49 +73,89 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
         <p id="adult">성인</p>
         <p id="kid">아동</p>
         <p id="baby">유아</p>
-        <select id="sel1" name="">
+        <script type="text/javascript">
+          var adult_pay=0;
+          var kid_pay=0;
+          var baby_pay=0;
+          var member =1;
+          var member2=0;
+          var member3=0;
+          function select_people_number(person){
+            var pay=<?=json_encode($p_pay)?>;
+            var money=document.getElementById('money');
+
+            var adult_val=document.getElementById('adult_val');
+            var kid_val=document.getElementById('kid_val');
+            var baby_val=document.getElementById('baby_val');
+
+            if(person=="adult"){
+            var sel1 =document.getElementById('sel1');
+            member = parseInt(sel1.options[sel1.selectedIndex].text);
+            pay = pay*member;
+            adult_pay=pay;
+          }else if (person=="kid") {
+            var sel2 =document.getElementById('sel2');
+            member2 = parseInt(sel2.options[sel2.selectedIndex].text);
+            pay = pay*member2*0.7;
+            kid_pay=pay;
+          }else if (person=="baby") {
+            var sel3 =document.getElementById('sel3');
+            member3 = parseInt(sel3.options[sel3.selectedIndex].text);
+            pay = pay*member3*0.5;
+            baby_pay=pay;
+          }
+            money.innerHTML=(adult_pay+kid_pay+baby_pay).toLocaleString();
+            adult_val.value=member;
+            kid_val.value=member2;
+            baby_val.value=member3;
+          }
+        </script>
+        <select id="sel1" onclick="select_people_number('adult')" name="">
+          <option  value="1">1</option>
+          <option  value="2">2</option>
+          <option  value="3">3</option>
+          <option  value="4">4</option>
+          <option  value="5">5</option>
+          <option  value="6">6</option>
+          <option  value="7">7</option>
+          <option  value="8">8</option>
+          <option  value="9">9</option>
+          <option  value="10">10</option>
+        </select>
+
+        <select id="sel2" onclick="select_people_number('kid')" name="">
+          <option value="0">0</option>
           <option value="1">1</option>
-          <option value="">2</option>
-          <option value="">3</option>
-          <option value="">4</option>
-          <option value="">5</option>
-          <option value="">6</option>
-          <option value="">7</option>
-          <option value="">8</option>
-          <option value="">9</option>
-          <option value="">10</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
         </select>
 
-        <select id="sel2" name="">
-          <option value="">0</option>
-          <option value="">1</option>
-          <option value="">2</option>
-          <option value="">3</option>
-          <option value="">4</option>
-          <option value="">5</option>
-          <option value="">6</option>
-          <option value="">7</option>
-          <option value="">8</option>
-          <option value="">9</option>
-          <option value="">10</option>
-        </select>
-
-        <select id="sel3" name="">
-          <option value="">0</option>
-          <option value="">1</option>
-          <option value="">2</option>
-          <option value="">3</option>
-          <option value="">4</option>
-          <option value="">5</option>
-          <option value="">6</option>
-          <option value="">7</option>
-          <option value="">8</option>
-          <option value="">9</option>
-          <option value="">10</option>
+        <select id="sel3" onclick="select_people_number('baby')" name="">
+          <option value="0">0</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
         </select>
       </div>
       <div id="pay_view">
         <p id="total_pay">총 예정금액</p>
+        <?php
+        $p_pay= number_format($p_pay);
+         ?>
         <b id="money"><?=$p_pay?></b> <p id="won">원</p>
         <p class="subtext1">유류할증료,제세공과금 포함</p>
         <p class="subtext1">※유류할증료 및 제세공과금은 유가와 환율에</p>
@@ -125,7 +166,23 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
         <p id="line">-------------------------------------------------------------------</p>
       </div>
       <div id="button">
-        <a href="../reserve/reserve_view.php?mode=<?=$p_code?>"><div id="reserve_status"> <b>예약마감</b></div></a><br>
+        <div id="reserve_status" onclick="people_submit()"> <b>예약마감</b></div><br>
+        <form id="people_form" name="people_form" action="../reserve/reserve_view.php?mode=<?=$p_code?>" method="post">
+          <input id="adult_val" type="hidden" name="adult_val" value="">
+          <input id="kid_val" type="hidden" name="kid_val" value="">
+          <input id="baby_val" type="hidden" name="baby_val" value="">
+        </form>
+
+
+        <script type="text/javascript">
+          function people_submit(){
+            document.people_form.submit();
+          }
+        </script>
+
+
+
+
         <a href="../cart/cart_list.php"><div id="go_cart"> <b>장바구니</b></div></a>
       </div>
       <div id="right_footer"></div>

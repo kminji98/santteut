@@ -30,6 +30,5 @@ $day2 = $yoil[date('w', strtotime($p_arr_date2))];
 
 $dp_date=explode("-", $p_dp_date);
 $dp_date2=explode("-", $p_arr_date2);
-$p_pay=number_format($p_pay);
 
  ?>

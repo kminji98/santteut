@@ -141,25 +141,91 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
     <div id="tbl_div3">
       <div id="tour_text1"><b>여행자 정보</b></div>
       <div id="tour_text2">  <b class="label_img">></b>  <b id="sel_text">인원선택</b> </div>
+      <?php
+          $adult_val=$_POST['adult_val'];
+          $kid_val=$_POST['kid_val'];
+          $baby_val=$_POST['baby_val'];
+      ?>
       <table id="tbl3">
         <tr>
           <td class="left3">성인<br>(만 12세 이상)</td>
           <td>
-            <div class="count"><button type="button" class="minus"><span class="ir">-</span></button><input type="text" value="1" class="in1"><button type="button" class="plus"><span class="ir">+</span></button>
+            <div class="count">
+              <button onclick="people_control_btn('-','text_adult')" id="minus_btn_adult" type="button" class="minus"><span class="ir">-</span></button>
+              <input id="text_adult" readonly type="text" value="<?=$adult_val?>" class="in1" >
+              <button onclick="people_control_btn('+','text_adult')" id="plus_btn_adult" type="button" class="plus"><span class="ir">+</span></button>
             </div>
           </td>
           <td class="left3">아동<br>(만 12세 미만)</td>
           <td>
-            <div class="count"><button type="button" class="minus"><span class="ir">-</span></button><input type="text" value="1" class="in1"><button type="button" class="plus"><span class="ir">+</span></button>
+            <div class="count">
+              <button onclick="people_control_btn('-','text_kid')"  id="minus_btn_kid" type="button" class="minus"><span class="ir">-</span></button>
+              <input id="text_kid" readonly type="text" value="<?=$kid_val?>" class="in1" >
+              <button onclick="people_control_btn('+','text_kid')" id="plus_btn_kid" type="button" class="plus"><span class="ir">+</span></button>
             </div>
           </td>
           <td class="left3">유아<br>(만 2세 미만)</td>
           <td>
-            <div class="count"><button type="button" class="minus"><span class="ir">-</span></button><input type="text" value="1" class="in1"><button type="button" class="plus"><span class="ir">+</span></button>
+            <div class="count">
+              <button onclick="people_control_btn('-','text_baby')" id="minus_btn_baby" type="button" class="minus"><span class="ir">-</span></button>
+              <input id="text_baby" readonly type="text" value="<?=$baby_val?>" class="in1" >
+              <button onclick="people_control_btn('+','text_baby')" id="plus_btn_baby" type="button" class="plus"><span class="ir">+</span></button>
             </div>
           </td>
         </tr>
       </table>
+      <script type="text/javascript">
+        var adult_num=<?=json_encode($adult_val)?>;
+        function people_control_btn(control,id){
+          var id2 = document.getElementById(id);
+          var text=id2.value;
+          text=parseInt(text);
+          if(control=="+"){
+            id2.value=text+1;
+            if(id=='text_adult'){
+              adult_num++;
+            }
+          }else{
+            id2.value=text-1;
+            if(id=='text_adult'){
+              adult_num--;
+              for(var i=adult_num;i>0;i--){
+                var test_table=document.getElementsByName('test_table')[i];
+                test_table.style.display="none";
+              }
+              var name_by_class = document.getElementsByClassName('test_class')[0].getAttribute('name');;
+            }
+          }
+          if(id2.value==11){
+            id2.value=10;
+          }else if(id=='text_adult'&&id2.value==0){
+              id2.value=1;
+              return false;
+          }else if(id2.value==-1){
+            var test_table=document.getElementsByName('test_table')[0];
+            test_table.style.display="none";
+          }else if(id2.value==-1){
+            id2.value=0;
+
+
+
+
+
+
+          }
+
+          for(var i=0;i<adult_num;i++){
+            var test_table=document.getElementsByName('test_table')[i];
+            test_table.style.display="block";
+
+
+          }
+          var name_by_class = document.getElementsByClassName('test_class')[0].getAttribute('name');;
+
+
+        }
+      </script>
+
 
       <div id="check_eql">
         <input type="checkbox" id="box1"><p>성인1이 예약자와 동일</p>
@@ -167,22 +233,64 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
 
       <table id="tbl4">
         <tr>
-          <td class="left4">한글이름<p class="star">*</p></td>
+          <td class="left4" colspan="2">한글이름<p class="star">*</p></td>
           <td class="left4">영문성<p class="star">*</p></td>
           <td class="left4">영문이름<p class="star">*</p></td>
           <td class="left4">성별<p class="star">*</p></td>
           <td class="left4">법정생년월일<p class="star">*</p></td>
           <td class="left4">휴대폰번호<p class="star">*</p></td>
         </tr>
+
         <tr>
-          <td class="inputs"> <b>성인1</b> <input type="text" class="inputs1" id="input1" value=""> </td>
+          <td><b >성인1</b></td>
+          <td id="name"class="inputs"><input type="text" class="inputs1" value="" size="10"></td>
+          <td class="inputs"><input  type="text" class="inputs1" id="input1" value=""></td>
           <td class="inputs"> <input type="text" class="inputs1" value=""> </td>
+
+
+          <td class="inputs"> <input type="radio" name="gen" id="male" value=""><label for="">남&nbsp;</label><input type="radio" name="gen" value=""><label for="">여</label></td>
+          <td class="inputs"> <input type="text" id="inputs2" value=""> </td>
+          <td class="inputs"> <input type="text" id="phone_num" value=""></td>
+        </tr>
+      </table>
+
+      <?php
+
+      for($i=2;$i<=10;$i++){
+        echo '
+        <table class="test_table1"name="test_table">
+        <tr>
+          <td class="test_class" colspan="2"></td>
+          <td class="test_class"></td>
+          <td class="test_class">&nbsp;</td>
+          <td class="test_class"></td>
+          <td class="test_class"></td>
+          <td class="test_class"></td>
+       </tr>
+
+        <tr>
+          <td><b >성인'.$i.'</b></td>
+          <td id="name"class="inputs"><input type="text" class="inputs1" value="" size="10"></td>
+          <td class="inputs"><input  type="text" class="inputs1" id="input1" value=""></td>
           <td class="inputs"> <input type="text" class="inputs1" value=""> </td>
           <td class="inputs"> <input type="radio" name="gen" id="male" value=""><label for="">남&nbsp;</label><input type="radio" name="gen" value=""><label for="">여</label></td>
           <td class="inputs"> <input type="text" id="inputs2" value=""> </td>
           <td class="inputs"> <input type="text" id="phone_num" value=""> </td>
         </tr>
-      </table>
+        </table>';
+      }
+
+
+
+
+
+
+
+       ?>
+
+
+
+
     </div>
 
       <div id="tour_text3">  <b class="label_img">></b>  <b id="sel_seat">좌석선택</b> </div>
