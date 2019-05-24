@@ -17,37 +17,40 @@ if(isset($_GET['mode'])){
     //a. [SEARCH]
     // 옵션 선택 : find_option / 검색할 키워드 : find_input
     case 'search':
-    $sql="SELECT * from `package` where $find_option like '%$q_find_input%';";
+    $find_option= $_GET['find_option'];
+    $find_input= $_GET['find_input'];
+    $sql="SELECT * from `package` where $find_option like '%$find_input%';";
     break;
 
     //b. [DETAIL] 상세검색 : 조건이 sql값으로 넘어옴(POST)
     case 'detail':
     $sql=$_POST['sql'];
+
     break;
 
     //@@@@@@ MINJI 테스트
     // //c. [RECENT] 최신순
     // case 'recent':
-    // //$_POST['order'] =>  desc / asc
+    // //$_POST['order'] =>  'desc' / 'asc'
     // // ex) $sql="SELECT * from `package` order by num desc";
-    // $sql= $sql+"order by `p_dp_date` "+$_POST['order'];
+    // $sql= $sql." order by `p_dp_date`"." ".$_POST['order'];
     // break;
     // //d. [PAY] 요금순
     // case 'pay':
-    // $sql= $sql+"order by `p_pay` "+$_POST['order'];
+    // $sql= $sql." order by `p_pay` ".$_POST['order'];
     // break;
     // //e. [POPULAR] 인기순 (예약이 많이 된 순)
     // case 'popular':
-    // // select * from bus inner join package on bus.b_code = package.p_code order by b_people;
-    // $sql ="select * from bus inner join package on bus.b_code = package.p_code order by b_people";
+    // // select * from package inner join bus on bus.b_code = package.p_code order by b_people;
+    // $sql =$sql." inner join bus on bus.b_code = package.p_code order by b_people";
     // // desc OR asc
-    // $sql= $sql+$_POST['order'];
+    // $sql= $sql." ".$_POST['order'];
     // break;
 
     // [DATE] 날짜검색 : 모드가 날짜로 넘어옴(GET)
     default:
       $date=$_GET['mode'];
-      $sql="SELECT * from `package` where `p_dp_date` = '$date'";
+      $sql=$sql." where `p_dp_date` = '$date';";
       break;
   }
   // if($_GET['mode'] == 'search' && isset($_GET['find_option'])&& isset($_GET['find_input'])){

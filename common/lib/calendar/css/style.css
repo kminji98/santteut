@@ -7,7 +7,7 @@
           text-align: center; font-size: 16px; font-weight: bold;}
 #kCalendar .button {color: #000; text-decoration: none;}
 #kCalendar table {position: relative; left:24.8%; border:0; border-collapse:collapse; width:50%;}
-#kCalendar table td{ color: grey; text-align: center;font-size: 0.74em; padding:4px; border:1px solid #ddd; text-align: center; }
+#kCalendar table td{ color: grey; text-align: center;font-size: 0.74em; padding:5px; border:1px solid #ddd; text-align: center; }
 #kCalendar tr:first-child td{color: #fff; background-color: #737373; border-color: #5d5d5d;}
 #kCalendar tr:first-child td.sun{background-color: #cc6e6e;}
 #kCalendar tr:first-child td.sat{background-color: rgb(112, 131, 186);}

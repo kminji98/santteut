@@ -9,11 +9,11 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css">
-    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/tour/package/css/package_list.css">
+    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/tour/package/css/package_list.css?ver=0">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/side_bar.css">
-    <link href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/lib/calendar/css/style.css" rel="stylesheet">
+    <link href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/lib/calendar/css/style.css?ver=0" rel="stylesheet">
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
-    <script src="http://127.0.0.1/santteut/common/lib/calendar/js/script.js"></script>
+    <script src="../../common/lib/calendar/js/script.js"></script>
     <style media="screen">
     .page_button_group button{border-radius: 3px; margin-bottom:3%; width: 35px; height: 35px; font-weight: bold; margin-right: 5px; cursor: pointer; border: 1px solid #464646; background-color: white;}
     .page_button_group button:hover{background-color: #2F9D27; color: white; border-radius: 3px; border: 1px solid #2F9D27;}
@@ -54,6 +54,8 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
         for(var i=0;i<=period_div.length-1;i++){
           if(period_div[i].style.backgroundColor!='white'){
             period_value=period_div[i].value;
+            // $(document).$("#value00").value = period_div[i].value;
+            // alert($(document).$("#value00").value);
           }
         }
         for(var i=0;i<=pay_div.length-1;i++){
@@ -82,14 +84,6 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
           }
         }
 
-        // alert(period_value);
-        // alert(pay_value);
-        // alert(time_value);
-        // alert(day_value);
-        // alert(add_value);
-        // alert(free_value);
-
-
         $.ajax({
           url: 'package_list_detail.php',
           type: 'POST',
@@ -109,7 +103,6 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
          var sql=document.getElementById('sql');
          sql.value=result;
          document.query_form.submit();
-         alert(sql.value+"0");
         })
         .fail(function() {
           console.log("error");
@@ -121,8 +114,6 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
 
       }
 
-
-
     function default_detail_value(name){
       var detail_name=document.getElementsByName(name);
       for(var i=0;i<=detail_name.length-1;i++){
@@ -133,7 +124,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
         detail_name[i].style.color='black';
         detail_name[i].style.border='none';
       }
-      detail_name[0].style.backgroundColor='#429161';
+      detail_name[0].style.backgroundColor='#2F9D27';
       detail_name[0].style.color='white';
     }
     function check_offsetTop(){
@@ -157,7 +148,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
       var con2 = document.getElementById("package_search_detail_control");
       if(con.style.display=='none'){
         con2.innerHTML="상세검색▲";
-          con.style.display = 'block';
+        con.style.display = 'block';
       }else{
           con.style.display = 'none';
           con2.innerHTML="상세검색▼";
@@ -166,18 +157,15 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
   function button_change(value){
     var btn = document.getElementById(value);
     if(btn.value==value+"순▼"){
+      order.value = "asc";
       btn.value=value+"순▲";
     }else{
+      order.value = "desc";
       btn.value=value+"순▼";
     }
   }
   </script>
   <body>
-    <!-- [DETAIL] 상세 검색 버튼 액션 -->
-    <form id="query_form" name="query_form" action="package_list.php?mode=detail" method="post">
-      <input id="sql" type="hidden" name="sql" value="">
-    </form>
-
     <!--로그인 회원가입 로그아웃-->
     <div id="wrap">
     <header>
@@ -201,23 +189,32 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
     </div>
       <div id="kCalendar" onclick="KCalendar_go()"></div>
       <!-- 검색/상세검색 -->
+      <!-- ///@@@@@@ MINJI 테스트중 시작  -->
+
       <div id="package_search" >
-          <select id="package_search_select" name="find">
-            <option value="subject">패키지명</option>
-            <option value="content">산 이름</option>
+        <form name="search_form" action="package_list.php" method="get">
+          <input type="hidden" name="mode" value="search">
+          <select id="package_search_select" name="find_option">
+            <option value="p_name" <?php if(isset($find_option) && $find_option==="p_name") echo "selected";?>>패키지명</option>
+            <option value="p_arr_mt" <?php if(isset($find_option) && $find_option==="p_arr_mt") echo "selected";?>>산 이름</option>
           </select><!-- 산 이름일 때에 placeholder ->산 이름을 입력하세요 -->
-          <input id="package_search_input" placeholder="패키지명을 입력하세요" type="text" name="" value="">
-          <button id="package_search_btn" type="button" name="button"><b>검색</b></button>
+          <input id="package_search_input" placeholder="검색어를 입력하세요" type="text" name="find_input" <?php if(isset($find_input)) echo "value='$find_input'";?>>
+          <button id="package_search_btn" type="button" name="button" onclick="document.search_form.submit()"><b>검색</b></button>
           <strong  id="package_search_detail_control" onclick="control_display2();">상세검색▼</strong>
+        </form>
       </div>
+
+      <!-- ///@@@@@@ MINJI 테스트중  -->
+      <!-- [DETAIL] 상세 검색 버튼 액션 -->
+      <form id="query_form" name="query_form" action="package_list.php?mode=detail&page=<?=$page?>" method="post">
+        <input id="sql" type="hidden" name="sql" value="">
+        <input id="value00" type="hidden" name="value00" value="">
       <br>
       <div id="package_search_detail_control_sub" style="display :none">
-
         <table id="package_search_detail_top">
 
           <tr>
-            <td class="package_search_detail_option" >출발일</td>
-
+            <td class="package_search_detail_option">출발일</td>
                   <td><input type="date" name="" value=""  id="dp_date_value"></td>
             <td id="nbsp"></td><td id="nbsp">
             <td id="nbsp"></td><td id="nbsp">
@@ -263,20 +260,15 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
                 detail_name[i].style.color='black';
                 detail_name[i].style.border='none';
               }
-              // period_id.style.backgroundColor ="#429161";
-              detail_id.style.backgroundColor="#429161";
+              // period_id.style.backgroundColor ="#2F9D27";
+              detail_id.style.backgroundColor="#2F9D27";
               detail_id.style.color="white";
               detail_id.style.color="white";
               detail_id.style.color="white";
               // period_id.style.color="white";
-              detail_id.style.border="1px solicd #2F9D27";
+              detail_id.style.border="1px solid #2F9D27";
               detail_id.value=value;
             }
-
-
-
-
-
 
           </script>
 
@@ -332,7 +324,8 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
         <br>
        <button id="package_search_detail_btn" type="button" name="button" onclick="detail_search_function();"><b>상세검색</b></button>
         <button id="package_search_detail_reset" type="button" name="button" ><b>초기화</b></button>
-
+      </form>
+      <!--[DETAIL] 상세 검색 버튼 액션   -->
 
 
 
@@ -340,6 +333,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
 
       <div id="package_list_view_btn">
         <form class="" action="index.html" method="post">
+          <input type="hidden" name="order" value="desc">
           <input onclick="button_change('최신')" id="최신" class="package_list_view_btn_value" type="button" name="" value="최신순▼">
           <input onclick="button_change('요금')" id="요금" class="package_list_view_btn_value" type="button" name="" value="요금순▼">
           <input onclick="button_change('인기')" id="인기" class="package_list_view_btn_value" type="button" name="" value="인기순▼">
@@ -375,8 +369,6 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
             $day = $yoil[date('w', strtotime($p_dp_date))];
             $day2 = $yoil[date('w', strtotime($p_arr_date2))];
             $p_pay=number_format($p_pay);
-
-
 
            ?>
 
@@ -414,7 +406,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
               // 현재 6 page 인 경우 '<(이전블럭)' 클릭 -> $pre_page = 6-PAGE_SCALE  -> 1 페이지로 이동
               $pre_block= $start_page - PAGE_SCALE;
               if(isset($_GET['mode']) && $_GET['mode']=="search"){
-                echo( '<a href="package_list.php?mode=search&find_option=$find_option&find_input=$find_input&page='.$pre_block.'"><button type="button" name="button" title="이전"><</button></a>' );
+                echo( '<a href="package_list.php?mode=search&find_option='.$find_option.'&find_input='.$find_input.'&page='.$pre_block.'"><button type="button" name="button" title="이전"><</button></a>' );
               }else{
                 echo( '<a href="package_list.php?page='.$pre_block.'"><button type="button" name="button" title="이전"><</button></a>' );
               }
@@ -426,7 +418,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
                 if ( $i == $page ){
                   echo( '<a href="#"><button type="button" name="button" style="background-color: #2F9D27; border: 1px solid #2F9D27; color: white;">'.$i.'</button></a>' );
                 }else if(isset($_GET['mode']) && $_GET['mode']=="search"){
-                  echo( '<a href="package_list.php?mode=search&find_option=$find_option&find_input=$find_input&page='.$page.'"><button type="button" name="button">'.$i.'</button></a>' );
+                  echo( '<a href="package_list.php?mode=search&find_option='.$find_option.'&find_input='.$find_input.'&page='.$i.'"><button type="button" name="button">'.$i.'</button></a>' );
                 }else{
                   echo( '<a href="package_list.php?page='.$i.'"><button type="button" name="button">'.$i.'</button></a>' );
                 }
@@ -442,11 +434,10 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
               $next_block= $start_page + PAGE_SCALE;
 
               if(isset($_GET['mode']) && $_GET['mode']=="search"){
-                echo( '<a href="package_list.php?mode=search&find_option=$find_option&find_input=$find_input&page='.$next_block.'"><button type="button" name="button">></button></a>' );
+                echo( '<a href="package_list.php?mode=search&find_option='.$find_option.'&find_input='.$find_input.'&page='.$next_block.'"><button type="button" name="button">></button></a>' );
               }else{
                 echo( '<a href="package_list.php?page='.$next_block.'"><button type="button" name="button" title="다음">></button></a>' );
               }
-
               //맨끝페이지로 이동
               echo( '<a href="package_list.php?page='.$total_pages.'"><button type="button" name="button" title="맨끝으로">>></button></a>' );
             }
