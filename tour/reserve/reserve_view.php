@@ -1,6 +1,7 @@
 <?php
 session_start();
 include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
+// $pay_value =$_POST['pay_value'];
 ?>
 <!DOCTYPE html>
 <html lang="ko" dir="ltr">
@@ -11,14 +12,25 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
 
     <title>산뜻 :: 즐거운 산행</title>
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+
   <script type="text/javascript">
   var a=450;
   var b=0;
   var c=1;
   var scroll_count =0;
       var prevScrollpos = window.pageYOffset;
-      window.onscroll = function() {
 
+
+      window.onscroll = function() {
+        var side_div =document.getElementById('side_div');
+        var reserve_detail_menu =document.getElementById('reserve_detail_menu');
+        // alert(side_div.style.height);
+        // alert(reserve_detail_menu.style.height);
+        realheight_div=reserve_detail_menu.style.height.substring(0,3);
+        realheight_div=parseInt(realheight_div);
+        // alert(realheight_div);
+        side_div.style.height=realheight_div-360+"px";
+        // side_div.height
       var currentScrollPos = window.pageYOffset;
         if(window.scrollY<=600){
         if (prevScrollpos > currentScrollPos) {
@@ -73,11 +85,43 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
     });
   </script>
 
+  <script type="text/javascript">
+    window.onload = function() {
+
+      adult_control_btn('+','text_adult','*');
+      kid_control_btn('+','text_kid','*');
+      baby_control_btn('+','text_baby','*');
+      var kid_side_div=document.getElementById('kid_side_div');
+      var baby_side_div=document.getElementById('baby_side_div');
+      var text_adult=document.getElementById('text_adult');
+      var text_kid=document.getElementById('text_kid');
+      var text_baby=document.getElementById('text_baby');
+      var reserve_money=document.getElementById('reserve_money');
+      var money_val=parseInt(reserve_money.value);
+      var pay = <?= json_encode($p_pay)?>;
+      pay=parseInt(pay);
+      text_adult=parseInt(text_adult.value);
+      text_kid=parseInt(text_kid.value);
+      text_baby=parseInt(text_baby.value);
+      reserve_money.innerHTML=((pay*text_adult)+(pay*text_kid*0.7)+(pay*text_baby*0.5)).toLocaleString();
+
+      if(kid>0){
+        kid_side_div.style.display="inline";
+      }
+      if(baby>0){
+        baby_side_div.style.display="inline";
+      }
+
+  }
+  </script>
+
+
   </head>
 
-  <body>
+  <body >
+    <input type="hidden" name="" value="">
     <!--로그인 회원가입 로그아웃-->
-    <div id="wrap">
+    <div id="wrap" style="height:2000px;;">
     <header>
       <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/login_menu.php";?>
     </header>
@@ -138,7 +182,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
       </table>
     </div>
 
-    <div id="tbl_div3">
+    <div id="tbl_div3" style="height:auto;">
       <div id="tour_text1"><b>여행자 정보</b></div>
       <div id="tour_text2">  <b class="label_img">></b>  <b id="sel_text">인원선택</b> </div>
       <?php
@@ -151,42 +195,59 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
           <td class="left3">성인<br>(만 12세 이상)</td>
           <td>
             <div class="count">
-              <button onclick="people_control_btn('-','text_adult')" id="minus_btn_adult" type="button" class="minus"><span class="ir">-</span></button>
+              <button onclick="adult_control_btn('-','text_adult')" id="minus_btn_adult" type="button" class="minus"><span class="ir">-</span></button>
               <input id="text_adult" readonly type="text" value="<?=$adult_val?>" class="in1" >
-              <button onclick="people_control_btn('+','text_adult')" id="plus_btn_adult" type="button" class="plus"><span class="ir">+</span></button>
+              <button onclick="adult_control_btn('+','text_adult')" id="plus_btn_adult" type="button" class="plus"><span class="ir">+</span></button>
             </div>
           </td>
           <td class="left3">아동<br>(만 12세 미만)</td>
           <td>
             <div class="count">
-              <button onclick="people_control_btn('-','text_kid')"  id="minus_btn_kid" type="button" class="minus"><span class="ir">-</span></button>
+              <button onclick="kid_control_btn('-','text_kid')"  id="minus_btn_kid" type="button" class="minus"><span class="ir">-</span></button>
               <input id="text_kid" readonly type="text" value="<?=$kid_val?>" class="in1" >
-              <button onclick="people_control_btn('+','text_kid')" id="plus_btn_kid" type="button" class="plus"><span class="ir">+</span></button>
+              <button onclick="kid_control_btn('+','text_kid')" id="plus_btn_kid" type="button" class="plus"><span class="ir">+</span></button>
             </div>
           </td>
           <td class="left3">유아<br>(만 2세 미만)</td>
           <td>
             <div class="count">
-              <button onclick="people_control_btn('-','text_baby')" id="minus_btn_baby" type="button" class="minus"><span class="ir">-</span></button>
+              <button onclick="baby_control_btn('-','text_baby')" id="minus_btn_baby" type="button" class="minus"><span class="ir">-</span></button>
               <input id="text_baby" readonly type="text" value="<?=$baby_val?>" class="in1" >
-              <button onclick="people_control_btn('+','text_baby')" id="plus_btn_baby" type="button" class="plus"><span class="ir">+</span></button>
+              <button onclick="baby_control_btn('+','text_baby')" id="plus_btn_baby" type="button" class="plus"><span class="ir">+</span></button>
             </div>
           </td>
         </tr>
       </table>
+
+
+
+        <!-- 실행되는것 : 어른값 아동값 유아값 height 값 증가,감소  -->
       <script type="text/javascript">
         var adult_num=<?=json_encode($adult_val)?>;
-        function people_control_btn(control,id){
+        var kid_num=<?=json_encode($kid_val)?>;
+        var baby_num=<?=json_encode($baby_val)?>;
+        var wrap = document.getElementById('wrap');
+        var height=wrap.style.height;
+        var realheight=0;
+        // 어른 수 함수
+        function adult_control_btn(control,id,set){
+          // alert(wrap.style.height);
+          realheight=height.substring(0,4);
+          realheight=parseInt(realheight);
           var id2 = document.getElementById(id);
           var text=id2.value;
           text=parseInt(text);
           if(control=="+"){
-            id2.value=text+1;
-            if(id=='text_adult'){
-              if(adult_num>=10){
-              adult_num=10;
-              }else{
-              adult_num++;
+            if(set=="*"){
+              id2.value=text;
+            }else{
+              id2.value=text+1;
+              if(id=='text_adult'){
+                if(adult_num>=10){
+                adult_num=10;
+                }else{
+                adult_num++;
+                }
               }
             }
           }else{
@@ -197,10 +258,8 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
               }else{
               adult_num--;
               }
-              // for(var i=adult_num+1;i>0;i--){
                 var test_table=document.getElementsByName('test_table')[adult_num-1];
                 test_table.style.display="none";
-              // }
             }
           }
 
@@ -220,8 +279,156 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
             var test_table=document.getElementsByName('test_table')[i];
             test_table.style.display="block";
           }
+          for(var i=0;i<adult_num-1;i++){
+            var test_table=document.getElementsByName('test_table')[i];
+            test_table.style.display="block";
+          }
 
+            wrap.style.height=realheight+(50*(adult_num+kid_num+baby_num))+"px";
+            // alert(wrap.style.height);
         }
+
+
+        // 아동 수 함수
+        function kid_control_btn(control,id,set){
+          // alert(wrap.style.height);
+          realheight=height.substring(0,4);
+          realheight=parseInt(realheight);
+
+
+          var id2 = document.getElementById(id);
+          var text=id2.value;
+          text=parseInt(text);
+          if(control=="+"){
+            if(set=="*"){
+              id2.value=text;
+              if(id2.value==0){
+                kid_side_div.style.display="none";
+              }else{
+                kid_side_div.style.display="inline";
+              }
+
+            }else{
+            id2.value=text+1;
+            if(id=='text_kid'){
+              if(kid_num>=10){
+              kid_num=10;
+              }else{
+              kid_num++;
+              kid_side_div.style.display="inline";
+              }
+            }
+          }
+          }else{
+            id2.value=text-1;
+              if(id=='text_kid'){
+                if(kid_num==1){
+                  kid_side_div.style.display="none";
+                }
+
+                if(kid_num<=0){
+
+                kid_num=0;
+                kid_side_div.style.display="none";
+
+              }else{
+              kid_num--;
+              }
+                var test_table2=document.getElementsByName('test_table2')[kid_num];
+                test_table2.style.display="none";
+            }
+          }
+
+          if(id2.value==11){
+            id2.value=10;
+          }else if(id=='kid_num'&&id2.value==0){
+              id2.value=1;
+              return false;
+          }else if(id2.value==1){
+            var test_table2=document.getElementsByName('test_table2')[0];
+            test_table2.style.display="none";
+          }else if(id2.value==-1){
+            id2.value=0;
+          }
+
+          for(var i=0;i<kid_num;i++){
+            var test_table2=document.getElementsByName('test_table2')[i];
+            test_table2.style.display="block";
+          }
+
+
+          wrap.style.height=realheight+(50*(adult_num+kid_num+baby_num))+"px";
+          // alert(wrap.style.height);
+        }
+
+      // 유아 수 함수
+      function baby_control_btn(control,id,set){
+
+        // alert(wrap.style.height);
+        realheight=height.substring(0,4);
+        realheight=parseInt(realheight);
+
+        var id2 = document.getElementById(id);
+        var text=id2.value;
+        text=parseInt(text);
+        if(control=="+"){
+          if(set=="*"){
+            if(id2.value==0){
+              baby_side_div.style.display="none";
+            }else{
+              baby_side_div.style.display="inline";
+            }
+            id2.value=text;
+          }else{
+          id2.value=text+1;
+          if(id=='text_baby'){
+            if(baby_num>=10){
+            baby_num=10;
+            }else{
+            baby_num++;
+            baby_side_div.style.display="inline";
+            }
+          }
+        }
+        }else{
+          id2.value=text-1;
+            if(id=='text_baby'){
+              if(baby_num==1){
+                baby_side_div.style.display="none";
+              }
+              if(baby_num<=0){
+              baby_num=0;
+              baby_side_div.style.display="none";
+            }else{
+            baby_num--;
+            }
+              var test_table3=document.getElementsByName('test_table3')[baby_num];
+              test_table3.style.display="none";
+          }
+        }
+
+        if(id2.value==11){
+          id2.value=10;
+        }else if(id=='baby_num'&&id2.value==0){
+            id2.value=1;
+            return false;
+        }else if(id2.value==1){
+          var test_table3=document.getElementsByName('test_table3')[0];
+          test_table3.style.display="none";
+        }else if(id2.value==-1){
+          id2.value=0;
+        }
+
+        for(var i=0;i<baby_num;i++){
+          var test_table3=document.getElementsByName('test_table3')[i];
+          test_table3.style.display="block";
+        }
+
+
+        wrap.style.height=realheight+(50*(adult_num+kid_num+baby_num))+"px";
+        // alert(wrap.style.height);
+
+      }
       </script>
 
 
@@ -229,7 +436,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
         <input type="checkbox" id="box1"><p>성인1이 예약자와 동일</p>
       </div>
 
-      <table id="tbl4">
+      <table id="tbl4" >
         <tr>
           <td class="left4" colspan="2">한글이름<p class="star">*</p></td>
           <td class="left4">영문성<p class="star">*</p></td>
@@ -278,17 +485,56 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
         </table>';
       }
 
+      for($i=1;$i<=10;$i++){
+        echo '
+        <table class="test_table1"name="test_table2">
+        <tr>
+          <td class="test_class" colspan="2"></td>
+          <td class="test_class"></td>
+          <td class="test_class">&nbsp;</td>
+          <td class="test_class"></td>
+          <td class="test_class"></td>
+          <td class="test_class"></td>
+       </tr>
+
+        <tr>
+          <td><b >아동'.$i.'</b></td>
+          <td id="name"class="inputs"><input type="text" class="inputs1" value="" size="10"></td>
+          <td class="inputs"><input  type="text" class="inputs1" id="input1" value=""></td>
+          <td class="inputs"> <input type="text" class="inputs1" value=""> </td>
+          <td class="inputs"> <input type="radio" name="gen" id="male" value=""><label for="">남&nbsp;</label><input type="radio" name="gen" value=""><label for="">여</label></td>
+          <td class="inputs"> <input type="text" id="inputs2" value=""> </td>
+          <td class="inputs"> <input type="text" id="phone_num" value=""> </td>
+        </tr>
+        </table>';
+      }
 
 
 
+      for($i=1;$i<=10;$i++){
+        echo '
+        <table class="test_table1"name="test_table3">
+        <tr>
+          <td class="test_class" colspan="2"></td>
+          <td class="test_class"></td>
+          <td class="test_class">&nbsp;</td>
+          <td class="test_class"></td>
+          <td class="test_class"></td>
+          <td class="test_class"></td>
+       </tr>
 
-
-
+        <tr>
+          <td><b >유아'.$i.'</b></td>
+          <td id="name"class="inputs"><input type="text" class="inputs1" value="" size="10"></td>
+          <td class="inputs"><input  type="text" class="inputs1" id="input1" value=""></td>
+          <td class="inputs"> <input type="text" class="inputs1" value=""> </td>
+          <td class="inputs"> <input type="radio" name="gen" id="male" value=""><label for="">남&nbsp;</label><input type="radio" name="gen" value=""><label for="">여</label></td>
+          <td class="inputs"> <input type="text" id="inputs2" value=""> </td>
+          <td class="inputs"> <input type="text" id="phone_num" value=""> </td>
+        </tr>
+        </table>';
+      }
        ?>
-
-
-
-
     </div>
 
       <div id="tour_text3">  <b class="label_img">></b>  <b id="sel_seat">좌석선택</b> </div>
@@ -487,8 +733,6 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
       </div>
       <!-- end of middle2 -->
       </div>
-
-
       <div id="reserve_detail_menu">
         <div id="cost_info">
           <p>상품요금정보</p>
@@ -498,7 +742,52 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
           <b id="reserve_money"><?=$p_pay?></b> <p id="won">원</p>
           <p class="subtext2">유류할증료,제세공과금 포함</p>
           <p class="subtext2">※발권일/환율에 따라 변경 가능합니다</p>
-          <p class="line">-----------------------------------------------------------</p>
+          <p class="line">-------------------------------------------------</p>
+          <div id="side_div" style="overflow-y: scroll; height:100px;" >
+
+            <div style="display:inline">
+              <p style="display:inline">&nbsp;<b>성인</b></p>
+              <b id="adult_val" style="font-size:25px;">&nbsp;&nbsp;&nbsp;&nbsp;<?=$p_pay?>원</b><br>
+              <p style="font-size:6px; margin:0px; display:inline;">&nbsp;(만12세 이상)</p>
+              <p style="display:inline-block; margin:0px; color:gray;">-------------------------------</p>
+              <p style="display:inline-block; margin:0px; color:gray;font-size:10px; "><b width:300px;>기본상품가격</b> <b style="text-align:center;"><?=$p_pay*0.922?>원</b></p><br>
+              <p style="display:inline-block; margin:0px; color:gray;font-size:10px; "><b width:300px;>유류할증료</b> <b style="text-align:center;">&nbsp;&nbsp;&nbsp;<?=$p_pay*0.078?>원</b> </p>
+              <hr style="border-color: #5D5D5D;">
+            </div>
+
+
+            <div id="kid_side_div" style="display:none;">
+              <p style="display:inline">&nbsp;<b>아동</b></p>
+              <b style="font-size:25px;">&nbsp;&nbsp;&nbsp;&nbsp;<?=$p_pay*0.7?>원</b><br>
+              <p style="font-size:6px; margin:0px; display:inline;">&nbsp;(만12세 미만)</p>
+              <p style="display:inline-block; margin:0px; color:gray;">-------------------------------</p>
+              <p style="display:inline-block; margin:0px; color:gray;font-size:10px; "><b width:300px;>기본상품가격</b> <b style="text-align:center;"><?=$p_pay*0.922*0.7?>원</b></p><br>
+              <p style="display:inline-block; margin:0px; color:gray;font-size:10px; "><b width:300px;>유류할증료</b> <b style="text-align:center;">&nbsp;&nbsp;&nbsp;<?=$p_pay*0.078*0.7?>원</b> </p>
+              <hr style="border-color: #5D5D5D;">
+            </div>
+
+
+
+
+            <div id="baby_side_div" style="display:none;">
+              <p style="display:inline">&nbsp;<b>유아</b></p>
+              <b style="font-size:25px;">&nbsp;&nbsp;&nbsp;&nbsp;<?=$p_pay*0.5?>원</b><br>
+              <p style="font-size:6px; margin:0px; display:inline;">&nbsp;(만2세 미만)</p>
+              <p style="display:inline-block; margin:0px; color:gray;">-------------------------------</p>
+              <p style="display:inline-block; margin:0px; color:gray;font-size:10px; "><b width:300px;>기본상품가격</b> <b style="text-align:center;"><?=$p_pay*0.922*0.5?>원</b></p><br>
+              <p style="display:inline-block; margin:0px; color:gray;font-size:10px; "><b width:300px;>유류할증료</b> <b style="text-align:center;">&nbsp;&nbsp;&nbsp;<?=$p_pay*0.078*0.5?>원</b> </p>
+              <hr style="border-color: #5D5D5D;">
+            </div>
+
+
+
+
+
+
+
+
+
+          </div>
         </div>
         <div id="increase_box" >
 
@@ -513,11 +802,13 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
 
   <!-- end of wrap -->
   </div>
+  <footer>
+      <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/footer.php";?>
+  </footer>
   </body>
 
 
+
 <br><br><br>
-<footer>
-  <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/footer.php";?>
-</footer>
+
 </html>

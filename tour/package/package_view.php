@@ -189,11 +189,12 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
     </div>
 
     </div>
+    <footer>
+      <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/footer.php";?>
+    </footer>
   </body>
 
 
 <br><br><br>
-<footer>
-  <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/footer.php";?>
-</footer>
+
 </html>
