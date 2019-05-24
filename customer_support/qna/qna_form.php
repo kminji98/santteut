@@ -1,11 +1,6 @@
 <?php
 session_start();
 
-/////////테스트
-$_SESSION['name']="이우주";
-$_SESSION['id']="di0625";
-/////////테스트
-
 // isset함수는 불리언값을 리턴 true or false
 // 비회원이면 권한없음
 if(!isset($_SESSION['id'])){
@@ -17,8 +12,8 @@ if(!isset($_SESSION['id'])){
 include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
 
 // 변수선언(번호 이름 제목 내용 작성일 조회수 비밀여부)
-$num=$name=$title=$content=$regist_day=$hit=$secret_ok="";
-
+$num=$name=$title=$content=$regist_day=$hit="";
+// $secret_ok="공개";
 $mode="insert";
 
 $name= $_SESSION['name'];
@@ -42,17 +37,15 @@ if((isset($_GET["mode"])&&$_GET["mode"]=="update") || (isset($_GET["mode"])&&$_G
     $title=str_replace(" ", "&nbsp;",$title);
     $content= htmlspecialchars($row['content']);
     $content=str_replace("\n", "<br>",$content);
+
     $content=str_replace(" ", "&nbsp;",$content);
-    $file_name=$row['file_name'];
-    $file_copied=$row['file_copied'];
-    $file_type=$row['file_type'];
     $regist_day=$row['regist_day'];
     $hit=$row['hit'];
     mysqli_close($conn);
 
     if($mode == "response"){
       $title="[답글]".$title;
-      $content="답글>".$content;
+      $content="";
       $content=str_replace("<br>", "<br>▶",$content);
     }
     mysqli_close($conn);
@@ -101,16 +94,16 @@ if((isset($_GET["mode"])&&$_GET["mode"]=="update") || (isset($_GET["mode"])&&$_G
         <tr>
           <th>비밀여부</th>
           <td>
-            <select class="" name="">
-              <option value="">공개</option>
-              <option value="">비공개</option>
+            <select name="secret_ok">
+              <option value="공개">공개</option>
+              <option value="비공개">비공개</option>
             </select>
           </td>
         </tr>
       </table>
         <div class="admin">
           <button id="admin_write_btn" onclick='document.qna_insert_form.submit();" type="button" name="button'>완료</button>
-          <button id="admin_write_btn" type="button" name="button"><a href="./qna_list.php">목록</a></button>
+          <a href="./qna_list.php"><button id="admin_write_btn" type="button" name="button">목록</button></a>
         </div>
       </form>
     </section>

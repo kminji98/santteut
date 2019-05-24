@@ -2,8 +2,6 @@
 include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
 
 session_start();
-$_SESSION['name']="이우주";
-$_SESSION['id']="di0625";
 
 // isset함수는 불리언값을 리턴 true or false
 // 비회원이면 권한없음
@@ -15,7 +13,7 @@ if(!isset($_SESSION['id'])){
 <meta charset="utf-8">
 <?php
 // 변수선언
-$content = $sql= $result = $name=$q_title=$q_content=$regist_day=$hit="";
+$content = $sql= $result = $name=$q_title=$q_content=$regist_day=$hit=$secret_ok="";
 $name = $_SESSION['name'];
 
 //mode가 insert일때
@@ -29,8 +27,9 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="insert"){
 
     $title = test_input($_POST["title"]);
     $q_content = $_POST["content"];
-    $name = test_input($name);
+    $id = test_input($_SESSION['id']);
     $hit = 0;
+    $secret_ok =test_input($_POST["secret_ok"]);
     $q_title = mysqli_real_escape_string($conn, $title);
     $q_content = mysqli_real_escape_string($conn, $content);
     $q_name = mysqli_real_escape_string($conn, $name);
@@ -75,7 +74,7 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="insert"){
 
     // 쿼리문실행문장
     $result=mysqli_query($conn,$sql);
-// 조건에 해당하는 레코드의 수 (3개)
+    // 조건에 해당하는 레코드의 수 (3개)
     $total_record=mysqli_num_rows($result);
 
     for($i=0; $i<$total_record ; $i++ ){
@@ -103,13 +102,14 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="insert"){
   $q_content = $_POST["content"];
   $name = test_input($name);
   $num = test_input($_POST["num"]);
+  $secret_ok = test_input($_POST["secret_ok"]);
   $hit = test_input($_POST["hit"]);
   $q_title = mysqli_real_escape_string($conn, $title);
   $q_name = mysqli_real_escape_string($conn, $name);
   $q_num = mysqli_real_escape_string($conn, $num);
   $regist_day=date("Y-m-d (H:i)");
 
-  $sql="UPDATE `qna` SET `title`='$q_title',`content`='$q_content',`regist_day`='$regist_day' WHERE `num`=$q_num;";
+  $sql="UPDATE `qna` SET `title`='$q_title',`content`='$q_content',`regist_day`='$regist_day',`secret_ok`='$secret_ok' WHERE `num`=$q_num;";
     $result = mysqli_query($conn,$sql);
     if (!$result) {die('Error: ' . mysqli_error($conn));}
 
@@ -125,9 +125,11 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="insert"){
     }
     $title = test_input($_POST["title"]);
     $content = test_input($_POST["content"]);
-    $id = test_input($id);
+    $id = test_input($_SESSION['id']);
     $num = test_input($_POST["num"]);
     $hit = test_input($_POST["hit"]);
+    $secret_ok = test_input($_POST["secret_ok"]);
+
     $hit =0;
     $q_title = mysqli_real_escape_string($conn, $title);
     $q_content = mysqli_real_escape_string($conn, $content);
@@ -137,7 +139,7 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="insert"){
 
     $sql="SELECT * from qna where num =$q_num;";
     $result = mysqli_query($conn,$sql);
-    if (!$result) {die('Error: ' . mysqli_error($conn));}
+    if (!$result) {die('1Error: ' . mysqli_error($conn));}
     $row=mysqli_fetch_array($result);
     $groupnum=(int)$row['groupnum'];
     $depth=(int)$row['depth'] + 1;
@@ -145,19 +147,21 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="insert"){
 
     $sql="UPDATE `qna` SET `ord`=`ord`+1 WHERE `groupnum` = $groupnum and `ord` >= $ord";
     $result = mysqli_query($conn,$sql);
-    if (!$result) {die('Error: ' . mysqli_error($conn));}
+    if (!$result) {die('2Error: ' . mysqli_error($conn));}
 
-    $sql="INSERT INTO `qna` VALUES (null,$groupnum,$depth,$ord,'$username','$q_title','$q_content','$regist_day','$hit');";
+    $sql="INSERT INTO `qna` VALUES (null,'$groupnum','$depth','$ord','$id','$q_title','$q_content','$regist_day','$hit','$secret_ok');";
+
     $result = mysqli_query($conn,$sql);
-    if (!$result) {die('Error: ' . mysqli_error($conn));}
+    if (!$result) {die('3Error: ' . mysqli_error($conn));}
 
     $sql="SELECT max(num) from qna;";
     $result = mysqli_query($conn,$sql);
-    if (!$result) {die('Error: ' . mysqli_error($conn));}
+    if (!$result) {die('4Error: ' . mysqli_error($conn));}
     $row=mysqli_fetch_array($result);
     $max_num=$row['max(num)'];
 
   echo "<script>location.href='./qna_view.php?num=$num&hit=$hit';</script>";
-}
+}//end of response
+
 
 ?>

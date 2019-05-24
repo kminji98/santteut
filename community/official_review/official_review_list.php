@@ -39,7 +39,7 @@ $number=$total_record - $start;
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>공식산행후기</title>
-    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/community/official_review/css/official_review_list.css">
+    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/community/official_review/css/official_review_list.css?ver=0">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   </head>
@@ -57,7 +57,7 @@ $number=$total_record - $start;
           $sql = "SELECT * FROM `official_review` ORDER BY regist_day DESC;";
           $result = mysqli_query($conn, $sql) or die(mysqli_error($con));
 
-          for($i=1;$i<$total_record;$i++){
+          for($i=0;$i<$total_record;$i++){
             $row = mysqli_fetch_array($result);
             $num = $row['num'];
             $title = $row['title'];
