@@ -74,8 +74,7 @@ if(isset($_GET["num"]) && !empty($_GET["num"])){
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/customer_support/notice/css/notice_view.css">
     <script type="text/javascript" src="./js/notice_view.js?ver=1"></script>
-    <script type="text/javascript">
-</script>
+  
     <title>공지사항</title>
   </head>
   <body>

@@ -17,12 +17,6 @@ $name = $_SESSION['name'];
 //0-0. 인클루드 디비
 include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
 
-//0-1. 인클루드 크리테이블
-include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/create_table_base.php";
-
-//0-2. 공지사항테이블생성
-create_table($conn,'notice');
-
 //1. 게시물수 정의
 define('ROW_SCALE', 10);
 define('PAGE_SCALE', 5);
@@ -35,7 +29,7 @@ $sql=$result=$total_record=$total_pages=$start_record=$row="";
 $total_record=0;
 
 
-//3. 검색모드를 세팅(제목,내용)
+//3. 검색모드를 세팅()
 if(isset($_GET["mode"])&&$_GET["mode"]=="search"){
 
   // find_option 는 select의 값들 문자열로 받아옴
@@ -50,9 +44,9 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="search"){
     exit;
   }
 
-  $sql="SELECT * from `notice` where $find_option like '%$q_find_input%';";
+  $sql="SELECT * from `member` where $find_option like '%$q_find_input%';";
 }else{
-  $sql="SELECT * from `notice` order by num desc";
+  $sql="SELECT * from `member` order by num desc";
 }
 
 // 쿼리문실행문장
@@ -93,13 +87,12 @@ $view_num = $total_record - $start_record;
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css">
-    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/customer_support/notice/css/notice_list.css?ver=0">
-    <title>공지사항</title>
+    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/member/admin/css/member_admin_list.css?ver=0">
+    <title>회원관리</title>
   </head>
   <body>
     <header>
       <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/login_menu.php";?>
-      <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/mini_menu.php";?>
     </header>
     <br><br><br>
     <section id="notice">
@@ -107,27 +100,32 @@ $view_num = $total_record - $start_record;
       <form name="notice_form" action="notice_list?mode=search" method="post">
       <div class="notice_list_search">
         <select>
-          <option value="">제목</option>
-          <option value="">내용</option>
+          <option value="">아이디</option>
+          <option value="">이름</option>
+          <option value="">이메일</option>
         </select>
         <input type="text" name="" value="">
         <button type="button" name="button">검색</button>
       </div>
       </form>
 
-      <!--총 게시물-->
+      <!--총 회원수-->
       <div class="total_title">
-        <h4>total <?=$total_record?></h4>
+        <h4>총 <?=$total_record?> 명</h4>
       </div>
 
       <!--게시물 제목-->
-      <table id="list_tbl">
+      <table id="list_tbl" border="1">
         <tr>
           <th>번호</th>
-          <th id="notice_list_title" style="width:600px;">제목</th>
-          <th>작성자</th>
-          <th>작성일</th>
-          <th>조회</th>
+          <th>아이디</th>
+          <th>이름</th>
+          <th>주소1</th>
+          <th>주소2</th>
+          <th>일반전화</th>
+          <th>휴대폰번호</th>
+          <th>이메일</th>
+          <th>회원삭제</th>
         </tr>
 
       <!--게시물 내용-->
@@ -136,23 +134,26 @@ $view_num = $total_record - $start_record;
           mysqli_data_seek($result,$record);
           $row=mysqli_fetch_array($result);
           $num=$row['num'];
-          $title=$row['title'];
-          $regist_day= substr($row['regist_day'],0,10);
-          $hit=$row['hit'];
-          $title=str_replace("\n", "<br>",$title);
-          $title=str_replace(" ", "&nbsp;",$title);
+          $id=$row['id'];
+          $address1=$row['address1'];
+          $address2=$row['address2'];
+          $hp1=$row['hp1'];
+          $hp2=$row['hp2'];
+          $email=$row['email'];
       ?>
         <tr>
           <!--번호-->
           <td><?=$view_num?></td>
-          <!--제목-->
-          <td><a href="./notice_view.php?num=<?=$num?>&present_page=<?=$page?>&hit=<?=$hit+1?>"><?=$title?></a></td>
-          <!--작성자-->
           <td><?=$name?></td>
-          <!--작성일-->
-          <td><?=$regist_day?></td>
-          <!--조회-->
-          <td><?=$hit?></td>
+          <td><?=$address1?></td>
+          <td><?=$address2?></td>
+          <td><?=$hp1?></td>
+          <td><?=$hp2?></td>
+          <td><?=$email?></td>
+          <td></td>
+          <!--제목-->
+          <!-- <td><a href="./notice_view.php?num=<?=$num?>&present_page=<?=$page?>&hit=<?=$hit+1?>"><?=$title?></a></td> -->
+
         </tr>
         <?php
           $view_num--;
@@ -160,10 +161,15 @@ $view_num = $total_record - $start_record;
         ?>
       </table>
 
+<!--다시 -->
 <?php
 if(!empty($_SESSION['id'])){
+  echo '<a href="../member/join/join_member.php"><button id="admin_write_btn" type="button" name="button">
+  회원등록</button></a>';
   echo '<a href="notice_form.php"><button id="admin_write_btn" type="button" name="button">
-  글쓰기</button></a>';
+  회원정보수정</button></a>';
+  echo '<a href="notice_form.php"><button id="admin_write_btn" type="button" name="button">
+  회원삭제</button></a>';
 }
 ?>
 <br>
@@ -186,7 +192,6 @@ if(!empty($_SESSION['id'])){
           }
         }
 
-    
         //현재 블럭에 해당하는 페이지 나열
         for( $i = $start_page; $i <= $end_page; $i++ ){
             //현재 블럭에 현재 페이지인 버튼
@@ -198,8 +203,6 @@ if(!empty($_SESSION['id'])){
               echo( '<a href="qna_list.php?page='.$i.'"><button type="button" name="button">'.$i.'</button></a>' );
             }
         }
-
-
 
         // 현재 블럭의 마지막 페이지 보다 총 페이지 수가 큰 경우, >(다음) 버튼 / >>(맨끝으로) 버튼 생성
         //[ex]  page가 9개 있고 현재 페이지가 6페이지인 경우  / 12345/ 6789     =>  <<(처음으로) <(이전) 6 7 8 9
