@@ -1,13 +1,9 @@
 <?php
 session_start();
-/////////테스트
-$_SESSION['name']="관리자";
-$_SESSION['id']="admin";
-/////////테스트
 
 // isset함수는 불리언값을 리턴 true or false
 // 회원 or 비회원이면 권한없음, 관리자일때만 입장
-if(!(isset($_SESSION['id']) &&  $_SESSION['id']=="admin")){
+if(!isset($_SESSION['id'])){
   echo "<script>alert('권한없음!');history.go(-1);</script>";
   exit;
 }
@@ -186,7 +182,7 @@ if(!empty($_SESSION['id'])){
           }
         }
 
-    
+
         //현재 블럭에 해당하는 페이지 나열
         for( $i = $start_page; $i <= $end_page; $i++ ){
             //현재 블럭에 현재 페이지인 버튼

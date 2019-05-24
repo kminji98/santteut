@@ -73,7 +73,22 @@ function create_table($conn, $table_name){
       ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
      ";
        break;
-        default:
+
+      case 'qna' :
+        $sql = "CREATE TABLE `qna` (
+        `num` int(11) unsigned NOT NULL AUTO_INCREMENT,
+        `title` varchar(20) NOT NULL,
+        `content` text NOT NULL,
+        `regist_day` date NOT NULL,
+        `hit` int(11) unsigned NOT NULL,
+        `file_name` varchar(45) DEFAULT NULL,
+        `file_copied` varchar(45) DEFAULT NULL,
+        `file_type` varchar(45) DEFAULT NULL,
+        PRIMARY KEY (`num`)
+      ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+     ";
+       break;
+      default:
 
       echo "<script>alert('해당 테이블이름이 없습니다. ');</script>";
       break;

@@ -2,9 +2,6 @@
 //세션아이디가 관리자인지 확인
 session_start();
 
-$_SESSION['name']="관리자";
-$_SESSION['id']="admin";
-
 // isset함수는 불리언값을 리턴 true or false
 // 회원 or 비회원이면 권한없음, 관리자일때만 입장
 if(!(isset($_SESSION['id']) &&  $_SESSION['id']=="admin")){

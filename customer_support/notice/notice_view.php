@@ -1,11 +1,9 @@
 <?php
 session_start();
-$_SESSION['name']="관리자";
-$_SESSION['id']="admin";
 
 // isset함수는 불리언값을 리턴 true or false
 // 회원 or 비회원이면 권한없음, 관리자일때만 입장
-if(!(isset($_SESSION['id']) &&  $_SESSION['id']=="admin")){
+if(!isset($_SESSION['id'])){
   echo "<script>alert('권한없음!');history.go(-1);</script>";
   exit;
 }
@@ -74,7 +72,7 @@ if(isset($_GET["num"]) && !empty($_GET["num"])){
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/customer_support/notice/css/notice_view.css">
     <script type="text/javascript" src="./js/notice_view.js?ver=1"></script>
-  
+
     <title>공지사항</title>
   </head>
   <body>
@@ -117,8 +115,8 @@ if(isset($_GET["num"]) && !empty($_GET["num"])){
 //2. 업로드된 이름을 보여주고 [저장] 할것인지 선택한다.
             echo ("
               첨부파일 : $file_name &nbsp; [ $file_size Byte ]
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <a href='notice_download.php?mode=download&num=$q_num'>저장</a><br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>
+              <a href='notice_download.php?mode=download&num=$q_num'>[저장]</a></b><br>
             ");
              ?>
           </td>
