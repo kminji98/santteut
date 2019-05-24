@@ -9,6 +9,7 @@ for($i=0;$i<5;$i++){
   $upfile_size[$i]="";
   $upfile_error[$i]="";
   $copied_file_name[$i]="";
+  $type[$i][0]="";
 }
 //*************************************************************************
   include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
@@ -42,11 +43,11 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="insert"){
 
   //파일의 실제명과 저장된 파일명을 삽입한다.
   $sql = "INSERT INTO `official_review` VALUES (null, '$q_title', '$q_content', '$regist_day', '$main_img',
-    '$upfile_name[0]', '$copied_file_name[0]', '',
-    '$upfile_name[1]', '$copied_file_name[1]', '',
-    '$upfile_name[2]', '$copied_file_name[2]', '',
-    '$upfile_name[3]', '$copied_file_name[3]', '',
-    '$upfile_name[4]', '$copied_file_name[4]', '');";
+    '$upfile_name[0]', '$copied_file_name[0]', 'text',
+    '$upfile_name[1]', '$copied_file_name[1]', 'text',
+    '$upfile_name[2]', '$copied_file_name[2]', 'text',
+    '$upfile_name[3]', '$copied_file_name[3]', 'text',
+    '$upfile_name[4]', '$copied_file_name[4]', 'text');";
 
   $result = mysqli_query($conn,$sql);
   if(!$result){

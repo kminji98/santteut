@@ -54,6 +54,7 @@ if(isset($_GET["num"])&&!empty($_GET["num"])){
     <meta charset="utf-8">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/community/official_review/css/official_review_form.css">
+        <script src="./js/official_review.js?ver=0"></script>
     <title><?=$title?></title>
   </head>
   <body>
@@ -86,7 +87,7 @@ if(isset($_GET["num"])&&!empty($_GET["num"])){
                 echo ("
                   첨부파일 : $file_name_0 ($file_size Byte)
                   &nbsp;
-                  <a href='official_review_download.php?mode=download&num=$q_num'>저장</a><br>
+                  <a href='official_review_download.php?mode=download&num=$q_num&file_copied=$file_copied_0&file_name=$file_name_0'>저장</a><br>
                 ");
               }
               if(!empty($file_copied_1)){
@@ -97,7 +98,7 @@ if(isset($_GET["num"])&&!empty($_GET["num"])){
                   echo ("
                     첨부파일 : $file_name_1 ($file_size Byte)
                     &nbsp;
-                    <a href='official_review_download.php?mode=download&num=$q_num'>저장</a><br>
+                    <a href='official_review_download.php?mode=download&num=$q_num&file_copied=$file_copied_1&file_name=$file_name_1'>저장</a><br>
                   ");
                 }
                 if(!empty($file_copied_2)){
@@ -108,7 +109,7 @@ if(isset($_GET["num"])&&!empty($_GET["num"])){
                     echo ("
                       첨부파일 : $file_name_2 ($file_size Byte)
                       &nbsp;
-                      <a href='official_review_download.php?mode=download&num=$q_num'>저장</a><br>
+                      <a href='official_review_download.php?mode=download&num=$q_num&file_copied=$file_copied_2&file_name=$file_name_2'>저장</a><br>
                     ");
                   }
                   if(!empty($file_copied_3)){
@@ -119,7 +120,7 @@ if(isset($_GET["num"])&&!empty($_GET["num"])){
                       echo ("
                         첨부파일 : $file_name_3 ($file_size Byte)
                         &nbsp;
-                        <a href='official_review_download.php?mode=download&num=$q_num'>저장</a><br>
+                        <a href='official_review_download.php?mode=download&num=$q_num&file_copied=$file_copied_3&file_name=$file_name_3'>저장</a><br>
                       ");
                     }
                     if(!empty($file_copied_4)){
@@ -130,7 +131,7 @@ if(isset($_GET["num"])&&!empty($_GET["num"])){
                         echo ("
                           첨부파일 : $file_name_4 ($file_size Byte)
                           &nbsp;
-                          <a href='official_review_download.php?mode=download&num=$q_num'>저장</a><br>
+                          <a href='official_review_download.php?mode=download&num=$q_num&file_copied=$file_copied_4&file_name=$file_name_4'>저장</a><br>
                         ");
                       }
              ?>
@@ -182,11 +183,11 @@ if(isset($_GET["num"])&&!empty($_GET["num"])){
         </td>
       </table>
       <div id="view_button">
-      <a href="./list.php?page=<?=$page?>"><input type="button" style="width:50px; height:24px; background-color:DarkSlateGray; color:white;" value="목록">&nbsp;</a>
+      <a href="./official_review_list.php?page=<?=$page?>"><input type="button" style="width:50px; height:24px; background-color:DarkSlateGray; color:white;" value="목록">&nbsp;</a>
                 <?php
                   //관리자이거나 해당된 작성자일경우 수정,삭제가 가능하도록 설정
                   // if($_SESSION['userid']=="admin" || $_SESSION['userid']==$id){
-                    echo ('<a href="./write_edit_form.php?mode=update&num='.$num.'"><input type="button" style="width:50px; height:24px; background-color:DarkSlateGray; color:white;" value="수정">&nbsp;</a>&nbsp;');
+                    echo ('<a href="./official_review_form.php?mode=update&num='.$num.'"><input type="button" style="width:50px; height:24px; background-color:DarkSlateGray; color:white;" value="수정">&nbsp;</a>&nbsp;');
                     echo ('<input type="button" style="width:50px; height:24px; background-color:DarkSlateGray; color:white;" value="삭제" onclick="check_delete('.$num.')">&nbsp;</a>&nbsp;');
                   // }
                  ?>

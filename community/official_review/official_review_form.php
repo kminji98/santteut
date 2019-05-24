@@ -42,9 +42,7 @@ if(isset($_GET["mode"]) && $_GET["mode"]=='update'){
   $title = str_replace("\n", "<br>", $title);
   $title = str_replace(" ", "&nbsp;", $title);
 
-  $content = htmlspecialchars($row['content']);
-  $content = str_replace("\n","<br>",$content);
-  $content = str_replace(" ","&nbsp;",$content);
+  $content = $row['content'];
   $regist_day = $row['regist_day'];
   mysqli_close($conn);
 }
@@ -85,11 +83,11 @@ if(isset($_GET["mode"]) && $_GET["mode"]=='update'){
         </tr>
         <tr>
           <th>제목</th>
-          <td><input type="text" name="title" value="" style="font-size:15px; width:400px;"></td>
+          <td><input type="text" name="title" value="<?=$title?>" style="font-size:15px; width:400px;"></td>
         </tr>
         <tr style="height:300px;">
           <th>내용</th>
-          <td><textarea name="content" id="summernote"></textarea></td>
+          <td><textarea name="content" id="summernote"><?=$content?></textarea></td>
         </tr>
         <tr>
           <th>파일</th>
@@ -104,18 +102,44 @@ if(isset($_GET["mode"]) && $_GET["mode"]=='update'){
             }else{
              ?>
              <input type="file" name="upfile[]" onclick='document.getElementById("del_file").checked=true; document.getElementById("del_file").disabled=true;'>
-             <input type="file" name="upfile[]" onclick='document.getElementById("del_file").checked=true; document.getElementById("del_file").disabled=true;'>
-             <input type="file" name="upfile[]" onclick='document.getElementById("del_file").checked=true; document.getElementById("del_file").disabled=true;'>
-             <input type="file" name="upfile[]" onclick='document.getElementById("del_file").checked=true; document.getElementById("del_file").disabled=true;'>
+             <?php
+             if($mode=="update" && !empty($file_name_0)){
+               echo "$file_name_0 파일등록";
+               echo '<input type="checkbox" id="del_file" name="del_file" value="1">삭제';
+               echo '<div class="clear"></div>';
+             }
+             ?>
              <input type="file" name="upfile[]" onclick='document.getElementById("del_file").checked=true; document.getElementById("del_file").disabled=true;'>
              <?php
-              }
+               if($mode=="update" && !empty($file_name_1)){
+                 echo "$file_name_1 파일등록";
+                 echo '<input type="checkbox" id="del_file" name="del_file" value="1">삭제';
+                 echo '<div class="clear"></div>';
+               }
               ?>
+              <input type="file" name="upfile[]" onclick='document.getElementById("del_file").checked=true; document.getElementById("del_file").disabled=true;'>
               <?php
-                if($mode=="update" && !empty($file_name_0)){
-                  echo "$file_name_0 파일등록";
+                if($mode=="update" && !empty($file_name_2)){
+                  echo "$file_name_2 파일등록";
                   echo '<input type="checkbox" id="del_file" name="del_file" value="1">삭제';
                   echo '<div class="clear"></div>';
+                }
+               ?>
+               <input type="file" name="upfile[]" onclick='document.getElementById("del_file").checked=true; document.getElementById("del_file").disabled=true;'>
+               <?php
+                 if($mode=="update" && !empty($file_name_3)){
+                   echo "$file_name_3 파일등록";
+                   echo '<input type="checkbox" id="del_file" name="del_file" value="1">삭제';
+                   echo '<div class="clear"></div>';
+                 }
+                ?>
+                <input type="file" name="upfile[]" onclick='document.getElementById("del_file").checked=true; document.getElementById("del_file").disabled=true;'>
+                <?php
+                  if($mode=="update" && !empty($file_name_4)){
+                    echo "$file_name_4 파일등록";
+                    echo '<input type="checkbox" id="del_file" name="del_file" value="1">삭제';
+                    echo '<div class="clear"></div>';
+                  }
                 }
                ?>
           </td>
