@@ -1,5 +1,77 @@
 <?php
 session_start();
+/////////테스트
+$_SESSION['name']="이우주";
+$_SESSION['id']="di0625";
+/////////테스트
+
+// isset함수는 불리언값을 리턴 true or false
+// 비회원이면 권한없음
+if(!isset($_SESSION['id'])){
+  echo "<script>alert('권한없음!');history.go(-1);</script>";
+  exit;
+}
+
+$name = $_SESSION['name'];
+
+//0-0. 인클루드 디비
+include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
+
+//1. 게시물수 정의
+define('ROW_SCALE', 10);
+define('PAGE_SCALE', 5);
+
+$sql=$result=$total_record=$total_page=$start_record=$row="";
+$total_record=0;
+
+if(isset($_GET["mode"])&&$_GET["mode"]=="search"){
+  //제목, 내용, 작성자
+  $find_option = test_input($_POST["find_option"]);
+
+  $find_input = test_input($_POST["find_input"]);
+  $q_find_input = mysqli_real_escape_string($conn, $find_input);
+
+  if(empty($find_input)){
+    echo ("<script>window.alert('검색할 단어를 입력해 주세요')history.go(-1)</script>");
+    exit;
+  }
+//검색시
+  $sql="SELECT num, groupnum, depth, ord, name, title, content, regist_day, hit from `qna` inner join member on `qna`.`id` = `member`.`id` where $find_option like '%$q_find_input%' order by num desc;";
+}else{
+  //
+  //"select num, groupnum, depth, ord, name, title, content, regist_day, hit FROM qna inner join member on qna.id = member.id;"
+  $sql="SELECT num, groupnum, depth, ord, name, title, content, regist_day, hit FROM `qna` inner join member on `qna`.`id` = `member`.`id` order by groupnum desc, ord asc;";
+}
+
+// 쿼리문실행문장
+$result=mysqli_query($conn,$sql);
+
+$total_record=mysqli_num_rows($result);
+
+// 조건?참:거짓
+$total_pages=ceil($total_record/ROW_SCALE);
+
+// 페이지가 없으면 디폴트 페이지 1페이지
+// if(empty($_GET['page'])){$page=1; }else{ $page=$_GET['page']; }
+$page=(empty($_GET['page']))?1:$_GET['page'];
+
+// 현재 블럭의 시작 페이지 = (ceil(현재페이지/블럭당 페이지 제한 수)-1) * 블럭당 페이지 제한 수 +1
+//[[  EX) 현재 페이지 5일 때 => ceil(5/3)-1 * 3  +1 =  (2-1)*3 +1 = 4 ]]
+$start_page= (ceil($page / PAGE_SCALE ) -1 ) * PAGE_SCALE +1 ;
+
+// 현재페이지 시작번호 계산함.
+//[[  EX) 현재 페이지 1일 때 => (1 - 1)*10 -> 0   ]]
+//[[  EX) 현재 페이지 5일 때 => (5 - 1)*10 -> 40  ]]
+$start_record=($page -1) * ROW_SCALE;
+
+// 현재 블럭 마지막 페이지
+// 전체 페이지가 (시작 페이지+페이지 스케일) 보다 크거나 같으면 마지막 페이지는 (시작페이지 + 페이지 스케일) -1 / 아니면 전체페이지 수 .
+//[[  EX) 현재 블럭 시작 페이지가 6/ 전체페이지 : 10 -> '10 >= (6+10)' 성립하지 않음 -> 10이 현재블럭의 가장 마지막 페이지 번호  ]]
+$end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCALE-1 : $total_pages;
+
+// 리스트에 보여줄 번호를 최근순으로 부여함.
+// 출력될 숫자
+$view_num = $total_record - $start_record;
 ?>
 <!DOCTYPE html>
 <html lang="ko" dir="ltr">
@@ -33,31 +105,106 @@ session_start();
           <th>작성자</th>
           <th>작성일</th>
           <th>조회</th>
-          <th>답변</th>
         </tr>
+
+        <!--게시물 내용-->
+        <?php
+          for ($record = $start_record; $record  < $start_record+ROW_SCALE && $record<$total_record; $record++){
+            mysqli_data_seek($result,$record );
+            $row=mysqli_fetch_array($result);
+            $num=$row['num'];
+            $name=$row['name'];
+            $hit=$row['hit'];
+            $regist_day= substr($row['regist_day'],0,10);
+            $title=$row['title'];
+            $title=str_replace("\n", "<br>",$title);
+            $title=str_replace(" ", "&nbsp;",$title);
+            $depth=(int)$row['depth'];//공간을 몆칸을 띄어야할지 결정하는 숫자임
+            $space="ㄴ";
+            for($j=0;$j<$depth;$j++){
+              $space="&nbsp;&nbsp;".$space;
+            }
+        ?>
+          <tr>
+            <!--보여지는번호-->
+            <td><?=$view_num?></td>
+
+            <!--제목-->
+            <td><a href="./qna_view.php?num=<?=$num?>&page=<?=$page?>&hit=<?=$hit+1?>"><?=$space.$title?></a></td>
+            <!--작성자-->
+            <td><?=$name?></td>
+            <!--작성일-->
+            <td><?=$regist_day?></td>
+            <!--조회-->
+            <td><?=$hit?></td>
+          </tr>
+
+          <?php
+            $view_num--;
+           }//end of for
+          ?>
+
       </table>
-    <br>
-    <button id="admin_write_btn" type="button" name="button">글쓰기</button>
-    <br>
-      <div class="page_button_group">
-        <button type="button" name="button"><<</button>
-        <button type="button" name="button"><</button>
-        <button type="button" name="button">1</button>
-        <button type="button" name="button">2</button>
-        <button type="button" name="button">3</button>
-        <button type="button" name="button">4</button>
-        <button type="button" name="button">5</button>
-        <button type="button" name="button">6</button>
-        <button type="button" name="button">7</button>
-        <button type="button" name="button">8</button>
-        <button type="button" name="button">9</button>
-        <button type="button" name="button">10</button>
-        <button type="button" name="button">></button>
-        <button type="button" name="button">>></button>
-      </div>
-    </section>
-    <br>
-    <footer>
+      <?php
+      if(!empty($_SESSION['id'])){
+        echo '<a href="qna_form.php"><button id="admin_write_btn" type="button" name="button">
+        글쓰기</button></a>';
+      }
+      ?>
+      <br>
+      <!--$page 는 현재페이지를 의미 x / 각 페이지를 의미-->
+            <div class="page_button_group">
+              <?php
+              //현재 블럭의 시작 페이지가 페이지 스케일 보다 클 때 -> 처음으로 버튼 생성 + 이전 블럭 존재
+              //[ex]  page가 9개 있고 현재 페이지가 6페이지인 경우  / 12345/ 6789     =>  <<(처음으로) <(이전) 6 7 8 9
+              if( $start_page > PAGE_SCALE ){
+                // echo( '<a href='qna_list.php?page=1'> << </a>' );
+                echo( '<a href="qna_list.php?page=1"><button type="button" name="button" title="처음으로"><<</button></a>' );
+
+                // 이전 블럭 클릭 시 -> 현재 블럭의 시작 페이지 - 페이지 스케일
+                // 현재 6 page 인 경우 '<(이전블럭)' 클릭 -> $pre_page = 6-PAGE_SCALE  -> 1 페이지로 이동
+                $pre_block= $start_page - PAGE_SCALE;
+                if(isset($_GET['mode']) && $_GET['mode']=="search"){
+                  echo( '<a href="qna_list.php?mode=search&find_option=$find_option&find_input=$find_input&page='.$pre_block.'"><button type="button" name="button" title="이전"><</button></a>' );
+                }else{
+                  echo( '<a href="qna_list.php?page='.$pre_block.'"><button type="button" name="button" title="이전"><</button></a>' );
+                }
+              }
+
+              //현재 블럭에 해당하는 페이지 나열
+              for( $i = $start_page; $i <= $end_page; $i++ ){
+                  //현재 블럭에 현재 페이지인 버튼
+                  if ( $i == $page ){
+                    echo( '<a href="#"><button type="button" name="button" style="background-color: #2F9D27; border: 1px solid #2F9D27; color: white;">'.$i.'</button></a>' );
+                  }else if(isset($_GET['mode']) && $_GET['mode']=="search"){
+                    echo( '<a href="qna_list.php?mode=search&find_option=$find_option&find_input=$find_input&page='.$i.'"><button type="button" name="button">'.$i.'</button></a>' );
+                  }else{
+                    echo( '<a href="qna_list.php?page='.$i.'"><button type="button" name="button">'.$i.'</button></a>' );
+                  }
+              }
+
+              // 현재 블럭의 마지막 페이지 보다 총 페이지 수가 큰 경우, >(다음) 버튼 / >>(맨끝으로) 버튼 생성
+              //[ex]  page가 9개 있고 현재 페이지가 6페이지인 경우  / 12345/ 6789     =>  <<(처음으로) <(이전) 6 7 8 9
+              //[ex]  page가 9개 있고 현재 페이지가 1페이지인 경우  / 12345/ 6789     =>  1 2 3 4 5 >(다음) >>(맨끝으로)
+              if( $total_pages > $end_page ){
+                // 다음블럭 => 현재 블럭의 시작페이지 + 스케일
+                // 클릭 시 다음 블럭의 첫 번째 페이지로 이동
+                // [ex]  총 page 9개 있고 페이지가 3인  경우 / >(다음) 버튼 누르면 '6'으로 이동
+                $next_block= $start_page + PAGE_SCALE;
+
+                if(isset($_GET['mode']) && $_GET['mode']=="search"){
+                  echo( '<a href="qna_list.php?mode=search&find_option=$find_option&find_input=$find_input&page='.$next_block.'"><button type="button" name="button">></button></a>' );
+                }else{
+                  echo( '<a href="qna_list.php?page='.$next_block.'"><button type="button" name="button" title="다음">></button></a>' );
+                }
+
+                //맨끝페이지로 이동
+                echo( '<a href="qna_list.php?page='.$total_pages.'"><button type="button" name="button" title="맨끝으로">>></button></a>' );
+              }
+              ?>
+            </div>
+          </section>
+        <footer>
       <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/footer.php";?>
     </footer>
   </body>
