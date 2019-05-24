@@ -14,6 +14,11 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
     <link href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/lib/calendar/css/style.css" rel="stylesheet">
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
     <script src="http://127.0.0.1/santteut/common/lib/calendar/js/script.js"></script>
+    <style media="screen">
+    .page_button_group button{border-radius: 3px; margin-bottom:3%; width: 35px; height: 35px; font-weight: bold; margin-right: 5px; cursor: pointer; border: 1px solid #464646; background-color: white;}
+    .page_button_group button:hover{background-color: #2F9D27; color: white; border-radius: 3px; border: 1px solid #2F9D27;}
+    .page_button_group{ position: relative; margin-top: auto; margin-left: auto;text-align:center;}
+    </style>
     <script type="text/javascript">
     window.onscroll = function() {
       window.onscroll = function() {
@@ -104,7 +109,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
          var sql=document.getElementById('sql');
          sql.value=result;
          document.query_form.submit();
-
+         alert(sql.value+"0");
         })
         .fail(function() {
           console.log("error");
@@ -168,12 +173,11 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
   }
   </script>
   <body>
-
-    <form id="query_form" name="query_form" action="package_list.php" method="post">
+    <!-- [DETAIL] 상세 검색 버튼 액션 -->
+    <form id="query_form" name="query_form" action="package_list.php?mode=detail" method="post">
       <input id="sql" type="hidden" name="sql" value="">
     </form>
 
-    <!-- <div id="kCalendar"></div> -->
     <!--로그인 회원가입 로그아웃-->
     <div id="wrap">
     <header>
@@ -396,6 +400,58 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
            ?>
         </table>
     </div>
+    <br><br><br>
+    <!--$page 는 현재페이지를 의미 x / 각 페이지를 의미-->
+          <div class="page_button_group">
+            <?php
+            //현재 블럭의 시작 페이지가 페이지 스케일 보다 클 때 -> 처음으로 버튼 생성 + 이전 블럭 존재
+            //[ex]  page가 9개 있고 현재 페이지가 6페이지인 경우  / 12345/ 6789     =>  <<(처음으로) <(이전) 6 7 8 9
+            if( $start_page > PAGE_SCALE ){
+              // echo( '<a href='package_list.php?page=1'> << </a>' );
+              echo( '<a href="package_list.php?page=1"><button type="button" name="button" title="처음으로"><<</button></a>' );
+
+              // 이전 블럭 클릭 시 -> 현재 블럭의 시작 페이지 - 페이지 스케일
+              // 현재 6 page 인 경우 '<(이전블럭)' 클릭 -> $pre_page = 6-PAGE_SCALE  -> 1 페이지로 이동
+              $pre_block= $start_page - PAGE_SCALE;
+              if(isset($_GET['mode']) && $_GET['mode']=="search"){
+                echo( '<a href="package_list.php?mode=search&find_option=$find_option&find_input=$find_input&page='.$pre_block.'"><button type="button" name="button" title="이전"><</button></a>' );
+              }else{
+                echo( '<a href="package_list.php?page='.$pre_block.'"><button type="button" name="button" title="이전"><</button></a>' );
+              }
+            }
+
+            //현재 블럭에 해당하는 페이지 나열
+            for( $i = $start_page; $i <= $end_page; $i++ ){
+                //현재 블럭에 현재 페이지인 버튼
+                if ( $i == $page ){
+                  echo( '<a href="#"><button type="button" name="button" style="background-color: #2F9D27; border: 1px solid #2F9D27; color: white;">'.$i.'</button></a>' );
+                }else if(isset($_GET['mode']) && $_GET['mode']=="search"){
+                  echo( '<a href="package_list.php?mode=search&find_option=$find_option&find_input=$find_input&page='.$page.'"><button type="button" name="button">'.$i.'</button></a>' );
+                }else{
+                  echo( '<a href="package_list.php?page='.$i.'"><button type="button" name="button">'.$i.'</button></a>' );
+                }
+            }
+
+            // 현재 블럭의 마지막 페이지 보다 총 페이지 수가 큰 경우, >(다음) 버튼 / >>(맨끝으로) 버튼 생성
+            //[ex]  page가 9개 있고 현재 페이지가 6페이지인 경우  / 12345/ 6789     =>  <<(처음으로) <(이전) 6 7 8 9
+            //[ex]  page가 9개 있고 현재 페이지가 1페이지인 경우  / 12345/ 6789     =>  1 2 3 4 5 >(다음) >>(맨끝으로)
+            if( $total_pages > $end_page ){
+              // 다음블럭 => 현재 블럭의 시작페이지 + 스케일
+              // 클릭 시 다음 블럭의 첫 번째 페이지로 이동
+              // [ex]  총 page 9개 있고 페이지가 3인  경우 / >(다음) 버튼 누르면 '6'으로 이동
+              $next_block= $start_page + PAGE_SCALE;
+
+              if(isset($_GET['mode']) && $_GET['mode']=="search"){
+                echo( '<a href="package_list.php?mode=search&find_option=$find_option&find_input=$find_input&page='.$next_block.'"><button type="button" name="button">></button></a>' );
+              }else{
+                echo( '<a href="package_list.php?page='.$next_block.'"><button type="button" name="button" title="다음">></button></a>' );
+              }
+
+              //맨끝페이지로 이동
+              echo( '<a href="package_list.php?page='.$total_pages.'"><button type="button" name="button" title="맨끝으로">>></button></a>' );
+            }
+            ?>
+          </div>
       <br><br><br><br><br><br><br><br><br><br>
 </div>
 </body>
