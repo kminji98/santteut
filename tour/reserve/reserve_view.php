@@ -244,6 +244,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
           if(control=="+"){
             if(set=="*"){
               id2.value=text;
+              adult_num++;
             }else{
               id2.value=text+1;
               if(id=='text_adult'){
@@ -283,10 +284,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
             var test_table=document.getElementsByName('test_table')[i];
             test_table.style.display="block";
           }
-          for(var i=0;i<adult_num-1;i++){
-            var test_table=document.getElementsByName('test_table')[i];
-            test_table.style.display="block";
-          }
+
 
 
           var a = parseInt(text_adult.value);
