@@ -183,45 +183,43 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
           if(control=="+"){
             id2.value=text+1;
             if(id=='text_adult'){
+              if(adult_num>=10){
+              adult_num=10;
+              }else{
               adult_num++;
+              }
             }
           }else{
             id2.value=text-1;
-            if(id=='text_adult'){
+              if(id=='text_adult'){
+                if(adult_num<=1){
+                adult_num=1;
+              }else{
               adult_num--;
-              for(var i=adult_num;i>0;i--){
-                var test_table=document.getElementsByName('test_table')[i];
-                test_table.style.display="none";
               }
-              var name_by_class = document.getElementsByClassName('test_class')[0].getAttribute('name');;
+              // for(var i=adult_num+1;i>0;i--){
+                var test_table=document.getElementsByName('test_table')[adult_num-1];
+                test_table.style.display="none";
+              // }
             }
           }
+
           if(id2.value==11){
             id2.value=10;
           }else if(id=='text_adult'&&id2.value==0){
               id2.value=1;
               return false;
-          }else if(id2.value==-1){
+          }else if(id2.value==1){
             var test_table=document.getElementsByName('test_table')[0];
             test_table.style.display="none";
           }else if(id2.value==-1){
             id2.value=0;
-
-
-
-
-
-
           }
 
-          for(var i=0;i<adult_num;i++){
+          for(var i=0;i<adult_num-1;i++){
             var test_table=document.getElementsByName('test_table')[i];
             test_table.style.display="block";
-
-
           }
-          var name_by_class = document.getElementsByClassName('test_class')[0].getAttribute('name');;
-
 
         }
       </script>
