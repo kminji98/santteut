@@ -58,7 +58,7 @@ html{scroll-behavior:smooth;}
 #reserve_detail_menu{ min-height: 430px; border: 2px solid #6e7689; border-top:1.5px solid #6e7689; width: 240px; height: 420px; position:sticky; top: 15px; margin-top: 140px; margin-left: 68.5%;}
 #reserve_total_pay{margin-left: 10px; font-size: 16px; font-weight: bold; margin-bottom: 0px;}
 #reserve_pay_view{height: 280px;}
-#reserve_money{font-size: 30px; color: #e85581; margin-left: 32%;}
+#reserve_money{font-size: 30px; color: #e85581; margin-left: 20%;}
 #won{font-size: 16px; color: #e85581;  display: inline-block;}
 .subtext2{font-size: 9px; color: #6e6e6e; text-align: right; margin-right: 10px;}
 .line{font-size: 9px; color: #cccccc;}

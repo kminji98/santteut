@@ -2,6 +2,9 @@
 session_start();
 include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
 // $pay_value =$_POST['pay_value'];
+// if(empty($_POST['adult_val'])){
+//   $adult_val=1;
+// }
 ?>
 <!DOCTYPE html>
 <html lang="ko" dir="ltr">
@@ -87,7 +90,6 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
 
   <script type="text/javascript">
     window.onload = function() {
-
       adult_control_btn('+','text_adult','*');
       kid_control_btn('+','text_kid','*');
       baby_control_btn('+','text_baby','*');
@@ -186,9 +188,9 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
       <div id="tour_text1"><b>여행자 정보</b></div>
       <div id="tour_text2">  <b class="label_img">></b>  <b id="sel_text">인원선택</b> </div>
       <?php
-          $adult_val=$_POST['adult_val'];
-          $kid_val=$_POST['kid_val'];
-          $baby_val=$_POST['baby_val'];
+          $adult_val=$_POST['adult_val']*1;
+          $kid_val=$_POST['kid_val']*1;
+          $baby_val=$_POST['baby_val']*1;
       ?>
       <table id="tbl3">
         <tr>
@@ -227,8 +229,10 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
         var kid_num=<?=json_encode($kid_val)?>;
         var baby_num=<?=json_encode($baby_val)?>;
         var wrap = document.getElementById('wrap');
+
         var height=wrap.style.height;
         var realheight=0;
+
         // 어른 수 함수
         function adult_control_btn(control,id,set){
           // alert(wrap.style.height);
@@ -284,7 +288,14 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
             test_table.style.display="block";
           }
 
-            wrap.style.height=realheight+(50*(adult_num+kid_num+baby_num))+"px";
+
+          var a = parseInt(text_adult.value);
+          var b = parseInt(text_kid.value);
+          var c = parseInt(text_baby.value);
+          wrap.style.height=realheight+(50*(a+b+c))+"px";
+          var pay = <?= json_encode($p_pay)?>;
+          pay=parseInt(pay);
+          reserve_money.innerHTML=((pay*a)+(pay*b*0.7)+(pay*c*0.5)).toLocaleString();
             // alert(wrap.style.height);
         }
 
@@ -356,8 +367,13 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
             test_table2.style.display="block";
           }
 
-
-          wrap.style.height=realheight+(50*(adult_num+kid_num+baby_num))+"px";
+          var a = parseInt(text_adult.value);
+          var b = parseInt(text_kid.value);
+          var c = parseInt(text_baby.value);
+          wrap.style.height=realheight+(50*(a+b+c))+"px";
+          var pay = <?= json_encode($p_pay)?>;
+          pay=parseInt(pay);
+          reserve_money.innerHTML=((pay*a)+(pay*b*0.7)+(pay*c*0.5)).toLocaleString();
           // alert(wrap.style.height);
         }
 
@@ -424,8 +440,13 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
           test_table3.style.display="block";
         }
 
-
-        wrap.style.height=realheight+(50*(adult_num+kid_num+baby_num))+"px";
+        var a = parseInt(text_adult.value);
+        var b = parseInt(text_kid.value);
+        var c = parseInt(text_baby.value);
+        wrap.style.height=realheight+(50*(a+b+c))+"px";
+        var pay = <?= json_encode($p_pay)?>;
+        pay=parseInt(pay);
+        reserve_money.innerHTML=((pay*a)+(pay*b*0.7)+(pay*c*0.5)).toLocaleString();
         // alert(wrap.style.height);
 
       }
@@ -739,7 +760,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
         </div>
         <div id="reserve_pay_view">
           <p id="reserve_total_pay">최종결제금액</p>
-          <b id="reserve_money"><?=$p_pay?></b> <p id="won">원</p>
+          <b id="reserve_money"><?=$p_pay*1?></b> <p id="won">원</p>
           <p class="subtext2">유류할증료,제세공과금 포함</p>
           <p class="subtext2">※발권일/환율에 따라 변경 가능합니다</p>
           <p class="line">-------------------------------------------------</p>
