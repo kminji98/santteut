@@ -1,10 +1,9 @@
 <?php
 session_start();
+$id = $_SESSION['id'];
 include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
-// $pay_value =$_POST['pay_value'];
-// if(empty($_POST['adult_val'])){
-//   $adult_val=1;
-// }
+
+
 ?>
 <!DOCTYPE html>
 <html lang="ko" dir="ltr">
@@ -164,20 +163,20 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
       <table id="tbl2">
         <tr>
           <td class="left2" id="res_name1">예약자명<p class="star">*</p></td>
-          <td id="res_name_td"> <input type="text" id="res_name" value=""> </td>
+          <td id="res_name_td"> <input type="text" id="res_name" value="<?=$name?>"> </td>
           <td class="left2" id="res_phone1">휴대폰번호<p class="star">*</p></td>
-          <td id="res_phone_td"> <input type="text" id="res_phone" value="" placeholder="  '-' 없이 입력해주세요"> </td>
+          <td id="res_phone_td"> <input type="text" id="res_phone" value="<?=$hp?>" placeholder="  '-' 없이 입력해주세요"> </td>
         </tr>
 
         <tr>
           <td class="left2" id="res_email0">이메일<p class="star">*</p></td>
-          <td colspan="3" > <input type="text" id="res_email1" value=""> @
+          <td colspan="3" > <input type="text" id="res_email1" value="<?=$email[0]?>"> @
             <select id="res_email2" name="">
             <option value="">선택</option>
-            <option value="">naver.com</option>
-            <option value="">hanmail.net</option>
-            <option value="">google.com</option>
-            <option value="">nate.com</option>
+            <option value="" <?php if(isset($email[1]) && $email[1]==="naver.com") echo "selected";?>>naver.com</option>
+            <option value="" <?php if(isset($email[1]) && $email[1]==="hanmail.net") echo "selected";?>>hanmail.net</option>
+            <option value="" <?php if(isset($email[1]) && $email[1]==="google.com") echo "selected";?>>google.com</option>
+            <option value="" <?php if(isset($email[1]) && $email[1]==="nate.com") echo "selected";?>>nate.com</option>
           </select> </td>
 
         </tr>

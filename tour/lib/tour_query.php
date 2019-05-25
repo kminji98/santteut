@@ -5,8 +5,11 @@ if(isset($_GET["mode"])){
   $p_code=$_GET["mode"];
 
   $sql="SELECT * from `package` where `p_code` = '$p_code';";
+  $member_sql="SELECT * from `member` where `id` = '$id';";
+
 }
 // 쿼리문실행문장
+
 $result=mysqli_query($conn,$sql);
 $row=mysqli_fetch_array($result);
 $p_name=$row['p_name'];
@@ -30,5 +33,16 @@ $day2 = $yoil[date('w', strtotime($p_arr_date2))];
 
 $dp_date=explode("-", $p_dp_date);
 $dp_date2=explode("-", $p_arr_date2);
+
+
+
+$member_result=mysqli_query($conn,$member_sql);
+$member_row=mysqli_fetch_array($member_result);
+$name=$member_row['name'];
+$hp1=$member_row['hp1'];
+$hp2=$member_row['hp2'];
+$email=$member_row['email'];
+$hp=$hp1.$hp2;
+$email=explode("@", $email);
 
  ?>
