@@ -22,7 +22,7 @@ $email =$_POST["email"];
      } else {
       srand((double)microtime()*1000000); //난수값 초기화
       $code=rand(100000,999999);
-      echo $code."인증 번호가 발송되었습니다.";
+      echo $code;
       $count=1;
       $to=$email;
       $from="관리자";

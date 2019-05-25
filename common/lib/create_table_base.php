@@ -76,10 +76,10 @@ function create_table($conn, $table_name){
 
        case 'bus' :
          $sql = "CREATE TABLE `bus` (
-         `b_id` varchar(30) NOT NULL,
+         `b_id` varchar(30) ,
          `b_code` varchar(20) NOT NULL,
-         `b_people` int(10) NOT NULL,
-         `b_seat` int(10) NOT NULL   
+         `b_people` int(10) ,
+         `b_seat` varchar(130)
        ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
       ";
         break;
@@ -108,6 +108,23 @@ function create_table($conn, $table_name){
         PRIMARY KEY (`num`)
       ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;";
        break;
+
+
+       case 'reserve' :
+       $sql = "CREATE TABLE `santteut`.`reserve` (
+        `r_code` CHAR(10) NOT NULL,
+        `r_id` VARCHAR(45) NOT NULL,
+        `r_date` VARCHAR(45) NOT NULL,
+        `r_adult` INT NOT NULL,
+        `r_kid` INT NOT NULL,
+        `r_baby` INT NOT NULL,
+        `r_cancel` INT NOT NULL
+      ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;";
+        break;
+
+
+
+
         default:
 
       echo "<script>alert('해당 테이블이름이 없습니다. ');</script>";
