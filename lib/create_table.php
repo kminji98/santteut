@@ -38,6 +38,19 @@ function create_table($conn, $table_name){
         PRIMARY KEY (`num`)
       ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;";
       break;
+
+      case 'official_review_ripple' :
+      $sql = "CREATE TABLE `official_review_ripple` (
+      `num` int(11) NOT NULL AUTO_INCREMENT,
+      `parent` int(11) NOT NULL,
+      `id` char(15) NOT NULL,
+      `name` char(10) NOT NULL,
+      `content` text NOT NULL,
+      `regist_day` char(20) DEFAULT NULL,
+      PRIMARY KEY (`num`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
+      break;
+
     }//end of switch
       if(mysqli_query($conn, $sql)){
         echo "<script>alert('$table_name table 생성완료');</script>";

@@ -7,6 +7,7 @@ $regist_day="";
 //***************************************************************************
 session_start();
 include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
+include $_SERVER['DOCUMENT_ROOT']."/santteut/community/official_review/lib/official_review_func.php";
 
 if(empty($_GET['page'])){
   $page=1;
@@ -142,12 +143,13 @@ if(isset($_GET["num"])&&!empty($_GET["num"])){
         <th>댓글</th>
         <td>
           <?php
-            $sql="SELECT * FROM `official_review_ripple` where parent=`$q_num`;";
+            $sql="SELECT * FROM `official_review_ripple` where parent=$q_num;";
             $ripple_result = mysqli_query($conn,$sql);
             while($ripple_row=mysqli_fetch_array($ripple_result)){
               $ripple_num=$ripple_row['num'];
+              $ripple_parent=$ripple_row['parent'];
               $ripple_id=$ripple_row['id'];
-              $ripple_nick=$ripple_row['nick'];
+              $ripple_name=$ripple_row['name'];
               $ripple_date=$ripple_row['regist_day'];
               $ripple_content=$ripple_row['content'];
               $ripple_content=str_replace("\n", "<br>", $ripple_content);
@@ -155,11 +157,11 @@ if(isset($_GET["num"])&&!empty($_GET["num"])){
           ?>
           <div id="ripple_title">
               <ul>
-                <li><?=$ripple_nick."&nbsp;&nbsp;".$ripple_date?></li>
+                <li><?=$ripple_name."&nbsp;&nbsp;".$ripple_date?></li>
                 <li id="mdi_del">
                 <?php
-                $message = free_ripple_delete($ripple_id,$ripple_num,'dml_board.php',$page,$hit,$q_num);
-                echo $message;
+                 $message = official_review_ripple_delete($ripple_id,$ripple_num,'official_review_query.php',$q_num);
+                 echo $message;
                 ?>
                 </li>
               </ul>
@@ -171,27 +173,29 @@ if(isset($_GET["num"])&&!empty($_GET["num"])){
             }//end of while
             mysqli_close($conn);
             ?>
-            <form name="ripple_form" action="dml_board.php?mode=insert_ripple" method="post">
+            <form name="ripple_form" action="official_review_query.php?mode=insert_ripple" method="post">
             <input type="hidden" name="parent" value="<?=$q_num?>">
-            <input type="hidden" name="page" value="<?=$page?>">
-            <input type="hidden" name="hit" value="<?=$hit?>">
             <div id="ripple_insert">
             <div id="ripple_textarea"><textarea name="ripple_content" rows="3" cols="80"></textarea></div>
-            <div id="ripple_button"><input type="submit" value="댓글입력" style="width:102px; height:28px; background-color:DarkSlateGray; color:white;"></div>
+            <div id="ripple_button"><input type="submit" value="댓글입력" style="width:102px; height:28px; background-color: #2F9D27; border: 1px solid #2F9D27; color: white;"></div>
             </div><!--end of ripple_insert  -->
             </form>
         </td>
       </table>
       <div id="view_button">
-      <a href="./official_review_list.php?page=<?=$page?>"><input type="button" style="width:50px; height:24px; background-color:DarkSlateGray; color:white;" value="목록">&nbsp;</a>
+      <a href="./official_review_list.php?page=<?=$page?>"><input type="button" style="width:50px; height:24px; background-color: #2F9D27; border: 1px solid #2F9D27; color: white;" value="목록">&nbsp;</a>
                 <?php
                   //관리자이거나 해당된 작성자일경우 수정,삭제가 가능하도록 설정
                   // if($_SESSION['userid']=="admin" || $_SESSION['userid']==$id){
-                    echo ('<a href="./official_review_form.php?mode=update&num='.$num.'"><input type="button" style="width:50px; height:24px; background-color:DarkSlateGray; color:white;" value="수정">&nbsp;</a>&nbsp;');
-                    echo ('<input type="button" style="width:50px; height:24px; background-color:DarkSlateGray; color:white;" value="삭제" onclick="check_delete('.$num.')">&nbsp;</a>&nbsp;');
+                    echo ('<a href="./official_review_form.php?mode=update&num='.$num.'"><input type="button" style="width:50px; height:24px; background-color: #2F9D27; border: 1px solid #2F9D27; color: white;" value="수정">&nbsp;</a>&nbsp;');
+                    echo ('<input type="button" style="width:50px; height:24px; background-color: #2F9D27; border: 1px solid #2F9D27; color: white;" value="삭제" onclick="check_delete('.$num.')">&nbsp;</a>&nbsp;');
                   // }
+                  //로그인하는 유저에게 글쓰기 기능을 부여함
+                    // if(!empty($_SESSION['userid'])){
+                    echo '<a href="official_review_form.php"><input type="button" style="width:60px; height:24px; background-color: #2F9D27; border: 1px solid #2F9D27; color: white;" value="글쓰기">&nbsp;</a>';
+                    // }
                  ?>
-              </div><!--end of write_button -->
+              </div><!--end of view_button -->
     </section>
     <br>
     <br>

@@ -144,8 +144,8 @@ if(isset($_GET["mode"]) && $_GET["mode"]=='update'){
         </tr>
       </table>
       <div id="write_button">
-        <input type="submit" style="width:50px; height:24px; background-color:DarkSlateGray; color:white;" value="완료">&nbsp;
-        <a href="./official_review_list.php"><input type="button" style="width:50px; height:24px; background-color:DarkSlateGray; color:white;" value="목록"></a>
+        <input type="submit" style="width:50px; height:24px; background-color: #2F9D27; border: 1px solid #2F9D27; color: white;" value="완료">&nbsp;
+        <a href="./official_review_list.php"><input type="button" style="width:50px; height:24px; background-color: #2F9D27; border: 1px solid #2F9D27; color: white;" value="목록"></a>
       </div><!--end of write_button-->
     </form>
     </section>

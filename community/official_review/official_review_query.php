@@ -15,7 +15,7 @@ for($i=0;$i<5;$i++){
 }
 //*************************************************************************
   include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
-
+  session_start();
 // $id = $_SESSION['id'];
 // $name = $_SESSION['name'];
 
@@ -27,10 +27,8 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="insert"){
   }
   $title = test_input($_POST["title"]);
   $content = $_POST["content"];
-  // $id = test_input($id);
   $q_title = mysqli_real_escape_string($conn, $title);
   $q_content = mysqli_real_escape_string($conn, $content);
-  // $q_id = mysqli_real_escape_string($conn, $id);
   $regist_day=date("Y-m-d (H:i)");
   $main_img = explode('<img src=', $_POST["content"]);
   if(count($main_img)<2){
@@ -119,10 +117,8 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="insert"){
   $q_num = mysqli_real_escape_string($conn, $num);
   $title = test_input($_POST["title"]);
   $content = $_POST["content"];
-  // $id = test_input($id);
   $q_title = mysqli_real_escape_string($conn, $title);
   $q_content = mysqli_real_escape_string($conn, $content);
-  // $q_id = mysqli_real_escape_string($conn, $id);
   $regist_day=date("Y-m-d (H:i)");
   $main_img = explode('<img src=', $_POST["content"]);
   if(count($main_img)<2){
@@ -135,16 +131,6 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="insert"){
   include $_SERVER['DOCUMENT_ROOT']."/santteut/community/official_review/lib/file_upload.php";
 
   if(isset($_POST['del_file_0']) && $_POST['del_file_0'] =='1'){
-    // $sql = "SELECT `file_copied_0` FROM `official_review` WHERE `num` = '$q_num';";
-    // $result = mysqli_query($conn,$sql);
-    // if(!$result){
-    //   alert_back('Error: '.mysqli_error($conn));
-    // }
-    // $row = mysqli_fetch_array($result);
-    // $file_copied_0=$row['file_copied_0'];
-    // if(!empty($file_copied_0)){
-    //   unlink("./data/".$file_copied_0);
-    // }
 
     $sql = "UPDATE `official_review` SET `file_name_0` = '', `file_copied_0` = '' WHERE num = $q_num;";
     $result = mysqli_query($conn,$sql);
@@ -152,13 +138,6 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="insert"){
       die('Error: '. mysqli_error($conn));
     }
 
-    // if(!empty($upfile_name[0])){
-    //   $sql = "UPDATE `official_review` SET `file_name_0` = '$upfile_name[0]', `file_copied_0` = '$copied_file_name[0]' WHERE `num` = '$q_num';";
-    //   $result = mysqli_query($conn, $sql);
-    //   if(!$result){
-    //     die('Error: '. mysqli_error($conn));
-    //   }
-    // }
   }
 
   if(!empty($upfile_name[0])){
@@ -170,31 +149,12 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="insert"){
   }
 
   if(isset($_POST['del_file_1']) && $_POST['del_file_1'] =='1'){
-    // $sql = "SELECT `file_copied_1` FROM `official_review` WHERE `num` = '$q_num';";
-    // $result = mysqli_query($conn,$sql);
-    // if(!$result){
-    //   alert_back('Error: '.mysqli_error($conn));
-    // }
-    // $row = mysqli_fetch_array($result);
-    // $file_copied_1=$row['file_copied_1'];
-    // if(!empty($file_copied_1)){
-    //   unlink("./data/".$file_copied_1);
-    // }
 
     $sql = "UPDATE `official_review` SET `file_name_1` = '', `file_copied_1` = '' WHERE `num` = '$q_num';";
     $result = mysqli_query($conn,$sql);
     if(!$result){
       die('Error: '. mysqli_error($conn));
     }
-
-    // if(!empty($upfile_name[1])){
-    //   $sql = "UPDATE `official_review` SET `file_name_1` = '$upfile_name[1]', `file_copied_1` = '$copied_file_name[1]' WHERE `num` = '$q_num';";
-    //   $result = mysqli_query($conn, $sql);
-    //   if(!$result){
-    //     die('Error: '. mysqli_error($conn));
-    //   }
-    // }
-
   }
 
   if(!empty($upfile_name[1])){
@@ -206,16 +166,7 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="insert"){
   }
 
   if(isset($_POST['del_file_2']) && $_POST['del_file_2'] =='1'){
-    // $sql = "SELECT `file_copied_2` FROM `official_review` WHERE `num` = '$q_num';";
-    // $result = mysqli_query($conn,$sql);
-    // if(!$result){
-    //   alert_back('Error: '.mysqli_error($conn));
-    // }
-    // $row = mysqli_fetch_array($result);
-    // $file_copied_2=$row['file_copied_2'];
-    // if(!empty($file_copied_2)){
-    //   unlink("./data/".$file_copied_2);
-    // }
+
 
     $sql = "UPDATE `official_review` SET `file_name_2` = '', `file_copied_2` = '' WHERE `num` = '$q_num';";
     $result = mysqli_query($conn,$sql);
@@ -223,13 +174,6 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="insert"){
       die('Error: '. mysqli_error($conn));
     }
 
-    // if(!empty($upfile_name[2])){
-    //   $sql = "UPDATE `official_review` SET `file_name_2` = '$upfile_name[2]', `file_copied_2` = '$copied_file_name[2]' WHERE `num` = '$q_num';";
-    //   $result = mysqli_query($conn, $sql);
-    //   if(!$result){
-    //     die('Error: '. mysqli_error($conn));
-    //   }
-    // }
   }
 
   if(!empty($upfile_name[2])){
@@ -241,16 +185,6 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="insert"){
   }
 
   if(isset($_POST['del_file_3']) && $_POST['del_file_3'] =='1'){
-    // $sql = "SELECT `file_copied_3` FROM `official_review` WHERE `num` = '$q_num';";
-    // $result = mysqli_query($conn,$sql);
-    // if(!$result){
-    //   alert_back('Error: '.mysqli_error($conn));
-    // }
-    // $row = mysqli_fetch_array($result);
-    // $file_copied_3=$row['file_copied_3'];
-    // if(!empty($file_copied_3)){
-    //   unlink("./data/".$file_copied_3);
-    // }
 
     $sql = "UPDATE `official_review` SET `file_name_3` = '', `file_copied_3` = '' WHERE `num` = '$q_num';";
     $result = mysqli_query($conn,$sql);
@@ -258,13 +192,6 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="insert"){
       die('Error: '. mysqli_error($conn));
     }
 
-    // if(!empty($upfile_name[3])){
-    //   $sql = "UPDATE `official_review` SET `file_name_3` = '$upfile_name[3]', `file_copied_3` = '$copied_file_name[3]' WHERE `num` = '$q_num';";
-    //   $result = mysqli_query($conn, $sql);
-    //   if(!$result){
-    //     die('Error: '. mysqli_error($conn));
-    //   }
-    // }
   }
 
   if(!empty($upfile_name[3])){
@@ -276,16 +203,6 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="insert"){
   }
 
   if(isset($_POST['del_file_4']) && $_POST['del_file_4'] =='1'){
-    // $sql = "SELECT `file_copied_4` FROM `official_review` WHERE `num` = '$q_num';";
-    // $result = mysqli_query($conn,$sql);
-    // if(!$result){
-    //   alert_back('Error: '.mysqli_error($conn));
-    // }
-    // $row = mysqli_fetch_array($result);
-    // $file_copied_4=$row['file_copied_4'];
-    // if(!empty($file_copied_4)){
-    //   unlink("./data/".$file_copied_4);
-    // }
 
     $sql = "UPDATE `official_review` SET `file_name_4` = '', `file_copied_4` = '' WHERE `num` = '$q_num';";
     $result = mysqli_query($conn,$sql);
@@ -293,13 +210,6 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="insert"){
       die('Error: '. mysqli_error($conn));
     }
 
-    // if(!empty($upfile_name[4])){
-    //   $sql = "UPDATE `official_review` SET `file_name_4` = '$upfile_name[4]', `file_copied_4` = '$copied_file_name[4]' WHERE `num` = '$q_num';";
-    //   $result = mysqli_query($conn, $sql);
-    //   if(!$result){
-    //     die('Error: '. mysqli_error($conn));
-    //   }
-    // }
   }
 
   if(!empty($upfile_name[4])){
@@ -310,20 +220,6 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="insert"){
     }
   }
 
-  //1번과 2번 파일삭제 신경쓰지않고 업로드가 됐느냐? 안됐느냐?
-  // if(!empty($_FILES['upfile']['name'])){
-  // include $_SERVER['DOCUMENT_ROOT']."/santteut/community/official_review/lib/file_upload.php";
-  // $sql = "UPDATE `official_review` SET `file_name_0` = '$upfile_name[0]', `file_copied_0` = '$copied_file_name[0]',
-  // `file_name_1` = '$upfile_name[1]', `file_copied_1` = '$copied_file_name[1]',
-  // `file_name_2` = '$upfile_name[2]', `file_copied_2` = '$copied_file_name[2]',
-  // `file_name_3` = '$upfile_name[3]', `file_copied_3` = '$copied_file_name[3]',
-  // `file_name_4` = '$upfile_name[4]', `file_copied_4` = '$copied_file_name[4]' WHERE num = $num;";
-  // $result = mysqli_query($conn, $sql);
-  // if(!$result){
-  //   die('Error: '. mysqli_error($conn));
-  // }
-// }
-
   $sql = "UPDATE `official_review` SET `title` = '$q_title', `content` = '$q_content', `regist_day` = '$regist_day', `main_img` = '$main_img' WHERE num = '$q_num';";
   $result = mysqli_query($conn, $sql);
   if (!$result){
@@ -331,6 +227,27 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="insert"){
   }
 
   echo "<script>location.href='./official_review_view.php?num=$num';</script>";
+}else if(isset($_GET["mode"]) && $_GET["mode"] == "insert_ripple"){
+  if(empty($_POST["ripple_content"])){
+    echo "<script>alert('댓글 내용을 입력하세요.');history.go(-1);";
+    exit;
+  }
+
+  $content = test_input($_POST["ripple_content"]);
+  $parent = test_input($_POST["parent"]);
+  $q_id = mysqli_real_escape_string($conn, $_SESSION['id']);
+  $q_name = mysqli_real_escape_string($conn, $_SESSION['name']);
+  $q_content = mysqli_real_escape_string($conn, $content);
+  $q_parent = mysqli_real_escape_string($conn, $parent);
+  $regist_day = date("Y-m-d (H:i)");
+
+  $sql = "INSERT INTO `official_review_ripple` VALUES (null, '$q_parent', '$q_id', '$q_name', '$q_content', '$regist_day')";
+  $result = mysqli_query($conn, $sql);
+  if(!$result){
+    die('Error: ' . mysqli_error($conn));
+  }
+  mysqli_close($conn);
+  echo "<script>location.href='./official_review_view.php?num=$parent';</script>";
 }
 
 ?>
