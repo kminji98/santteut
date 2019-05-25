@@ -245,7 +245,10 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
           if(control=="+"){
             if(set=="*"){
               id2.value=text;
-              adult_num++;
+              if(adult_num==0){
+                adult_num++;
+              }
+
             }else{
               id2.value=text+1;
               if(id=='text_adult'){
