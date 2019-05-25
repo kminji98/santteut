@@ -14,7 +14,7 @@ $sql="SELECT * from `package`";
 
 if(isset($_GET['mode'])){
   switch ($_GET['mode']) {
-    //a. [SEARCH]
+    //A. [SEARCH]
     // 옵션 선택 : find_option / 검색할 키워드 : find_input
     case 'search':
     $find_option= $_GET['find_option'];
@@ -22,47 +22,70 @@ if(isset($_GET['mode'])){
     $sql="SELECT * from `package` where $find_option like '%$find_input%';";
     break;
 
-    //b. [DETAIL] 상세검색 : 조건이 sql값으로 넘어옴(POST)
+    //B. [DETAIL] 상세검색 : 조건이 sql값으로 넘어옴(POST)
     case 'detail':
     $sql=$_POST['sql'];
     $output=$_POST['output'];
     $page=$_POST['page'];
-    // var_dump($page);
     break;
 
     //@@@@@@ MINJI 테스트
-    //c. [RECENT] 최신순
-    case 'recent':
-    //$_POST['order'] =>  'desc' / 'asc'
-    // ex) $sql="SELECT * from `package` order by num desc";
-    // $sql= $sql." order by `p_dp_date`"." ".$_POST['order'];
-    // break;
-    // //d. [PAY] 요금순
-    // case 'pay':
-    // $sql= $sql." order by `p_pay` ".$_POST['order'];
-    // break;
-    // //e. [POPULAR] 인기순 (예약이 많이 된 순)
-    // case 'popular':
-    // // select * from package inner join bus on bus.b_code = package.p_code order by b_people;
-    // $sql =$sql." inner join bus on bus.b_code = package.p_code order by b_people";
-    // // desc OR asc
-    // $sql= $sql." ".$_POST['order'];
-    // break;
 
-    // [DATE] 날짜검색 : 모드가 날짜로 넘어옴(GET)
+    //C. [ORDER] 최신순▼요금순▼인기순▼ : 조건, 내림차순/오름차순(POST)
+    //최신순▼요금순▼인기순▼
+    case 'order':
+    // $_POST['order'] =>  'desc' / 'asc'
+    // ex) $sql="SELECT * from `package` order by num desc";
+    $sql= $sql." order by";
+    $order_btn = $_POST['order_btn'];
+    $order_condition = $_POST['order_condition'];
+    $order_option = $_POST['order_option'];
+    break;
+
+    //D. [DATE] 날짜검색 : 모드가 날짜로 넘어옴(GET)
     default:
       $date=$_GET['mode'];
       $sql=$sql." where `p_dp_date` = '$date';";
       break;
   }
-  // if($_GET['mode'] == 'search' && isset($_GET['find_option'])&& isset($_GET['find_input'])){
-  //   $sql="SELECT * from `package` where $find_option like '%$q_find_input%';";
-  // }else{
-  // }
-  //
-  // if($_GET['mode'] =='detail' && isset($_POST['sql'])){
-  // //[DETAIL SEARCH]
-  // }
+
+  if($_GET['mode']=="order"){
+    switch ($_POST['order_condition']) {
+      //C.1 [RECENT] 최신순
+      case '최신':
+      $sql= $sql." `p_dp_date`";
+      break;
+
+      //C.2 [RECENT] 최신순
+      case '요금':
+      $sql= $sql." `p_pay`";
+      break;
+
+      //C.3 [RECENT] 인기순
+      case '인기':
+      $sql =$sql." inner join bus on bus.b_code = package.p_code order by b_people";
+      break;
+
+      default:
+        break;
+    }
+    $sql= $sql." ".$_POST['order_option'];
+
+
+  }
+  // //d. [PAY] 요금순
+  // case 'pay':
+  // $sql= $sql." order by `p_pay` ".$_POST['order'];
+  // break;
+  // //e. [POPULAR] 인기순 (예약이 많이 된 순)
+  // case 'popular':
+  // // select * from package inner join bus on bus.b_code = package.p_code order by b_people;
+  // $sql =$sql." inner join bus on bus.b_code = package.p_code order by b_people";
+  // // desc OR asc
+  // $sql= $sql." ".$_POST['order'];
+  // break;
+
+
 }
 
 // 쿼리문실행문장

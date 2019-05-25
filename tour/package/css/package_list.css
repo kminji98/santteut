@@ -22,7 +22,7 @@
 .package_search_detail_option_all{padding-top:1px; padding-bottom:4px; text-align: center; width:65px;height:16px;background-color:#2F9D27; color:#FFFFFF; border-radius:100px; border: 1px solid #2F9D27;}
 #package_list_view_btn{margin-left:68.7%;}
 .package_list_view_btn_value{border-radius: 3px;  background-color: inherit; border:0;}
-.package_list_view_btn_value:hover{ cursor:pointer; text-decoration: none; background-color: #2F9D27;}
+.package_list_view_btn_value:hover{ cursor:pointer; text-decoration: underline;}
 #package_list_view{margin-left: 17.2%; width:65%; border: 1px solid #BDBDBD; margin-top: 0.5%;}
 #package_list_view_table{font-size: 0.9em; padding: 0 2%; width:100%; padding:3%;  border-bottom:1px solid #F6F6F6; border-collapse: collapse; height: auto; text-align: center;}
 #package_list_view_table td{border-bottom:1px solid #F6F6F6; border-collapse: collapse; height: auto;}
@@ -35,3 +35,6 @@
 #best_text{margin-left: 1%;}
 #main_big3{margin-left: -2%;}
 #best3{position:relative;  width:100%;  left:0;  right:0;  margin-left:auto;  margin-right:auto; text-align:center;}
+.page_button_group button{border-radius: 3px; margin-bottom:3%; width: 35px; height: 35px; font-weight: bold; margin-right: 5px; cursor: pointer; border: 1px solid #464646; background-color: white;}
+.page_button_group button:hover{background-color: #2F9D27; color: white; border-radius: 3px; border: 1px solid #2F9D27;}
+.page_button_group{ position: relative; margin-top: auto; margin-left: auto;text-align:center;}

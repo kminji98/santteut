@@ -9,7 +9,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css">
-    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/tour/package/css/package_list.css?ver=0">
+    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/tour/package/css/package_list.css?ver=1">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/side_bar.css">
     <link href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/lib/calendar/css/style.css?ver=0" rel="stylesheet">
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
@@ -36,6 +36,12 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
       default_detail_value('free_div');
       document.getElementsByName('output')[0].value=<?=json_encode($output)?>;
       document.getElementsByName('sql')[0].value=<?=json_encode($sql)?>;
+      var order_condition = <?=json_encode($order_condition)?>;
+      var order_option = <?=json_encode($order_option)?>;
+      var sql = <?=json_encode($sql)?>;
+      alert(sql);
+      // alert(order_option);
+      document.getElementById(order_condition).value=<?=json_encode($order_btn)?>;
     };
 
 
@@ -217,15 +223,40 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
           con2.innerHTML="상세검색▼";
       }
   }
+  ////@@@@@MINJI
   function button_change(value){
     var btn = document.getElementById(value);
     if(btn.value==value+"순▼"){
-      order.value = "asc";
+      document.order_form.order_option.value = "asc";
       btn.value=value+"순▲";
     }else{
-      order.value = "desc";
+      document.order_form.order_option.value = "desc";
       btn.value=value+"순▼";
     }
+    $.ajax({
+      url: 'package_list_btn_change.php',
+      type: 'POST',
+      data: {
+        order_btn : btn.value,
+        order_condition: value,
+        order_option :document.order_form.order_option.value
+      }
+    })
+    .done(function(result) {
+      var output = $.parseJSON(result);
+      document.order_form.order_condition.value = output[0].order_condition;
+      document.order_form.order_option.value = output[0].order_option;
+      document.order_form.order_btn.value = output[0].order_btn;
+      document.order_form.submit();
+    })
+    .fail(function() {
+      console.log("error");
+    })
+    .always(function() {
+      console.log("complete");
+    });
+
+
   }
   </script>
   <body>
@@ -392,11 +423,14 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
       <p style="position: relative; margin-top: auto; margin-left: auto;text-align:center; font-weight: bold; font-size:13px;"><?=$output?></p>
     </form>
       <div id="package_list_view_btn">
-        <form class="" action="index.html" method="post">
-          <input type="hidden" name="order" value="desc">
-          <input onclick="button_change('최신')" id="최신" class="package_list_view_btn_value" type="button" name="" value="최신순▼">
-          <input onclick="button_change('요금')" id="요금" class="package_list_view_btn_value" type="button" name="" value="요금순▼">
-          <input onclick="button_change('인기')" id="인기" class="package_list_view_btn_value" type="button" name="" value="인기순▼">
+        <form name="order_form" action="package_list.php?mode=order" method="post">
+          <input type="hidden" name="post_page" value="">
+          <input type="hidden" name="order_condition" value="">
+          <input type="hidden" name="order_option" value="desc">
+          <input type="hidden" name="order_btn" value="">
+          <input onclick="button_change('최신')" id="최신" class="package_list_view_btn_value" type="button" value="최신순▼">
+          <input onclick="button_change('요금')" id="요금" class="package_list_view_btn_value" type="button" value="요금순▼">
+          <input onclick="button_change('인기')" id="인기" class="package_list_view_btn_value" type="button" value="인기순▼">
         </form>
       </div>
       <div id="package_list_view">
