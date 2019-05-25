@@ -7,8 +7,8 @@ $total_record=0;
 
 
 //@@@@@@ MINJI 테스트
-define('ROW_SCALE', 2);
-define('PAGE_SCALE', 5);
+define('ROW_SCALE', 3);
+define('PAGE_SCALE', 3);
 
 $sql="SELECT * from `package`";
 
@@ -25,14 +25,16 @@ if(isset($_GET['mode'])){
     //b. [DETAIL] 상세검색 : 조건이 sql값으로 넘어옴(POST)
     case 'detail':
     $sql=$_POST['sql'];
-
+    $output=$_POST['output'];
+    $page=$_POST['page'];
+    // var_dump($page);
     break;
 
     //@@@@@@ MINJI 테스트
-    // //c. [RECENT] 최신순
-    // case 'recent':
-    // //$_POST['order'] =>  'desc' / 'asc'
-    // // ex) $sql="SELECT * from `package` order by num desc";
+    //c. [RECENT] 최신순
+    case 'recent':
+    //$_POST['order'] =>  'desc' / 'asc'
+    // ex) $sql="SELECT * from `package` order by num desc";
     // $sql= $sql." order by `p_dp_date`"." ".$_POST['order'];
     // break;
     // //d. [PAY] 요금순
@@ -73,6 +75,11 @@ $total_pages=ceil($total_record/ROW_SCALE);
 // 페이지가 없으면 디폴트 페이지 1페이지
 // if(empty($_GET['page'])){$page=1; }else{ $page=$_GET['page']; }
 $page=(empty($_GET['page']))?1:$_GET['page'];
+
+//@@@@@@@@@@MINJI
+if(isset($_POST['page'])){
+  $page=(empty($_POST['page']))?1:$_POST['page'];
+}
 
 // 현재 블럭의 시작 페이지 = (ceil(현재페이지/블럭당 페이지 제한 수)-1) * 블럭당 페이지 제한 수 +1
 //[[  EX) 현재 페이지 5일 때 => ceil(5/3)-1 * 3  +1 =  (2-1)*3 +1 = 4 ]]

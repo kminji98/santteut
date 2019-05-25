@@ -1,9 +1,10 @@
 <?php
 session_start();
 include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
-
 ?>
 <!DOCTYPE html>
+<script type="text/javascript">
+</script>
 <html lang="ko" dir="ltr">
   <head>
     <meta charset="utf-8">
@@ -111,7 +112,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
           }
         </script>
         <select id="sel1" onclick="select_people_number('adult')" name="">
-          <option  value="1">1</option>
+          <option  value="1" >1</option>
           <option  value="2">2</option>
           <option  value="3">3</option>
           <option  value="4">4</option>
@@ -189,11 +190,12 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
     </div>
 
     </div>
+    <footer>
+      <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/footer.php";?>
+    </footer>
   </body>
 
 
 <br><br><br>
-<footer>
-  <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/footer.php";?>
-</footer>
+
 </html>

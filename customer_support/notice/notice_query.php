@@ -2,8 +2,6 @@
 include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
 
 session_start();
-$_SESSION['name']="관리자";
-$_SESSION['id']="admin";
 
 // isset함수는 불리언값을 리턴 true or false
 // 회원 or 비회원이면 권한없음, 관리자일때만 입장

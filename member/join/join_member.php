@@ -34,6 +34,7 @@
         }
 
       }
+
     </script>
 
 
@@ -144,6 +145,7 @@
             var e_mailPatt = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
             var e_mail_id_value=e_mail_id.value.concat('@'+e_mail_adress_2.value);
             hidden_email.value = e_mail_id.value.concat('@'+e_mail_adress_2.value);
+            var hidden_email_value = hidden_email.value;
             console.log(hidden_email.value);
             if(!e_mail_id.value){
               alert("이메일 아이디를 입력해주세요");
@@ -161,7 +163,7 @@
             $.ajax({
               url: 'check_email.php',
               type: 'POST',
-              data: {email: e_mail_id_value}
+              data: {email: hidden_email_value}
             })
             .done(function(result) {
               done=result;

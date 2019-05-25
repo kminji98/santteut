@@ -1,9 +1,5 @@
 <?php
 session_start();
-// test
-$_SESSION['name']="이우주";
-$_SESSION['id']="di0625";
-// test
 
 // isset함수는 불리언값을 리턴 true or false
 // 비회원이면 권한없음
@@ -13,7 +9,8 @@ if(!isset($_SESSION['id'])){
 }
 include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
 
-$num=$name=$title=$content=$regist_day=$hit=$secret_ok="";
+$num=$name=$title=$content=$regist_day=$hit="";
+$secret_ok="";
 
 // 페이지가 없으면 디폴트 페이지 1페이지
 if(empty($_GET['page'])){$page=1;}else{$page=$_GET['page'];}
@@ -27,11 +24,13 @@ if(isset($_GET["num"]) && !empty($_GET["num"])){
     $result = mysqli_query($conn,$sql);
     if (!$result) {die('Error: ' . mysqli_error($conn));}
 
+// 디비에서 값을 가져와서 보여줌
     $sql="SELECT * from `qna` where num ='$q_num';";
     $result = mysqli_query($conn,$sql);
     if (!$result) {die('Error: ' . mysqli_error($conn));}
     $row=mysqli_fetch_array($result);
     $hit=$row['hit'];
+    $secret_ok=$row['secret_ok'];
     $title= htmlspecialchars($row['title']);
     $content= $row['content'];
     $title=str_replace("\n", "<br>",$title);
@@ -80,25 +79,23 @@ if(isset($_GET["num"]) && !empty($_GET["num"])){
 
       </table>
     <div class="admin">
-      <button id="admin_write_btn" type="button" name="button"><a href="./qna_form.php?mode=update&num=<?=$num?>">수정</a></button>
+      <a href="./qna_form.php?mode=update&num=<?=$num?>"><button id="admin_write_btn" type="button" name="button">수정</button></a>
       <button id="admin_write_btn" type="button" name="button" onclick="check_delete(<?=$num?>)">삭제</button>
-      <!-- 답글 클릭 -> qna_query의 답글 insert ->qna_view-->
-      <button id="admin_write_btn" type="button" name="button"><a href="./qna_form.php?mode=insert&num=<?=$num?>">답글</button>
-      <button id="admin_write_btn" type="button" name="button"><a href="./qna_list.php?page=<?=$page?>">목록</a></button>
+      <a href="./qna_form.php?mode=response&num=<?=$num?>"><button id="admin_write_btn" type="button" name="button">답글</button></a>
+      <a href="./qna_list.php?page=<?=$page?>"><button id="admin_write_btn" type="button" name="button">목록</button></a>
     </div>
-
 <!--  -->
     <?php
       // if(isset($_SESSION['id'])){
       //   if($_SESSION['id']=="admin" || $_SESSION['id']==$id){
-          echo('<a href="./qna_form.php?mode=update&num='.$num.'"> <button id="admin_write_btn" type="button" name="button">목록</button></a>');
+          // echo('<a href="./qna_form.php?mode=update&num='.$num.'"> <button id="admin_write_btn" type="button" name="button">목록</button></a>');
           // echo('<img src="../img/delete.png" onclick="check_delete('.$num.')">&nbsp;'); 삭제
       //   }
       // }
-      if(!empty($_SESSION['id'])){
-        echo '<a href="qna_form.php?mode=response&num='.$num.'">답글</a>';
+      // if(!empty($_SESSION['id'])){
+        // echo '<a href="qna_form.php?mode=response&num='.$num.'">답글</a>';
         // echo '<a href="qna_form.php"><img src="../img/write.png"></a>';
-      }
+      // }
     ?>
 <!--  -->
     </section>

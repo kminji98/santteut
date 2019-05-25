@@ -50,11 +50,17 @@ session_start();
         //월 클릭 -> days 변화 이벤트
         $("#month1").click(function(event) {
           var days = lastday($("#year1").val(), $(this).val());
-          $("#day1").html("<option value="+days+">"+days+"</option>");
+          $("#day1").html("");
+          for(var i=1; i<=days; i++){
+            $("#day1").append("<option value="+i+">"+i+"</option>");
+          }
         });
         $("#month2").click(function(event) {
           var days = lastday($("#year2").val(), $(this).val());
-          $("#day2").html("<option value="+days+">"+days+"</option>");
+          $("#day2").html("");
+          for(var i=1; i<=days; i++){
+          $("#day2").append("<option value="+i+">"+i+"</option>");
+          }
         });
       });
       function lastday(year, month){

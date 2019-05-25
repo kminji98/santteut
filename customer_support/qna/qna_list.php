@@ -1,9 +1,5 @@
 <?php
 session_start();
-/////////테스트
-$_SESSION['name']="이우주";
-$_SESSION['id']="di0625";
-/////////테스트
 
 // isset함수는 불리언값을 리턴 true or false
 // 비회원이면 권한없음
@@ -38,7 +34,7 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="search"){
 //검색시
   $sql="SELECT num, groupnum, depth, ord, name, title, content, regist_day, hit from `qna` inner join member on `qna`.`id` = `member`.`id` where $find_option like '%$q_find_input%' order by num desc;";
 }else{
-  //
+
   //"select num, groupnum, depth, ord, name, title, content, regist_day, hit FROM qna inner join member on qna.id = member.id;"
   $sql="SELECT num, groupnum, depth, ord, name, title, content, regist_day, hit FROM `qna` inner join member on `qna`.`id` = `member`.`id` order by groupnum desc, ord asc;";
 }
@@ -120,7 +116,8 @@ $view_num = $total_record - $start_record;
             $title=str_replace("\n", "<br>",$title);
             $title=str_replace(" ", "&nbsp;",$title);
             $depth=(int)$row['depth'];//공간을 몆칸을 띄어야할지 결정하는 숫자임
-            $space="ㄴ";
+            $space="";
+
             for($j=0;$j<$depth;$j++){
               $space="&nbsp;&nbsp;".$space;
             }
@@ -128,7 +125,6 @@ $view_num = $total_record - $start_record;
           <tr>
             <!--보여지는번호-->
             <td><?=$view_num?></td>
-
             <!--제목-->
             <td><a href="./qna_view.php?num=<?=$num?>&page=<?=$page?>&hit=<?=$hit+1?>"><?=$space.$title?></a></td>
             <!--작성자-->
