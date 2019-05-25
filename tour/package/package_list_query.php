@@ -7,8 +7,8 @@ $total_record=0;
 
 
 //@@@@@@ MINJI 테스트
-define('ROW_SCALE', 3);
-define('PAGE_SCALE', 3);
+define('ROW_SCALE', 2);
+define('PAGE_SCALE', 2);
 
 $sql="SELECT * from `package`";
 
@@ -31,8 +31,8 @@ if(isset($_GET['mode'])){
 
     //@@@@@@ MINJI 테스트
 
-    //C. [ORDER] 최신순▼요금순▼인기순▼ : 조건, 내림차순/오름차순(POST)
-    //최신순▼요금순▼인기순▼
+    //C. [ORDER] 최신순▼요금순▼ : 조건, 내림차순/오름차순(POST)
+    //최신순▼요금순▼
     case 'order':
     // $_POST['order'] =>  'desc' / 'asc'
     // ex) $sql="SELECT * from `package` order by num desc";
@@ -61,16 +61,10 @@ if(isset($_GET['mode'])){
       $sql= $sql." `p_pay`";
       break;
 
-      //C.3 [RECENT] 인기순
-      case '인기':
-      $sql =$sql." inner join bus on bus.b_code = package.p_code order by b_people";
-      break;
-
       default:
         break;
     }
     $sql= $sql." ".$_POST['order_option'];
-
   }
 
 }
