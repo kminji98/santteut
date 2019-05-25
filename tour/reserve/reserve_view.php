@@ -484,14 +484,14 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
 
         <tr>
           <td><b >성인1</b></td>
-          <td id="name"class="inputs"><input id="set_name" type="text" class="inputs1" value="" size="10"></td>
-          <td class="inputs"><input  type="text" class="inputs1" id="input1" value=""></td>
-          <td class="inputs"> <input type="text" class="inputs1" value=""> </td>
+          <td id="name"class="inputs"><input name="adult_name_1" id="set_name" type="text" class="inputs1" value="" size="10"></td>
+          <td class="inputs"><input name="adult_fe_name_1"  type="text" class="inputs1" id="input1" value=""></td>
+          <td class="inputs"> <input name="adult_le_name_1" type="text" class="inputs1" value=""> </td>
 
 
-          <td class="inputs"> <input type="radio" name="gen" id="male" value=""><label for="">남&nbsp;</label><input type="radio" name="gen" value=""><label for="">여</label></td>
-          <td class="inputs"> <input type="text" id="inputs2" value=""> </td>
-          <td class="inputs"> <input type="text" id="phone_num" value=""></td>
+          <td class="inputs"> <input name="adult_gender_1" type="radio" name="gen" id="male" value=""><label for="">남&nbsp;</label><input name="adult_gender_1" type="radio" name="gen" value=""><label for="">여</label></td>
+          <td class="inputs"> <input name="adult_birr_1" type="text" id="inputs2" value=""> </td>
+          <td class="inputs"> <input name="adult_ph_1" type="text" id="phone_num" value=""></td>
         </tr>
       </table>
 
@@ -511,12 +511,12 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
 
         <tr>
           <td><b >성인'.$i.'</b></td>
-          <td id="name"class="inputs"><input type="text" class="inputs1" value="" size="10"></td>
-          <td class="inputs"><input  type="text" class="inputs1" id="input1" value=""></td>
-          <td class="inputs"> <input type="text" class="inputs1" value=""> </td>
-          <td class="inputs"> <input type="radio" name="gen" id="male" value=""><label for="">남&nbsp;</label><input type="radio" name="gen" value=""><label for="">여</label></td>
-          <td class="inputs"> <input type="text" id="inputs2" value=""> </td>
-          <td class="inputs"> <input type="text" id="phone_num" value=""> </td>
+          <td  id="name"class="inputs" ><input name="name1_'.$i.'" type="text" class="inputs1" value="" size="10"></td>
+          <td class="inputs"><input name="fe_name1_'.$i.'"  type="text" class="inputs1" id="input1" value=""></td>
+          <td class="inputs"> <input name="le_name1_'.$i.'" type="text" class="inputs1" value=""> </td>
+          <td class="inputs"> <input  type="radio" name="gen1_'.$i.'" id="male" value=""><label for="">남&nbsp;</label><input type="radio" name="gen1_'.$i.'" value=""><label for="">여</label></td>
+          <td class="inputs"> <input name="bir1_'.$i.'" type="text" id="inputs2" value=""> </td>
+          <td class="inputs"> <input name="ph1_'.$i.'" type="text" id="phone_num" value=""> </td>
         </tr>
         </table>';
       }
@@ -535,12 +535,12 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
 
         <tr>
           <td><b >아동'.$i.'</b></td>
-          <td id="name"class="inputs"><input type="text" class="inputs1" value="" size="10"></td>
-          <td class="inputs"><input  type="text" class="inputs1" id="input1" value=""></td>
-          <td class="inputs"> <input type="text" class="inputs1" value=""> </td>
-          <td class="inputs"> <input type="radio" name="gen" id="male" value=""><label for="">남&nbsp;</label><input type="radio" name="gen" value=""><label for="">여</label></td>
-          <td class="inputs"> <input type="text" id="inputs2" value=""> </td>
-          <td class="inputs"> <input type="text" id="phone_num" value=""> </td>
+          <td id="name"class="inputs"><input input name="name2_'.$i.'" type="text" class="inputs1" value="" size="10"></td>
+          <td class="inputs"><input name="fe_name2_'.$i.'"  type="text" class="inputs1" id="input1" value=""></td>
+          <td class="inputs"> <input name="le_name2_'.$i.'" type="text" class="inputs1" value=""> </td>
+          <td class="inputs"> <input type="radio" name="gen2_'.$i.'" id="male" value=""><label for="">남&nbsp;</label><input type="radio" name="gen2_'.$i.'" value=""><label for="">여</label></td>
+          <td class="inputs"> <input name="bir2_'.$i.'" type="text" id="inputs2" value=""> </td>
+          <td class="inputs"> <input name="ph2_'.$i.'" type="text" id="phone_num" value=""> </td>
         </tr>
         </table>';
       }
@@ -561,12 +561,12 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
 
         <tr>
           <td><b >유아'.$i.'</b></td>
-          <td id="name"class="inputs"><input type="text" class="inputs1" value="" size="10"></td>
-          <td class="inputs"><input  type="text" class="inputs1" id="input1" value=""></td>
-          <td class="inputs"> <input type="text" class="inputs1" value=""> </td>
-          <td class="inputs"> <input type="radio" name="gen" id="male" value=""><label for="">남&nbsp;</label><input type="radio" name="gen" value=""><label for="">여</label></td>
-          <td class="inputs"> <input type="text" id="inputs2" value=""> </td>
-          <td class="inputs"> <input type="text" id="phone_num" value=""> </td>
+          <td id="name"class="inputs"><input name="name3_'.$i.'" type="text" class="inputs1" value="" size="10"></td>
+          <td class="inputs"><input name="fe_name3_'.$i.'" type="text" class="inputs1" id="input1" value=""></td>
+          <td class="inputs"> <input name="le_name3_'.$i.'" type="text" class="inputs1" value=""> </td>
+          <td class="inputs"> <input type="radio" name="gen3_'.$i.'" id="male" value=""><label for="">남&nbsp;</label><input type="radio" name="gen3_'.$i.'" value=""><label for="">여</label></td>
+          <td class="inputs"> <input name="bir3_'.$i.'" type="text" id="inputs2" value=""> </td>
+          <td class="inputs"> <input name="ph3_'.$i.'" type="text" id="phone_num" value=""> </td>
         </tr>
         </table>';
       }
@@ -937,7 +937,173 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
           }else if(!member_num){
             alert("인원을선택해주세요");
           }
+          var bus_seat_check=document.getElementsByName('test_table');
+          var bus_seat_check2=document.getElementsByName('test_table2');
+          var bus_seat_check3=document.getElementsByName('test_table3');
 
+          var adult_name_1=document.getElementsByName('adult_name_1');
+          var adult_fe_name_1=document.getElementsByName('adult_fe_name_1');
+          var adult_le_name_1=document.getElementsByName('adult_le_name_1');
+          var adult_gender_1=document.getElementsByName('adult_gender_1');
+          var adult_birr_1=document.getElementsByName('adult_birr_1');
+          var adult_ph_1=document.getElementsByName('adult_ph_1');
+
+          if(adult_name_1[0].value==false){
+            alert("성인1 의 이름을 입력해주세요");
+            return false;
+          }
+          if(adult_fe_name_1[0].value==false){
+            alert("성인1 의 영문성을 입력해주세요");
+            return false;
+          }
+          if(adult_le_name_1[0].value==false){
+            alert("성인1의 영문이름을 입력해주세요");
+            return false;
+          }
+          if(adult_gender_1[0].checked==false&&adult_gender_1[1].checked==false){
+            alert("성인1의 성별을 선택해주세요");
+            return false;
+          }
+          if(adult_birr_1[0].value==false){
+            alert("성인1의 법정생년월일을 입력해주세요");
+            return false;
+          }
+          if(adult_ph_1[0].value==false){
+            alert("성인1의 휴대폰번호를 입력해주세요");
+            return false;
+          }
+
+
+
+
+
+
+          for(var i=0;i<8;i++){
+            if(bus_seat_check[i].style.display=="block"){
+              var name1=document.getElementsByName('name1_'+(i+2));
+              var fe_name1=document.getElementsByName('fe_name1_'+(i+2));
+              var le_name1_=document.getElementsByName('le_name1_'+(i+2));
+              var gen1_=document.getElementsByName('gen1_'+(i+2));
+              var bir1_=document.getElementsByName('bir1_'+(i+2));
+              var ph1_=document.getElementsByName('ph1_'+(i+2));
+
+              if(name1[0].value==false){
+                alert("성인"+(i+2)+"의 이름을 입력해주세요");
+                return false;
+              }
+              if(fe_name1[0].value==false){
+                alert("성인"+(i+2)+"의 영문성을 입력해주세요");
+                return false;
+              }
+              if(le_name1_[0].value==false){
+                alert("성인"+(i+2)+"의 영문이름을 입력해주세요");
+                return false;
+              }
+              if(gen1_[0].checked==false&&gen1_[1].checked==false){
+                alert("성인"+(i+2)+"의 성별을 선택해주세요");
+                return false;
+              }
+              if(bir1_[0].value==false){
+                alert("성인"+(i+2)+"의 법정생년월일을 입력해주세요");
+                return false;
+              }
+              if(ph1_[0].value==false){
+                alert("성인"+(i+2)+"의 휴대폰번호를 입력해주세요");
+                return false;
+              }
+            }
+            // alert(bus_seat_check[i].style.display);
+          }
+
+          for(var i=0;i<=9;i++){
+            if(bus_seat_check2[i].style.display=="block"){
+              var name2=document.getElementsByName('name2_'+(i+1));
+              var fe_name2=document.getElementsByName('fe_name2_'+(i+1));
+              var le_name2_=document.getElementsByName('le_name2_'+(i+1));
+              var gen2_=document.getElementsByName('gen2_'+(i+1));
+              var bir2_=document.getElementsByName('bir2_'+(i+1));
+              var ph2_=document.getElementsByName('ph2_'+(i+1));
+
+              if(name2[0].value==false){
+                alert("아동"+(i+1)+"의 이름을 입력해주세요");
+                return false;
+              }
+              if(fe_name2[0].value==false){
+                alert("아동"+(i+1)+"의 영문성을 입력해주세요");
+                return false;
+              }
+              if(le_name2_[0].value==false){
+                alert("아동"+(i+1)+"의 영문이름을 입력해주세요");
+                return false;
+              }
+              if(gen2_[0].checked==false&&gen2_[1].checked==false){
+                alert("아동"+(i+1)+"의 성별을 선택해주세요");
+                return false;
+              }
+              if(bir2_[0].value==false){
+                alert("아동"+(i+1)+"의 법정생년월일을 입력해주세요");
+                return false;
+              }
+              if(ph2_[0].value==false){
+                alert("아동"+(i+1)+"의 휴대폰번호를 입력해주세요");
+                return false;
+              }
+            }
+          }
+
+
+          for(var i=0;i<=9;i++){
+            if(bus_seat_check3[i].style.display=="block"){
+              var name3=document.getElementsByName('name3_'+(i+1));
+              var fe_name3_=document.getElementsByName('fe_name3_'+(i+1));
+              var le_name3_=document.getElementsByName('le_name3_'+(i+1));
+              var gen3_=document.getElementsByName('gen3_'+(i+1));
+              var bir3_=document.getElementsByName('bir3_'+(i+1));
+              var ph3_=document.getElementsByName('ph3_'+(i+1));
+
+              if(name3[0].value==false){
+                alert("유아"+(i+1)+"의 이름을 입력해주세요");
+                return false;
+              }
+              if(fe_name3_[0].value==false){
+                alert("유아"+(i+1)+"의 영문성을 입력해주세요");
+                return false;
+              }
+              if(le_name3_[0].value==false){
+                alert("유아"+(i+1)+"의 영문이름을 입력해주세요");
+                return false;
+              }
+              if(gen3_[0].checked==false&&gen3_[1].checked==false){
+                alert("유아"+(i+1)+"의 성별을 선택해주세요");
+                return false;
+              }
+              if(bir3_[0].value==false){
+                alert("유아"+(i+1)+"의 법정생년월일을 입력해주세요");
+                return false;
+              }
+              if(ph3_[0].value==false){
+                alert("유아"+(i+1)+"의 휴대폰번호를 입력해주세요");
+                return false;
+              }
+            }
+          }
+          var h_y= document.getElementById('h_y');
+          var n_y= document.getElementById('n_y');
+          var c_y= document.getElementById('c_y');
+          var a_y= document.getElementById('a_y');
+          if(h_y.checked!=true){
+            alert("여행표준약관에 동의하세요");
+            return false;
+          }else if(n_y.checked!=true){
+            alert("위치기반서비스에 동의하세요");
+            return false;
+          }else if(c_y.checked!=true){
+            alert("고유식별정보수집에 동의하세요");
+            return false;
+          }else if(a_y.checked!=true){
+            alert("개인정보활용에 동의하세요");
+            return false;
+          }
 
 
           $.ajax({
@@ -953,7 +1119,8 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
             }
           })
           .done(function(result) {
-
+            // 여기
+            location.href='reserve_complete.php?p_code=<?=json_encode($p_code)?>&p_name=<?=json_encode($p_name)?>&member_num='+member_num+'&adult_val='+adult_val+'&kid_val='+kid_val+'&baby_val='+baby_val;
           })
           .fail(function() {
             console.log("error");

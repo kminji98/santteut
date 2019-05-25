@@ -7,6 +7,18 @@
 =================================================================
 */
 session_start();
+
+  if(isset($_GET['p_code'])){
+    $p_code=$_GET['p_code'];
+    $p_name=$_GET['p_name'];
+    $member_num=$_GET['member_num'];
+    $adult_val=$_GET['adult_val'];
+    $kid_val=$_GET['kid_val'];
+    $baby_val=$_GET['baby_val'];
+  }else{
+    echo "안됨";
+  }
+
 ?>
 <!DOCTYPE html>
 <html lang="ko" dir="ltr">
@@ -34,15 +46,15 @@ session_start();
         <table id="list_tbl_body2" style="">
           <tr>
             <td class="tbl_left">예약코드</td>
-            <td width="800px">코드값</td>
+            <td width="800px"><?=$p_code?></td>
           </tr>
           <tr>
             <td class="tbl_left" id="name_td">상품명</td>
-            <td>상품명</td>
+            <td><?=$p_name?></td>
           </tr>
           <tr>
             <td class="tbl_left">예약인원</td>
-            <td>총 1명 (성인 1명)</td>
+            <td>"총 <?=$member_num?>명 (성인 <?=$adult_val?>명||아동 <?=$kid_val?>명||유아 <?=$baby_val?>명)"</td>
 
           </tr>
         </table>
