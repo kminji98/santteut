@@ -34,14 +34,19 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
       default_detail_value('day_div');
       default_detail_value('add_div');
       default_detail_value('free_div');
+      // 상세검색 조건에 따른 결과
       document.getElementsByName('output')[0].value=<?=json_encode($output)?>;
       document.getElementsByName('sql')[0].value=<?=json_encode($sql)?>;
+      document.getElementsByName('order_condition')[0].value=<?=json_encode($order_condition)?>;
+      document.getElementsByName('order_option')[0].value=<?=json_encode($order_option)?>;
+      document.getElementsByName('order_btn')[0].value=<?=json_encode($order_btn)?>;
+      // document.getElementsByName('order_sql')[0].value=<?=json_encode($sql)?>;
+      // 최신순/요금순/인기순 조건에 따른 결과
       var order_condition = <?=json_encode($order_condition)?>;
       var order_option = <?=json_encode($order_option)?>;
-      var sql = <?=json_encode($sql)?>;
-      alert(sql);
-      // alert(order_option);
+      var order_btn = <?=json_encode($order_btn)?>;
       document.getElementById(order_condition).value=<?=json_encode($order_btn)?>;
+      alert(order_btn);
     };
 
 
@@ -167,7 +172,28 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
           console.log("complete");
         });
 
-      }
+  }
+    //[PAGE BUTTON ACTION]
+    function order_mv_page(p){
+        $.ajax({
+          url: 'package_list_post_page.php',
+          type: 'POST',
+          data: {
+            page: p
+          }
+        })
+        .done(function(result) {
+         document.order_form.page.value = result;
+         document.order_form.submit();
+        })
+        .fail(function() {
+          console.log("error");
+        })
+        .always(function() {
+          console.log("complete");
+        });
+
+  }
 
     function reset_btn(){
       var dp_date_value = document.getElementById('dp_date_value');
@@ -223,7 +249,6 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
           con2.innerHTML="상세검색▼";
       }
   }
-  ////@@@@@MINJI
   function button_change(value){
     var btn = document.getElementById(value);
     if(btn.value==value+"순▼"){
@@ -247,6 +272,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
       document.order_form.order_condition.value = output[0].order_condition;
       document.order_form.order_option.value = output[0].order_option;
       document.order_form.order_btn.value = output[0].order_btn;
+      // alert(document.order_form.order_btn.value);
       document.order_form.submit();
     })
     .fail(function() {
@@ -424,7 +450,8 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
     </form>
       <div id="package_list_view_btn">
         <form name="order_form" action="package_list.php?mode=order" method="post">
-          <input type="hidden" name="post_page" value="">
+          <input type="hidden" name="page" value="">
+          <input type="hidden" name="order_sql" value="">
           <input type="hidden" name="order_condition" value="">
           <input type="hidden" name="order_option" value="desc">
           <input type="hidden" name="order_btn" value="">
@@ -445,8 +472,8 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
           </tr>
 
           <?php
+          mysqli_data_seek($result,$start_record);
           for ($record = $start_record; $record  < $start_record+ROW_SCALE && $record<$total_record; $record++){
-            mysqli_data_seek($result,$record);
             $row=mysqli_fetch_array($result);
             $p_code=$row['p_code'];
             $p_name=$row['p_name'];
@@ -519,6 +546,9 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
                       break;
                     case 'detail':
                       echo( '<button type="button" onclick="detail_search_mv_page('.$i.')">'.$i.'</button>' );
+                      break;
+                    case 'order':
+                      echo( '<button type="button" onclick="order_mv_page('.$i.')">'.$i.'</button>' );
                       break;
                     default:
                       break;
