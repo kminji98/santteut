@@ -15,11 +15,11 @@
 
 class Sendmail {
     /* smtp 의 호스트 설정 : 아래는 naver 일경우 */
-    var $host="ssl://smtp.naver.com";
+    var $host="ssl://smtp.gmail.com";
     /* smtp 계정 아이디 입력 */
-    var $smtp_id="kswoah123@naver.com";
+    var $smtp_id="kimohjoojolee@gmail.com";
     /* smtp 계정 비밀번호 입력 */
-    var $smtp_pw="sksmsqnwkek";
+    var $smtp_pw="dongjin0502";
 
     /* 디버그모드 - 활성 :1, 비활성 : 0; */
     var $debug = 1;
@@ -296,9 +296,9 @@ class Sendmail {
  *   + $bcc_mail : Bcc 메일이 있을경우 (옵션값으로 생략가능)
  *   */
 $config=array(
-    'host'=>'ssl://smtp.naver.com',
-    'smtp_id'=>'kswoah123@naver.com',
-    'smtp_pw'=>'sksmsqnwkek',
+    'host'=>'ssl://smtp.gmail.com',
+    'smtp_id'=>'kimohjoojolee@gmail.com',
+    'smtp_pw'=>'dongjin0502',
     'debug'=>1,
     'charset'=>'utf-8',
     'ctype'=>'text/plain'

@@ -13,8 +13,13 @@
     function insurance_field_click(){
         var con = document.getElementById("insurance_field");
         var con2 = document.getElementById("payment_imformation_field");
+        var button1 = document.getElementById("insurance_btn");
+        var button2 = document.getElementById("payment_imformation_btn");
+
         if(con.style.display=='none'){
             con.style.display = 'block';
+            button1.style.backgroundColor='#35cc2b';
+            button2.style.backgroundColor='#2F9D27';
             con2.style.display='none'
         }
     }
@@ -22,8 +27,12 @@
     function payment_imformation_field_click(){
         var con = document.getElementById("insurance_field");
         var con2 = document.getElementById("payment_imformation_field");
+        var button1 = document.getElementById("insurance_btn");
+        var button2 = document.getElementById("payment_imformation_btn");
         if(con2.style.display=='none'){
             con2.style.display = 'block';
+            button2.style.backgroundColor='#35cc2b';
+            button1.style.backgroundColor='#2F9D27';
             con.style.display='none'
         }
     }
@@ -167,8 +176,8 @@
     <div id="package_detail_imformations">
       <div id="package_detail_imformations_text"><b>기타 정보</b></div>
       <div id="package_detail_imformations_btn_field">
-      <button class="package_detail_imformations_btn" id="insurance_btn" type="button" name="button" onclick="insurance_field_click()">보험 정보</button>
-      <button class="package_detail_imformations_btn" id="payment_imformation_btn" type="button" name="button" onclick="payment_imformation_field_click()">결제 안내</button>
+      <button class="package_detail_imformations_btn" style="border:none; width: 8%; height: 8%; background-color:#35cc2b; color:white;" id="insurance_btn" type="button" name="button" onclick="insurance_field_click()">보험 정보</button>
+      <button class="package_detail_imformations_btn" style="border:none; width: 8%; height: 8%; background-color:#2F9D27; color:white;" id="payment_imformation_btn" type="button" name="button" onclick="payment_imformation_field_click()">결제 안내</button>
       </div>
       <!-- 보험정보 -->
       <div id="insurance_field" style="display :block">
