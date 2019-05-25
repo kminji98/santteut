@@ -62,9 +62,6 @@ if(isset($_GET["mode"]) && $_GET["mode"]=='update'){
     <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.js"></script>
     <script src="./js/official_review_form.js?ver=0"></script>
     <script type="text/javascript">
-        function checked_del(){
-          document.getElementById("del_file").checked = true;
-        }
     </script>
     <title>공식산행후기</title>
   </head>
@@ -76,6 +73,7 @@ if(isset($_GET["mode"]) && $_GET["mode"]=='update'){
     <br>
     <section id="notice">
       <form name="board_form" action="official_review_query.php?mode=<?=$mode?>" method="post" enctype="multipart/form-data">
+      <input type="hidden" name="num" value="<?=$num?>">
       <table border="1">
         <tr>
           <th>작성자</th>
@@ -101,43 +99,43 @@ if(isset($_GET["mode"]) && $_GET["mode"]=='update'){
               echo '<input type="file" name="upfile[]">';
             }else{
              ?>
-             <input type="file" name="upfile[]" onclick='document.getElementById("del_file").checked=true; document.getElementById("del_file").disabled=true;'>
+             <input type="file" name="upfile[]" onclick='document.getElementById("del_file_0").checked=true;'>
              <?php
              if($mode=="update" && !empty($file_name_0)){
                echo "$file_name_0 파일등록";
-               echo '<input type="checkbox" id="del_file" name="del_file" value="1">삭제';
+               echo '<input type="checkbox" id="del_file_0" name="del_file_0" value="1">삭제';
                echo '<div class="clear"></div>';
              }
              ?>
-             <input type="file" name="upfile[]" onclick='document.getElementById("del_file").checked=true; document.getElementById("del_file").disabled=true;'>
+             <input type="file" name="upfile[]" onclick='document.getElementById("del_file_1").checked=true;'>
              <?php
                if($mode=="update" && !empty($file_name_1)){
                  echo "$file_name_1 파일등록";
-                 echo '<input type="checkbox" id="del_file" name="del_file" value="1">삭제';
+                 echo '<input type="checkbox" id="del_file_1" name="del_file_1" value="1">삭제';
                  echo '<div class="clear"></div>';
                }
               ?>
-              <input type="file" name="upfile[]" onclick='document.getElementById("del_file").checked=true; document.getElementById("del_file").disabled=true;'>
+              <input type="file" name="upfile[]" onclick='document.getElementById("del_file_2").checked=true;'>
               <?php
                 if($mode=="update" && !empty($file_name_2)){
                   echo "$file_name_2 파일등록";
-                  echo '<input type="checkbox" id="del_file" name="del_file" value="1">삭제';
+                  echo '<input type="checkbox" id="del_file_2" name="del_file_2" value="1">삭제';
                   echo '<div class="clear"></div>';
                 }
                ?>
-               <input type="file" name="upfile[]" onclick='document.getElementById("del_file").checked=true; document.getElementById("del_file").disabled=true;'>
+               <input type="file" name="upfile[]" onclick='document.getElementById("del_file_3").checked=true;'>
                <?php
                  if($mode=="update" && !empty($file_name_3)){
                    echo "$file_name_3 파일등록";
-                   echo '<input type="checkbox" id="del_file" name="del_file" value="1">삭제';
+                   echo '<input type="checkbox" id="del_file_3" name="del_file_3" value="1">삭제';
                    echo '<div class="clear"></div>';
                  }
                 ?>
-                <input type="file" name="upfile[]" onclick='document.getElementById("del_file").checked=true; document.getElementById("del_file").disabled=true;'>
+                <input type="file" name="upfile[]" onclick='document.getElementById("del_file_4").checked=true;'>
                 <?php
                   if($mode=="update" && !empty($file_name_4)){
                     echo "$file_name_4 파일등록";
-                    echo '<input type="checkbox" id="del_file" name="del_file" value="1">삭제';
+                    echo '<input type="checkbox" id="del_file_4" name="del_file_4" value="1">삭제';
                     echo '<div class="clear"></div>';
                   }
                 }

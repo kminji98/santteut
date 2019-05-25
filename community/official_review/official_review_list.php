@@ -57,7 +57,7 @@ $number=$total_record - $start;
           $sql = "SELECT * FROM `official_review` ORDER BY regist_day DESC;";
           $result = mysqli_query($conn, $sql) or die(mysqli_error($con));
 
-          for($i=1;$i<$total_record;$i++){
+          for($i=0;$i<$total_record;$i++){
             $row = mysqli_fetch_array($result);
             $num = $row['num'];
             $title = $row['title'];
