@@ -451,9 +451,25 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
 
 
       <div id="check_eql">
-        <input type="checkbox" id="box1"><p>성인1이 예약자와 동일</p>
+        <input type="checkbox" id="box1" onclick="set_imfo()"><p>성인1이 예약자와 동일</p>
       </div>
 
+      <script type="text/javascript">
+      var set_check=false;
+        function set_imfo(){
+          var set_name =document.getElementById('set_name');
+          var phone_num =document.getElementById('phone_num');
+          if(set_check==false){
+            set_name.value=<?=json_encode($name)?>;
+            phone_num.value=<?=json_encode($hp)?>;
+            set_check =true;
+          }else{
+            set_name.value="";
+            phone_num.value="";
+            set_check =false;
+          }
+        }
+      </script>
       <table id="tbl4" >
         <tr>
           <td class="left4" colspan="2">한글이름<p class="star">*</p></td>
@@ -466,7 +482,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
 
         <tr>
           <td><b >성인1</b></td>
-          <td id="name"class="inputs"><input type="text" class="inputs1" value="" size="10"></td>
+          <td id="name"class="inputs"><input id="set_name" type="text" class="inputs1" value="" size="10"></td>
           <td class="inputs"><input  type="text" class="inputs1" id="input1" value=""></td>
           <td class="inputs"> <input type="text" class="inputs1" value=""> </td>
 
