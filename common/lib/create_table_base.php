@@ -27,9 +27,9 @@ function create_table($conn, $table_name){
           `hp2` char(12) DEFAULT NULL,
           `email` varchar(45) DEFAULT NULL,
           PRIMARY KEY (`id`)
-        ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+        ) DEFAULT CHARSET=utf8;
         ";
-        break;
+      break;
 
       case 'package' :
           $sql = "CREATE TABLE `package` (
@@ -55,9 +55,9 @@ function create_table($conn, $table_name){
           `p_airplane_num` varchar(30) NOT NULL,
           `p_bus` int(10) NOT NULL,
           PRIMARY KEY (`p_code`)
-        ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-        ";
-        break;
+          ) DEFAULT CHARSET=utf8;
+          ";
+      break;
 
       case 'notice' :
         $sql = "CREATE TABLE `notice` (
@@ -70,22 +70,22 @@ function create_table($conn, $table_name){
         `file_copied` varchar(45) DEFAULT NULL,
         `file_type` varchar(45) DEFAULT NULL,
         PRIMARY KEY (`num`)
-      ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-     ";
-       break;
+        ) DEFAULT CHARSET=utf8;
+        ";
+      break;
 
-       case 'bus' :
+      case 'bus' :
          $sql = "CREATE TABLE `bus` (
          `b_id` varchar(30) ,
          `b_code` varchar(20) NOT NULL,
          `b_people` int(10) ,
          `b_seat` varchar(130)
-       ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-      ";
-        break;
+          ) DEFAULT CHARSET=utf8;
+          ";
+      break;
 
       case 'official_review' :
-      $sql = "CREATE TABLE `official_review` (
+        $sql = "CREATE TABLE `official_review` (
         `num` int(11) NOT NULL AUTO_INCREMENT,
         `title` varchar(100) NOT NULL,
         `content` text NOT NULL,
@@ -107,11 +107,11 @@ function create_table($conn, $table_name){
         `file_copied_4` char(30) DEFAULT NULL,
         `file_type_4` char(30) DEFAULT NULL,
         PRIMARY KEY (`num`)
-      ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;";
-       break;
+        ) DEFAULT CHARSET=utf8;";
+     break;
 
-       case 'mt_information' :
-       $sql = "CREATE TABLE `mt_information` (
+     case 'mt_information' :
+     $sql = "CREATE TABLE `mt_information` (
          `num` int(11) NOT NULL AUTO_INCREMENT,
          `title` varchar(100) NOT NULL,
          `content` text NOT NULL,
@@ -133,10 +133,10 @@ function create_table($conn, $table_name){
          `file_copied_4` char(30) DEFAULT NULL,
          `file_type_4` char(30) DEFAULT NULL,
          PRIMARY KEY (`num`)
-       ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;";
-        break;
+         ) DEFAULT CHARSET=utf8;";
+     break;
 
-       case 'official_review_ripple' :
+     case 'official_review_ripple' :
        $sql = "CREATE TABLE `official_review_ripple` (
        `num` int(11) NOT NULL AUTO_INCREMENT,
        `parent` int(11) NOT NULL,
@@ -145,10 +145,10 @@ function create_table($conn, $table_name){
        `content` text NOT NULL,
        `regist_day` char(20) DEFAULT NULL,
        PRIMARY KEY (`num`)
-     ) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
-       break;
+       ) DEFAULT CHARSET=utf8;";
+      break;
 
-       case 'mt_information_ripple' :
+     case 'mt_information_ripple' :
        $sql = "CREATE TABLE `mt_information_ripple` (
        `num` int(11) NOT NULL AUTO_INCREMENT,
        `parent` int(11) NOT NULL,
@@ -157,11 +157,11 @@ function create_table($conn, $table_name){
        `content` text NOT NULL,
        `regist_day` char(20) DEFAULT NULL,
        PRIMARY KEY (`num`)
-     ) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
-       break;
+       ) DEFAULT CHARSET=utf8;";
+     break;
 
-       case 'reserve' :
-       $sql = "CREATE TABLE `santteut`.`reserve` (
+     case 'reserve' :
+        $sql = "CREATE TABLE `santteut`.`reserve` (
         `r_pk` CHAR(30) NOT NULL,
         `r_code` CHAR(10) NOT NULL,
         `r_id` VARCHAR(45) NOT NULL,
@@ -171,20 +171,20 @@ function create_table($conn, $table_name){
         `r_baby` INT NOT NULL,
         `r_cancel` INT NOT NULL,
         `r_pay` VARCHAR(15) NOT NULL
-      ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;";
-        break;
+        ) DEFAULT CHARSET=utf8;";
+     break;
 
-        case 'bill' :
+     case 'bill' :
         $sql = "CREATE TABLE `bill`(
-          `b_pk` CHAR(30) NOT NULL,
-          `b_code` varchar(10),
-          `b_id` varchar(20),
-          `b_date` varchar(15),
-          `b_way` char(1),
-          `b_pay` int
-        );";
-         break;
-        case 'qna' :
+        `b_pk` CHAR(30) NOT NULL,
+        `b_code` varchar(10),
+        `b_id` varchar(20),
+        `b_date` varchar(15),
+        `b_way` char(1),
+        `b_pay` int
+        ) DEFAULT CHARSET=utf8;";
+        break;
+     case 'qna' :
        $sql = "CREATE TABLE `qna` (
        `num` int(11) unsigned NOT NULL AUTO_INCREMENT,
        `groupnum` int(11) unsigned NOT NULL,
@@ -197,13 +197,24 @@ function create_table($conn, $table_name){
        `hit` int(11) unsigned NOT NULL,
        `secret_ok` varchar(10) NOT NULL,
        PRIMARY KEY (`num`)
-     ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-    ";
-      break;
+       ) DEFAULT CHARSET=utf8;
+       ";
+    break;
+     case 'member_review' :
+       $sql = "CREATE TABLE `member_review` (
+       `num` int(11) NOT NULL AUTO_INCREMENT,
+       `p_code` varchar(10) NOT NULL,
+       `r_pk` char(30) NOT NULL,
+       `content` text NOT NULL,
+       PRIMARY KEY (`num`)
+       ) DEFAULT CHARSET=utf8;
+       ";
+    break;
 
-      default:
+    default:
       echo "<script>alert('해당 테이블이름이 없습니다. ');</script>";
-      break;
+      exit;
+    break;
     }//end of switch
 
     if(mysqli_query($conn,$sql)){
@@ -211,7 +222,6 @@ function create_table($conn, $table_name){
     }else{
       echo "실패원인".mysqli_error($conn);
     }
-
   }//end of if flag
 
 }//end of function

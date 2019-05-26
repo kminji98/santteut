@@ -596,12 +596,7 @@
       var popupY= (window.screen.height /2) - (500 / 2);
       window.open('../../common/lib/google3.php', '', 'status=no, width=800, height=500, left='+ popupX + ', top='+ popupY + ', screenX='+ popupX + ', screenY= '+ popupY);
 
-}
-      // function parent1(){
-      //   // var location_val=map_window.document.getElementById("location_val").value;
-      //   // alert('ㅋ'+location_val);
-      //   alert('성공');
-      // }
+    }
     	/* 예제용 함수 */
     	function saveContent() {
     		Editor.save(); // 이 함수를 호출하여 글을 등록하면 된다
