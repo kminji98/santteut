@@ -9,6 +9,8 @@ session_start();
 include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
 include $_SERVER['DOCUMENT_ROOT']."/santteut/community/official_review/lib/official_review_func.php";
 
+create_table($conn, 'official_review_ripple');
+
 if(empty($_GET['page'])){
   $page=1;
 }else{
