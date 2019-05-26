@@ -18,10 +18,12 @@
         <table id="insert_form">
           <tr>
             <td><p>패키지 코드</p></td>
-            <td> <input type="text" name="p_code" value="<?=$package_number?>" readonly> <p style="display:inline">*종류</p>
-              <select  name="p_period">
-                <option value="국내">국내</option>;
-                <option value="해외">해외</option>;
+            <td> <input type="text" name="p_code" value="<?=$package_number?>" readonly> <p style="display:inline">종류</p>
+
+              <select  name="p_place">
+                <option value="">선택</option>;
+                <option value="1">국내</option>;
+                <option value="2">해외</option>;
               </select>
 
             </td>

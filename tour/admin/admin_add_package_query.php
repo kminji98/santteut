@@ -2,8 +2,15 @@
 session_start();
 include '../../common/lib/db_connector.php';
 
-
+// echo "<script>alert($_POST['p_code']);history.go(-1);</script>";
 //--------------------------------------
+if(!empty($_POST['p_place'])){
+    $p_place = $_POST['p_place'];
+}else{
+    $p_place = "";
+    echo "<script>alert('종류를 입력하세요');history.go(-1);</script>";
+    return false;
+}
 if(!empty($_POST['p_code'])){
     $code = $_POST['p_code'];
 }else{
@@ -358,8 +365,15 @@ if(!empty($_POST['p_bus'])){
           $package_str .= chr($capi);
       }
   $package_num = mt_rand(100000, 999999);
+echo "<script>alert($p_place)</script>";
+  if($p_place=="1"){
+    $airplane_number="0";
+  }else if($p_place=="2"){
   $airplane_number = $package_str . $package_num;
-
+}else{
+  echo "<script>alert('종류를 입력하세요');history.go(-1);</script>";
+  return false;
+}
     // echo "항공".$airplane_number; echo "<br>";
 // alert($content);
 // alert($name);
