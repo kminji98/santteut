@@ -3,25 +3,29 @@ session_start();
 include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
 ?>
 <!DOCTYPE html>
-<script type="text/javascript">
-</script>
 <html lang="ko" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css?ver=5">
-    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/tour/package/css/package_view.css?ver=2">
+    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css?ver=3">
+    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/tour/package/css/package_view.css?ver=3">
+    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/side_bar.css">
 
     <title>산뜻 :: 즐거운 산행</title>
   </head>
     <script type="text/javascript">
-
+    window.onload = function() {
+      onload_button_status();
+    }
     </script>
+
+
   <body>
     <!--로그인 회원가입 로그아웃-->
     <div id="wrap">
     <header>
       <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/login_menu.php";?>
     </header>
+    <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/side_bar.php";?>
     <!-- 윗부분  -->
     <div id="head" >
       <div id="top_box">
@@ -60,7 +64,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
 
         <tr>
           <td class="left" id="res">예약현황</td>
-          <td id="res_now">예약: 0명 좌석: 40 (최소출발 20명)</td>
+          <td id="res_now">예약: <?=$total?>명 좌석: <?=$p_bus?>석 (최소출발 <?=$p_bus_half?>명)</td>
         </tr>
       </table>
 
@@ -164,15 +168,25 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
         <p class="subtext1">※ 아동, 유아요금은 성인 2인과 같은 방 사용조건이며,</p>
         <p class="subtext1">미충족시 아동추가 요금이 발생합니다.</p>
         <p class="subtext1">※ 1인 객실 사용시 추가요금 발생</p>
-        <p id="line">-------------------------------------------------------------------</p>
+        <p id="line">------------------------------------------------------</p>
       </div>
       <div id="button">
-        <div id="reserve_status" onclick="people_submit()"> <b>예약마감</b></div><br>
+        <div id="reserve_status" onclick="people_submit()"> <b id="status"><?=$status?></b></div><br>
         <form id="people_form" name="people_form" action="../reserve/reserve_view.php?mode=<?=$p_code?>" method="post">
           <input id="adult_val" type="hidden" name="adult_val" value="">
           <input id="kid_val" type="hidden" name="kid_val" value="">
           <input id="baby_val" type="hidden" name="baby_val" value="">
         </form>
+
+        <script type="text/javascript">
+          function onload_button_status(){
+          var reserve_status = document.getElementById('reserve_status');
+          var status = document.getElementById('status');
+          if(status.innerHTML=="예약마감"){
+            reserve_status.style.backgroundColor = "#aaaaaa";
+          }
+        }
+        </script>
 
 
         <script type="text/javascript">

@@ -11,5 +11,5 @@ create_table($conn,'mt_information_ripple');
 create_table($conn,'bus');
 create_table($conn,'reserve');
 create_table($conn,'bill');
-// create_table($conn,'qna');
+create_table($conn,'qna');
  ?>

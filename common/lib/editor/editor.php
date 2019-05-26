@@ -93,7 +93,7 @@
 
           <tr>
             <td><p>버스선택</p></td>
-            <td><b>일반</b><input type="radio" name="p_bus" value="28"><b>우등</b><input type="radio" name="p_bus" value="41"></td>
+            <td><b>일반</b><input type="radio" name="p_bus" value="41"><b>우등</b><input type="radio" name="p_bus" value="28"></td>
           </tr>
 
 

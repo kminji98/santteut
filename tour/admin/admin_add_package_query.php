@@ -372,7 +372,6 @@ $bus_sql="INSERT INTO `santteut`.`bus`(`b_code`)VALUES('$code')";
 
 
 mysqli_query($conn, $bus_sql) or die(mysqli_error($conn));
-echo "<script>alert('버스.')</script>";
 $sql= "INSERT INTO `package`
 (`p_code`,
 `p_name`,
