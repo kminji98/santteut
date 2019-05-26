@@ -248,8 +248,6 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
               //예약날짜/ 예약 코드/ 상품명/ 총 결제금액/ 인원/ 출발일*귀국일 / 예약상태 /결제상태 / 후기
               $r_date = $row['r_date'];
               $r_code=$row['r_code'];
-
-              var_dump($r_kid);
               //상품명
               $p_name=$row['p_name'];
               //총 결제금액(결제 해야할 금액 - reserve.r_pay)

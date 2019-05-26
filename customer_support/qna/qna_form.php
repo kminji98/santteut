@@ -44,16 +44,22 @@ if((isset($_GET["mode"])&&$_GET["mode"]=="update") || (isset($_GET["mode"])&&$_G
     mysqli_close($conn);
 
     if($mode == "response"){
-      $title="[답글]".$title;
-      $content="";
+      $title="";
       $content=str_replace("<br>", "<br>▶",$content);
+      $content="";
     }
     mysqli_close($conn);
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="ko" dir="ltr">
   <head>
+    <style media="screen">
+      #qna img{
+        max-width:400px;
+      }
+    </style>
     <meta charset="utf-8">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/customer_support/qna/css/qna_form.css">
@@ -65,6 +71,20 @@ if((isset($_GET["mode"])&&$_GET["mode"]=="update") || (isset($_GET["mode"])&&$_G
     <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.css" rel="stylesheet">
     <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.js"></script>
     <script src="./js/qna_form.js?ver=0"></script>
+    <script type="text/javascript">
+    window.onload = function(){
+      document.getElementById('secret_ok').onclick = function(){
+        var check = document.getElementById('secret_ok');
+        check = check.checked;
+        var pw = document.getElementById('pw');
+        if(check){
+          pw.type = 'hidden';
+        }else{
+          pw.type = 'number';
+        }
+      }
+    }
+    </script>
     <title>문의하기</title>
   </head>
   <body>
@@ -94,15 +114,13 @@ if((isset($_GET["mode"])&&$_GET["mode"]=="update") || (isset($_GET["mode"])&&$_G
         <tr>
           <th>비밀여부</th>
           <td>
-            <select name="secret_ok">
-              <option value="공개">공개</option>
-              <option value="비공개">비공개</option>
-            </select>
+            <input type="checkbox" id="secret_ok" name="secret_ok" value="">비밀글
+            <input type="number" name="pw" id="pw" value="">
           </td>
         </tr>
       </table>
         <div class="admin">
-          <button id="admin_write_btn" onclick='document.qna_insert_form.submit();" type="button" name="button'>완료</button>
+          <button id="admin_write_btn" onclick='document.qna_insert_form.submit();" type="button" name="button"'>완료</button>
           <a href="./qna_list.php"><button id="admin_write_btn" type="button" name="button">목록</button></a>
         </div>
       </form>

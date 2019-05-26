@@ -16,8 +16,6 @@ for($i=0;$i<5;$i++){
 //*************************************************************************
   include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
   session_start();
-// $id = $_SESSION['id'];
-// $name = $_SESSION['name'];
 
 if(isset($_GET["mode"])&&$_GET["mode"]=="insert"){
   $title = trim($_POST["title"]);
@@ -39,10 +37,10 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="insert"){
   $main_img =  $main_img[0];
 
   //include 파일업로드기능
-  include $_SERVER['DOCUMENT_ROOT']."/santteut/community/official_review/lib/file_upload.php";
+  include $_SERVER['DOCUMENT_ROOT']."/santteut/community/mt_information/lib/file_upload.php";
 
   //파일의 실제명과 저장된 파일명을 삽입한다.
-  $sql = "INSERT INTO `official_review` VALUES (null, '$q_title', '$q_content', '$regist_day', '$main_img',
+  $sql = "INSERT INTO `mt_information` VALUES (null, '$q_title', '$q_content', '$regist_day', '$main_img',
     '$upfile_name[0]', '$copied_file_name[0]', 'text',
     '$upfile_name[1]', '$copied_file_name[1]', 'text',
     '$upfile_name[2]', '$copied_file_name[2]', 'text',
@@ -54,7 +52,7 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="insert"){
     alert_back('Error: '.mysqli_error($conn));
   }
 
-  $sql = "SELECT num FROM `official_review` ORDER BY num desc limit 1;";
+  $sql = "SELECT num FROM `mt_information` ORDER BY num desc limit 1;";
   $result = mysqli_query($conn, $sql);
   if(!$result){
     alert_back('Error: ' .mysqli_error($conn));
@@ -63,7 +61,7 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="insert"){
   $num = $row['num'];
   mysqli_close($conn);
 
-  echo "<script>location.href='./official_review_view.php?num=$num';</script>";
+  echo "<script>location.href='./mt_information_view.php?num=$num';</script>";
 
 }else if(isset($_GET["mode"])&&$_GET["mode"]=="delete"){
   if($_SESSION["id"]!=admin){
@@ -73,7 +71,7 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="insert"){
   $q_num = mysqli_real_escape_string($conn, $num);
 
   //삭제할 파일의 파일명을 가져와서 삭제한다.
-  $sql = "SELECT `file_copied_0`,`file_copied_1`,`file_copied_2`,`file_copied_3`,`file_copied_4` FROM `official_review` WHERE num='$q_num';";
+  $sql = "SELECT `file_copied_0`,`file_copied_1`,`file_copied_2`,`file_copied_3`,`file_copied_4` FROM `mt_information` WHERE num='$q_num';";
   $result = mysqli_query($conn,$sql);
   if (!$result) {
     alert_back('Error: '.mysqli_error($conn));
@@ -101,13 +99,13 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="insert"){
     unlink("./data/".$filed_copied_4);
   }
 
-  $sql ="DELETE FROM `official_review` WHERE num='$q_num'";
+  $sql ="DELETE FROM `mt_information` WHERE num='$q_num'";
   $result = mysqli_query($conn,$sql);
   if(!$result){
     die('Error:' .mysqli_error($conn));
   }
   mysqli_close($conn);
-  echo "<script>location.href='./official_review_list.php';</script>";
+  echo "<script>location.href='./mt_information_list.php';</script>";
 
 }else if(isset($_GET["mode"]) && $_GET["mode"]=="update"){
   $content = trim($_POST["content"]);
@@ -131,11 +129,11 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="insert"){
   $main_img = explode('"', $main_img[1]);
   $main_img =  $main_img[0];
 
-  include $_SERVER['DOCUMENT_ROOT']."/santteut/community/official_review/lib/file_upload.php";
+  include $_SERVER['DOCUMENT_ROOT']."/santteut/community/mt_information/lib/file_upload.php";
 
   if(isset($_POST['del_file_0']) && $_POST['del_file_0'] =='1'){
 
-    $sql = "UPDATE `official_review` SET `file_name_0` = '', `file_copied_0` = '' WHERE num = $q_num;";
+    $sql = "UPDATE `mt_information` SET `file_name_0` = '', `file_copied_0` = '' WHERE num = $q_num;";
     $result = mysqli_query($conn,$sql);
     if(!$result){
       die('Error: '. mysqli_error($conn));
@@ -144,7 +142,7 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="insert"){
   }
 
   if(!empty($upfile_name[0])){
-    $sql = "UPDATE `official_review` SET `file_name_0` = '$upfile_name[0]', `file_copied_0` = '$copied_file_name[0]' WHERE `num` = '$q_num';";
+    $sql = "UPDATE `mt_information` SET `file_name_0` = '$upfile_name[0]', `file_copied_0` = '$copied_file_name[0]' WHERE `num` = '$q_num';";
     $result = mysqli_query($conn, $sql);
     if(!$result){
       die('Error: '. mysqli_error($conn));
@@ -153,7 +151,7 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="insert"){
 
   if(isset($_POST['del_file_1']) && $_POST['del_file_1'] =='1'){
 
-    $sql = "UPDATE `official_review` SET `file_name_1` = '', `file_copied_1` = '' WHERE `num` = '$q_num';";
+    $sql = "UPDATE `mt_information` SET `file_name_1` = '', `file_copied_1` = '' WHERE `num` = '$q_num';";
     $result = mysqli_query($conn,$sql);
     if(!$result){
       die('Error: '. mysqli_error($conn));
@@ -161,7 +159,7 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="insert"){
   }
 
   if(!empty($upfile_name[1])){
-    $sql = "UPDATE `official_review` SET `file_name_1` = '$upfile_name[1]', `file_copied_1` = '$copied_file_name[1]' WHERE `num` = '$q_num';";
+    $sql = "UPDATE `mt_information` SET `file_name_1` = '$upfile_name[1]', `file_copied_1` = '$copied_file_name[1]' WHERE `num` = '$q_num';";
     $result = mysqli_query($conn, $sql);
     if(!$result){
       die('Error: '. mysqli_error($conn));
@@ -171,7 +169,7 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="insert"){
   if(isset($_POST['del_file_2']) && $_POST['del_file_2'] =='1'){
 
 
-    $sql = "UPDATE `official_review` SET `file_name_2` = '', `file_copied_2` = '' WHERE `num` = '$q_num';";
+    $sql = "UPDATE `mt_information` SET `file_name_2` = '', `file_copied_2` = '' WHERE `num` = '$q_num';";
     $result = mysqli_query($conn,$sql);
     if(!$result){
       die('Error: '. mysqli_error($conn));
@@ -180,7 +178,7 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="insert"){
   }
 
   if(!empty($upfile_name[2])){
-    $sql = "UPDATE `official_review` SET `file_name_2` = '$upfile_name[2]', `file_copied_2` = '$copied_file_name[2]' WHERE `num` = '$q_num';";
+    $sql = "UPDATE `mt_information` SET `file_name_2` = '$upfile_name[2]', `file_copied_2` = '$copied_file_name[2]' WHERE `num` = '$q_num';";
     $result = mysqli_query($conn, $sql);
     if(!$result){
       die('Error: '. mysqli_error($conn));
@@ -189,7 +187,7 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="insert"){
 
   if(isset($_POST['del_file_3']) && $_POST['del_file_3'] =='1'){
 
-    $sql = "UPDATE `official_review` SET `file_name_3` = '', `file_copied_3` = '' WHERE `num` = '$q_num';";
+    $sql = "UPDATE `mt_information` SET `file_name_3` = '', `file_copied_3` = '' WHERE `num` = '$q_num';";
     $result = mysqli_query($conn,$sql);
     if(!$result){
       die('Error: '. mysqli_error($conn));
@@ -198,7 +196,7 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="insert"){
   }
 
   if(!empty($upfile_name[3])){
-    $sql = "UPDATE `official_review` SET `file_name_3` = '$upfile_name[3]', `file_copied_3` = '$copied_file_name[3]' WHERE `num` = '$q_num';";
+    $sql = "UPDATE `mt_information` SET `file_name_3` = '$upfile_name[3]', `file_copied_3` = '$copied_file_name[3]' WHERE `num` = '$q_num';";
     $result = mysqli_query($conn, $sql);
     if(!$result){
       die('Error: '. mysqli_error($conn));
@@ -207,7 +205,7 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="insert"){
 
   if(isset($_POST['del_file_4']) && $_POST['del_file_4'] =='1'){
 
-    $sql = "UPDATE `official_review` SET `file_name_4` = '', `file_copied_4` = '' WHERE `num` = '$q_num';";
+    $sql = "UPDATE `mt_information` SET `file_name_4` = '', `file_copied_4` = '' WHERE `num` = '$q_num';";
     $result = mysqli_query($conn,$sql);
     if(!$result){
       die('Error: '. mysqli_error($conn));
@@ -216,20 +214,20 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="insert"){
   }
 
   if(!empty($upfile_name[4])){
-    $sql = "UPDATE `official_review` SET `file_name_4` = '$upfile_name[4]', `file_copied_4` = '$copied_file_name[4]' WHERE `num` = '$q_num';";
+    $sql = "UPDATE `mt_information` SET `file_name_4` = '$upfile_name[4]', `file_copied_4` = '$copied_file_name[4]' WHERE `num` = '$q_num';";
     $result = mysqli_query($conn, $sql);
     if(!$result){
       die('Error: '. mysqli_error($conn));
     }
   }
 
-  $sql = "UPDATE `official_review` SET `title` = '$q_title', `content` = '$q_content', `regist_day` = '$regist_day', `main_img` = '$main_img' WHERE num = '$q_num';";
+  $sql = "UPDATE `mt_information` SET `title` = '$q_title', `content` = '$q_content', `regist_day` = '$regist_day', `main_img` = '$main_img' WHERE num = '$q_num';";
   $result = mysqli_query($conn, $sql);
   if (!$result){
     die('Error: '.mysqli_error($conn));
   }
 
-  echo "<script>location.href='./official_review_view.php?num=$num';</script>";
+  echo "<script>location.href='./mt_information_view.php?num=$num';</script>";
 }else if(isset($_GET["mode"]) && $_GET["mode"] == "insert_ripple"){
   if(empty($_POST["ripple_content"])){
     echo "<script>alert('댓글 내용을 입력하세요.');history.go(-1);</script>";
@@ -247,37 +245,25 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="insert"){
   $q_parent = mysqli_real_escape_string($conn, $parent);
   $regist_day = date("Y-m-d (H:i)");
 
-  $sql = "INSERT INTO `official_review_ripple` VALUES (null, '$q_parent', '$q_id', '$q_name', '$q_content', '$regist_day')";
+  $sql = "INSERT INTO `mt_information_ripple` VALUES (null, '$q_parent', '$q_id', '$q_name', '$q_content', '$regist_day')";
   $result = mysqli_query($conn, $sql);
   if(!$result){
     die('Error: ' . mysqli_error($conn));
   }
   mysqli_close($conn);
-  echo "<script>location.href='./official_review_view.php?num=$parent';</script>";
+  echo "<script>location.href='./mt_information_view.php?num=$parent';</script>";
 }
 
 }else if(isset($_GET["mode"]) && $_GET["mode"] == "delete_ripple"){
-  $ripple_num = $_POST['num'];
-  $sql = "SELECT * FROM `official_review_ripple` WHERE num='$ripple_num';";
-  $result = mysqli_query($conn, $sql);
-  if(!$result){
-    alert_back('Error: ' .mysqli_error($conn));
-  }
-  $row = mysqli_fetch_array($result);
-  $id = $row['id'];
-
-  if(!($_SESSION["id"]=="admin" || $id==$_SESSION["id"])){
-    alert_back('삭제 권한이 없습니다.');
-  }
   $num = test_input($_POST["num"]);
   $parent = test_input($_POST["parent"]);
   $q_num = mysqli_real_escape_string($conn, $num);
-  $sql = "DELETE FROM `official_review_ripple` WHERE num=$q_num";
+  $sql = "DELETE FROM `mt_information_ripple` WHERE num=$q_num";
   $result = mysqli_query($conn, $sql);
   if(!$result){
     die('Error: '.mysqli_error($conn));
   }
   mysqli_close($conn);
-  echo "<script>location.href='official_review_view.php?num=$parent';</script>";
+  echo "<script>location.href='mt_information_view.php?num=$parent';</script>";
 }
 ?>

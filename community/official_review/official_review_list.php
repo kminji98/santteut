@@ -7,10 +7,7 @@ $total_record=0;
 //******************************************************************
 session_start();
 
-//$name = $_SESSION['name'];
-
 include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/create_table.php";
-
 
 create_table($conn, 'official_review');//공식산행후기 메인 테이블 생성
 
@@ -98,7 +95,7 @@ $view_num = $total_record - $start_record;
           </table>
         </form>
       </section>
-      <section style="padding-top: 20px;">
+      <section id="image_list" style="padding-top: 50px;">
         <?php
           $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
 
@@ -123,6 +120,9 @@ $view_num = $total_record - $start_record;
       </section>
     </div>
     <div class="clear"></div>
+    <div style="padding-bottom: 40px;">
+      <a href="./official_review_form.php"><input type="button" style="width:60px; height:24px; background-color: #2F9D27; border: 1px solid #2F9D27; color: white; margin-left:1200px;" value="글쓰기"></a>
+    </div>
     <div class="page_button_group">
       <?php
       //현재 블럭의 시작 페이지가 페이지 스케일 보다 클 때 -> 처음으로 버튼 생성 + 이전 블럭 존재

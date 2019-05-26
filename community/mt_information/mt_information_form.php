@@ -20,7 +20,7 @@ if(isset($_GET["mode"]) && $_GET["mode"]=='update'){
   $num = test_input($_GET["num"]);
   $q_num = mysqli_real_escape_string($conn, $num);
 
-  $sql = "SELECT * FROM `official_review` WHERE num='$q_num';";
+  $sql = "SELECT * FROM `mt_information` WHERE num='$q_num';";
   $result = mysqli_query($conn, $sql);
   if(!$result){
     die('Error: '.mysqli_error($conn));
@@ -57,7 +57,7 @@ if(isset($_GET["mode"]) && $_GET["mode"]=='update'){
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css">
-    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/community/official_review/css/official_review_form.css">
+    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/community/mt_information/css/mt_information_form.css">
     <!-- include libraries(jQuery,bootstrap) -->
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
@@ -65,10 +65,10 @@ if(isset($_GET["mode"]) && $_GET["mode"]=='update'){
     <!-- include summernote css/js -->
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.css">
     <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.js"></script>
-    <script src="./js/official_review_form.js?ver=0"></script>
+    <script src="./js/mt_information_form.js?ver=0"></script>
     <script type="text/javascript">
     </script>
-    <title>공식산행후기</title>
+    <title>명산정보</title>
   </head>
   <body>
     <header>
@@ -77,7 +77,7 @@ if(isset($_GET["mode"]) && $_GET["mode"]=='update'){
     <br>
     <br>
     <section id="notice">
-      <form name="board_form" action="official_review_query.php?mode=<?=$mode?>" method="post" enctype="multipart/form-data">
+      <form name="board_form" action="mt_information_query.php?mode=<?=$mode?>" method="post" enctype="multipart/form-data">
       <input type="hidden" name="num" value="<?=$num?>">
       <table border="1">
         <tr>
@@ -150,7 +150,7 @@ if(isset($_GET["mode"]) && $_GET["mode"]=='update'){
       </table>
       <div id="write_button">
         <input type="submit" style="width:50px; height:24px; background-color: #2F9D27; border: 1px solid #2F9D27; color: white;" value="완료">&nbsp;
-        <a href="./official_review_list.php"><input type="button" style="width:50px; height:24px; background-color: #2F9D27; border: 1px solid #2F9D27; color: white;" value="목록"></a>
+        <a href="./mt_information_list.php"><input type="button" style="width:50px; height:24px; background-color: #2F9D27; border: 1px solid #2F9D27; color: white;" value="목록"></a>
       </div><!--end of write_button-->
     </form>
     </section>

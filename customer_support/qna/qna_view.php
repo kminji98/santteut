@@ -20,7 +20,7 @@ if(isset($_GET["num"]) && !empty($_GET["num"])){
     $hit = test_input($_GET["hit"]);
     $q_num = mysqli_real_escape_string($conn, $num);
 
-    $sql="UPDATE `qna` SET `hit`=$hit WHERE `num`=$q_num;";
+    $sql="UPDATE `qna` SET `hit`=$hit WHERE `num`='$q_num';";
     $result = mysqli_query($conn,$sql);
     if (!$result) {die('Error: ' . mysqli_error($conn));}
 
@@ -35,8 +35,6 @@ if(isset($_GET["num"]) && !empty($_GET["num"])){
     $content= $row['content'];
     $title=str_replace("\n", "<br>",$title);
     $title=str_replace(" ", "&nbsp;",$title);
-    $content=str_replace("\n", "<br>",$content);
-    $content=str_replace(" ", "&nbsp;",$content);
     $regist_day=$row['regist_day'];
     mysqli_close($conn);
 }
@@ -50,6 +48,11 @@ if(isset($_GET["num"]) && !empty($_GET["num"])){
     <script type="text/javascript" src="./js/qna_view.js?ver=1"></script>
 
     <title>문의하기</title>
+    <style media="screen">
+      #qna img{
+        max-width:400px;
+      }
+    </style>
   </head>
   <body>
     <header>

@@ -6,6 +6,8 @@ create_table($conn,'package');
 create_table($conn,'notice');
 create_table($conn,'official_review');
 create_table($conn,'official_review_ripple');
+create_table($conn,'mt_information');
+create_table($conn,'mt_information_ripple');
 create_table($conn,'bus');
 create_table($conn,'reserve');
 create_table($conn,'bill');
