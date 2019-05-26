@@ -205,6 +205,7 @@ function create_table($conn, $table_name){
        `num` int(11) NOT NULL AUTO_INCREMENT,
        `p_code` varchar(10) NOT NULL,
        `r_pk` char(30) NOT NULL,
+       `title` varchar(100) NOT NULL,
        `content` text NOT NULL,
        `id` char(20) NOT NULL,
        PRIMARY KEY (`num`)
