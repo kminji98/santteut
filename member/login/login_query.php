@@ -22,6 +22,11 @@ $login_passwd = mysqli_real_escape_string($conn, test_input($login_passwd));
 
     $row=mysqli_fetch_array($result);
 
+    if(empty($row['id'])){
+      echo '<script>alert("아이디 또는 패스워드 오류입니다.");history.go(-1);</script>';
+      exit;
+    }
+
     $_SESSION['id']= $row['id'];
     $_SESSION['name']= $row['name'];
 

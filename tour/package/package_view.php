@@ -177,7 +177,16 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
 
         <script type="text/javascript">
           function people_submit(){
+            var empty_flag =<?=json_encode($_SESSION['id'])?>;
+
+            if(empty_flag==null){
+              alert('로그인 해주세요!');
+              location.href='../../member/login/login.php';
+              return false;
+            }
+
             document.people_form.submit();
+
           }
         </script>
 
