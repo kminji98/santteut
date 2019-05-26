@@ -117,14 +117,6 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
           $("#day2").append("<option value="+i+">"+i+"</option>");
           }
         });
-
-        $("input[name='review_btn']").click(function(event) {
-          // alert($(this).attr('id'));
-          var popupX = (window.screen.width / 2) - (800 / 2);
-          var popupY= (window.screen.height /2) - (500 / 2);
-          // $p_code 가 들어가야함 
-          window.open("../member_review/member_review.php?code=", '', 'status=no, width=800, height=500, left='+ popupX + ', top='+ popupY + ', screenX='+ popupX + ', screenY= '+ popupY);
-        });
       });
       function lastday(year, month){
         var res = new Date(year, month,0);
@@ -244,19 +236,18 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
             <td>총 결제금액</td>
             <td>인원</td>
             <td>출발일/귀국일</td>
-            <td>예약/결제상태</td>
-            <td>취소</td>
-            <td>산행후기</td>
+            <td>예약상태</td>
+            <td>결제상태</td>
+            <td>후기</td>
           </tr>
           <output id="list_tbl_body_output">
             <?php
             mysqli_data_seek($result,$start_record);
             for ($record = $start_record; $record  < $start_record+ROW_SCALE && $record<$total_record; $record++){
               $row=mysqli_fetch_array($result);
-              //예약날짜/ 예약 코드/ 상품명/ 총 결제금액/ 인원/ 출발일*귀국일 / 예약/결제상태 /취소 / 후기
-              //예약 pk 저장
-              $r_pk = $row['r_pk'];
+              //예약날짜/ 예약 코드/ 상품명/ 총 결제금액/ 인원/ 출발일*귀국일 / 예약상태 /결제상태 / 후기
               $r_date = $row['r_date'];
+              $r_pk = $row['r_pk'];
               $r_code=$row['r_code'];
               //상품명
               $p_name=$row['p_name'];
@@ -264,6 +255,7 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
               $r_pay=$row['r_pay'];
               //인원
               $r_adult=$row['r_adult'];
+//@@@@@@@@@@@MINJI
               $r_kid=$row['r_kid'];
               $r_baby=$row['r_baby'];
               $r_total = $r_adult + $r_kid + $r_baby;
@@ -274,19 +266,24 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
               $p_arr_date1 = date('y-m-d', $timestamp);
               $p_arr_date2 = "20".$p_arr_date1;
               //예약상태
+              //총 상품금액
+              $b_pay=$row['b_pay'];
 
-              $bill_sql = "SELECT * FROM `bill` where `b_code`='$r_code'";
-              //취소
+
+              $bill_sql = "SELECT * FROM `bill` where `b_code`=$r_code";
+              //결제상태
               $bill_result=mysqli_query($conn,$bill_sql);
               $count=mysqli_num_rows($bill_result);
               $bill_row=mysqli_fetch_array($bill_result);
 
               $bill_status =$bill_row['b_pay'];
               if(empty($count)){
-                $bill_status = "예약취소";
-              }else{
-                $bill_status = "결제취소";
+                $bill_status = "결제미완료";
               }
+              // $b_pay=$bill_row['b_pay'];
+
+              $p_pay=$row['p_pay'];
+              //후기
 
               $reserve_status_sql = "SELECT sum(`r_adult`+`r_kid`+`r_baby`),`p_bus` from `package` inner join `reserve` on `package`.`p_code` = `reserve`.`r_code` where `reserve`.`r_code` = '$r_code';";
               $result_status_sql=mysqli_query($conn,$reserve_status_sql);
@@ -301,27 +298,12 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
               }
 
 
+
               if($total<$p_bus_half){
                 $status="예약완료";
               }
               if($total>=$p_bus_half){
-                $status="<a style='color:red;' href='../bill/bill_view.php'>결제대기</a>";
-              }
-
-              //산행후기 review @@@@@@@@@MINJI0527
-              $review_sql = "SELECT * FROM `member_review` where `r_pk`='$r_pk'";
-              //취소
-              $review_result=mysqli_query($conn,$review_sql);
-              $review_row=mysqli_fetch_array($review_result);
-
-              //해당 예약 항목의 후기 여부 확인 -> 후기 없으면 작성 form /있으면 보여주기
-              $review_status =$review_row['num'];
-              // $r_pk = "aaa";
-              if(empty(mysqli_num_rows($review_result))){
-                // $review_status='<button type="button" name="button" onclick="review("../member_review/member_review.php");" >후기작성</button>';
-                $review_status='<input type="button" name="review_btn" id="'.$r_pk.'" value="후기">';
-              }else{
-                // $review_status='<button type="button" name="button" onclick="review("../member_review/member_review.php");" >후기확인</button>';
+                $status="<a style='color:red;' href='../bill/bill_view.php?r_pk=$r_pk'>결제대기</a>";
               }
              ?>
              <tr>
@@ -332,12 +314,12 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
                <td><?=$r_total?></td>
                <td><?=$p_dp_date?><br><?=$p_arr_date2?></td>
 
-               <!-- //예약 및 결제상태
-               //취소
+               <!-- //예약상태
+               //결제상태
                //후기 -->
                <td><?=$status?></td>
                <td><?=$bill_status?></td>
-               <td><?=$review_status?></td>
+               <td></td>
              </tr>
              <?php
                }

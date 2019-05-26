@@ -1,6 +1,11 @@
+<?php
+include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/bill/bil_query.php";
+
+?>
 <!DOCTYPE html>
 <html lang="ko" dir="ltr">
   <head>
+
     <meta charset="utf-8">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/tour/package/css/package_list.css">
@@ -82,9 +87,9 @@
         <p id="baby">유아</p>
         <div class="" style="display:inline-block;">
           &nbsp;&nbsp;&nbsp;
-        <input readonly type="text" size="4" name="" value="">&nbsp;&nbsp;
-        <input readonly type="text" size="4" name="" value="">&nbsp;&nbsp;
-        <input readonly type="text" size="4" name="" value="">
+        <input disabled type="text" size="4" name="" value="<?=$r_adult?>">&nbsp;&nbsp;
+        <input disabled type="text" size="4" name="" value="<?=$r_kid?>">&nbsp;&nbsp;
+        <input disabled type="text" size="4" name="" value="<?=$r_baby?>">
         </div>
         <script type="text/javascript">
           var adult_pay=0;
@@ -131,7 +136,7 @@
         <?php
         $p_pay= number_format($p_pay);
          ?>
-        <b id="money"><?=$p_pay?></b> <p id="won">원</p>
+        <b id="money"><?=$r_pay?></b> <p id="won">원</p>
         <p class="subtext1">유류할증료,제세공과금 포함</p>
         <p class="subtext1">※유류할증료 및 제세공과금은 유가와 환율에</p>
         <p class="subtext1">따라 변동될 수 있습니다.</p>
@@ -150,23 +155,24 @@
 
         <script type="text/javascript">
           function people_submit(){
-            var empty_flag =<?=json_encode($_SESSION['id'])?>;
-
-            if(empty_flag==null){
-              alert('로그인 해주세요!');
-              location.href='../../member/login/login.php';
+          var pay=document.getElementsByName('pay');
+          if(pay[0].checked==true){
+            var select_bank=document.getElementById('select_bank');
+            if(select_bank.value==""){
+              alert("은행을 선택해 주세요");
               return false;
             }
-
-            document.people_form.submit();
-
+            alert(select_bank.value);
+          }else{
+            alert("pay2"+pay[1].checked);
+          }
           }
         </script>
 
 
 
 
-        <a href="../cart/cart_list.php"><div id="go_cart"> <b>취소하기</b></div></a>
+        <a href="../reserve/reserve_list.php"><div id="go_cart"> <b>예약목록 보기</b></div></a>
       </div>
       <div id="right_footer"></div>
     </div>
@@ -179,25 +185,25 @@
       <table id="tbl1">
         <tr>
           <td class="left2" id="pac_name" >상품명</td>
-          <td id="pac_name2">백두산이다아아아아아아아이야아아아아아앙</td>
+          <td id="pac_name2"><?=$p_name?></td>
         </tr>
 
         <tr>
           <td class="left2" id="pac_code">상품코드</td>
-          <td id="pac_code2">ABC123455</td>
+          <td id="pac_code2"><?=$p_code?></td>
         </tr>
         <tr>
           <td rowspan="3" class="left2" id="sch1">일정</td>
-          <td id="period1">6일</td>
+          <td id="period1"><?=$p_period?></td>
         </tr>
 
         <tr>
-          <td id="go"><div class="gb2">한국출발</div> </td>
+            <td id="go"><div class="gb2" style="display:inline-block;">한국출발</div>  <?php echo $dp_date[0]."년 ".$dp_date[1]."월 ".$dp_date[2]."일 "." (".$day.") ".$p_dp_time ?></td>
 
         </tr>
 
         <tr>
-          <td id="back"><div class="gb2" >한국도착</div> </td>
+          <td id="back"><div class="gb2" style="display:inline-block;">한국도착</div> <?php echo $dp_date2[0]."년 ".$dp_date2[1]."월 ".$dp_date2[2]."일 "." (".$day2.") ".$p_arr_time ?></td>
 
         </tr>
       </table>
@@ -208,14 +214,15 @@
       <table id="tbl2">
         <tr>
           <td class="left2">예약자명*</td>
-          <td> <input type="text" id="res_name" value=""> </td>
+          <td> <input disabled type="text" id="res_name" value="<?=$m_name?>"> </td>
           <td class="left2">휴대폰번호*</td>
-          <td> <input type="text" id="res_phone" value=""> </td>
+          <td> <input disabled type="text" id="res_phone" value="<?=$m_email?>"> </td>
         </tr>
 
         <tr>
           <td class="left2">이메일*</td>
-          <td> <input type="text" id="res_email1" value=""> @ <input type="text" id="res_email2" value=""> </td>
+          <td> <input disabled type="text" id="res_email1" value="<?=$hp?>"></td>
+          <td></td><td></td>
         </tr>
       </table>
     </div>
@@ -225,35 +232,35 @@
       <div id="package_detail_imformation_text"><b>상품가격</b></div>
       <table id="package_detail_imformation_table">
         <tr >
-          <td colspan="2" id="package_detail_imformation_division"><b>구분</b></td>
+          <td id="package_detail_imformation_division"><b>구분</b></td>
           <td id="package_detail_imformation_adult"><b>성인 <br>(만 12세이상)</b></td>
           <td id="package_detail_imformation_child"><b>아동 <br>(만 12세미만)</b></td>
           <td id="package_detail_imformation_baby"><b>유아 <br>(만 2세미만)</b></td>
         </tr>
-        <tr>
-          <td rowspan="4" id="package_detail_imformation_pay"><b>상품 가격</b></td>
+        <!-- <tr>
+          <td rowspan="3" id="package_detail_imformation_pay"><b>상품 가격</b></td>
           <td class="package_detail_imformation_pay_field"><b>기본상품가격</b></td>
-          <td class="package_detail_imformation_pay_field_value">성인 값</td>
-          <td class="package_detail_imformation_pay_field_value">아동 값</td>
-          <td class="package_detail_imformation_pay_field_value">유아 값</td>
+          <td class="package_detail_imformation_pay_field_value"><?=$p_pay?></td>
+          <td class="package_detail_imformation_pay_field_value"><?=$p_pay*0.7?></td>
+          <td class="package_detail_imformation_pay_field_value"><?=$p_pay*0.5?></td>
+        </tr> -->
+        <tr>
+          <td id="package_detail_imformation_pay" class="package_detail_imformation_pay_field"><b>기본상품가격</b></td>
+          <td class="package_detail_imformation_pay_field_value"> <?=$p_pay*1000*0.922?>원</td>
+          <td class="package_detail_imformation_pay_field_value"> <?=$p_pay*1000*0.922*0.7?>원</td>
+          <td class="package_detail_imformation_pay_field_value"><?=$p_pay*1000*0.922*0.5?>원</td>
         </tr>
         <tr>
           <td class="package_detail_imformation_pay_field"><b>유류할증료</b></td>
-          <td class="package_detail_imformation_pay_field_value">성인 값</td>
-          <td class="package_detail_imformation_pay_field_value">아동 값</td>
-          <td class="package_detail_imformation_pay_field_value">유아 값</td>
-        </tr>
-        <tr>
-          <td class="package_detail_imformation_pay_field"><b>전세공과금</b></td>
-          <td class="package_detail_imformation_pay_field_value">성인 값</td>
-          <td class="package_detail_imformation_pay_field_value">아동 값</td>
-          <td class="package_detail_imformation_pay_field_value">유아 값</td>
+          <td class="package_detail_imformation_pay_field_value"> <?=$p_pay*1000*0.078?>원</td>
+          <td class="package_detail_imformation_pay_field_value"> <?=$p_pay*1000*0.7*0.078?>원</td>
+          <td class="package_detail_imformation_pay_field_value"><?=$p_pay*1000*0.5*0.078?>원</td>
         </tr>
         <tr>
           <td class="package_detail_imformation_pay_field"><b>소계</b></td>
-          <td class="package_detail_imformation_pay_field_value_final">성인 값</td>
-          <td class="package_detail_imformation_pay_field_value_final">아동 값</td>
-          <td class="package_detail_imformation_pay_field_value_final">유아 값</td>
+          <td class="package_detail_imformation_pay_field_value_final"><?=$p_pay*1000?>원</td>
+          <td class="package_detail_imformation_pay_field_value_final"><?=$p_pay*1000*0.7?>원</td>
+          <td class="package_detail_imformation_pay_field_value_final"><?=$p_pay*1000*0.5?>원</td>
         </tr>
       </table>
     </div>
@@ -263,7 +270,7 @@
       <table id="package_minimum_person_imformation_table">
         <tr>
           <td id="person_standard"><b>최소출발인원 기준</b></td>
-          <td id="person_standard_value">값</td>
+          <td id="person_standard_value"> <b style="color:#35cc2b;font-size:17px;"><?=$p_bus?></b> </td>
           <td id="commission_standard"><b>최소수수료 부과 기준</b></td>
           <td class="commission_standard_value"><b>V </b>표준약관 적용</td>
           <td class="commission_standard_value">특별약관 적용</td>
@@ -385,11 +392,11 @@
         <tr>
           <td id="payment_choice_way"><b>결제수단</b></td>
           <td id="payment_choice_direct">
-            <input id="payment_choice_direct_radiobtn" type="radio" name="pay" value="" onclick="payment_choice_direct_radiobtn_click()" checked="checked">
+            <input id="payment_choice_direct_radiobtn" type="radio" name="pay" value="1" onclick="payment_choice_direct_radiobtn_click()" checked="checked">
             <b>무통장입금</b>
           </td>
           <td id="payment_choice_kakaopay">
-            <input id="kakopay_radiobtn" type="radio" name="pay" value="" onclick="kakopay_radiobtn_click()">
+            <input id="kakopay_radiobtn" type="radio" name="pay" value="2" onclick="kakopay_radiobtn_click()">
           </td>
           <td id="payment_choice_kakaopay_img">
             <img class="kakopay_img" src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/img/kakaopay.jpg">
@@ -401,7 +408,7 @@
           <td id="payment_choice_direct_detail_1">입금은행 선택</td>
           <td colspan='3' id="payment_choice_direct_detail_2">
             <select id="select_bank">
-              <option value="국민은행">선택해주세요</option>
+              <option value="">선택해주세요</option>
               <option value="국민은행">국민은행</option>
               <option value="하나은행">하나은행</option>
               <option value="신한은행">신한은행</option>
