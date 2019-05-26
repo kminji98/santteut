@@ -252,5 +252,6 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="insert"){
   mysqli_close($conn);
   echo "<script>location.href='./official_review_view.php?num=$parent';</script>";
 }
-}else if
+
+}
 ?>

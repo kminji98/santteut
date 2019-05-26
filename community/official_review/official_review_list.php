@@ -9,8 +9,8 @@ session_start();
 
 //$name = $_SESSION['name'];
 
-include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/create_table_base.php";
-include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
+include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/create_table.php";
+
 
 create_table($conn, 'official_review');//공식산행후기 메인 테이블 생성
 

@@ -6,9 +6,8 @@ $file_name_3=$file_copied_3=$file_type_3=$file_name_4=$file_copied_4=$file_type_
 $regist_day="";
 //***************************************************************************
 session_start();
-include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
+include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/create_table.php";
 include $_SERVER['DOCUMENT_ROOT']."/santteut/community/official_review/lib/official_review_func.php";
-
 create_table($conn, 'official_review_ripple');
 
 if(empty($_GET['page'])){
