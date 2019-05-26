@@ -1128,7 +1128,6 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
             }
           })
           .done(function(result) {
-            alert(result);
             location.href='reserve_complete.php?p_code=<?=json_encode($p_code)?>&p_name=<?=json_encode($p_name)?>&member_num='+member_num+'&adult_val='+adult_val+'&kid_val='+kid_val+'&baby_val='+baby_val;
           })
           .fail(function() {
