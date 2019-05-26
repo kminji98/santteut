@@ -7,16 +7,17 @@
 =================================================================
 */
 session_start();
+$id=$_SESSION['id'];
 include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
 $sql=$result=$total_record=$total_pages=$start_record=$row="";
 $total_record=0;
 
 
 //@@@@@@ MINJI 테스트
-define('ROW_SCALE', 2);
-define('PAGE_SCALE', 2);
+define('ROW_SCALE', 10);
+define('PAGE_SCALE', 10);
 //@@@ id 세션 아이디로 바꿔야 함 지금테스트중 !!
-$sql="SELECT * from `reserve` join `package` on `reserve`.`r_code` = `package`.`p_code` where `reserve`.`r_id` = 'dd';";
+$sql="SELECT * from `reserve` join `package` on `reserve`.`r_code` = `package`.`p_code` where `reserve`.`r_id` = '$id';";
 
 if(isset($_GET['mode'])){
     $date=$_GET['mode'];
@@ -67,6 +68,10 @@ $view_num = $total_record - $start_record;
   $d = $now -> format("d");
   //t = the number of days in the given month
   $t = $now -> format("t");
+
+
+
+
  ?>
 <!DOCTYPE html>
 <html lang="ko" dir="ltr">
@@ -281,18 +286,40 @@ $view_num = $total_record - $start_record;
 
               $p_pay=$row['p_pay'];
               //후기
+
+              $reserve_status_sql = "SELECT sum(`r_adult`+`r_kid`+`r_baby`),`p_bus` from `package` inner join `reserve` on `package`.`p_code` = `reserve`.`r_code` where `package`.`p_code` = '$p_code';";
+              $result_status_sql=mysqli_query($conn,$reserve_status_sql);
+              $total=0;
+              $states="";
+              for($i=0;$i<mysqli_num_rows($result_status_sql);$i++){
+                $row1 = mysqli_fetch_array($result_status_sql);
+                $sum = $row1['sum(`r_adult`+`r_kid`+`r_baby`)'];
+                $p_bus = $row1['p_bus'];
+                $p_bus_half =(ceil($p_bus / 2));
+                $total+=$sum;
+              }
+
+
+
+              if($total<$p_bus_half){
+                $status="예약완료";
+              }
+              if($total>=$p_bus_half){
+                $status="<a style='color:red;' href='../bill/bill_view.php'>결제대기</a>";
+              }
              ?>
              <tr>
-               <td><?=$r_date?></td>
+               <td><?=$r_date?></td >
                <td><?=$p_code?></td>
                <td><?=$p_name?></td>
                <td><?=$r_pay?></td>
                <td><?=$r_total?></td>
-               <td><?=$p_dp_date.$p_arr_date2?></td>
+               <td><?=$p_dp_date?><br><?=$p_arr_date2?></td>
+
                <!-- //예약상태
                //결제상태
                //후기 -->
-               <td></td>
+               <td><?=$status?></td>
                <td><?=$bill_status?></td>
                <td></td>
              </tr>

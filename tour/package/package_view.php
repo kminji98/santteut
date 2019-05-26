@@ -8,6 +8,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
     <meta charset="utf-8">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css?ver=3">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/tour/package/css/package_view.css?ver=3">
+    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/side_bar.css">
 
     <title>산뜻 :: 즐거운 산행</title>
   </head>
@@ -24,6 +25,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
     <header>
       <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/login_menu.php";?>
     </header>
+    <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/side_bar.php";?>
     <!-- 윗부분  -->
     <div id="head" >
       <div id="top_box">
