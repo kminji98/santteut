@@ -4,6 +4,7 @@ $id = $_SESSION['id'];
 include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
 
 
+
 ?>
 <!DOCTYPE html>
 <html lang="ko" dir="ltr">
@@ -11,11 +12,11 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
     <meta charset="utf-8">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css?ver=6">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/tour/reserve/css/reserve_view.css?ver=0.2">
-
     <title>산뜻 :: 즐거운 산행</title>
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
 
   <script type="text/javascript">
+  var count=0;
   var a=450;
   var b=0;
   var c=1;
@@ -89,6 +90,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
 
   <script type="text/javascript">
     window.onload = function() {
+      var insert_seat="";
       adult_control_btn('+','text_adult','*');
       kid_control_btn('+','text_kid','*');
       baby_control_btn('+','text_baby','*');
@@ -163,15 +165,15 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
       <table id="tbl2">
         <tr>
           <td class="left2" id="res_name1">예약자명<p class="star">*</p></td>
-          <td id="res_name_td"> <input type="text" id="res_name" value="<?=$name?>"> </td>
+          <td id="res_name_td"> <input disabled type="text" id="res_name" value="<?=$name?>"> </td>
           <td class="left2" id="res_phone1">휴대폰번호<p class="star">*</p></td>
-          <td id="res_phone_td"> <input type="text" id="res_phone" value="<?=$hp?>" placeholder="  '-' 없이 입력해주세요"> </td>
+          <td id="res_phone_td"> <input disabled type="text" id="res_phone" value="<?=$hp?>" placeholder="  '-' 없이 입력해주세요"> </td>
         </tr>
 
         <tr>
           <td class="left2" id="res_email0">이메일<p class="star">*</p></td>
-          <td colspan="3" > <input type="text" id="res_email1" value="<?=$email[0]?>"> @
-            <select id="res_email2" name="">
+          <td colspan="3" > <input disabled type="text" id="res_email1" value="<?=$email[0]?>"> @
+            <select disabled id="res_email2" name="">
             <option value="">선택</option>
             <option value="" <?php if(isset($email[1]) && $email[1]==="naver.com") echo "selected";?>>naver.com</option>
             <option value="" <?php if(isset($email[1]) && $email[1]==="hanmail.net") echo "selected";?>>hanmail.net</option>
@@ -243,7 +245,10 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
           if(control=="+"){
             if(set=="*"){
               id2.value=text;
-              adult_num++;
+              if(adult_num==0){
+                adult_num++;
+              }
+
             }else{
               id2.value=text+1;
               if(id=='text_adult'){
@@ -451,10 +456,26 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
 
 
       <div id="check_eql">
-        <input type="checkbox" id="box1"><p>성인1이 예약자와 동일</p>
+        <input type="checkbox" id="box1" onclick="set_imfo()"><p>성인1이 예약자와 동일</p>
       </div>
 
-      <table id="tbl4" >
+      <script type="text/javascript">
+      var set_check=false;
+        function set_imfo(){
+          var set_name =document.getElementById('set_name');
+          var phone_num =document.getElementById('phone_num');
+          if(set_check==false){
+            set_name.value=<?=json_encode($name)?>;
+            phone_num.value=<?=json_encode($hp)?>;
+            set_check =true;
+          }else{
+            set_name.value="";
+            phone_num.value="";
+            set_check =false;
+          }
+        }
+      </script>
+      <table id="tbl4"  >
         <tr>
           <td class="left4" colspan="2">한글이름<p class="star">*</p></td>
           <td class="left4">영문성<p class="star">*</p></td>
@@ -466,14 +487,14 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
 
         <tr>
           <td><b >성인1</b></td>
-          <td id="name"class="inputs"><input type="text" class="inputs1" value="" size="10"></td>
-          <td class="inputs"><input  type="text" class="inputs1" id="input1" value=""></td>
-          <td class="inputs"> <input type="text" class="inputs1" value=""> </td>
+          <td id="name"class="inputs"><input name="adult_name_1" id="set_name" type="text" class="inputs1" value="" size="10"></td>
+          <td class="inputs"><input name="adult_fe_name_1"  type="text" class="inputs1" id="input1" value=""></td>
+          <td class="inputs"> <input name="adult_le_name_1" type="text" class="inputs1" value=""> </td>
 
 
-          <td class="inputs"> <input type="radio" name="gen" id="male" value=""><label for="">남&nbsp;</label><input type="radio" name="gen" value=""><label for="">여</label></td>
-          <td class="inputs"> <input type="text" id="inputs2" value=""> </td>
-          <td class="inputs"> <input type="text" id="phone_num" value=""></td>
+          <td class="inputs"> <input name="adult_gender_1" type="radio" name="gen" id="male" value=""><label for="">남&nbsp;</label><input name="adult_gender_1" type="radio" name="gen" value=""><label for="">여</label></td>
+          <td class="inputs"> <input name="adult_birr_1" type="text" id="inputs2" value=""> </td>
+          <td class="inputs"> <input name="adult_ph_1" type="text" id="phone_num" value=""></td>
         </tr>
       </table>
 
@@ -493,12 +514,12 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
 
         <tr>
           <td><b >성인'.$i.'</b></td>
-          <td id="name"class="inputs"><input type="text" class="inputs1" value="" size="10"></td>
-          <td class="inputs"><input  type="text" class="inputs1" id="input1" value=""></td>
-          <td class="inputs"> <input type="text" class="inputs1" value=""> </td>
-          <td class="inputs"> <input type="radio" name="gen" id="male" value=""><label for="">남&nbsp;</label><input type="radio" name="gen" value=""><label for="">여</label></td>
-          <td class="inputs"> <input type="text" id="inputs2" value=""> </td>
-          <td class="inputs"> <input type="text" id="phone_num" value=""> </td>
+          <td  id="name"class="inputs" ><input name="name1_'.$i.'" type="text" class="inputs1" value="" size="10"></td>
+          <td class="inputs"><input name="fe_name1_'.$i.'"  type="text" class="inputs1" id="input1" value=""></td>
+          <td class="inputs"> <input name="le_name1_'.$i.'" type="text" class="inputs1" value=""> </td>
+          <td class="inputs"> <input  type="radio" name="gen1_'.$i.'" id="male" value=""><label for="">남&nbsp;</label><input type="radio" name="gen1_'.$i.'" value=""><label for="">여</label></td>
+          <td class="inputs"> <input name="bir1_'.$i.'" type="text" id="inputs2" value=""> </td>
+          <td class="inputs"> <input name="ph1_'.$i.'" type="text" id="phone_num" value=""> </td>
         </tr>
         </table>';
       }
@@ -517,12 +538,12 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
 
         <tr>
           <td><b >아동'.$i.'</b></td>
-          <td id="name"class="inputs"><input type="text" class="inputs1" value="" size="10"></td>
-          <td class="inputs"><input  type="text" class="inputs1" id="input1" value=""></td>
-          <td class="inputs"> <input type="text" class="inputs1" value=""> </td>
-          <td class="inputs"> <input type="radio" name="gen" id="male" value=""><label for="">남&nbsp;</label><input type="radio" name="gen" value=""><label for="">여</label></td>
-          <td class="inputs"> <input type="text" id="inputs2" value=""> </td>
-          <td class="inputs"> <input type="text" id="phone_num" value=""> </td>
+          <td id="name"class="inputs"><input input name="name2_'.$i.'" type="text" class="inputs1" value="" size="10"></td>
+          <td class="inputs"><input name="fe_name2_'.$i.'"  type="text" class="inputs1" id="input1" value=""></td>
+          <td class="inputs"> <input name="le_name2_'.$i.'" type="text" class="inputs1" value=""> </td>
+          <td class="inputs"> <input type="radio" name="gen2_'.$i.'" id="male" value=""><label for="">남&nbsp;</label><input type="radio" name="gen2_'.$i.'" value=""><label for="">여</label></td>
+          <td class="inputs"> <input name="bir2_'.$i.'" type="text" id="inputs2" value=""> </td>
+          <td class="inputs"> <input name="ph2_'.$i.'" type="text" id="phone_num" value=""> </td>
         </tr>
         </table>';
       }
@@ -543,12 +564,12 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
 
         <tr>
           <td><b >유아'.$i.'</b></td>
-          <td id="name"class="inputs"><input type="text" class="inputs1" value="" size="10"></td>
-          <td class="inputs"><input  type="text" class="inputs1" id="input1" value=""></td>
-          <td class="inputs"> <input type="text" class="inputs1" value=""> </td>
-          <td class="inputs"> <input type="radio" name="gen" id="male" value=""><label for="">남&nbsp;</label><input type="radio" name="gen" value=""><label for="">여</label></td>
-          <td class="inputs"> <input type="text" id="inputs2" value=""> </td>
-          <td class="inputs"> <input type="text" id="phone_num" value=""> </td>
+          <td id="name"class="inputs"><input name="name3_'.$i.'" type="text" class="inputs1" value="" size="10"></td>
+          <td class="inputs"><input name="fe_name3_'.$i.'" type="text" class="inputs1" id="input1" value=""></td>
+          <td class="inputs"> <input name="le_name3_'.$i.'" type="text" class="inputs1" value=""> </td>
+          <td class="inputs"> <input type="radio" name="gen3_'.$i.'" id="male" value=""><label for="">남&nbsp;</label><input type="radio" name="gen3_'.$i.'" value=""><label for="">여</label></td>
+          <td class="inputs"> <input name="bir3_'.$i.'" type="text" id="inputs2" value=""> </td>
+          <td class="inputs"> <input name="ph3_'.$i.'" type="text" id="phone_num" value=""> </td>
         </tr>
         </table>';
       }
@@ -561,8 +582,9 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
         <div id="seat_box">
         <?php
         //우등버스인지 일반버스인지 넘겨주는 값
-        $bus="2";
-        if($bus==="1"){
+
+        $bus=$p_bus;
+        if($bus==="28"){
           define('row', 2);
           define('col', 8);
           define('margin', 322);
@@ -577,28 +599,72 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
         //****************************버스 좌석 생성
       for ($i=0; $i <=row ; $i++) {
         for ($j=0; $j <=col ; $j++) {
-            echo '<input type="checkbox" value="'.((row+1)*$j+$i+1).'">'.((row+1)*$j+$i+1);
+          $checked ='';
+
+            if(isset($seat[((row+1)*$j+$i+1)])){
+              $style='style="color:#CFCFCF;"';
+              $checked ='style="color:#35cc2b;" checked disabled';
+            }else{
+              $style='style="color:#000000;"';
+            }
+            // 여기
+            echo '<input id="'.((row+1)*$j+$i+1).'"  onclick="check_seat(\''.((row+1)*$j+$i+1).'\');" name="bus_seat_check" type="checkbox" value="'.((row+1)*$j+$i+1).'" '.$checked.'><b '.$style.'  >'.((row+1)*$j+$i+1).'</b>';
             echo "&nbsp;";
             if($j==col){
               echo "<br>";
               if($i==1){
-                echo '<input type="checkbox" id="last_seat" style="margin-left:'.margin.'px; margin-top:15px; margin-bottom:15px;" value="'.last.'">'.last.'<br>';
+                echo '<input  onclick="check_seat(\'last_seat\');" name="bus_seat_check" type="checkbox" id="last_seat" style="margin-left:'.margin.'px; margin-top:15px; margin-bottom:15px;" value="'.last.'" '.$checked.'><b '.$style.'>'.last.'</b><br>';
               }
             }else if(((row+1)*$j+$i+1)==9 && !($bus=="1")){
                echo "&nbsp;&nbsp;";
             }
           }
         }
-
         ?>
         </div>
+        <!-- 좌석시트 함수  -->
+        <script type="text/javascript">
+          function check_seat(seat){
 
 
+
+          var seat=document.getElementById(seat);
+          var text_adult=document.getElementById('text_adult');
+          var text_kid=document.getElementById('text_kid');
+          var text_baby=document.getElementById('text_baby');
+          var a=parseInt(text_adult.value);
+          var b=parseInt(text_kid.value);
+          var c=parseInt(text_baby.value);
+          var limit =a+b+c;
+
+          if(count<limit){
+            if(seat.checked==true){
+              count++;
+            }else{
+              count--;
+            }
+          }else{
+            if(seat.checked==false){
+              count--;
+            }else{
+            alert('초과');
+            seat.checked=false;
+            }
+          }
+
+
+
+        }
+        </script>
+
+<!-- style="color:#35cc2b;" -->
         <div id="terms_view">
           <div id="all_agree">
-            <input type="radio" name="all_choice_value" value="" onclick="all_choice_value()">전체동의하기
+            <input id="all_agree_btn" type="checkbox" name="all_choice_value" value="" onclick="all_choice_value()">전체동의하기
             <script type="text/javascript">
+              var choice =false;
               function all_choice_value(){
+                if(choice==false){
                 var h_y= document.getElementById('h_y');
                 var n_y= document.getElementById('n_y');
                 var c_y= document.getElementById('c_y');
@@ -607,6 +673,23 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
                 n_y.checked=true;
                 c_y.checked=true;
                 a_y.checked=true;
+                choice=true;
+              }else{
+                var h_y= document.getElementById('h_y');
+                var n_y= document.getElementById('n_y');
+                var c_y= document.getElementById('c_y');
+                var a_y= document.getElementById('a_y');
+                h_n.checked=true;
+                n_n.checked=true;
+                c_n.checked=true;
+                a_n.checked=true;
+                choice=false;
+              }
+              }
+              function not_agree(){
+                var all_agree_btn =document.getElementById('all_agree_btn');
+                all_agree_btn.checked=false;
+                choice =false;
               }
             </script>
           </div>
@@ -718,13 +801,14 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
           <br><br><br><br>
         </div>
         <div id="choice_values">
-        <p class="choice_value" id="Home_choice_value" ><b>(여행표준약관)</b><input type="radio" name="Home_choice_value" value="" id="h_y">동의합니다.&nbsp;&nbsp;&nbsp;&nbsp;<input id="h_n" type="radio" name="Home_choice_value" value="" checked>동의하지 않습니다.</p>
-        <p class="choice_value" id="News_choice_value"  ><b>(위치기반 서비스 동의)</b><input type="radio" name="News_choice_value" value="" id="n_y">동의합니다.&nbsp;&nbsp;&nbsp;&nbsp;<input id="n_n" type="radio" name="News_choice_value" value="" checked>동의하지 않습니다.</p>
-        <p class="choice_value" id="Contact_choice_value"  ><b>(고유식별정보 수집)</b><input type="radio" name="Contact_choice_value" value="" id="c_y">동의합니다.&nbsp;&nbsp;&nbsp;&nbsp;<input id="c_n" type="radio" name="Contact_choice_value" value="" checked>동의하지 않습니다.</p>
-        <p class="choice_value" id="About_choice_value" ><b>(개인정보활용 동의)</b><input type="radio" name="About_choice_value" value="" id="a_y">동의합니다.&nbsp;&nbsp;&nbsp;&nbsp;<input id="a_n" type="radio" name="About_choice_value" value="" checked>동의하지 않습니다.</p>
+        <p class="choice_value" id="Home_choice_value" ><b>(여행표준약관)</b><input type="radio" name="Home_choice_value" value="" id="h_y">동의합니다.&nbsp;&nbsp;&nbsp;&nbsp;<input id="h_n" onclick="not_agree()" type="radio" name="Home_choice_value" value="" checked>동의하지 않습니다.</p>
+        <p class="choice_value" id="News_choice_value"  ><b>(위치기반 서비스 동의)</b><input type="radio" name="News_choice_value" value="" id="n_y">동의합니다.&nbsp;&nbsp;&nbsp;&nbsp;<input onclick="not_agree()" id="n_n" type="radio" name="News_choice_value" value="" checked>동의하지 않습니다.</p>
+        <p class="choice_value" id="Contact_choice_value"  ><b>(고유식별정보 수집)</b><input type="radio" name="Contact_choice_value" value="" id="c_y">동의합니다.&nbsp;&nbsp;&nbsp;&nbsp;<input onclick="not_agree()" id="c_n" type="radio" name="Contact_choice_value" value="" checked>동의하지 않습니다.</p>
+        <p class="choice_value" id="About_choice_value" ><b>(개인정보활용 동의)</b><input type="radio" name="About_choice_value" value="" id="a_y">동의합니다.&nbsp;&nbsp;&nbsp;&nbsp;<input onclick="not_agree()"; id="a_n" type="radio" name="About_choice_value" value="" checked>동의하지 않습니다.</p>
         </div>
         </div>
         <script>
+
         function openPage(pageName,elmnt,color,choiceName) {
           var i, tabcontent, tablinks;
           tabcontent = document.getElementsByClassName("tabcontent");
@@ -766,7 +850,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
             <div style="display:inline">
               <p style="display:inline">&nbsp;<b>성인</b></p>
               <b id="adult_val" style="font-size:25px;">&nbsp;&nbsp;&nbsp;&nbsp;<?=$p_pay?>원</b><br>
-              <p style="font-size:6px; margin:0px; display:inline;">&nbsp;(만12세 이상)</p>
+              <p style="font-size:6px; margin:0px; display:inline;">&nbsp;(만 12세 이상)</p>
               <p style="display:inline-block; margin:0px; color:gray;">-------------------------------</p>
               <p style="display:inline-block; margin:0px; color:gray;font-size:10px; "><b width:300px;>기본상품가격</b> <b style="text-align:center;"><?=$p_pay*0.922?>원</b></p><br>
               <p style="display:inline-block; margin:0px; color:gray;font-size:10px; "><b width:300px;>유류할증료</b> <b style="text-align:center;">&nbsp;&nbsp;&nbsp;<?=$p_pay*0.078?>원</b> </p>
@@ -777,7 +861,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
             <div id="kid_side_div" style="display:none;">
               <p style="display:inline">&nbsp;<b>아동</b></p>
               <b style="font-size:25px;">&nbsp;&nbsp;&nbsp;&nbsp;<?=$p_pay*0.7?>원</b><br>
-              <p style="font-size:6px; margin:0px; display:inline;">&nbsp;(만12세 미만)</p>
+              <p style="font-size:6px; margin:0px; display:inline;">&nbsp;(만 12세 미만)</p>
               <p style="display:inline-block; margin:0px; color:gray;">-------------------------------</p>
               <p style="display:inline-block; margin:0px; color:gray;font-size:10px; "><b width:300px;>기본상품가격</b> <b style="text-align:center;"><?=$p_pay*0.922*0.7?>원</b></p><br>
               <p style="display:inline-block; margin:0px; color:gray;font-size:10px; "><b width:300px;>유류할증료</b> <b style="text-align:center;">&nbsp;&nbsp;&nbsp;<?=$p_pay*0.078*0.7?>원</b> </p>
@@ -811,11 +895,246 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
 
         </div>
         <div id="reserve_button">
-          <a href="reserve_complete.php"><div id="reserve_finish"> <b>예약마감</b></div></a><br>
+          <div id="reserve_finish" onclick="check_form()" > <b>예약마감</b></div><br>
           <!-- <input type="button" id="reserve_finish" value="예약마감"> -->
         </div>
         <div id="right_footer"></div>
       </div>
+      <script type="text/javascript">
+
+
+
+
+
+        function check_form(){
+
+          var adult = document.getElementById('text_adult');
+          var kid = document.getElementById('text_kid');
+          var baby = document.getElementById('text_baby');
+          var insert_seat="";
+          var bus_seat_check=document.getElementsByName('bus_seat_check');
+          for(var i=0;i< <?=json_encode($bus)?> ; i++){
+            if(bus_seat_check[i].checked==true&&bus_seat_check[i].disabled==false){
+              insert_seat=insert_seat+"/"+bus_seat_check[i].value;
+            }
+          }
+
+          var adult_val=parseInt(adult.value);
+          var kid_val=parseInt(kid.value);
+          var baby_val=parseInt(baby.value);
+          var member_num=adult_val+kid_val+baby_val;
+
+          if(!<?=json_encode($p_code)?>){
+            alert("코드값이 없습니다.");
+            return false;
+          }else if(count<member_num){
+            alert("좌석을 알맞게 선택해주세요");
+            for(var i=0;i< <?=json_encode($bus)?> ; i++){
+              if(bus_seat_check[i].disabled==false){
+                bus_seat_check[i].checked=false;
+                count=0;
+              }
+            }
+            var insert_seat="";
+            return false;
+          }else if(!member_num){
+            alert("인원을선택해주세요");
+          }
+          var bus_seat_check=document.getElementsByName('test_table');
+          var bus_seat_check2=document.getElementsByName('test_table2');
+          var bus_seat_check3=document.getElementsByName('test_table3');
+
+          var adult_name_1=document.getElementsByName('adult_name_1');
+          var adult_fe_name_1=document.getElementsByName('adult_fe_name_1');
+          var adult_le_name_1=document.getElementsByName('adult_le_name_1');
+          var adult_gender_1=document.getElementsByName('adult_gender_1');
+          var adult_birr_1=document.getElementsByName('adult_birr_1');
+          var adult_ph_1=document.getElementsByName('adult_ph_1');
+
+          if(adult_name_1[0].value==false){
+            alert("성인1 의 이름을 입력해주세요");
+            return false;
+          }
+          if(adult_fe_name_1[0].value==false){
+            alert("성인1 의 영문성을 입력해주세요");
+            return false;
+          }
+          if(adult_le_name_1[0].value==false){
+            alert("성인1의 영문이름을 입력해주세요");
+            return false;
+          }
+          if(adult_gender_1[0].checked==false&&adult_gender_1[1].checked==false){
+            alert("성인1의 성별을 선택해주세요");
+            return false;
+          }
+          if(adult_birr_1[0].value==false){
+            alert("성인1의 법정생년월일을 입력해주세요");
+            return false;
+          }
+          if(adult_ph_1[0].value==false){
+            alert("성인1의 휴대폰번호를 입력해주세요");
+            return false;
+          }
+
+
+
+
+
+
+          for(var i=0;i<8;i++){
+            if(bus_seat_check[i].style.display=="block"){
+              var name1=document.getElementsByName('name1_'+(i+2));
+              var fe_name1=document.getElementsByName('fe_name1_'+(i+2));
+              var le_name1_=document.getElementsByName('le_name1_'+(i+2));
+              var gen1_=document.getElementsByName('gen1_'+(i+2));
+              var bir1_=document.getElementsByName('bir1_'+(i+2));
+              var ph1_=document.getElementsByName('ph1_'+(i+2));
+
+              if(name1[0].value==false){
+                alert("성인"+(i+2)+"의 이름을 입력해주세요");
+                return false;
+              }
+              if(fe_name1[0].value==false){
+                alert("성인"+(i+2)+"의 영문성을 입력해주세요");
+                return false;
+              }
+              if(le_name1_[0].value==false){
+                alert("성인"+(i+2)+"의 영문이름을 입력해주세요");
+                return false;
+              }
+              if(gen1_[0].checked==false&&gen1_[1].checked==false){
+                alert("성인"+(i+2)+"의 성별을 선택해주세요");
+                return false;
+              }
+              if(bir1_[0].value==false){
+                alert("성인"+(i+2)+"의 법정생년월일을 입력해주세요");
+                return false;
+              }
+              if(ph1_[0].value==false){
+                alert("성인"+(i+2)+"의 휴대폰번호를 입력해주세요");
+                return false;
+              }
+            }
+            // alert(bus_seat_check[i].style.display);
+          }
+
+          for(var i=0;i<=9;i++){
+            if(bus_seat_check2[i].style.display=="block"){
+              var name2=document.getElementsByName('name2_'+(i+1));
+              var fe_name2=document.getElementsByName('fe_name2_'+(i+1));
+              var le_name2_=document.getElementsByName('le_name2_'+(i+1));
+              var gen2_=document.getElementsByName('gen2_'+(i+1));
+              var bir2_=document.getElementsByName('bir2_'+(i+1));
+              var ph2_=document.getElementsByName('ph2_'+(i+1));
+
+              if(name2[0].value==false){
+                alert("아동"+(i+1)+"의 이름을 입력해주세요");
+                return false;
+              }
+              if(fe_name2[0].value==false){
+                alert("아동"+(i+1)+"의 영문성을 입력해주세요");
+                return false;
+              }
+              if(le_name2_[0].value==false){
+                alert("아동"+(i+1)+"의 영문이름을 입력해주세요");
+                return false;
+              }
+              if(gen2_[0].checked==false&&gen2_[1].checked==false){
+                alert("아동"+(i+1)+"의 성별을 선택해주세요");
+                return false;
+              }
+              if(bir2_[0].value==false){
+                alert("아동"+(i+1)+"의 법정생년월일을 입력해주세요");
+                return false;
+              }
+              if(ph2_[0].value==false){
+                alert("아동"+(i+1)+"의 휴대폰번호를 입력해주세요");
+                return false;
+              }
+            }
+          }
+
+
+          for(var i=0;i<=9;i++){
+            if(bus_seat_check3[i].style.display=="block"){
+              var name3=document.getElementsByName('name3_'+(i+1));
+              var fe_name3_=document.getElementsByName('fe_name3_'+(i+1));
+              var le_name3_=document.getElementsByName('le_name3_'+(i+1));
+              var gen3_=document.getElementsByName('gen3_'+(i+1));
+              var bir3_=document.getElementsByName('bir3_'+(i+1));
+              var ph3_=document.getElementsByName('ph3_'+(i+1));
+
+              if(name3[0].value==false){
+                alert("유아"+(i+1)+"의 이름을 입력해주세요");
+                return false;
+              }
+              if(fe_name3_[0].value==false){
+                alert("유아"+(i+1)+"의 영문성을 입력해주세요");
+                return false;
+              }
+              if(le_name3_[0].value==false){
+                alert("유아"+(i+1)+"의 영문이름을 입력해주세요");
+                return false;
+              }
+              if(gen3_[0].checked==false&&gen3_[1].checked==false){
+                alert("유아"+(i+1)+"의 성별을 선택해주세요");
+                return false;
+              }
+              if(bir3_[0].value==false){
+                alert("유아"+(i+1)+"의 법정생년월일을 입력해주세요");
+                return false;
+              }
+              if(ph3_[0].value==false){
+                alert("유아"+(i+1)+"의 휴대폰번호를 입력해주세요");
+                return false;
+              }
+            }
+          }
+          var h_y= document.getElementById('h_y');
+          var n_y= document.getElementById('n_y');
+          var c_y= document.getElementById('c_y');
+          var a_y= document.getElementById('a_y');
+          if(h_y.checked!=true){
+            alert("여행표준약관에 동의하세요");
+            return false;
+          }else if(n_y.checked!=true){
+            alert("위치기반서비스에 동의하세요");
+            return false;
+          }else if(c_y.checked!=true){
+            alert("고유식별정보수집에 동의하세요");
+            return false;
+          }else if(a_y.checked!=true){
+            alert("개인정보활용에 동의하세요");
+            return false;
+          }
+
+
+          $.ajax({
+            url: 'reserve_query.php',
+            type: 'POST',
+            data: {
+              code:<?=json_encode($p_code)?>
+              ,seat:insert_seat
+              ,member_num:member_num
+              ,adult:adult_val
+              ,kid:kid_val
+              ,baby:baby_val
+            }
+          })
+          .done(function(result) {
+            // 여기
+            location.href='reserve_complete.php?p_code=<?=json_encode($p_code)?>&p_name=<?=json_encode($p_name)?>&member_num='+member_num+'&adult_val='+adult_val+'&kid_val='+kid_val+'&baby_val='+baby_val;
+          })
+          .fail(function() {
+            console.log("error");
+          })
+          .always(function() {
+            console.log("complete");
+
+          });
+
+        }
+      </script>
 
 
   <!-- end of wrap -->

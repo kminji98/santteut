@@ -6,5 +6,7 @@ create_table($conn,'package');
 create_table($conn,'notice');
 create_table($conn,'official_review');
 create_table($conn,'bus');
+create_table($conn,'reserve');
+create_table($conn,'bill');
 // create_table($conn,'qna');
  ?>

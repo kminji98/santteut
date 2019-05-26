@@ -9,7 +9,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css">
-    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/tour/package/css/package_list.css?ver=0">
+    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/tour/package/css/package_list.css?ver=2">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/side_bar.css">
     <link href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/lib/calendar/css/style.css?ver=0" rel="stylesheet">
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
@@ -34,8 +34,18 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
       default_detail_value('day_div');
       default_detail_value('add_div');
       default_detail_value('free_div');
+      // 상세검색 조건에 따른 결과
       document.getElementsByName('output')[0].value=<?=json_encode($output)?>;
       document.getElementsByName('sql')[0].value=<?=json_encode($sql)?>;
+      document.getElementsByName('order_condition')[0].value=<?=json_encode($order_condition)?>;
+      document.getElementsByName('order_option')[0].value=<?=json_encode($order_option)?>;
+      document.getElementsByName('order_btn')[0].value=<?=json_encode($order_btn)?>;
+      // document.getElementsByName('order_sql')[0].value=<?=json_encode($sql)?>;
+      // 최신순/요금순/ 조건에 따른 결과
+      var order_condition = <?=json_encode($order_condition)?>;
+      var order_option = <?=json_encode($order_option)?>;
+      var order_btn = <?=json_encode($order_btn)?>;
+      document.getElementById(order_condition).value=<?=json_encode($order_btn)?>;
     };
 
 
@@ -59,7 +69,6 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
       var output = '※해당 게시물의 검색조건 → | ';
 
 
-        // alert(package_search_detail_option_city.value);
         for(var i=0;i<=period_div.length-1;i++){
           id = after_period_value[i].id;
           if(period_div[i].style.backgroundColor!='white'){
@@ -108,9 +117,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
             output+= "자유일정 : " + keyword.id+" | ";
           }
         }
-        // alert(output);
         document.getElementsByName('output')[0].value=output;
-        // alert(document.getElementsByName('output')[0].value);
         $.ajax({
           url: 'package_list_detail.php',
           type: 'POST',
@@ -161,7 +168,28 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
           console.log("complete");
         });
 
-      }
+  }
+    //[PAGE BUTTON ACTION]
+    function order_mv_page(p){
+        $.ajax({
+          url: 'package_list_post_page.php',
+          type: 'POST',
+          data: {
+            page: p
+          }
+        })
+        .done(function(result) {
+         document.order_form.page.value = result;
+         document.order_form.submit();
+        })
+        .fail(function() {
+          console.log("error");
+        })
+        .always(function() {
+          console.log("complete");
+        });
+
+  }
 
     function reset_btn(){
       var dp_date_value = document.getElementById('dp_date_value');
@@ -197,9 +225,6 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
         if(value.offsetTop<=value2.offsetTop+250){
           value2.style.position="static";
         }
-        // else{
-        //   value2.style.position="sticky";
-        // }
     }
     </script>
     <title>산뜻 :: 즐거운 산행</title>
@@ -220,12 +245,36 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
   function button_change(value){
     var btn = document.getElementById(value);
     if(btn.value==value+"순▼"){
-      order.value = "asc";
+      document.order_form.order_option.value = "asc";
       btn.value=value+"순▲";
     }else{
-      order.value = "desc";
+      document.order_form.order_option.value = "desc";
       btn.value=value+"순▼";
     }
+    $.ajax({
+      url: 'package_list_btn_change.php',
+      type: 'POST',
+      data: {
+        order_btn : btn.value,
+        order_condition: value,
+        order_option :document.order_form.order_option.value
+      }
+    })
+    .done(function(result) {
+      var output = $.parseJSON(result);
+      document.order_form.order_condition.value = output[0].order_condition;
+      document.order_form.order_option.value = output[0].order_option;
+      document.order_form.order_btn.value = output[0].order_btn;
+      document.order_form.submit();
+    })
+    .fail(function() {
+      console.log("error");
+    })
+    .always(function() {
+      console.log("complete");
+    });
+
+
   }
   </script>
   <body>
@@ -315,19 +364,15 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
             function detail_function(id, name ,value){
               var detail_id =document.getElementById(id);
               var detail_name=document.getElementsByName(name);
-              // alert(period_td.value);
-              // var id=this.id;
               for(var i=0;i<=detail_name.length-1;i++){
                 detail_name[i].style.backgroundColor='white';
                 detail_name[i].style.color='black';
                 detail_name[i].style.border='none';
               }
-              // period_id.style.backgroundColor ="#2F9D27";
               detail_id.style.backgroundColor="#2F9D27";
               detail_id.style.color="white";
               detail_id.style.color="white";
               detail_id.style.color="white";
-              // period_id.style.color="white";
               detail_id.style.border="1px solid #2F9D27";
               detail_id.value=value;
             }
@@ -392,11 +437,14 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
       <p style="position: relative; margin-top: auto; margin-left: auto;text-align:center; font-weight: bold; font-size:13px;"><?=$output?></p>
     </form>
       <div id="package_list_view_btn">
-        <form class="" action="index.html" method="post">
-          <input type="hidden" name="order" value="desc">
-          <input onclick="button_change('최신')" id="최신" class="package_list_view_btn_value" type="button" name="" value="최신순▼">
-          <input onclick="button_change('요금')" id="요금" class="package_list_view_btn_value" type="button" name="" value="요금순▼">
-          <input onclick="button_change('인기')" id="인기" class="package_list_view_btn_value" type="button" name="" value="인기순▼">
+        <form name="order_form" action="package_list.php?mode=order" method="post">
+          <input type="hidden" name="page" value="">
+          <input type="hidden" name="order_sql" value="">
+          <input type="hidden" name="order_condition" value="">
+          <input type="hidden" name="order_option" value="desc">
+          <input type="hidden" name="order_btn" value="">
+          <input onclick="button_change('최신')" id="최신" class="package_list_view_btn_value" type="button" value="최신순▼">
+          <input onclick="button_change('요금')" id="요금" class="package_list_view_btn_value" type="button" value="요금순▼">
         </form>
       </div>
       <div id="package_list_view">
@@ -411,8 +459,8 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
           </tr>
 
           <?php
+          mysqli_data_seek($result,$start_record);
           for ($record = $start_record; $record  < $start_record+ROW_SCALE && $record<$total_record; $record++){
-            mysqli_data_seek($result,$record);
             $row=mysqli_fetch_array($result);
             $p_code=$row['p_code'];
             $p_name=$row['p_name'];
@@ -459,17 +507,33 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
             //현재 블럭의 시작 페이지가 페이지 스케일 보다 클 때 -> 처음으로 버튼 생성 + 이전 블럭 존재
             //[ex]  page가 9개 있고 현재 페이지가 6페이지인 경우  / 12345/ 6789     =>  <<(처음으로) <(이전) 6 7 8 9
             if( $start_page > PAGE_SCALE ){
+
               // echo( '<a href='package_list.php?page=1'> << </a>' );
-              echo( '<a href="package_list.php?page=1"><button type="button" name="button" title="처음으로"><<</button></a>' );
 
               // 이전 블럭 클릭 시 -> 현재 블럭의 시작 페이지 - 페이지 스케일
               // 현재 6 page 인 경우 '<(이전블럭)' 클릭 -> $pre_page = 6-PAGE_SCALE  -> 1 페이지로 이동
               $pre_block= $start_page - PAGE_SCALE;
-              if(isset($_GET['mode']) && $_GET['mode']=="search"){
-                echo( '<a href="package_list.php?mode=search&find_option='.$find_option.'&find_input='.$find_input.'&page='.$pre_block.'"><button type="button" name="button" title="이전"><</button></a>' );
-              }else{
-                echo( '<a href="package_list.php?page='.$pre_block.'"><button type="button" name="button" title="이전"><</button></a>' );
-              }
+               if(isset($_GET['mode'])){
+                 switch ($_GET['mode']) {
+                   case 'search':
+                    echo( '<a href="package_list.php?mode=search&find_option='.$find_option.'&find_input='.$find_input.'&page=1"><button type="button" name="button" title="처음으로"><<</button></a>' );
+                    echo( '<a href="package_list.php?mode=search&find_option='.$find_option.'&find_input='.$find_input.'&page='.$pre_block.'"><button type="button" name="button" title="이전"><</button></a>' );
+                    break;
+                  case 'detail':
+                    echo( '<button type="button" title="처음으로" onclick="detail_search_mv_page(1)"><<</button>' );
+                    echo( '<button type="button" title="이전" onclick="detail_search_mv_page('.$pre_block.')"><</button>' );
+                    break;
+                  case 'order':
+                    echo( '<button type="button" title="처음으로" onclick="order_mv_page(1)"><<</button>' );
+                    echo( '<button type="button" title="이전" onclick="order_mv_page('.$pre_block.')"><</button>' );
+                    break;
+                  default:
+                    break;
+                }
+               }else{
+                 echo( '<a href="package_list.php?page=1"><button type="button" name="button" title="처음으로"><<</button></a>');
+                 echo( '<a href="package_list.php?page='.$pre_block.'"><button type="button" name="button" title="이전"><</button></a>');
+               }
             }
 
 
@@ -486,6 +550,9 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
                     case 'detail':
                       echo( '<button type="button" onclick="detail_search_mv_page('.$i.')">'.$i.'</button>' );
                       break;
+                    case 'order':
+                      echo( '<button type="button" onclick="order_mv_page('.$i.')">'.$i.'</button>' );
+                      break;
                     default:
                       break;
                   }
@@ -499,12 +566,16 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
               if(isset($_GET['mode'])){
                 switch ($_GET['mode']) {
                   case 'search':
-                    echo( '<a href="package_list.php?mode=search&find_option='.$find_option.'&find_input='.$find_input.'&page='.$next_block.'"><button type="button" name="button">></button></a>' );
-                    echo( '<a href="package_list.php?mode=search&find_option='.$find_option.'&find_input='.$find_input.'&page='.$total_pages.'"><button type="button" name="button">>></button></a>' );
+                    echo( '<a href="package_list.php?mode=search&find_option='.$find_option.'&find_input='.$find_input.'&page='.$next_block.'"  title="다음"><button type="button" name="button">></button></a>' );
+                    echo( '<a href="package_list.php?mode=search&find_option='.$find_option.'&find_input='.$find_input.'&page='.$total_pages.'" title="맨끝으로"><button type="button" name="button">>></button></a>' );
                     break;
                   case 'detail':
                     echo( '<button type="button" title="다음" onclick="detail_search_mv_page('.$next_block.')">></button>' );
                     echo( '<button type="button" title="맨끝으로" onclick="detail_search_mv_page('.$total_pages.')">>></button>' );
+                    break;
+                  case 'order':
+                    echo( '<button type="button" title="다음" onclick="order_mv_page('.$next_block.')">></button>' );
+                    echo( '<button type="button" title="맨끝으로" onclick="order_mv_page('.$total_pages.')">>></button>' );
                     break;
                   default:
                     break;

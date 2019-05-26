@@ -7,14 +7,14 @@ $total_record=0;
 
 
 //@@@@@@ MINJI 테스트
-define('ROW_SCALE', 3);
-define('PAGE_SCALE', 3);
+define('ROW_SCALE', 10);
+define('PAGE_SCALE', 5);
 
 $sql="SELECT * from `package`";
 
 if(isset($_GET['mode'])){
   switch ($_GET['mode']) {
-    //a. [SEARCH]
+    //A. [SEARCH]
     // 옵션 선택 : find_option / 검색할 키워드 : find_input
     case 'search':
     $find_option= $_GET['find_option'];
@@ -22,47 +22,51 @@ if(isset($_GET['mode'])){
     $sql="SELECT * from `package` where $find_option like '%$find_input%';";
     break;
 
-    //b. [DETAIL] 상세검색 : 조건이 sql값으로 넘어옴(POST)
+    //B. [DETAIL] 상세검색 : 조건이 sql값으로 넘어옴(POST)
     case 'detail':
     $sql=$_POST['sql'];
     $output=$_POST['output'];
     $page=$_POST['page'];
-    // var_dump($page);
     break;
 
     //@@@@@@ MINJI 테스트
-    //c. [RECENT] 최신순
-    case 'recent':
-    //$_POST['order'] =>  'desc' / 'asc'
-    // ex) $sql="SELECT * from `package` order by num desc";
-    // $sql= $sql." order by `p_dp_date`"." ".$_POST['order'];
-    // break;
-    // //d. [PAY] 요금순
-    // case 'pay':
-    // $sql= $sql." order by `p_pay` ".$_POST['order'];
-    // break;
-    // //e. [POPULAR] 인기순 (예약이 많이 된 순)
-    // case 'popular':
-    // // select * from package inner join bus on bus.b_code = package.p_code order by b_people;
-    // $sql =$sql." inner join bus on bus.b_code = package.p_code order by b_people";
-    // // desc OR asc
-    // $sql= $sql." ".$_POST['order'];
-    // break;
 
-    // [DATE] 날짜검색 : 모드가 날짜로 넘어옴(GET)
+    //C. [ORDER] 최신순▼요금순▼ : 조건, 내림차순/오름차순(POST)
+    //최신순▼요금순▼
+    case 'order':
+    // $_POST['order'] =>  'desc' / 'asc'
+    // ex) $sql="SELECT * from `package` order by num desc";
+    $sql= $sql." order by";
+    $order_btn = $_POST['order_btn'];
+    $order_condition = $_POST['order_condition'];
+    $order_option = $_POST['order_option'];
+    break;
+
+    //D. [DATE] 날짜검색 : 모드가 날짜로 넘어옴(GET)
     default:
       $date=$_GET['mode'];
       $sql=$sql." where `p_dp_date` = '$date';";
       break;
   }
-  // if($_GET['mode'] == 'search' && isset($_GET['find_option'])&& isset($_GET['find_input'])){
-  //   $sql="SELECT * from `package` where $find_option like '%$q_find_input%';";
-  // }else{
-  // }
-  //
-  // if($_GET['mode'] =='detail' && isset($_POST['sql'])){
-  // //[DETAIL SEARCH]
-  // }
+
+  if($_GET['mode']=="order"){
+    switch ($_POST['order_condition']) {
+      //C.1 [RECENT] 최신순
+      case '최신':
+      $sql= $sql." `p_dp_date`";
+      break;
+
+      //C.2 [RECENT] 최신순
+      case '요금':
+      $sql= $sql." `p_pay`";
+      break;
+
+      default:
+        break;
+    }
+    $sql= $sql." ".$_POST['order_option'];
+  }
+
 }
 
 // 쿼리문실행문장
@@ -72,11 +76,10 @@ $total_record=mysqli_num_rows($result);
 // 조건?참:거짓
 $total_pages=ceil($total_record/ROW_SCALE);
 
+
 // 페이지가 없으면 디폴트 페이지 1페이지
-// if(empty($_GET['page'])){$page=1; }else{ $page=$_GET['page']; }
 $page=(empty($_GET['page']))?1:$_GET['page'];
 
-//@@@@@@@@@@MINJI
 if(isset($_POST['page'])){
   $page=(empty($_POST['page']))?1:$_POST['page'];
 }
@@ -85,10 +88,12 @@ if(isset($_POST['page'])){
 //[[  EX) 현재 페이지 5일 때 => ceil(5/3)-1 * 3  +1 =  (2-1)*3 +1 = 4 ]]
 $start_page= (ceil($page / PAGE_SCALE ) -1 ) * PAGE_SCALE +1 ;
 
+
 // 현재페이지 시작번호 계산함.
 //[[  EX) 현재 페이지 1일 때 => (1 - 1)*10 -> 0   ]]
 //[[  EX) 현재 페이지 5일 때 => (5 - 1)*10 -> 40  ]]
 $start_record=($page -1) * ROW_SCALE;
+
 
 // 현재 블럭 마지막 페이지
 // 전체 페이지가 (시작 페이지+페이지 스케일) 보다 크거나 같으면 마지막 페이지는 (시작페이지 + 페이지 스케일) -1 / 아니면 전체페이지 수 .

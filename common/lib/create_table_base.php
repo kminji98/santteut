@@ -76,39 +76,66 @@ function create_table($conn, $table_name){
 
        case 'bus' :
          $sql = "CREATE TABLE `bus` (
-         `b_id` varchar(30) NOT NULL,
+         `b_id` varchar(30) ,
          `b_code` varchar(20) NOT NULL,
-         `b_people` int(10) NOT NULL,
-         `b_seat` int(10) NOT NULL
+         `b_people` int(10) ,
+         `b_seat` varchar(130)
        ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
       ";
         break;
+      case 'official_review' :
+      $sql = "CREATE TABLE `official_review` (
+        `num` int(11) NOT NULL AUTO_INCREMENT,
+        `title` varchar(100) NOT NULL,
+        `content` text NOT NULL,
+        `regist_day` char(20) DEFAULT NULL,
+        `main_img` char(50) NOT NULL,
+        `file_name_0` char(40) DEFAULT NULL,
+        `file_copied_0` char(30) DEFAULT NULL,
+        `file_type_0` char(30) DEFAULT NULL,
+        `file_name_1` char(40) DEFAULT NULL,
+        `file_copied_1` char(30) DEFAULT NULL,
+        `file_type_1` char(30) DEFAULT NULL,
+        `file_name_2` char(40) DEFAULT NULL,
+        `file_copied_2` char(30) DEFAULT NULL,
+        `file_type_2` char(30) DEFAULT NULL,
+        `file_name_3` char(40) DEFAULT NULL,
+        `file_copied_3` char(30) DEFAULT NULL,
+        `file_type_3` char(30) DEFAULT NULL,
+        `file_name_4` char(40) DEFAULT NULL,
+        `file_copied_4` char(30) DEFAULT NULL,
+        `file_type_4` char(30) DEFAULT NULL,
+        PRIMARY KEY (`num`)
+      ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;";
+       break;
 
-        case 'official_review':
-        $sql = "CREATE TABLE `official_review` (
-          `num` int(11) NOT NULL AUTO_INCREMENT,
-          `title` varchar(100) NOT NULL,
-          `content` text NOT NULL,
-          `regist_day` char(20) DEFAULT NULL,
-          `main_img` char(50) NOT NULL,
-          `file_name_0` char(40) DEFAULT NULL,
-          `file_copied_0` char(30) DEFAULT NULL,
-          `file_type_0` char(30) DEFAULT NULL,
-          `file_name_1` char(40) DEFAULT NULL,
-          `file_copied_1` char(30) DEFAULT NULL,
-          `file_type_1` char(30) DEFAULT NULL,
-          `file_name_2` char(40) DEFAULT NULL,
-          `file_copied_2` char(30) DEFAULT NULL,
-          `file_type_2` char(30) DEFAULT NULL,
-          `file_name_3` char(40) DEFAULT NULL,
-          `file_copied_3` char(30) DEFAULT NULL,
-          `file_type_3` char(30) DEFAULT NULL,
-          `file_name_4` char(40) DEFAULT NULL,
-          `file_copied_4` char(30) DEFAULT NULL,
-          `file_type_4` char(30) DEFAULT NULL,
-          PRIMARY KEY (`num`)
-        ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;";
+
+       case 'reserve' :
+       $sql = "CREATE TABLE `santteut`.`reserve` (
+        `r_code` CHAR(10) NOT NULL,
+        `r_id` VARCHAR(45) NOT NULL,
+        `r_date` VARCHAR(45) NOT NULL,
+        `r_adult` INT NOT NULL,
+        `r_kid` INT NOT NULL,
+        `r_baby` INT NOT NULL,
+        `r_cancel` INT NOT NULL,
+        `r_pay` INT NOT NULL
+      ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;";
         break;
+
+        case 'bill' :
+        $sql = "CREATE TABLE `bill`(
+          `b_code` varchar(10),
+          `b_id` varchar(20),
+          `b_date` varchar(15),
+          `b_way` char(1),
+          `b_pay` int
+        );";
+         break;
+
+
+
+
         default:
 
       echo "<script>alert('해당 테이블이름이 없습니다. ');</script>";

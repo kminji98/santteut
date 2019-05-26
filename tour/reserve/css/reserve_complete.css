@@ -1,8 +1,13 @@
-#cart_list{width:1098px; margin-left:14%;}
-#title, #sub_title{margin-bottom:9px;}
-#del_btn{color:white; border-radius: 3px; margin-bottom:3%; width: 85px; height: 36px; font-weight: bold; margin-left: 1020px; cursor: pointer; border: 1px solid #2F9D27; background-color: #2F9D27;}
-#del_btn:hover {background-color: #429161;}
-#list_field{border: none; margin:0;padding:0;}
-#list_tbl_body {width:100%;-webkit-border-horizontal-spacing: 0px;-webkit-border-vertical-spacing: 0px;border-top-width: 0px;border-right-width: 0px;border-bottom-width: 0px;border-left-width: 0px; font-size: 0.89em; margin-top: 20px; text-align: center; border: 1px solid #dedede; border-top-color :  black; border-collapse: separate;}
-#list_tbl_body tr:first-child{font-weight:bolder; color:#3d3d3d; background-color:#f2f2f2;}
-#list_tbl_body td{padding:12px; border-right:1px solid #dedede; border-bottom:1px solid #dedede; border-collapse: collapse;}
+#done_text{text-align:center;margin-top: 5%;}
+#p1{text-align: center; font-size: 13px; margin-top: 3%;}
+#p2{text-align: center; font-size: 13px; color: #1ae134; font-weight: bold; margin-top: 1%;}
+#cart_list{width:1098px; margin-left:12%;}
+#title, #sub_title{margin-left: 5%;margin-top:3%;}
+#res_btn{color:white; border-radius: 2px; margin-bottom:3%; width: 190px; height: 48px; font-weight: bold; margin-left: 41%; cursor: pointer; border: 1px solid #2F9D27; background-color: #2F9D27; font-size: 15px; margin-top: 5%;}
+#res_btn:hover {background-color: #47C83E;}
+#list_field2{border: none; margin:0;padding:0; margin-top: 3%;}
+#list_tbl_body2 { margin-left: 5%; width:950px; height: 180px; -webkit-border-horizontal-spacing: 0px;-webkit-border-vertical-spacing: 0px;border-top-width: 0px;border-right-width: 0px;border-bottom-width: 0px;border-left-width: 0px; font-size: 0.89em; margin-top: 20px;  border-bottom: 1px solid #a9adb9; border-top : 2px solid #a9adb9; border-collapse: separate;}
+.tbl_left{background-color: #f2f2f2; font-weight: bold;}
+#name_td{height: 50px;}
+#list_tbl_body2 td{padding:12px;  border-bottom:1px solid #EAEAEA; border-collapse: collapse;}
+#done_content{margin-bottom: 10%;}

@@ -6,6 +6,23 @@ if(isset($_GET["mode"])){
 
   $sql="SELECT * from `package` where `p_code` = '$p_code';";
   $member_sql="SELECT * from `member` where `id` = '$id';";
+  $bus_sql="SELECT * from `bus` where `b_code`='$p_code';";
+
+  $bus_result = mysqli_query($conn,$bus_sql) or die("실패원인1: ".mysqli_error($conn));
+  while($row = mysqli_fetch_array($bus_result)){
+    $b_seat = $row['b_seat'];       //좌석정보를 가져옴 /1/2
+    $str .= $b_seat;      //예약된 좌석번호 누적해서 변수에 저장 ex) "/4/5/6" + "/1/2/3"+ "/65/78"
+  }
+
+  $b_seat = explode("/", $str);
+
+    foreach ($b_seat as $key => $val) {
+        $seat[$val] = $val;
+    }
+
+
+
+
 
 }
 // 쿼리문실행문장
@@ -33,6 +50,8 @@ $day2 = $yoil[date('w', strtotime($p_arr_date2))];
 
 $dp_date=explode("-", $p_dp_date);
 $dp_date2=explode("-", $p_arr_date2);
+
+$p_bus=$row['p_bus'];
 
 
 

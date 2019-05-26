@@ -166,12 +166,12 @@
               data: {email: hidden_email_value}
             })
             .done(function(result) {
-              done=result;
-              alert(done);
-              if (done!="존재하는 이메일입니다.") {
-                check_email1.setAttribute('type', 'text');
-                check_email2.setAttribute('type', 'button');
-              }
+              code=result;
+              alert(code);
+              check_email1.setAttribute('type', 'text');
+              check_email2.setAttribute('type', 'button');
+              alert('이메일로 코드가 발송 되었습니다.');
+
             })
             .fail(function() {
               alert("인증 번호 발송실패!");
