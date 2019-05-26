@@ -162,7 +162,10 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/bill/bil_query.php";
               alert("은행을 선택해 주세요");
               return false;
             }
-            alert(select_bank.value);
+            var popupX = (window.screen.width / 2) - (800 / 2);
+            var popupY= (window.screen.height /2) - (500 / 2);
+            var select_bank=document.getElementById('select_bank');
+            window.open('none_bank.php?r_pay=<?=$r_pay?>&p_code=<?=$p_code?>&p_name=<?=$p_name?>&bank='+select_bank.value, '', 'status=no, width=900, height=300, left='+ popupX + ', top='+ popupY + ', screenX='+ popupX + ', screenY= '+ popupY);
           }else{
             alert("pay2"+pay[1].checked);
           }
@@ -172,7 +175,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/bill/bil_query.php";
 
 
 
-        <a href="../reserve/reserve_list.php"><div id="go_cart"> <b>예약목록 보기</b></div></a>
+        <a href="../reserve/reserve_list.php>"><div id="go_cart"> <b>예약목록 보기</b></div></a>
       </div>
       <div id="right_footer"></div>
     </div>
