@@ -16,7 +16,7 @@ $total_record=0;
 define('ROW_SCALE', 2);
 define('PAGE_SCALE', 2);
 //@@@ id 세션 아이디로 바꿔야 함 지금테스트중 !!
-$sql="SELECT * from `reserve` join `package` on `reserve`.`r_code` = `package`.`p_code` join bill on `package`.`p_code` = `bill`.`b_code` where `reserve`.`r_id` = 'ms9669';";
+$sql="SELECT * from `reserve` join `package` on `reserve`.`r_code` = `package`.`p_code` where `reserve`.`r_id` = 'dd';";
 
 if(isset($_GET['mode'])){
     $date=$_GET['mode'];
@@ -248,8 +248,6 @@ $view_num = $total_record - $start_record;
               $p_code=$row['p_code'];
               //상품명
               $p_name=$row['p_name'];
-              //총결제금액
-              $b_pay=$row['b_pay'];
               //인원
               $r_adult=$row['r_adult'];
 //@@@@@@@@@@@MINJI
@@ -257,7 +255,6 @@ $view_num = $total_record - $start_record;
               $r_kid=$row['r_kid'];
               $r_baby=$row['r_baby'];
               $r_total = $r_adult + $r_kid + $r_baby;
-
               //출발일/귀국일
               $p_dp_date=$row['p_dp_date'];
               $p_period=$row['p_period'];
@@ -265,6 +262,9 @@ $view_num = $total_record - $start_record;
               $p_arr_date1 = date('y-m-d', $timestamp);
               $p_arr_date2 = "20".$p_arr_date1;
               //예약상태
+              //총 상품금액
+              $b_pay=$row['b_pay'];
+              $sql = "SELECT * FROM "
               //결제상태
               $p_pay=$row['p_pay'];
               //후기
