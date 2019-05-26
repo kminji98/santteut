@@ -21,10 +21,23 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/create_table.php";
     <div id="main_search">
       <br><br><br><br><br><br><br><br><br>
       <div id="search1">
+      <form name="main_search_form" action="./tour/package/main_search_list.php" method="post">
       <input type="text" id="tex1" name="search" size="30" placeholder="국가명 / 도시명 / 산 이름으로 검색">
-      <button type="button" name="button">검색</button>
+      <input type="hidden" name="main_search_word" id="main_search_word" value="">
+      <button type="button" name="button" onclick="main_search()">검색</button>
+      </form>
       </div>
     </div>
+
+    <script type="text/javascript">
+      function main_search(){
+        var tex1 = document.getElementById('tex1');
+        var word = document.getElementById('main_search_word');
+        word.value = tex1.value;
+        document.main_search_form.submit();
+      }
+    </script>
+
 <br>
 <br>
 <br>

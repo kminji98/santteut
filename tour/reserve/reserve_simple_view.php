@@ -5,7 +5,7 @@ session_start();
 <html lang="ko" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/tour/reserve/css/reserve_simple_view.css?ver=0">
+    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/tour/reserve/css/reserve_simple_view.css?ver=1">
     <title></title>
   </head>
   <body>
@@ -36,6 +36,13 @@ session_start();
         <td class="info"> <p>ms960719@naver.com</p> </td>
         <td class="change_grey">예약자 휴대폰</td>
         <td class="info"> <p>01052062758</p> </td>
+      </tr>
+
+      <tr>
+        <td class="change_grey">버스 좌석</td>
+        <td colspan="3" class="info2"> <p id="bus_view">14,15,16,17</p> </td>
+        <td></td>
+        <td></td>
       </tr>
 
       <tr>
