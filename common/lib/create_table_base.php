@@ -124,6 +124,7 @@ function create_table($conn, $table_name){
 
        case 'reserve' :
        $sql = "CREATE TABLE `santteut`.`reserve` (
+        `r_pk` CHAR(30) NOT NULL,
         `r_code` CHAR(10) NOT NULL,
         `r_id` VARCHAR(45) NOT NULL,
         `r_date` VARCHAR(45) NOT NULL,
@@ -137,6 +138,7 @@ function create_table($conn, $table_name){
 
         case 'bill' :
         $sql = "CREATE TABLE `bill`(
+          `b_pk` CHAR(30) NOT NULL,
           `b_code` varchar(10),
           `b_id` varchar(20),
           `b_date` varchar(15),

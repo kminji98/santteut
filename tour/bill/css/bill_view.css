@@ -119,3 +119,28 @@
 #payment_choice_direct_detail_2{border-right:  1px solid #dddddd; text-align: left;}
 #payment_choice_direct_detail_3{font-size: 12px; color: #353535; text-align: left; border-bottom:  1px solid #dddddd;}
 #final_mention{color: #2F9D27;}
+
+
+
+
+
+
+
+/* 사이드바 */
+
+#detail_menu{    border: 2px solid grey; border-top:1.5px solid grey; max-width: 250px; width: 17%; position:sticky; top: 15px;  margin-top: 30px; margin-left: 69%; display : inline-block; margin:0px; float:right; margin-top:30px; margin-right:200px;}
+#select_people{background-color: #f2f2f2;}
+#select_people p{font-size: 13px; color:#444444; display: inline-block; font-weight: bold; margin-bottom: 1px; margin-top: 5px;}
+#adult{margin-left: 37px;}
+#kid{margin-left: 42px;}
+#baby{margin-left: 40px;}
+#sel1{width: 55px; margin-left: 25px; margin-bottom: 10px; margin-top: 2px; padding: 4px 3px; border-radius: 2px;}
+#sel2{width: 55px; margin-left: 11px; padding: 4px 3px; border-radius: 2px;}
+#sel3{width: 55px; margin-left: 11px; padding: 4px 3px; border-radius: 2px;}
+#total_pay{margin-left: 15px; font-size: 16px; font-weight: bold; margin-bottom: 0px;}
+#money{font-size: 30px; color: #e85581; margin-left: 70px;}
+#won{font-size: 16px; color: #e85581;  display: inline-block;}
+.subtext1{font-size: 9px; color: #6e6e6e; text-align: right; margin-right: 10px;}
+#line{font-size: 9px; color: #cccccc; margin-left: 2%;}
+#reserve_status{background-color: #35cc2b; color: white; font-size: 15px; font-weight: bold; width: 180px; margin-left: 23px; text-align: center; padding: 14px 5px;}
+#go_cart{ border: 1px solid #e85581; color: #e85581; font-size: 15px; font-weight: bold; width: 180px; margin-left: 23px; text-align: center; padding: 13px 4px; margin-bottom: 15px;}

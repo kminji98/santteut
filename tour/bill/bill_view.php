@@ -74,6 +74,106 @@
     </header>
     </div>
     <div id="top_text"><b>결제하기</b></div>
+
+    <div id="detail_menu">
+      <div id="select_people" >
+        <p id="adult">성인</p>&nbsp;
+        <p id="kid">아동</p>&nbsp;
+        <p id="baby">유아</p>
+        <div class="" style="display:inline-block;">
+          &nbsp;&nbsp;&nbsp;
+        <input readonly type="text" size="4" name="" value="">&nbsp;&nbsp;
+        <input readonly type="text" size="4" name="" value="">&nbsp;&nbsp;
+        <input readonly type="text" size="4" name="" value="">
+        </div>
+        <script type="text/javascript">
+          var adult_pay=0;
+          var kid_pay=0;
+          var baby_pay=0;
+          var member =1;
+          var member2=0;
+          var member3=0;
+          function select_people_number(person){
+            var pay=<?=json_encode($p_pay)?>;
+            var money=document.getElementById('money');
+
+            var adult_val=document.getElementById('adult_val');
+            var kid_val=document.getElementById('kid_val');
+            var baby_val=document.getElementById('baby_val');
+
+            if(person=="adult"){
+            var sel1 =document.getElementById('sel1');
+            member = parseInt(sel1.options[sel1.selectedIndex].text);
+            pay = pay*member;
+            adult_pay=pay;
+          }else if (person=="kid") {
+            var sel2 =document.getElementById('sel2');
+            member2 = parseInt(sel2.options[sel2.selectedIndex].text);
+            pay = pay*member2*0.7;
+            kid_pay=pay;
+          }else if (person=="baby") {
+            var sel3 =document.getElementById('sel3');
+            member3 = parseInt(sel3.options[sel3.selectedIndex].text);
+            pay = pay*member3*0.5;
+            baby_pay=pay;
+          }
+            money.innerHTML=(adult_pay+kid_pay+baby_pay).toLocaleString();
+            adult_val.value=member;
+            kid_val.value=member2;
+            baby_val.value=member3;
+          }
+        </script>
+        <div class="" style="align:center;">
+        </div>
+      </div>
+      <div id="pay_view">
+        <p id="total_pay">총 예정금액</p>
+        <?php
+        $p_pay= number_format($p_pay);
+         ?>
+        <b id="money"><?=$p_pay?></b> <p id="won">원</p>
+        <p class="subtext1">유류할증료,제세공과금 포함</p>
+        <p class="subtext1">※유류할증료 및 제세공과금은 유가와 환율에</p>
+        <p class="subtext1">따라 변동될 수 있습니다.</p>
+        <p class="subtext1">※ 아동, 유아요금은 성인 2인과 같은 방 사용조건이며,</p>
+        <p class="subtext1">미충족시 아동추가 요금이 발생합니다.</p>
+        <p class="subtext1">※ 1인 객실 사용시 추가요금 발생</p>
+        <p id="line">-------------------------------------------------------------------</p>
+      </div>
+      <div id="button">
+        <div id="reserve_status" onclick="people_submit()"> <b id="status">결제하기</b></div><br>
+        <form id="people_form" name="people_form" action="../reserve/reserve_view.php?mode=<?=$p_code?>" method="post">
+          <input id="adult_val" type="hidden" name="adult_val" value="">
+          <input id="kid_val" type="hidden" name="kid_val" value="">
+          <input id="baby_val" type="hidden" name="baby_val" value="">
+        </form>
+
+        <script type="text/javascript">
+          function people_submit(){
+            var empty_flag =<?=json_encode($_SESSION['id'])?>;
+
+            if(empty_flag==null){
+              alert('로그인 해주세요!');
+              location.href='../../member/login/login.php';
+              return false;
+            }
+
+            document.people_form.submit();
+
+          }
+        </script>
+
+
+
+
+        <a href="../cart/cart_list.php"><div id="go_cart"> <b>취소하기</b></div></a>
+      </div>
+      <div id="right_footer"></div>
+    </div>
+
+
+
+
     <div id="tbl_div1">
       <div id="top_text2"><b>선택 상품정보</b></div>
       <table id="tbl1">

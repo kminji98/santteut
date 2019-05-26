@@ -12,7 +12,7 @@
 
   $money=$_POST['money'];
 
-  echo $money;
+  // echo $money;
 
 
 
@@ -22,11 +22,17 @@
   '$code',
   '$member_num',
   '$seat')";
+  $pk=date("Y-m-d-H-i-s",time());
+  srand((double)microtime()*1000000); //난수값 초기화
+  $mil=rand(100000,999999);
+  $pk=$pk."-".$mil;
+
 
   $date =date("Y-m-d");
   $cancel="1";
   $sql_reserve="INSERT INTO `reserve`
   VALUES(
+  '$pk',
   '$code',
   '$id',
   '$date',
