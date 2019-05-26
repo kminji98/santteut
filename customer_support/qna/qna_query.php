@@ -17,8 +17,7 @@ $content = $sql= $result = $name=$q_title=$q_content=$regist_day=$hit=$secret_ok
 $name = $_SESSION['name'];
 
 //mode가 insert일때
-if(isset($_GET["mode"])&&$_GET["mode"]=="insert"){
-    $content = trim($_POST["content"]);
+if(isset($_GET["mode"]) && $_GET["mode"]=="insert"){
     $title = trim($_POST["title"]);
     if(empty($content)||empty($title)){
       alert_back('1. 내용이나제목입력요망!');
@@ -26,7 +25,7 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="insert"){
     }
 
     $title = test_input($_POST["title"]);
-    $q_content = $_POST["content"];
+    $q_content = trim($_POST["content"]);
     $id = test_input($_SESSION['id']);
     $hit = 0;
     $secret_ok =test_input($_POST["secret_ok"]);
@@ -38,54 +37,60 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="insert"){
     $ord=0;
     $groupnum=0;
 
-    // 메인글 저장 삽입한다. 디비변수명 적지x
+    // 메인글 저장 삽입한다. (디비변수명 적지x)
     $sql="INSERT INTO `qna` VALUES (null,'$groupnum','$depth','$ord','$id','$q_title','$q_content','$regist_day','$hit','$secret_ok');";
 
     $result = mysqli_query($conn,$sql);
     if (!$result) {alert_back('Error:5 ' . mysqli_error($conn));}
 
     //등록된사용자가 최근 입력한 qna_list를 보여주기 위하여 num 찾아서 전달하기 위함이다.
-// 최근에 삽입된 게시물이 큰넘버가 맥스넘
+    // 최근에 삽입된 게시물이 큰넘버가 맥스넘
     $sql="SELECT max(num) from qna;";
     $result = mysqli_query($conn,$sql);
     if (!$result) {alert_back('Error: 6' . mysqli_error($conn));}
+
     $row=mysqli_fetch_array($result);
     $max_num=$row['max(num)'];
+
     $sql="UPDATE `qna` SET `groupnum`= $max_num WHERE `num`=$max_num;";
     $result = mysqli_query($conn,$sql);
-    if (!$result) {
-      die('Error: ' . mysqli_error($conn));
-    }
+    if (!$result) {die('Error: ' . mysqli_error($conn));}
     mysqli_close($conn);
 
     echo "<script>location.href='./qna_view.php?num=$max_num&hit=$hit';</script>";
 
 }else if(isset($_GET["mode"]) && $_GET["mode"]=="delete"){
+    //1. 삭제할 해당 게시물의 넘버
     $num = test_input($_GET["num"]);
     $q_num = mysqli_real_escape_string($conn, $num);
-    // 답변글이 있는 경우, 답변글도 삭제
 
-    // 삭제하려는 줄과 그 밑에 답글을 다 삭제하는 쿼리문
-
-    // 삭제하려고하는 줄(num 2,3,4를 삭제할거임)을 보여주는데 같은 그룹의 넘버를 가져옴,그리고 게시글의 위치가 선택한줄 자신과 큰애들을 가져온다
-    // ex )[num=1 groupnum=1 depth=0 ord=0/num=2 groupnum=1 depth=1 ord=1/num=3 groupnum=1 depth=2 ord=2/num=4 groupnum=1 depth=3 ord=3]
-    // $sql ="SELECT num FROM `qna` where groupnum=1 and depth>=1";
-    $sql ="SELECT num FROM `qna` where groupnum=(select groupnum from `qna` where num=$q_num) and depth>=(select depth from `qna` where num=$q_num)";
-
+    //2. 해당게시물의 ord/depth/groupnum 을 가져온다.
+    $sql = "SELECT ord,depth,groupnum from qna where num = $q_num";
     // 쿼리문실행문장
     $result=mysqli_query($conn,$sql);
-    // 조건에 해당하는 레코드의 수 (3개)
-    $total_record=mysqli_num_rows($result);
+    $row=mysqli_fetch_array($result);
+    $ord = $row['ord'];
+    $depth = $row['depth'];
+    $groupnum = $row['groupnum'];
 
-    for($i=0; $i<$total_record ; $i++ ){
-      //각 레코드를 가져옴(2,3,4)
-      $row=mysqli_fetch_array($result);
-      $num=$row['num'];
 
-      $sql ="DELETE FROM `qna` WHERE num=$q_num";
+    //3. 해당게시물의 답변글들의 범위 체크
+    //3-1. 해당게시물과 같은 depth 가 있는 경우.
+    //3-1-1. min(ord) = 삭제할 게시물의 depth 와 같고/ ord가 크고 / 그룹넘버가 같은 레코드 중 최소 ord 값
+    $sql = "SELECT min(ord) from qna where depth = $depth and ord > $ord and groupnum = $groupnum";
+    $result=mysqli_query($conn,$sql);
+    $row=mysqli_fetch_array($result);
+    $min_ord = $row['min(ord)'];
+    //3-1-2. 삭제할 게시물의 범위 : 해당게시물 이상 min(ord)미만
+    $sql ="DELETE FROM `qna` WHERE `ord`>=$ord and `ord`<$min_ord;";
+
+    //3-2. 해당게시물과 같은 depth 가 없는 경우.
+    if(empty($min_ord)){
+      $sql ="DELETE FROM `qna` WHERE `ord`>=$ord";
+    }
+
       $result = mysqli_query($conn,$sql);
       if (!$result) {alert_back('Error: 6' . mysqli_error($conn));}
-    }
 
     mysqli_close($conn);
     echo "<script>location.href='./qna_list.php?page=1';</script>";
@@ -160,7 +165,7 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="insert"){
     $row=mysqli_fetch_array($result);
     $max_num=$row['max(num)'];
 
-  echo "<script>location.href='./qna_view.php?num=$num&hit=$hit';</script>";
+  echo "<script>location.href='./qna_view.php?num=$max_num&hit=$hit';</script>";
 }//end of response
 
 
