@@ -206,6 +206,7 @@ function create_table($conn, $table_name){
        `p_code` varchar(10) NOT NULL,
        `r_pk` char(30) NOT NULL,
        `content` text NOT NULL,
+       `id` char(20) NOT NULL,
        PRIMARY KEY (`num`)
        ) DEFAULT CHARSET=utf8;
        ";
