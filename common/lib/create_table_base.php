@@ -211,6 +211,14 @@ function create_table($conn, $table_name){
        ";
     break;
 
+    case 'cart' :
+      $sql = "CREATE TABLE `cart` (
+      `c_code` varchar(10) ,
+      `c_id` varchar(20)
+      ) DEFAULT CHARSET=utf8;
+      ";
+     break;
+
     default:
       echo "<script>alert('해당 테이블이름이 없습니다. ');</script>";
       exit;

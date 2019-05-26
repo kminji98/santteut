@@ -13,4 +13,5 @@ create_table($conn,'reserve');
 create_table($conn,'bill');
 create_table($conn,'qna');
 create_table($conn,'member_review');
+create_table($conn,'cart');
  ?>
