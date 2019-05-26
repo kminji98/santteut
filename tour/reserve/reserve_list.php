@@ -16,7 +16,7 @@ $total_record=0;
 define('ROW_SCALE', 2);
 define('PAGE_SCALE', 2);
 //@@@ id 세션 아이디로 바꿔야 함 지금테스트중 !!
-$sql="SELECT * from `reserve` join `package` on `reserve`.`r_code` = `package`.`p_code` join bill on `package`.`p_code` = `bill`.`b_code` where `reserve`.`r_id` = 'ms9669';";
+$sql="SELECT * from `reserve` join `package` on `reserve`.`r_code` = `package`.`p_code` join `bill` on `package`.`p_code` = `bill`.`b_code` where `reserve`.`r_id` = 'ms9669';";
 
 if(isset($_GET['mode'])){
     $date=$_GET['mode'];

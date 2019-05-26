@@ -122,6 +122,16 @@ function create_table($conn, $table_name){
       ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;";
         break;
 
+        case 'bill' :
+        $sql = "CREATE TABLE `bill`(
+          `b_code` varchar(10),
+          `b_id` varchar(20),
+          `b_date` varchar(15),
+          `b_way` char(1),
+          `b_pay` int
+        );";
+         break;
+
 
 
 
