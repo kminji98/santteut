@@ -144,9 +144,24 @@ function create_table($conn, $table_name){
           `b_pay` int
         );";
          break;
+        case 'qna' :
+       $sql = "CREATE TABLE `qna` (
+       `num` int(11) unsigned NOT NULL AUTO_INCREMENT,
+       `groupnum` int(11) unsigned NOT NULL,
+       `depth` int(11) unsigned NOT NULL,
+       `ord` int(11) unsigned NOT NULL,
+       `id` varchar(20) NOT NULL,
+       `title` varchar(20) NOT NULL,
+       `content` text NOT NULL,
+       `regist_day` date NOT NULL,
+       `hit` int(11) unsigned NOT NULL,
+       `secret_ok` varchar(10) NOT NULL,
+       PRIMARY KEY (`num`)
+     ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+    ";
+      break;
 
-        default:
-
+      default:
       echo "<script>alert('해당 테이블이름이 없습니다. ');</script>";
       break;
     }//end of switch
