@@ -7,8 +7,8 @@ $total_record=0;
 
 
 //@@@@@@ MINJI 테스트
-define('ROW_SCALE', 2);
-define('PAGE_SCALE', 2);
+define('ROW_SCALE', 10);
+define('PAGE_SCALE', 5);
 
 $sql="SELECT * from `package`";
 

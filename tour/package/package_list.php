@@ -225,9 +225,6 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
         if(value.offsetTop<=value2.offsetTop+250){
           value2.style.position="static";
         }
-        // else{
-        //   value2.style.position="sticky";
-        // }
     }
     </script>
     <title>산뜻 :: 즐거운 산행</title>

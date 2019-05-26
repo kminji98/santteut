@@ -2,11 +2,63 @@
 /*
 =================================================================
 + [DESC] 예약/결제 목록 확인
-+ [DATE] 2019-05-21
++ [DATE] 2019-05-26
 + [NAME] 김민지
 =================================================================
 */
 session_start();
+include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
+$sql=$result=$total_record=$total_pages=$start_record=$row="";
+$total_record=0;
+
+
+//@@@@@@ MINJI 테스트
+define('ROW_SCALE', 2);
+define('PAGE_SCALE', 2);
+//@@@ id 세션 아이디로 바꿔야 함 지금테스트중 !!
+$sql="SELECT * from `reserve` join `package` on `reserve`.`r_code` = `package`.`p_code` join bill on `package`.`p_code` = `bill`.`b_code` where `reserve`.`r_id` = 'ms9669';";
+
+if(isset($_GET['mode'])){
+    $date=$_GET['mode'];
+    $sql=$sql." where `package`.`p_dp_date` = '$date';";
+}
+
+// 쿼리문실행문장
+$result=mysqli_query($conn,$sql);
+$total_record=mysqli_num_rows($result);
+
+// 조건?참:거짓
+$total_pages=ceil($total_record/ROW_SCALE);
+
+
+// 페이지가 없으면 디폴트 페이지 1페이지
+$page=(empty($_GET['page']))?1:$_GET['page'];
+
+if(isset($_POST['page'])){
+  $page=(empty($_POST['page']))?1:$_POST['page'];
+}
+
+// 현재 블럭의 시작 페이지 = (ceil(현재페이지/블럭당 페이지 제한 수)-1) * 블럭당 페이지 제한 수 +1
+//[[  EX) 현재 페이지 5일 때 => ceil(5/3)-1 * 3  +1 =  (2-1)*3 +1 = 4 ]]
+$start_page= (ceil($page / PAGE_SCALE ) -1 ) * PAGE_SCALE +1 ;
+
+
+// 현재페이지 시작번호 계산함.
+//[[  EX) 현재 페이지 1일 때 => (1 - 1)*10 -> 0   ]]
+//[[  EX) 현재 페이지 5일 때 => (5 - 1)*10 -> 40  ]]
+$start_record=($page -1) * ROW_SCALE;
+
+
+// 현재 블럭 마지막 페이지
+// 전체 페이지가 (시작 페이지+페이지 스케일) 보다 크거나 같으면 마지막 페이지는 (시작페이지 + 페이지 스케일) -1 / 아니면 전체페이지 수 .
+//[[  EX) 현재 블럭 시작 페이지가 6/ 전체페이지 : 10 -> '10 >= (6+10)' 성립하지 않음 -> 10이 현재블럭의 가장 마지막 페이지 번호  ]]
+$end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCALE-1 : $total_pages;
+
+
+// 리스트에 보여줄 번호를 최근순으로 부여함.
+// 출력될 숫자
+$view_num = $total_record - $start_record;
+
 ?>
 <?php
   $now = new DateTime();
@@ -21,7 +73,7 @@ session_start();
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css?ver=2">
-    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/tour/reserve/css/reserve_list.css?ver=2">
+    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/tour/reserve/css/reserve_list.css?ver=3">
     <title>산뜻 :: 즐거운 산행</title>
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
     <script type="text/javascript">
@@ -89,7 +141,7 @@ session_start();
         </div>
       </fieldset>
       <br>
-      <fieldset id="search_field" width="min-width: 1000px;">
+      <fieldset id="search_field">
         <span id="search_date">출발일</span>&nbsp;&nbsp;&nbsp;
         <select class="date_select" name="year1" id="year1" >
         <?php
@@ -181,16 +233,68 @@ session_start();
             <td>총 결제금액</td>
             <td>인원</td>
             <td>출발일/귀국일</td>
-            <!-- 취소내역 -> 예약상태 : 예약 취소  -->
             <td>예약상태</td>
             <td>결제상태</td>
             <td>후기</td>
           </tr>
           <output id="list_tbl_body_output">
-            <tr><td colspan="9" style="padding:40px;">예약 내역이 없습니다.</td></tr>
+            <?php
+
+            mysqli_data_seek($result,$start_record);
+            for ($record = $start_record; $record  < $start_record+ROW_SCALE && $record<$total_record; $record++){
+              $row=mysqli_fetch_array($result);
+              //예약날짜/ 예약 코드/ 상품명/ 총 결제금액/ 인원/ 출발일*귀국일 / 예약상태 /결제상태 / 후기
+              $r_date = $row['r_date'];
+              $p_code=$row['p_code'];
+              //상품명
+              $p_name=$row['p_name'];
+              //총결제금액
+              $b_pay=$row['b_pay'];
+              //인원
+              $r_adult=$row['r_adult'];
+//@@@@@@@@@@@MINJI
+
+              $r_kid=$row['r_kid'];
+              $r_baby=$row['r_baby'];
+              $r_total = $r_adult + $r_kid + $r_baby;
+
+              //출발일/귀국일
+              $p_dp_date=$row['p_dp_date'];
+              $p_period=$row['p_period'];
+              $timestamp = strtotime("$p_dp_date +$p_period days");
+              $p_arr_date1 = date('y-m-d', $timestamp);
+              $p_arr_date2 = "20".$p_arr_date1;
+              //예약상태
+              //결제상태
+              $p_pay=$row['p_pay'];
+              //후기
+             ?>
+             <tr>
+               <td><?=$r_date?></td>
+               <td><?=$p_code?></td>
+               <td><?=$p_name?></td>
+               <td><?=$b_pay?></td>
+               <td><?=$r_total?></td>
+               <td><?=$p_dp_date.$p_arr_date2?></td>
+               <!-- //예약상태
+               //결제상태
+               //후기 -->
+               <td></td>
+               <td></td>
+               <td></td>
+             </tr>
+             <?php
+               }
+              ?>
           </output>
         </table>
       </fieldset>
+      <?php
+      if(empty($total_record)){
+        echo '<p id="no_result" style="text-align:center; padding:2%;margin-bottom:3%;">예약된 산행 내역이 없습니다.</p>';
+      }
+
+       ?>
 
 
     </div> <!-- end of div "reserve_list" -->
