@@ -3,12 +3,12 @@
 $page=$num=$q_num=$sql=$result=$row=$title=$content=$file_name_0=$file_copied_0=$file_type_0="";
 $file_name_1=$file_copied_1=$file_type_1=$file_name_2=$file_copied_2=$file_type_2="";
 $file_name_3=$file_copied_3=$file_type_3=$file_name_4=$file_copied_4=$file_type_4="";
-$regist_day=$id="";
+$regist_day="";
 //***************************************************************************
 session_start();
 include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/create_table.php";
-include $_SERVER['DOCUMENT_ROOT']."/santteut/community/official_review/lib/official_review_func.php";
-create_table($conn, 'official_review_ripple');
+include $_SERVER['DOCUMENT_ROOT']."/santteut/community/mt_information/lib/mt_information_func.php";
+create_table($conn, 'mt_information_ripple');
 
 if(empty($_GET['page'])){
   $page=1;
@@ -20,7 +20,7 @@ if(isset($_GET["num"])&&!empty($_GET["num"])){
   $num = test_input($_GET["num"]);
   $q_num = mysqli_real_escape_string($conn, $num);
 
-  $sql = "SELECT * FROM `official_review` WHERE num='$q_num';";
+  $sql = "SELECT * FROM `mt_information` WHERE num='$q_num';";
   $result = mysqli_query($conn,$sql);
   if(!$result){
     die('Error: ' . mysqli_error($conn));
@@ -55,8 +55,8 @@ if(isset($_GET["num"])&&!empty($_GET["num"])){
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css">
-    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/community/official_review/css/official_review_form.css">
-        <script src="./js/official_review.js?ver=1"></script>
+    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/community/mt_information/css/mt_information_form.css">
+        <script src="./js/mt_information.js?ver=0"></script>
     <title><?=$title?></title>
   </head>
   <body>
@@ -89,7 +89,7 @@ if(isset($_GET["num"])&&!empty($_GET["num"])){
                 echo ("
                   첨부파일 : $file_name_0 ($file_size Byte)
                   &nbsp;
-                  <a href='official_review_download.php?mode=download&num=$q_num&file_copied=$file_copied_0&file_name=$file_name_0'>저장</a><br>
+                  <a href='mt_information_download.php?mode=download&num=$q_num&file_copied=$file_copied_0&file_name=$file_name_0'>저장</a><br>
                 ");
               }
               if(!empty($file_copied_1)){
@@ -100,7 +100,7 @@ if(isset($_GET["num"])&&!empty($_GET["num"])){
                   echo ("
                     첨부파일 : $file_name_1 ($file_size Byte)
                     &nbsp;
-                    <a href='official_review_download.php?mode=download&num=$q_num&file_copied=$file_copied_1&file_name=$file_name_1'>저장</a><br>
+                    <a href='mt_information_download.php?mode=download&num=$q_num&file_copied=$file_copied_1&file_name=$file_name_1'>저장</a><br>
                   ");
                 }
                 if(!empty($file_copied_2)){
@@ -111,7 +111,7 @@ if(isset($_GET["num"])&&!empty($_GET["num"])){
                     echo ("
                       첨부파일 : $file_name_2 ($file_size Byte)
                       &nbsp;
-                      <a href='official_review_download.php?mode=download&num=$q_num&file_copied=$file_copied_2&file_name=$file_name_2'>저장</a><br>
+                      <a href='mt_information_download.php?mode=download&num=$q_num&file_copied=$file_copied_2&file_name=$file_name_2'>저장</a><br>
                     ");
                   }
                   if(!empty($file_copied_3)){
@@ -122,7 +122,7 @@ if(isset($_GET["num"])&&!empty($_GET["num"])){
                       echo ("
                         첨부파일 : $file_name_3 ($file_size Byte)
                         &nbsp;
-                        <a href='official_review_download.php?mode=download&num=$q_num&file_copied=$file_copied_3&file_name=$file_name_3'>저장</a><br>
+                        <a href='mt_information_download.php?mode=download&num=$q_num&file_copied=$file_copied_3&file_name=$file_name_3'>저장</a><br>
                       ");
                     }
                     if(!empty($file_copied_4)){
@@ -133,7 +133,7 @@ if(isset($_GET["num"])&&!empty($_GET["num"])){
                         echo ("
                           첨부파일 : $file_name_4 ($file_size Byte)
                           &nbsp;
-                          <a href='official_review_download.php?mode=download&num=$q_num&file_copied=$file_copied_4&file_name=$file_name_4'>저장</a><br>
+                          <a href='mt_information_download.php?mode=download&num=$q_num&file_copied=$file_copied_4&file_name=$file_name_4'>저장</a><br>
                         ");
                       }
              ?>
@@ -144,7 +144,7 @@ if(isset($_GET["num"])&&!empty($_GET["num"])){
         <th>댓글</th>
         <td>
           <?php
-            $sql="SELECT * FROM `official_review_ripple` where parent=$q_num;";
+            $sql="SELECT * FROM `mt_information_ripple` where parent=$q_num;";
             $ripple_result = mysqli_query($conn,$sql);
             while($ripple_row=mysqli_fetch_array($ripple_result)){
               $ripple_num=$ripple_row['num'];
@@ -161,7 +161,7 @@ if(isset($_GET["num"])&&!empty($_GET["num"])){
                 <li><?=$ripple_name."&nbsp;&nbsp;".$ripple_date?></li>
                 <li id="mdi_del">
                 <?php
-                 $message = official_review_ripple_delete($ripple_id,$ripple_num,'official_review_query.php',$q_num);
+                 $message = mt_information_ripple_delete($ripple_id,$ripple_num,'mt_information_query.php',$q_num);
                  echo $message;
                 ?>
                 </li>
@@ -174,7 +174,7 @@ if(isset($_GET["num"])&&!empty($_GET["num"])){
             }//end of while
             mysqli_close($conn);
             ?>
-            <form name="ripple_form" action="official_review_query.php?mode=insert_ripple" method="post">
+            <form name="ripple_form" action="mt_information_query.php?mode=insert_ripple" method="post">
             <input type="hidden" name="parent" value="<?=$q_num?>">
             <div id="ripple_insert">
             <div id="ripple_textarea"><textarea name="ripple_content" rows="3" cols="80"></textarea></div>
@@ -184,14 +184,14 @@ if(isset($_GET["num"])&&!empty($_GET["num"])){
         </td>
       </table>
       <div id="view_button">
-      <a href="./official_review_list.php?page=<?=$page?>"><input type="button" style="width:50px; height:24px; background-color: #2F9D27; border: 1px solid #2F9D27; color: white;" value="목록">&nbsp;</a>
+      <a href="./mt_information_list.php?page=<?=$page?>"><input type="button" style="width:50px; height:24px; background-color: #2F9D27; border: 1px solid #2F9D27; color: white;" value="목록">&nbsp;</a>
                 <?php
-                  //관리자일경우 수정,삭제가 가능하도록 설정
-                   // if($id=="admin"){
-                    echo ('<a href="./official_review_form.php?mode=update&num='.$num.'"><input type="button" style="width:50px; height:24px; background-color: #2F9D27; border: 1px solid #2F9D27; color: white;" value="수정">&nbsp;</a>&nbsp;');
+                //관리자일경우 수정,삭제가 가능하도록 설정
+                 // if($id=="admin"){
+                    echo ('<a href="./mt_information_form.php?mode=update&num='.$num.'"><input type="button" style="width:50px; height:24px; background-color: #2F9D27; border: 1px solid #2F9D27; color: white;" value="수정">&nbsp;</a>&nbsp;');
                     echo ('<input type="button" style="width:50px; height:24px; background-color: #2F9D27; border: 1px solid #2F9D27; color: white;" value="삭제" onclick="check_delete('.$num.')">&nbsp;</a>&nbsp;');
-                    echo '<a href="official_review_form.php"><input type="button" style="width:60px; height:24px; background-color: #2F9D27; border: 1px solid #2F9D27; color: white;" value="글쓰기">&nbsp;</a>';
-                   // }
+                    echo '<a href="mt_information_form.php"><input type="button" style="width:60px; height:24px; background-color: #2F9D27; border: 1px solid #2F9D27; color: white;" value="글쓰기">&nbsp;</a>';
+                // }    
                  ?>
               </div><!--end of view_button -->
     </section>
