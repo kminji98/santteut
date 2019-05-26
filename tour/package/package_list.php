@@ -459,7 +459,11 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
           </tr>
 
           <?php
+
+
+
           mysqli_data_seek($result,$start_record);
+
           for ($record = $start_record; $record  < $start_record+ROW_SCALE && $record<$total_record; $record++){
             $row=mysqli_fetch_array($result);
             $p_code=$row['p_code'];
@@ -478,6 +482,23 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
             $day2 = $yoil[date('w', strtotime($p_arr_date2))];
             $p_pay=number_format($p_pay);
 
+            $total=0;
+            $status ="예약가능";
+            $reserve_status_sql = "SELECT sum(`r_adult`+`r_kid`+`r_baby`),`p_bus` from `package` inner join `reserve` on `package`.`p_code` = `reserve`.`r_code` where `package`.`p_code` = '$p_code';";
+            $result_status_sql=mysqli_query($conn,$reserve_status_sql);
+            for($i=0;$i<mysqli_num_rows($result_status_sql);$i++){
+              $row1 = mysqli_fetch_array($result_status_sql);
+              $sum = $row1['sum(`r_adult`+`r_kid`+`r_baby`)'];
+              $p_bus = $row1['p_bus'];
+              $total +=$sum;
+            }
+            if($total>=$p_bus/2){
+              $status="출발가능";
+            }
+            if($total==$p_bus){
+              $status="예약마감";
+            }
+
            ?>
 
           <tr class="package_list_view_value">
@@ -492,11 +513,12 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
             <td class="package_list_view_name_value"><a href="package_view.php?mode=<?=$p_code?>"><?=$p_name?></a></td>
             <td class="package_list_view_pay_value"><?=$p_pay?></td>
             <td>
-              <output class="package_list_view_state_value">예약가능</output>
+              <output class="package_list_view_state_value"><?=$status?></output>
             </td>
           </tr>
           <?php
-            }
+
+          }
            ?>
         </table>
     </div>

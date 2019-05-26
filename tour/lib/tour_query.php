@@ -7,6 +7,8 @@ if(isset($_GET["mode"])){
   $sql="SELECT * from `package` where `p_code` = '$p_code';";
   $member_sql="SELECT * from `member` where `id` = '$id';";
   $bus_sql="SELECT * from `bus` where `b_code`='$p_code';";
+  $reserve_status_sql = "SELECT sum(`r_adult`+`r_kid`+`r_baby`),`p_bus` from `package` inner join `reserve` on `package`.`p_code` = `reserve`.`r_code` where `package`.`p_code` = '$p_code';";
+
 
   $bus_result = mysqli_query($conn,$bus_sql) or die("실패원인1: ".mysqli_error($conn));
   while($row = mysqli_fetch_array($bus_result)){
@@ -19,10 +21,6 @@ if(isset($_GET["mode"])){
     foreach ($b_seat as $key => $val) {
         $seat[$val] = $val;
     }
-
-
-
-
 
 }
 // 쿼리문실행문장
@@ -63,5 +61,23 @@ $hp2=$member_row['hp2'];
 $email=$member_row['email'];
 $hp=$hp1.$hp2;
 $email=explode("@", $email);
+
+
+$result_status_sql=mysqli_query($conn,$reserve_status_sql);
+$total=0;
+$status ="예약가능";
+for($i=0;$i<mysqli_num_rows($result_status_sql);$i++){
+  $row1 = mysqli_fetch_array($result_status_sql);
+  $sum = $row1['sum(`r_adult`+`r_kid`+`r_baby`)'];
+  $p_bus = $row1['p_bus'];
+  $p_bus_half =(ceil($p_bus / 2));
+  $total +=$sum;
+}
+if($total>=$p_bus_half){
+  $status="출발가능";
+}
+if($total==$p_bus){
+  $status="예약마감";
+}
 
  ?>
