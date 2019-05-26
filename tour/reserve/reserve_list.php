@@ -248,10 +248,11 @@ $view_num = $total_record - $start_record;
               $p_code=$row['p_code'];
               //상품명
               $p_name=$row['p_name'];
+              //총 결제금액(결제 해야할 금액 - reserve.r_pay)
+              $r_pay=$row['r_pay'];
               //인원
               $r_adult=$row['r_adult'];
 //@@@@@@@@@@@MINJI
-
               $r_kid=$row['r_kid'];
               $r_baby=$row['r_baby'];
               $r_total = $r_adult + $r_kid + $r_baby;
@@ -264,8 +265,20 @@ $view_num = $total_record - $start_record;
               //예약상태
               //총 상품금액
               $b_pay=$row['b_pay'];
-              $sql = "SELECT * FROM "
+
+
+              $bill_sql = "SELECT * FROM `bill` where `b_code`=$p_code";
               //결제상태
+              $bill_result=mysqli_query($conn,$bill_sql);
+              $count=mysqli_num_rows($bill_result);
+              $bill_row=mysqli_fetch_array($result);
+
+              $bill_status =$bill_row['b_pay'];
+              if(empty($count)){
+                $bill_status = "결제미완료";
+              }
+              // $b_pay=$bill_row['b_pay'];
+
               $p_pay=$row['p_pay'];
               //후기
              ?>
@@ -273,14 +286,14 @@ $view_num = $total_record - $start_record;
                <td><?=$r_date?></td>
                <td><?=$p_code?></td>
                <td><?=$p_name?></td>
-               <td><?=$b_pay?></td>
+               <td><?=$r_pay?></td>
                <td><?=$r_total?></td>
                <td><?=$p_dp_date.$p_arr_date2?></td>
                <!-- //예약상태
                //결제상태
                //후기 -->
                <td></td>
-               <td></td>
+               <td><?=$bill_status?></td>
                <td></td>
              </tr>
              <?php
