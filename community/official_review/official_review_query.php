@@ -229,10 +229,13 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="insert"){
   echo "<script>location.href='./official_review_view.php?num=$num';</script>";
 }else if(isset($_GET["mode"]) && $_GET["mode"] == "insert_ripple"){
   if(empty($_POST["ripple_content"])){
-    echo "<script>alert('댓글 내용을 입력하세요.');history.go(-1);";
+    echo "<script>alert('댓글 내용을 입력하세요.');history.go(-1);</script>";
     exit;
   }
-
+  if(empty($_SESSION['id']) || empty($_SESSION['name'])){
+    echo "<script>alert('로그인 후 이용해주세요.');history.go(-1);</script>";
+    exit;
+  }else{
   $content = test_input($_POST["ripple_content"]);
   $parent = test_input($_POST["parent"]);
   $q_id = mysqli_real_escape_string($conn, $_SESSION['id']);
@@ -249,5 +252,5 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="insert"){
   mysqli_close($conn);
   echo "<script>location.href='./official_review_view.php?num=$parent';</script>";
 }
-
+}else if
 ?>

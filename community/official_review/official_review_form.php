@@ -8,6 +8,11 @@ $file_name_3=$file_copied_3=$file_type_3="";
 $file_name_4=$file_copied_4=$file_type_4="";
 $title=$content=$regist_day=$checked="";
 //**********************************************************************
+session_start();
+if(!isset($_SESSION['id'])){
+  echo "<script>alert('로그인 후 이용해주세요.');history.go(-1);</script>";
+  exit;
+}
 include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
 $mode="insert";
 if(isset($_GET["mode"]) && $_GET["mode"]=='update'){
