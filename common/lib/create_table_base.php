@@ -131,7 +131,7 @@ function create_table($conn, $table_name){
         `r_kid` INT NOT NULL,
         `r_baby` INT NOT NULL,
         `r_cancel` INT NOT NULL,
-        `r_pay` INT NOT NULL
+        `r_pay` VARCHAR(15) NOT NULL
       ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;";
         break;
 

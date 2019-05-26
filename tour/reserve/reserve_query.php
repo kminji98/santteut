@@ -9,6 +9,13 @@
   $kid=$_POST['kid'];
   $baby=$_POST['baby'];
 
+
+  $money=$_POST['money'];
+
+  echo $money;
+
+
+
   $sql_bus="INSERT INTO `bus`
   VALUES(
   '$id',
@@ -26,10 +33,13 @@
   '$adult',
   '$kid',
   '$baby',
-  '$cancel'
+  '$cancel',
+  '$money'
   )";
   mysqli_query($conn,$sql_bus);
   mysqli_query($conn,$sql_reserve);
-  echo $date;
+  // echo $date;
+
+
 
  ?>

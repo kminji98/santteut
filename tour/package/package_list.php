@@ -46,6 +46,11 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
       var order_option = <?=json_encode($order_option)?>;
       var order_btn = <?=json_encode($order_btn)?>;
       document.getElementById(order_condition).value=<?=json_encode($order_btn)?>;
+
+      var list_status = document.getElementById('list_status');
+      if(list_status.innerHTML=="예약마감"){
+        list_status.style.color ="grey";
+      }
     };
 
 
@@ -513,7 +518,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
             <td class="package_list_view_name_value"><a href="package_view.php?mode=<?=$p_code?>"><?=$p_name?></a></td>
             <td class="package_list_view_pay_value"><?=$p_pay?></td>
             <td>
-              <output class="package_list_view_state_value"><?=$status?></output>
+              <output class="package_list_view_state_value" id="list_status"><?=$status?></output>
             </td>
           </tr>
           <?php
@@ -521,6 +526,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
           }
            ?>
         </table>
+
     </div>
     <br><br><br>
     <!--$page 는 현재페이지를 의미 x / 각 페이지를 의미-->
