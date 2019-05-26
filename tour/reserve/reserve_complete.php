@@ -59,7 +59,7 @@ session_start();
           </tr>
         </table>
         <br>
-        <a href="./reserve_list.php"><input type="button" id="res_btn" value="예약내역 확인하기" ></a> 
+        <a href="./reserve_list.php"><input type="button" id="res_btn" value="예약내역 확인하기" ></a>
       </fieldset>
       </div>
 
