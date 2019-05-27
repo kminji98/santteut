@@ -16,14 +16,20 @@ if(isset($_GET["mode"]) && isset($_GET["code"]) && $_GET["mode"]=="insert"){
         history.go(-1);
         </script>";
   }else{
-    echo "<script>alert('장바구니에 담았습니다.');
-        </script>";
-    $sql = "INSERT INTO `cart` VALUES ('$c_code','$c_id');";
+    if(empty($c_id)){
+      echo "<script>alert('로그인 해주세요.');
+          history.go(-1);
+          </script>";
+    }else{
+      echo "<script>alert('장바구니에 담았습니다.');
+          </script>";
+      $sql = "INSERT INTO `cart` VALUES ('$c_code','$c_id');";
 
-    $result = mysqli_query($conn,$sql);
-    if (!$result) {
-      alert_back('Error:5 ' . mysqli_error($conn));
-      // die('Error: ' . mysqli_error($conn));
+      $result = mysqli_query($conn,$sql);
+      if (!$result) {
+        alert_back('Error:5 ' . mysqli_error($conn));
+        // die('Error: ' . mysqli_error($conn));
+      }
     }
   }
 }
