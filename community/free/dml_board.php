@@ -5,8 +5,8 @@ if(!isset($_SESSION['userid'])){
   exit;
 }
 include $_SERVER['DOCUMENT_ROOT']."/santtuet/common/lib/db_connector.php";
-$userid = $_SESSION['userid'];
-$username = $_SESSION['username'];
+$userid = $_SESSION['id'];
+$username = $_SESSION['name'];
 $title = $_POST["title"];
 $content = $_POST["content"];
 $image = $_POST["del"];

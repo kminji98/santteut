@@ -98,7 +98,7 @@ $number--;
 </td>
   <td></td>
   <td><?php
-    if(!empty($_SESSION['userid'])){
+    if(!empty($_SESSION['id'])){
     echo '<a href="write_edit_form.php">글쓰기</a>';
     }
   ?></td>
