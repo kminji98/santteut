@@ -1,7 +1,10 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/best3.css?ver=1">
+</head>
 <?php
-session_start();
-include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
-//best3 SCALE=>3
 define(SCALE, 3);
 
   $sql = "SELECT * ,sum(`r_adult`+`r_kid`+`r_baby`) from `reserve` join `package` on `reserve`.`r_code`=`package`.`p_code` where `package`.`p_airplane_num` ='0' group by `r_code` order by sum(`r_adult`+`r_kid`+`r_baby`) desc limit 3;";
@@ -24,12 +27,8 @@ define(SCALE, 3);
     $p_pay[$record]=number_format($p_pay[$record]);
   }
  ?>
-<!DOCTYPE html>
-<html>
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+
 <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/best3.css?ver=2">
-</head>
 <body>
     <div class="container" id="con1">
       <img src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/lib/editor/data/<?=$p_main_img_copy1[0]?>" alt="Avatar" class="image">
@@ -106,4 +105,5 @@ define(SCALE, 3);
           </div>
         </div>
 </body>
+
 </html>
