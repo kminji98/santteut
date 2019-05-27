@@ -8,7 +8,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santtuet/common/lib/db_connector.php";
 <?php
 function free_ripple_delete($id1,$num1,$page1,$page,$hit,$parent){
   $message="";
-  if($_SESSION['userid']=="admin"||$_SESSION['userid']==$id1){
+  if($_SESSION['id']=="admin"||$_SESSION['id']==$id1){
     $message='<form style="display:inline" action="'.$page1.'?mode=delete_ripple&page='.$page.'&hit='.$hit.'" method="post">
     <input type="hidden" name="num" value="'.$num1.'">
     <input type="hidden" name="parent" value="'.$parent.'">
@@ -46,14 +46,14 @@ if (!$result) {
  ?>
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>산뜻 :: 즐거운 산행</title>
   </head>
   <body>
 <table style="width : 80%;">
   <tr>
     <td style="width : 500px;"><?=$title?></td>
     <td style="float : right;"><?=$name?><?php
-        if(!empty($_SESSION['userid'])&&!empty($destination)){
+        if(!empty($_SESSION['id'])&&!empty($destination)){
         $file_size = filesize($destination)/1024;
         $file_size = floor($file_size);
           echo ("
