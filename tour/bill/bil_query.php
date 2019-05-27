@@ -1,5 +1,6 @@
 <?php
-
+session_start();
+$id=$_SESSION['id'];
 
 include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
 if(isset($_GET["r_pk"])){
@@ -51,5 +52,8 @@ $bus_sql = "SELECT * from `bus` where `b_pk`='$r_pk';";
 $result3=mysqli_query($conn,$bus_sql);
 $row3=mysqli_fetch_array($result3);
 $b_seat=$row3['b_seat'];
+
+
+// if(){}
 
  ?>
