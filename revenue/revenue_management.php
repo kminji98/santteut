@@ -31,7 +31,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/create_table_base.php";
     </header>
 
     <section id="revenue">
-      <h1>SANTTEUT SALES HISTORY</h1>
+      <h1>SANTTEUT REVENUE MANAGEMENT</h1>
       <div>
       <div><h4>매출 내역</h4></div>
       <form name="month_form" action="admin_flight_sales.php" method="post">
