@@ -175,6 +175,7 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
         </div>
       </fieldset>
       <br>
+      <form name="reserve_search_form" action="reserve_list.php" method="post">
       <fieldset id="search_field">
         <span id="search_date">출발일</span>&nbsp;&nbsp;&nbsp;
         <select class="date_select" name="year1" id="year1" >
@@ -253,8 +254,20 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
           ?>
         </select>일
           &nbsp;&nbsp;
-        <input type="button" id="search_btn" name="" value="검색하기" >
+        <input type="button" id="search_btn" name="" onclick="reserve_search_submit()" value="검색하기" >
       </fieldset>
+      </form>
+      <script type="text/javascript">
+        function reserve_search_submit(){
+          var year1 = document.getElementById('year1');
+          var year2 = document.getElementById('year2');
+          var month1 = document.getElementById('month1');
+          var month1 = document.getElementById('month2');
+          var day1 = document.getElementById('day1');
+          var day2 = document.getElementById('day2');
+        }
+
+      </script>
       <br><br>
       <fieldset id="list_field" >
          <h4 id="sub_title"><b class="symbol_greater_than">></b>산뜻 예약/결제</h4>
@@ -336,7 +349,7 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
               }
 
               if($total>=$p_bus_half){
-                $status="<a style='color:red;' href='../bill/bill_view.php'>결제대기</a>";
+                $status="<a style='color:red;' href='../bill/bill_view.php?&r_pk=<?=$r_pk?>'>결제대기</a>";
               }
 
               //산행후기 review @@@@@@@@@MINJI0527
