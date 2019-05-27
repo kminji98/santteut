@@ -29,7 +29,7 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="search"){
   $q_find_input = mysqli_real_escape_string($conn, $find_input);
 
   if(empty($find_input)){
-    echo ("<script>window.alert('검색할 단어를 입력해 주세요.')history.go(-1);");
+    echo ("<script>window.alert('검색할 단어를 입력해 주세요.');history.go(-1);</script>");
     exit;
   }
 
