@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <?php
 session_start();
-include $_SERVER['DOCUMENT_ROOT']."/santtuet/common/lib/db_connector.php";
+include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
 if(!isset($_SESSION['id'])){echo "<script>alert('권한없음!');history.go(-1);</script>";
 exit;}
 $mode="insert";
