@@ -17,13 +17,13 @@ $id= $_SESSION['id'];
 $name= $_SESSION['name'];
 
 // 모드가 수정 or 답글일때
-if((isset($_GET["mode"])&&$_GET["mode"]=="update") || (isset($_GET["mode"])&&$_GET["mode"]=="response") ){
+if((isset($_GET["mode"])&&$_GET["mode"]=="update") ){
 
-    $mode=$_GET["mode"];//update 또는 response $mode="update"or"response"
+    $mode=$_GET["mode"];//update 또는 response $mode="update"
     $num = test_input($_GET["num"]);
     $q_num = mysqli_real_escape_string($conn, $num);
 
-    //update 이면 해당된글, response이면 부모의 해당된글을 가져옴.
+    //update 이면 해당된글
     $sql="SELECT * from `member_review` where num ='$q_num';";
     $result = mysqli_query($conn,$sql);
     if (!$result) {die('Error: ' . mysqli_error($conn));}
@@ -55,29 +55,47 @@ if((isset($_GET["mode"])&&$_GET["mode"]=="update") || (isset($_GET["mode"])&&$_G
   <head>
     <meta charset="utf-8">
     <title>산행후기</title>
+    <style media="screen">
+      #review_section{
+        margin-left:14%;margin-top:1%;
+      }
+      #review_tbl{
+        width:60%; text-align:center;
+        font-size: 15px;margin-top: 10%;
+        border-collapse: collapse;
+        border-color: #828282;
+        color:  #252525;
+      }
+      #review_tbl tr th{
+        padding:30px;
+      }
+      #title{
+        font-size:15px; width:95%; padding:1%;
+      }
+
+    </style>
   </head>
   <body>
-    <section style="margin-left:10%;margin-top:1%;">
-      <form class="member_review_insert_form" action="member_review_query.php?mode=<?=$mode;?>" method="post">
-        <input type="hidden" name="num" value="<?=$num?>">
-        <input type="hidden" name="code" value="<?=$p_code?>">
-      <table border="1">
+    <section id="review_section" >
+      <form class="member_review_insert_form" action="member_review_query.php?mode=<?=$mode?>" method="post">
+        <input type="hidden" name="code" value="<?=$r_pk?>">
+      <table id="review_tbl" border="1">
         <tr>
-          <th>작성자</th>
-          <td style="width:600px; text-align:center;"><?=$name?></td>
+          <th  style="padding:8px">작성자</th>
+          <td ><?=$name?></td>
         </tr>
         <tr>
-          <th>제목</th>
-          <td><input type="text" style="font-size:15px; width:95%; padding:1%" name="title" value="<?=$title?>"></td>
+          <th style="padding:0">제목</th>
+          <td><input type="text" id="title" name="title" value="<?=$title?>" maxlength="30"></td>
         </tr>
         <tr>
           <th>내용</th>
-          <td><textarea name="content" cols="80" rows="20"><?=$content?></textarea></td>
+          <td><textarea name="content" cols="80" rows="17"><?=$content?></textarea></td>
         </tr>
       </table>
       <br>
         <div>
-          <button id="admin_write_btn" style="margin-left:25%" onclick='document.member_review_insert_form.submit();" type="button" name="button"'>완료</button>
+          <button id="admin_write_btn" style="margin-left:40%" onclick='document.member_review_insert_form.submit();" type="button" name="button"'>완료</button>
         </div>
       </form>
     </section>
