@@ -11,6 +11,9 @@ session_start();
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
     <script type="text/javascript">
     $(document).ready(function(){
+      $("#faq_mini").css("font-weight","bold");
+      $("#faq_mini").css("color","black");
+      $("#faq_mini").css("font-size","23px");
       $("#li1").click(function(){
         $("#li1_1").slideToggle("fast");
         if($("#li1").css("color")=="rgb(0, 0, 0)"){

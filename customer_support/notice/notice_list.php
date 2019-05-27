@@ -91,6 +91,14 @@ $view_num = $total_record - $start_record;
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/customer_support/notice/css/notice_list.css?ver=0">
     <title>공지사항</title>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $("#not_mini").css("font-weight","bold");
+        $("#not_mini").css("color","black");
+        $("#not_mini").css("font-size","23px");
+      });
+      </script>
   </head>
   <body>
     <header>
