@@ -2,29 +2,43 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/best3.css?ver=1">
+<link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/best3.css">
 </head>
 <?php
 define(SCALE, 3);
 
-  $sql = "SELECT * ,sum(`r_adult`+`r_kid`+`r_baby`) from `reserve` join `package` on `reserve`.`r_code`=`package`.`p_code` where `package`.`p_airplane_num` ='0' group by `r_code` order by sum(`r_adult`+`r_kid`+`r_baby`) desc limit 3;";
-  $result=mysqli_query($conn,$sql);
-  $total_records = mysqli_num_rows($result);
-  for ($record=0; $record < SCALE ; $record++) {
-    $row = mysqli_fetch_array($result);
-    $p_code[$record]=$row['p_code'];
-    $p_name[$record]=$row['p_name'];
-    $p_dp_date[$record]=$row['p_dp_date'];
-    $p_pay[$record]=$row['p_pay'];
-    $p_main_img_copy1[$record]=$row['p_main_img_copy1'];
-    $p_period[$record]=$row['p_period'];
-    $timestamp = strtotime("$p_dp_date[$record] +$p_period[$record] days");
-    $p_arr_date1[$record] = date('y-m-d', $timestamp);
-    $p_arr_date2[$record] = "20".$p_arr_date1[$record];
+  if($_GET['divide']){
+    switch ($_GET['divide']) {
+      case 'domestic':
+      $divide_flag="where `package`.`p_airplane_num`='0'";
+      break;
+      case 'abroad':
+      $divide_flag="where `package`.`p_airplane_num`!='0'";
+      break;
+      default:
+      $divide_flag='';
+        break;
+    }
+
+  }
+  $best3_sql = "SELECT * ,sum(`r_adult`+`r_kid`+`r_baby`) from `reserve` join `package` on `reserve`.`r_code`=`package`.`p_code` $divide_flag group by `r_code` order by sum(`r_adult`+`r_kid`+`r_baby`) desc limit 3;";
+  $best3_result=mysqli_query($conn,$best3_sql);
+
+  for ($best3_record=0; $best3_record < SCALE ; $best3_record++) {
+    $row = mysqli_fetch_array($best3_result);
+    $p_code[$best3_record]=$row['p_code'];
+    $p_name[$best3_record]=$row['p_name'];
+    $p_dp_date[$best3_record]=$row['p_dp_date'];
+    $p_pay[$best3_record]=$row['p_pay'];
+    $p_main_img_copy1[$best3_record]=$row['p_main_img_copy1'];
+    $p_period[$best3_record]=$row['p_period'];
+    $timestamp = strtotime("$p_dp_date[$best3_record] +$p_period[$best3_record] days");
+    $p_arr_date1[$best3_record] = date('y-m-d', $timestamp);
+    $p_arr_date2[$best3_record] = "20".$p_arr_date1[$best3_record];
     $yoil = array("일","월","화","수","목","금","토");
-    $day[$record] = $yoil[date('w', strtotime($p_dp_date))];
-    $day2[$record] = $yoil[date('w', strtotime($p_arr_date2))];
-    $p_pay[$record]=number_format($p_pay[$record]);
+    $day[$best3_record] = $yoil[date('w', strtotime($p_dp_date))];
+    $day2[$best3_record] = $yoil[date('w', strtotime($p_arr_date2))];
+    $p_pay[$best3_record]=number_format($p_pay[$best3_record]);
   }
  ?>
 
