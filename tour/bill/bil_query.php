@@ -45,4 +45,15 @@ $m_hp2=$row2['hp2'];
 $m_email=$row2['email'];
 $hp=$m_hp1.$m_hp2;
 
+
+
+$member_sql = "SELECT * from `bus` where `id`='$r_id';";
+$result2=mysqli_query($conn,$member_sql);
+$row2=mysqli_fetch_array($result2);
+$m_name=$row2['name'];
+$m_hp1=$row2['hp1'];
+$m_hp2=$row2['hp2'];
+$m_email=$row2['email'];
+$hp=$m_hp1.$m_hp2;
+
  ?>

@@ -14,7 +14,10 @@
 
   // echo $money;
 
-
+  $pk=date("Y-m-d-H-i-s",time());
+  srand((double)microtime()*1000000); //난수값 초기화
+  $mil=rand(100000,999999);
+  $pk=$pk."-".$mil;
 
   $sql_bus="INSERT INTO `bus`
   VALUES(
@@ -23,10 +26,7 @@
   '$code',
   '$member_num',
   '$seat')";
-  $pk=date("Y-m-d-H-i-s",time());
-  srand((double)microtime()*1000000); //난수값 초기화
-  $mil=rand(100000,999999);
-  $pk=$pk."-".$mil;
+
 
 
   $date =date("Y-m-d");
