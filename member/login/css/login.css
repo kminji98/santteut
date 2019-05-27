@@ -5,7 +5,7 @@
 #login_button{width: 85px; height: 85px; font-size: 20px;}
 .login_div a:hover{color: black;}
 .login_div a{color: black; text-decoration: none;}
-#login h2{margin-left: 20%;}
+#login h2{margin-left: 19%;}
 #id_storage input{height: 13px;}
 #empty_row{height: 10px}
 #id_storage b{font-size: 18px;}

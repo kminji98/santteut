@@ -9,8 +9,6 @@
     <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
 
-
-
     <!-- 약관모두체크 -->
     <script type="text/javascript">
       var check_val=false;
@@ -36,8 +34,6 @@
       }
 
     </script>
-
-
 
 
     <!-- 아이디/비밀번호중복확인 -->
@@ -268,11 +264,6 @@
     </script>
 
 
-
-
-
-
-
     <!-- 다음 주소찾기 -->
     <script>
       function execDaumPostcode() {/* 폼은 다음 주소찾기 빌리면서 입력값은 여기서 받고 처리하네?  */
@@ -465,18 +456,10 @@
 
          // 여기1
 
-
-
          document.join_member_form.submit();
          alert("성공");
       }
     </script>
-
-
-
-
-
-
 
 
 
@@ -486,6 +469,7 @@
     <header>
       <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/login_menu.php";?>
     </header>
+    <hr>
     <h2 id="join_title">회원가입</h2>
     <hr>
     <section>
