@@ -11,9 +11,8 @@ if(!isset($_SESSION['id'])){
 $name = $_SESSION['name'];
 
 //0-0. 인클루드 디비
-include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/create_table.php";
+include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
 
-create_table($conn, 'official_review');
 //1. 게시물수 정의
 define('ROW_SCALE', 10);
 define('PAGE_SCALE', 5);

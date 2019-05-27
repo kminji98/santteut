@@ -73,6 +73,10 @@ if(isset($_GET["num"]) && !empty($_GET["num"])){
         </tr>
         <tr style="height:400px;">
           <th>내용</th>
+          <?php
+          $content=str_replace('<p>','', $content);
+          $content=str_replace('</p>','', $content);
+          ?>
           <td><?=$content?></td>
         </tr>
         <tr>

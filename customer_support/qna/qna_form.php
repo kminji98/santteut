@@ -4,7 +4,7 @@ session_start();
 // isset함수는 불리언값을 리턴 true or false
 // 비회원이면 권한없음
 if(!isset($_SESSION['id'])){
-  echo "<script>alert('권한없음!');history.go(-1);</script>";
+  echo "<script>alert('회원가입 후 이용해주세요.');history.go(-1);</script>";
   exit;
 }
 
@@ -35,17 +35,12 @@ if((isset($_GET["mode"])&&$_GET["mode"]=="update") || (isset($_GET["mode"])&&$_G
     $title= htmlspecialchars($row['title']);
     $title=str_replace("\n", "<br>",$title);
     $title=str_replace(" ", "&nbsp;",$title);
-    $content= htmlspecialchars($row['content']);
-    $content=str_replace("\n", "<br>",$content);
-
-    $content=str_replace(" ", "&nbsp;",$content);
+    $content= $row['content'];
     $regist_day=$row['regist_day'];
     $hit=$row['hit'];
-    mysqli_close($conn);
 
     if($mode == "response"){
       $title="";
-      $content=str_replace("<br>", "<br>▶",$content);
       $content="";
     }
     mysqli_close($conn);
