@@ -18,6 +18,7 @@
 
   $sql_bus="INSERT INTO `bus`
   VALUES(
+  '$pk',
   '$id',
   '$code',
   '$member_num',

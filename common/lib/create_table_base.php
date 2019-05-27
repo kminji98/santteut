@@ -76,6 +76,7 @@ function create_table($conn, $table_name){
 
       case 'bus' :
          $sql = "CREATE TABLE `bus` (
+         `b_pk` varchar(30) ,
          `b_id` varchar(30) ,
          `b_code` varchar(20) NOT NULL,
          `b_people` int(10) ,
