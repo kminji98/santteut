@@ -30,7 +30,7 @@
 
 
   $date =date("Y-m-d");
-  $cancel="1";
+  $cancel="0";
   $sql_reserve="INSERT INTO `reserve`
   VALUES(
   '$pk',

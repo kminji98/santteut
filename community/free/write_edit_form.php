@@ -1,11 +1,8 @@
 <!DOCTYPE html>
 <?php
 session_start();
-include $_SERVER['DOCUMENT_ROOT']."/free/db_connector.php";
-$_SESSION['userid']="id1";
-$_SESSION['username']="가나다";
-$id= $_SESSION['userid'];
-if(!isset($_SESSION['userid'])){echo "<script>alert('권한없음!');history.go(-1);</script>";
+include $_SERVER['DOCUMENT_ROOT']."/santtuet/common/lib/db_connector.php";
+if(!isset($_SESSION['id'])){echo "<script>alert('권한없음!');history.go(-1);</script>";
 exit;}
 $mode="insert";
 $update="";
@@ -35,7 +32,7 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="update"){
 <html lang="ko" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>산뜻 :: 즐거운 산행</title>
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
     <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
@@ -81,8 +78,12 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="update"){
      }
 
     });
-
     </script>
+    <style media="screen">
+      img {
+        width:400px;
+      }
+    </style>
   </head>
   <body>
     <header style="text-align : center; margin-bottom : 30px; font-size : 30px;">
