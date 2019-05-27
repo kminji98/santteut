@@ -19,12 +19,35 @@ define('PAGE_SCALE', 10);
 //r_cancel=1 -> 예약내역
 $reserve_flag =empty($_POST['reserve_flag']) ? 0 : $_POST['reserve_flag'];
 
+if(isset($_GET["mode"])&&$_GET["mode"]=="search"){
+  $year1=$_POST["h_year1"];
+  $year2=$_POST["h_year2"];
+  $month1=$_POST["h_month1"];
+  $month2=$_POST["h_month2"];
+  $day1=$_POST["h_day1"];
+  $day2=$_POST["h_day2"];
 
-$sql="SELECT * from `reserve` join `package` on `reserve`.`r_code` = `package`.`p_code` where `reserve`.`r_id` = '$id' and `reserve`.`r_cancel`='$reserve_flag';";
-
-if(isset($_GET['mode'])){
-    $date=$_GET['mode'];
-    $sql=$sql." where `package`.`p_dp_date` = '$date';";
+  if($month1>0 && $month1<10){
+    $month1="0".$month1;
+  }
+  if($month2>0 && $month2<10){
+    $month2="0".$month2;
+  }
+  if($day1>0 && $day1<10){
+    $day1="0".$day1;
+  }
+  if($day2>0 && $day2<10){
+    $day2="0".$day2;
+  }
+  $search_start = $year1."-".$month1."-".$day1;
+  $search_end = $year2."-".$month2."-".$day2;
+  $sql="SELECT * from `reserve` join `package` on `reserve`.`r_code` = `package`.`p_code` where `package`.`p_dp_date` between '$search_start' and '$search_end' and `reserve`.`r_id` = '$id' and `reserve`.`r_cancel`='$reserve_flag';";
+}else{
+  $sql="SELECT * from `reserve` join `package` on `reserve`.`r_code` = `package`.`p_code` where `reserve`.`r_id` = '$id' and `reserve`.`r_cancel`='$reserve_flag';";
+  if(isset($_GET['mode'])){
+      $date=$_GET['mode'];
+      $sql=$sql." where `package`.`p_dp_date` = '$date';";
+  }
 }
 
 // 쿼리문실행문장
@@ -85,7 +108,6 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
       $(document).ready(function() {
         // var reserve_flag = <?=json_encode($reserve_flag)?>;
         $("#reserve_flag").val(<?=json_encode($reserve_flag)?>);
-        alert($("#reserve_flag").val());
         if($("#reserve_flag").val()*1){
           if($("#list_head_cancel").css('background-color')!="white"){
             $("#list_head_cancel").css('background-color', 'white');
@@ -175,7 +197,6 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
         </div>
       </fieldset>
       <br>
-      <form name="reserve_search_form" action="reserve_list.php" method="post">
       <fieldset id="search_field">
         <span id="search_date">출발일</span>&nbsp;&nbsp;&nbsp;
         <select class="date_select" name="year1" id="year1" >
@@ -256,15 +277,41 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
           &nbsp;&nbsp;
         <input type="button" id="search_btn" name="" onclick="reserve_search_submit()" value="검색하기" >
       </fieldset>
+      <form name="reserve_search_form" action="reserve_list.php?mode=search" method="post">
+      <input type="hidden" name="h_year1" id="h_year1" value="">
+      <input type="hidden" name="h_year2" id="h_year2" value="">
+      <input type="hidden" name="h_month1" id="h_month1" value="">
+      <input type="hidden" name="h_month2" id="h_month2" value="">
+      <input type="hidden" name="h_day1" id="h_day1" value="">
+      <input type="hidden" name="h_day2" id="h_day2" value="">
       </form>
+
       <script type="text/javascript">
         function reserve_search_submit(){
           var year1 = document.getElementById('year1');
           var year2 = document.getElementById('year2');
           var month1 = document.getElementById('month1');
-          var month1 = document.getElementById('month2');
+          var month2 = document.getElementById('month2');
           var day1 = document.getElementById('day1');
           var day2 = document.getElementById('day2');
+
+          var h_year1 = document.getElementById('h_year1');
+          var h_year2 = document.getElementById('h_year2');
+          var h_month1 = document.getElementById('h_month1');
+          var h_month2 = document.getElementById('h_month2');
+          var h_day1 = document.getElementById('h_day1');
+          var h_day2 = document.getElementById('h_day2');
+
+          h_year1.value = year1.value;
+          h_year2.value = year2.value;
+          h_month1.value = month1.value;
+          h_month2.value = month2.value;
+          h_day1.value = day1.value;
+          h_day2.value = day2.value;
+
+          alert(h_year1.value);
+
+          document.reserve_search_form.submit();
         }
 
       </script>
@@ -315,7 +362,7 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
               $b_pay=$row['b_pay'];
 
 
-              $bill_sql = "SELECT * FROM `bill` where `b_code`=$r_code";
+              $bill_sql = "SELECT * FROM `bill` where `b_code`='$r_code'";
               //결제상태
               $bill_result=mysqli_query($conn,$bill_sql);
               $count=mysqli_num_rows($bill_result);
@@ -349,7 +396,7 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
               }
 
               if($total>=$p_bus_half){
-                $status="<a style='color:red;' href='../bill/bill_view.php?&r_pk=<?=$r_pk?>'>결제대기</a>";
+                $status="<a style='color:red;' href='../bill/bill_view.php?&r_pk=$r_pk'>결제대기</a>";
               }
 
               //산행후기 review @@@@@@@@@MINJI0527
