@@ -201,12 +201,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
 
           }
         </script>
-
-
-
-
         <a href="../cart/cart_list.php?mode=insert&code=<?=$p_code?>"><div id="go_cart"> <b>장바구니</b></div></a>
-
       </div>
       <div id="right_footer"></div>
     </div>
