@@ -1,12 +1,7 @@
 <?php
 session_start();
-$r_pay=$_GET["r_pay"];
-$p_code=$_GET["p_code"];
-$p_name=$_GET["p_name"];
-$bank=$_GET["bank"];
-$b_seat=$_GET["b_seat"];
-$date=date("Y-m-d");
-
+include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/bill/bil_query.php";
+include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/bill/bill_insert_query.php";
 ?>
 <!DOCTYPE html>
 <html lang="ko" dir="ltr">
@@ -49,7 +44,7 @@ $date=date("Y-m-d");
 
         alert('결제가완료되었습니다.');
         // self.opener = self;
-        opener.location.href="http://127.0.0.1/santteut/index.php";
+        opener.location.href="../../index.php";
         window.close();
 
       }

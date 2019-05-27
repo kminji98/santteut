@@ -84,7 +84,7 @@ function kCalendar(id, date) {
    for(var k = 0; k < week; k++) {
       for(var l = 0; l < 7; l++, dateNum2++) {
          if( dateNum2 < 1 || dateNum2 > currentLastDate ) {continue;   }
-         calendar += '            <td class="' + dateString[l] + '"><span><a href="http://127.0.0.1/santteut/tour/package/package_list.php?mode='+currentYear+'-'+currentMonth+'-'+dateNum2 +'">' + dateNum2 + '</a></span></td>';
+         calendar += '            <td class="' + dateString[l] + '"><span><a href="http://127.0.0.1/santteut/tour/package/package_list.php?mode='+currentYear+'-'+currentMonth+'-'+dateNum2 +'&divide='+divide+'">' + dateNum2 + '</a></span></td>';
       }
    }
    calendar += '         </tr>';

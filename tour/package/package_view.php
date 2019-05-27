@@ -77,7 +77,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
         <p id="kid">아동</p>
         <p id="baby">유아</p>
         <script type="text/javascript">
-          var adult_pay=0;
+          var adult_pay=parseInt(<?=json_encode($p_pay)?>);
           var kid_pay=0;
           var baby_pay=0;
           var member =1;
@@ -86,7 +86,6 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
           function select_people_number(person){
             var pay=<?=json_encode($p_pay)?>;
             var money=document.getElementById('money');
-
             var adult_val=document.getElementById('adult_val');
             var kid_val=document.getElementById('kid_val');
             var baby_val=document.getElementById('baby_val');
@@ -96,11 +95,13 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
             member = parseInt(sel1.options[sel1.selectedIndex].text);
             pay = pay*member;
             adult_pay=pay;
+
           }else if (person=="kid") {
             var sel2 =document.getElementById('sel2');
             member2 = parseInt(sel2.options[sel2.selectedIndex].text);
             pay = pay*member2*0.7;
             kid_pay=pay;
+
           }else if (person=="baby") {
             var sel3 =document.getElementById('sel3');
             member3 = parseInt(sel3.options[sel3.selectedIndex].text);

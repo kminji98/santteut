@@ -182,7 +182,7 @@ function create_table($conn, $table_name){
         `b_id` varchar(20),
         `b_date` varchar(15),
         `b_way` char(1),
-        `b_pay` int
+        `b_pay` varchar(15)
         ) DEFAULT CHARSET=utf8;";
         break;
 

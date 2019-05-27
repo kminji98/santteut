@@ -17,8 +17,8 @@
 <div id="side_bar" style="display: none;">
   <!-- 비로그인->로그인//회원가입 or 로그인  ->장바구니//예약내역,결제내역  -->
   <div id="side_bar_top">
-    <a href="../../tour/cart/cart_list.php"><img title="장바구니" id="side_bar_cart_img" src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/img/장바구니.jpg"></a>
-    <a href="../../tour/reserve/reserve_list.php"><img title="예약/결제확인" id="side_bar_confirm_img" src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/img/예약결제확인.png"></a>
+    <a href="../../tour/cart/cart_list.php"><img title="장바구니" id="side_bar_cart_img" src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/img/cart.jpg"></a>
+    <a href="../../tour/reserve/reserve_list.php"><img title="예약/결제확인" id="side_bar_confirm_img" src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/img/reserve_payment.png"></a>
   </div>
     <!-- 사진경로  변수로 설정해주셔야 합니다 -->
   <div id="side_bar_recent">

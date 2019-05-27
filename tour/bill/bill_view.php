@@ -1,4 +1,5 @@
 <?php
+session_start();
 include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/bill/bil_query.php";
 
 ?>
@@ -11,6 +12,71 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/bill/bil_query.php";
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/tour/package/css/package_list.css">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/tour/bill/css/bill_view.css">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/side_bar.css">
+
+    <script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+    <script  src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <!-- 카카오페이 -->
+      <script type="text/javascript">
+    function payment(){
+      var IMP = window.IMP; // 생략가능
+      IMP.init('imp16652312'); //가맹점 식별 코드
+
+     //아래 입력된 정보는 테스트를 위한것.
+     //원래는 주문자 정보를 가져와서 넣어야함.
+      IMP.request_pay({
+          pg : 'kakaopay', //결제방식
+          pay_method : 'card', //결제 수단
+          merchant_uid : 'merchant_' + new Date().getTime(),
+          name : '<?=$p_name?>', //order 테이블에 들어갈 주문명 혹은 주문 번호
+          amount : '<?=$r_pay?>', //주문 금액
+          buyer_name : '<?=$m_name?>', //구매자 이름
+          kakaoOpenApp : true
+      }, function(rsp) {
+       //callback함수
+          if ( rsp.success ) { //결제 성공시
+             //[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
+             jQuery.ajax({
+                url: "/payments/complete", //cross-domain error가 발생하지 않도록 주의해주세요
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                   imp_uid : rsp.imp_uid
+                   //기타 필요한 데이터가 있으면 추가 전달
+                }
+             }).done(function(data) {
+                //[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
+                if ( everythings_fine ) {
+                   var msg = '결제가 완료되었습니다.';
+                   msg += '\n고유ID : ' + rsp.imp_uid;
+                   msg += '\n상점 거래ID : ' + rsp.merchant_uid;
+                   msg += '\n결제 금액 : ' + rsp.paid_amount;
+                   msg += '카드 승인번호 : ' + rsp.apply_num;
+
+                    var select_bank=document.getElementById('select_bank');
+                    alert(msg);
+                } else {
+                   //[3] 아직 제대로 결제가 되지 않았습니다.
+                   //[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
+                }
+             });
+             alert('결제가 완료되었습니다.');
+             location.href="bill_insert_query.php?r_pk=<?=$r_pk?>&way=2&r_pay=<?=$r_pay?>&p_code=<?=$p_code?>&p_name=<?=$p_name?>&b_seat=<?=$b_seat?>";
+
+          }else{
+           var msg = '결제에 실패하였습니다.';
+           msg += '에러내용 : ' + rsp.error_msg;
+           alert(msg);
+           // alert('결제가 실패되었습니다.');
+          return false;
+          }//end of else
+
+      });
+      }
+
+    </script>
+
+
+
 
     <title>산뜻 :: 즐거운 산행</title>
     <!--보험/결제   -->
@@ -165,77 +231,11 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/bill/bil_query.php";
             var select_bank=document.getElementById('select_bank');
             var popupX = (window.screen.width / 2) - (800 / 2);
             var popupY= (window.screen.height /2) - (500 / 2);
-            window.open('none_bank.php?r_pay=<?=$r_pay?>&p_code=<?=$p_code?>&p_name=<?=$p_name?>&bank='+select_bank.value+'&b_seat=<?=$b_seat?>', '', 'status=no, width=900, height=300, left='+ popupX + ', top='+ popupY + ', screenX='+ popupX + ', screenY= '+ popupY);
+            window.open('none_bank.php?r_pk=&way=1&r_pk=<?=$r_pk?>&r_pay=<?=$r_pay?>&p_code=<?=$p_code?>&p_name=<?=$p_name?>&bank='+select_bank.value+'&b_seat=<?=$b_seat?>', '', 'status=no, width=900, height=300, left='+ popupX + ', top='+ popupY + ', screenX='+ popupX + ', screenY= '+ popupY);
           }else{
-
-             function payment(){
-                var IMP = window.IMP; // 생략가능
-                IMP.init('imp47585895'); //가맹점 식별 코드
-
-               //아래 입력된 정보는 테스트를 위한것.
-               //원래는 주문자 정보를 가져와서 넣어야함.
-                IMP.request_pay({
-                    pg : 'kakaopay', //결제방식
-                    pay_method : 'card', //결제 수단
-                    merchant_uid : 'merchant_' + new Date().getTime(),
-                    name : '<?=$club_name?>', //order 테이블에 들어갈 주문명 혹은 주문 번호
-                    amount : '<?=$club_price?>', //주문 금액
-                    buyer_name : '신청번호 :<?=$club_num?>_<?=$userid?>', //구매자 이름
-                    kakaoOpenApp : true
-                }, function(rsp) {
-                 //callback함수
-                    if ( rsp.success ) { //결제 성공시
-                       //[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
-                       jQuery.ajax({
-                          url: "/payments/complete", //cross-domain error가 발생하지 않도록 주의해주세요
-                          type: 'POST',
-                          dataType: 'json',
-                          data: {
-                             imp_uid : rsp.imp_uid
-                             //기타 필요한 데이터가 있으면 추가 전달
-                          }
-                       }).done(function(data) {
-                          //[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
-                          if ( everythings_fine ) {
-                             var msg = '결제가 완료되었습니다.';
-                             msg += '\n고유ID : ' + rsp.imp_uid;
-                             msg += '\n상점 거래ID : ' + rsp.merchant_uid;
-                             msg += '\n결제 금액 : ' + rsp.paid_amount;
-                             msg += '카드 승인번호 : ' + rsp.apply_num;
-
-                             alert(msg);
-
-                        location.href="./query.php?mode=<?=$mode="pay"?>&id=<?=$userid?>&club_num=<?=$club_num?>";
-
-                          } else {
-                             //[3] 아직 제대로 결제가 되지 않았습니다.
-                             //[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
-                          }
-
-                       });
-                     alert('구매되었습니다.'); //결제 성공시 알림창 띄워준다
-                     location.href="./query.php?mode=<?=$mode="pay"?>&id=<?=$userid?>&club_num=<?=$club_num?>";
-
-                    }else{
-                     var msg = '결제에 실패하였습니다.';
-                     msg += '에러내용 : ' + rsp.error_msg;
-                     alert(msg);
-                     alert('결제가 실패되었습니다.');
-                        location.href="./view.php?club_num=<?=$club_num?>";
-                    }//end of else
-
-                });
-                }
                payment();
-
-             </script>
-
-
-
-
-
-
           }
+
           }
         </script>
 
@@ -264,7 +264,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/bill/bil_query.php";
         </tr>
         <tr>
           <td rowspan="3" class="left2" id="sch1">일정</td>
-          <td id="period1"><?=$p_period?></td>
+          <td id="period1"><?=$p_period?>일</td>
         </tr>
 
         <tr>
@@ -283,15 +283,15 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/bill/bil_query.php";
       <div id="top_text3"><b>예약자 정보</b></div>
       <table id="tbl2">
         <tr>
-          <td class="left2">예약자명*</td>
+          <td class="left2">예약자명</td>
           <td> <input disabled type="text" id="res_name" value="<?=$m_name?>"> </td>
-          <td class="left2">휴대폰번호*</td>
-          <td> <input disabled type="text" id="res_phone" value="<?=$m_email?>"> </td>
+          <td class="left2">휴대폰번호</td>
+          <td> <input disabled type="text" id="res_phone" value="<?=$hp?>"> </td>
         </tr>
 
         <tr>
-          <td class="left2">이메일*</td>
-          <td> <input disabled type="text" id="res_email1" value="<?=$hp?>"></td>
+          <td class="left2">이메일</td>
+          <td> <input disabled type="text" id="res_email1" value="<?=$m_email?>"></td>
           <td></td><td></td>
         </tr>
       </table>

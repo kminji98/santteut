@@ -1,7 +1,7 @@
 <?php
 session_start();
-
 include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php";
+$divide=$_GET['divide'];
 ?>
 
 <!DOCTYPE html>
@@ -12,6 +12,9 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/tour/package/css/package_list.css?ver=2">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/side_bar.css">
     <link href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/lib/calendar/css/style.css?ver=0" rel="stylesheet">
+    <script type="text/javascript">
+      var divide= <?=json_encode($_GET['divide'])?>;
+    </script>
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
     <script src="../../common/lib/calendar/js/script.js"></script>
     <style media="screen">
@@ -136,9 +139,11 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
             ,day_value:day_value
             ,add_value:add_value
             ,free_value:free_value
+            ,divide:divide
           }
         })
         .done(function(result) {
+          alert(result);
          var sql=document.getElementById('sql');
          sql.value=result;
          document.query_form.submit();
@@ -317,11 +322,12 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
           <input id="package_search_input" placeholder="검색어를 입력하세요" type="text" name="find_input" <?php if(isset($find_input)) echo "value='$find_input'";?>>
           <button id="package_search_btn" type="button" name="button" onclick="document.search_form.submit()"><b>검색</b></button>
           <strong  id="package_search_detail_control" onclick="control_display2();">상세검색▼</strong>
+          <input type="hidden" name="divide" value="<?=$_GET['divide']?>">
         </form>
       </div>
 
       <!-- [DETAIL] 상세 검색 버튼 액션 -->
-      <form id="query_form" name="query_form" action="package_list.php?mode=detail" method="post">
+      <form id="query_form" name="query_form" action="package_list.php?mode=detail&divide=<?=$divide?>" method="post">
         <input id="sql" type="hidden" name="sql" value="">
         <input id="page" type="hidden" name="page" value="">
         <input type="hidden" name="output" value="">
@@ -442,7 +448,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
       <p style="position: relative; margin-top: auto; margin-left: auto;text-align:center; font-weight: bold; font-size:13px;"><?=$output?></p>
     </form>
       <div id="package_list_view_btn">
-        <form name="order_form" action="package_list.php?mode=order" method="post">
+        <form name="order_form" action="package_list.php?mode=order&divide=<?=$divide?>" method="post">
           <input type="hidden" name="page" value="">
           <input type="hidden" name="order_sql" value="">
           <input type="hidden" name="order_condition" value="">
@@ -544,8 +550,8 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
                if(isset($_GET['mode'])){
                  switch ($_GET['mode']) {
                    case 'search':
-                    echo( '<a href="package_list.php?mode=search&find_option='.$find_option.'&find_input='.$find_input.'&page=1"><button type="button" name="button" title="처음으로"><<</button></a>' );
-                    echo( '<a href="package_list.php?mode=search&find_option='.$find_option.'&find_input='.$find_input.'&page='.$pre_block.'"><button type="button" name="button" title="이전"><</button></a>' );
+                    echo( '<a href="package_list.php?mode=search&find_option='.$find_option.'&find_input='.$find_input.'&page=1&$divide='.$_GET['divide'].'"><button type="button" name="button" title="처음으로"><<</button></a>' );
+                    echo( '<a href="package_list.php?mode=search&find_option='.$find_option.'&find_input='.$find_input.'&page='.$pre_block.'&divide='.$divide.'"><button type="button" name="button" title="이전"><</button></a>' );
                     break;
                   case 'detail':
                     echo( '<button type="button" title="처음으로" onclick="detail_search_mv_page(1)"><<</button>' );
@@ -559,8 +565,8 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
                     break;
                 }
                }else{
-                 echo( '<a href="package_list.php?page=1"><button type="button" name="button" title="처음으로"><<</button></a>');
-                 echo( '<a href="package_list.php?page='.$pre_block.'"><button type="button" name="button" title="이전"><</button></a>');
+                 echo( '<a href="package_list.php?page=1&divide='.$divide.'"><button type="button" name="button" title="처음으로"><<</button></a>');
+                 echo( '<a href="package_list.php?page='.$pre_block.'&divide='.$divide.'"><button type="button" name="button" title="이전"><</button></a>');
                }
             }
 
@@ -573,7 +579,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
                 }else if(isset($_GET['mode'])){
                   switch ($_GET['mode']) {
                     case 'search':
-                      echo( '<a href="package_list.php?mode=search&find_option='.$find_option.'&find_input='.$find_input.'&page='.$i.'"><button type="button" name="button">'.$i.'</button></a>' );
+                      echo( '<a href="package_list.php?mode=search&find_option='.$find_option.'&find_input='.$find_input.'&page='.$i.'&divide='.$divide.'"><button type="button" name="button">'.$i.'</button></a>' );
                       break;
                     case 'detail':
                       echo( '<button type="button" onclick="detail_search_mv_page('.$i.')">'.$i.'</button>' );
@@ -585,7 +591,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
                       break;
                   }
                 }else{
-                  echo( '<a href="package_list.php?page='.$i.'"><button type="button" name="button">'.$i.'</button></a>' );
+                  echo( '<a href="package_list.php?page='.$i.'&divide='.$divide.'"><button type="button" name="button">'.$i.'</button></a>' );
                 }
             }
 
@@ -594,8 +600,8 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
               if(isset($_GET['mode'])){
                 switch ($_GET['mode']) {
                   case 'search':
-                    echo( '<a href="package_list.php?mode=search&find_option='.$find_option.'&find_input='.$find_input.'&page='.$next_block.'"  title="다음"><button type="button" name="button">></button></a>' );
-                    echo( '<a href="package_list.php?mode=search&find_option='.$find_option.'&find_input='.$find_input.'&page='.$total_pages.'" title="맨끝으로"><button type="button" name="button">>></button></a>' );
+                    echo( '<a href="package_list.php?mode=search&find_option='.$find_option.'&find_input='.$find_input.'&page='.$next_block.'&divide='.$divide.'"  title="다음"><button type="button" name="button">></button></a>' );
+                    echo( '<a href="package_list.php?mode=search&find_option='.$find_option.'&find_input='.$find_input.'&page='.$total_pages.'&divide='.$divide.'" title="맨끝으로"><button type="button" name="button">>></button></a>' );
                     break;
                   case 'detail':
                     echo( '<button type="button" title="다음" onclick="detail_search_mv_page('.$next_block.')">></button>' );
@@ -609,8 +615,8 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
                     break;
                 }
               }else{
-                echo( '<a href="package_list.php?page='.$next_block.'"><button type="button" name="button" title="다음">></button></a>' );
-                echo( '<a href="package_list.php?page='.$total_pages.'"><button type="button" name="button" title="맨끝으로">>></button></a>' );
+                echo( '<a href="package_list.php?page='.$next_block.'&divide='.$divide.'"><button type="button" name="button" title="다음">></button></a>' );
+                echo( '<a href="package_list.php?page='.$total_pages.'&divide='.$divide.'"><button type="button" name="button" title="맨끝으로">>></button></a>' );
               }
             }
             ?>
