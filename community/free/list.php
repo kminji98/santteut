@@ -35,7 +35,7 @@ $number = $total_record - $start;
 <html lang="ko" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>산뜻 :: 즐거운 산행</title>
   </head>
   <body>
     <form class="" action="list.php?mode=search" method="post">
@@ -48,7 +48,7 @@ $number = $total_record - $start;
       <option value="name">이름</option>
       <option value="id">아이디</option>
     </select></td>
-    <td><input type="text" name="" value="search"></td>
+    <td><input type="text" name="search" value=""></td>
     <td><input type="submit" name="" value="검색"></td>
   </tr>
 </table>
@@ -98,8 +98,8 @@ $number--;
 </td>
   <td></td>
   <td><?php
-    if(!empty($_SESSION['userid'])){
-    echo '<a href="write_edit_form.php">글쓰기</a>';
+    if(!empty($_SESSION['id'])){
+    echo '<a href="write_edit_form.php"><input type="button" value="글쓰기"></a>';
     }
   ?></td>
   <td><a href="./list.php?page=<?=$page?>"><input type="button" name="" value="목록"> </a></td>

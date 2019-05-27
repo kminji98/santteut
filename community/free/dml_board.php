@@ -1,11 +1,11 @@
 <?php
 session_start();
-if(!isset($_SESSION['userid'])){
+if(!isset($_SESSION['id'])){
   echo "<script>alert('권한없음!');history.go(-1);</script>";
   exit;
 }
 include $_SERVER['DOCUMENT_ROOT']."/santtuet/common/lib/db_connector.php";
-$userid = $_SESSION['userid'];
+$id = $_SESSION['id'];
 $username = $_SESSION['username'];
 $title = $_POST["title"];
 $content = $_POST["content"];
@@ -29,7 +29,7 @@ if ($_FILES['upfile']['name']){
           }
         }
         if(isset($_GET["mode"])&&$_GET["mode"]=="insert"){
-        $sql="INSERT INTO `free` VALUES (null,'$userid','$username','$title','$content','$destination','$upfilename','$file_type','$image','$day',0);";
+        $sql="INSERT INTO `free` VALUES (null,'$id','$username','$title','$content','$destination','$upfilename','$file_type','$image','$day',0);";
         $result = mysqli_query($conn,$sql);
         if (!$result) {
           alert_back('Error: ' . mysqli_error($conn));
@@ -119,7 +119,7 @@ if ($_FILES['upfile']['name']){
           $q_content = mysqli_real_escape_string($conn, $content);
           $q_parent = mysqli_real_escape_string($conn, $parent);
           $regist_day=date("Y-m-d (H:i)");
-          $sql="INSERT INTO `free_ripple` VALUES (null,'$q_parent','$userid','$q_username','$q_content','$regist_day')";
+          $sql="INSERT INTO `free_ripple` VALUES (null,'$q_parent','$id','$q_username','$q_content','$regist_day')";
           $result = mysqli_query($conn,$sql);
           if (!$result) {
             die('Error: ' . mysqli_error($conn));
