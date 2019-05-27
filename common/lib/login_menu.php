@@ -26,8 +26,8 @@
 
         //관리자일때
       }else if($_SESSION['id']=="admin"){
-        echo ("<b> {$_SESSION['name']} </b> 님 환영합니다. ");
-        echo ('<li id="logout">[<a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/member/login/logout.php">로그아웃</a>]</li> ');
+        echo (" {$_SESSION['name']} 님 환영합니다. ");
+        echo ('<li><a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/member/login/logout.php">로그아웃</a></li> ');
         echo ('<li id="top_my" class="hov">관리자모드<small>▼</small>
           <div id="top_my_content">
             <ul id="top_my_content_ul">
@@ -51,8 +51,8 @@
 
         //회원일때
       }else{
-        echo ("<b> {$_SESSION['name']} </b> 님 환영합니다. ");
-        echo ('<li id="logout">[<a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/member/login/logout.php">로그아웃</a>]</li> ');
+        echo (" {$_SESSION['name']} 님 환영합니다. ");
+        echo ('<li><a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/member/login/logout.php">로그아웃</a></li> ');
         echo ('<li id="top_my" class="hov">My<small>▼</small>
           <div id="top_my_content">
             <ul id="top_my_content_ul">
