@@ -30,17 +30,15 @@ if((isset($_GET["mode"])&&$_GET["mode"]=="update") || (isset($_GET["mode"])&&$_G
     $result = mysqli_query($conn,$sql);
     if (!$result) {die('Error: ' . mysqli_error($conn));}
     $row=mysqli_fetch_array($result);
-
     $id=$row['id'];
-    $title= htmlspecialchars($row['title']);
-    $title=str_replace("\n", "<br>",$title);
-    $title=str_replace(" ", "&nbsp;",$title);
+    $pw=$row['pw'];
+    $title= $row['title'];
     $content= $row['content'];
     $regist_day=$row['regist_day'];
     $hit=$row['hit'];
 
     if($mode == "response"){
-      $title="";
+      $title="[re]".$title;
       $content="";
     }
     mysqli_close($conn);
@@ -73,9 +71,9 @@ if((isset($_GET["mode"])&&$_GET["mode"]=="update") || (isset($_GET["mode"])&&$_G
         check = check.checked;
         var pw = document.getElementById('pw');
         if(check){
-          pw.type = 'hidden';
-        }else{
           pw.type = 'number';
+        }else{
+          pw.type = 'hidden';
         }
       }
     }
@@ -110,7 +108,7 @@ if((isset($_GET["mode"])&&$_GET["mode"]=="update") || (isset($_GET["mode"])&&$_G
           <th>비밀여부</th>
           <td>
             <input type="checkbox" id="secret_ok" name="secret_ok" value="">비밀글
-            <input type="number" name="pw" id="pw" value="">
+            <input type="hidden" name="pw" id="pw">
           </td>
         </tr>
       </table>
