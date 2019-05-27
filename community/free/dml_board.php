@@ -6,7 +6,7 @@ if(!isset($_SESSION['id'])){
 }
 include $_SERVER['DOCUMENT_ROOT']."/santtuet/common/lib/db_connector.php";
 $id = $_SESSION['id'];
-$username = $_SESSION['username'];
+$username = $_SESSION['name'];
 $title = $_POST["title"];
 $content = $_POST["content"];
 $image = $_POST["del"];
@@ -14,20 +14,20 @@ $day=date("Y-m-d (H:i)");
 $hit = $_POST["hit"];
 if ($_FILES['upfile']['name']){
       if (!$_FILES['upfile']['error']) {
-          $name=date("Y_m_d_H_i_s");
-          $ext = explode('.', $_FILES['upfile']['name']);
-          $filename = $name . '.' . $ext[1];
-          $destination = './upload/' . $filename;//change this directory
-          $location = $_FILES["upfile"]["tmp_name"];
-          $upfilename = $_FILES["upfile"]["name"];
-          $file_type= $_FILES['upfile']['type'];
-          move_uploaded_file($location, $destination);
-          }
-          else
-          {
-          echo  $message = 'Ooops!  Your upload triggered the following error:  '.$_FILES['file']['error'];
-          }
-        }
+        $name=date("Y_m_d_H_i_s");
+        $ext = explode('.', $_FILES['upfile']['name']);
+        $filename = $name . '.' . $ext[1];
+        $destination = './upload/' . $filename;//change this directory
+        $location = $_FILES["upfile"]["tmp_name"];
+        $upfilename = $_FILES["upfile"]["name"];
+        $file_type= $_FILES['upfile']['type'];
+        move_uploaded_file($location, $destination);
+      }
+      else
+      {
+        echo  $message = 'Ooops!  Your upload triggered the following error:  '.$_FILES['file']['error'];
+      }
+}
         if(isset($_GET["mode"])&&$_GET["mode"]=="insert"){
         $sql="INSERT INTO `free` VALUES (null,'$id','$username','$title','$content','$destination','$upfilename','$file_type','$image','$day',0);";
         $result = mysqli_query($conn,$sql);
@@ -109,13 +109,13 @@ if ($_FILES['upfile']['name']){
         if(empty($_POST["ripple_content"])){
           echo "<script>alert('내용입력요망!');history.go(-1);</script>";
           exit;
-        }//덧글 다는사람은 로그인 해야한다.
-
+        }
+        //덧글 다는사람은 로그인 해야한다.
           $content = test_input($_POST["ripple_content"]);
           $page = test_input($_POST["page"]);
           $parent = test_input($_POST["parent"]);
           $hit = test_input($_POST["hit"]);
-          $q_username = mysqli_real_escape_string($conn, $_SESSION['username']);
+          $q_username = mysqli_real_escape_string($conn, $_SESSION['name']);
           $q_content = mysqli_real_escape_string($conn, $content);
           $q_parent = mysqli_real_escape_string($conn, $parent);
           $regist_day=date("Y-m-d (H:i)");
