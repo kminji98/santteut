@@ -34,7 +34,7 @@
               <li><a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/tour/admin/admin_add_package.php" class="hov">상품등록</a></li>
               <li><a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/tour/reserve/reserve_list.php" class="hov">예약/결제목록</a></li>
               <li><a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/customer_support/qna/qna_list.php" class="hov">답변글관리</a></li>
-              <li><a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/?" class="hov">매출관리</a></li>
+              <li><a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/revenue/revenue_management.php" class="hov">매출관리</a></li>
               <li><a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/member/admin/member_admin_list.php" class="hov">회원관리</a></li>
             </ul>
           </div>
@@ -58,6 +58,7 @@
             <ul id="top_my_content_ul">
               <li><a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/?" class="hov">쪽지</a></li>
               <li><a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/member/join/join_member.php" class="hov">정보수정</a></li>
+              <li><a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/mypage/myboard/myboard.php" class="hov">참여내역</a></li>
               <li><a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/tour/reserve/reserve_list.php" class="hov">예약/결제내역</a></li>
               <li><a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/customer_support//qna/qna_form.php" class="hov">상담문의</a></li>
               <li><a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/tour/cart/cart_list.php" class="hov">장바구니</a></li>
