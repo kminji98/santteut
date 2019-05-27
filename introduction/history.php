@@ -16,22 +16,25 @@ session_start();
     </header>
 
     <section id="history">
-      <h2>산뜻소개</h2>
+      <h2 style="margin-left: 18%;">산뜻소개</h2>
       <hr>
       <ul id="title_history">
           연혁
       </ul>
-<hr>
-<div class="fieldset">
-
-      <fieldset>
-        <legend><h3>산뜻산악회</h3></legend>
-        <ul>
-          <li><b>2019년</b> <strong>5월 7일</strong> 산뜻산악회 창립</li>
-          <li><b>2020년</b> <strong>5월 8일</strong> 김주오이조민</li>
-          <li><b>2021년</b> <strong>5월 9일</strong> 짱짱걸맨들</li>
+      <hr>
+      <h4>산뜻산악회</h4>
+        <ul id="field">
+          <li><b>2019년</b> <strong>6월 20일</strong><br><br>
+            미래교육원수료와 함께 첫번째로 설립된 민간조직<br><br>
+            김주오이조민회원들을 중심으로 미래강당에서 창립총회를 갖고 명칭을 산뜻산악회라 칭함<br><br>
+            초대 팀장에 php파이어 김밍밍 언니를 추대<br><br>
+            산뜻산악회는 첫 사업으로 5명의 동지들이 모여 미래교육원수료기념등산회를 가짐<br><br>
+          </li>
+          <br>
+          <li><b>2019년</b> <strong>6월 21일</strong><br><br>
+            등산의 일상화를 위해 미래교육원생들을 대상으로 제 1회 등행대회를 개최<br><br>
         </ul>
-      </fieldset>
+
     </div>
     </section>
     <br>

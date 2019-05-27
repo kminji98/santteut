@@ -10,9 +10,9 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
 <html lang="ko" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css?ver=6">
-    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/tour/reserve/css/reserve_view.css?ver=0.2">
-    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/side_bar.css">
+    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css?ver=7">
+    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/tour/reserve/css/reserve_view.css?ver=1">
+    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/side_bar.css?ver=0">
     <title>산뜻 :: 즐거운 산행</title>
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
 
@@ -92,6 +92,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
   <script type="text/javascript">
     window.onload = function() {
       var insert_seat="";
+      onload_button_status();
       adult_control_btn('+','text_adult','*');
       kid_control_btn('+','text_kid','*');
       baby_control_btn('+','text_baby','*');
@@ -883,28 +884,26 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
               <hr style="border-color: #5D5D5D;">
             </div>
 
-
-
-
-
-
-
-
-
           </div>
         </div>
         <div id="increase_box" >
 
         </div>
         <div id="reserve_button">
-          <div id="reserve_finish" onclick="check_form()" > <b>예약마감</b></div><br>
+          <div id="reserve_finish" onclick="check_form()" > <b id="status"><?=$status2?></b></div><br>
           <!-- <input type="button" id="reserve_finish" value="예약마감"> -->
         </div>
         <div id="right_footer"></div>
       </div>
       <script type="text/javascript">
 
-
+        function onload_button_status(){
+          var reserve_finish = document.getElementById('reserve_finish');
+          var status = document.getElementById('status');
+          if(status.innerHTML=="예약마감"){
+            reserve_status.style.backgroundColor = "#aaaaaa";
+          }
+        }
 
 
 

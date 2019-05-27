@@ -61,7 +61,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/bill/bil_query.php";
              });
              alert('결제가 완료되었습니다.');
              location.href="bill_insert_query.php?r_pk=<?=$r_pk?>&way=2&r_pay=<?=$r_pay?>&p_code=<?=$p_code?>&p_name=<?=$p_name?>&b_seat=<?=$b_seat?>";
-          
+
           }else{
            var msg = '결제에 실패하였습니다.';
            msg += '에러내용 : ' + rsp.error_msg;
@@ -264,7 +264,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/bill/bil_query.php";
         </tr>
         <tr>
           <td rowspan="3" class="left2" id="sch1">일정</td>
-          <td id="period1"><?=$p_period?></td>
+          <td id="period1"><?=$p_period?>일</td>
         </tr>
 
         <tr>
@@ -283,15 +283,15 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/bill/bil_query.php";
       <div id="top_text3"><b>예약자 정보</b></div>
       <table id="tbl2">
         <tr>
-          <td class="left2">예약자명*</td>
+          <td class="left2">예약자명</td>
           <td> <input disabled type="text" id="res_name" value="<?=$m_name?>"> </td>
-          <td class="left2">휴대폰번호*</td>
-          <td> <input disabled type="text" id="res_phone" value="<?=$m_email?>"> </td>
+          <td class="left2">휴대폰번호</td>
+          <td> <input disabled type="text" id="res_phone" value="<?=$hp?>"> </td>
         </tr>
 
         <tr>
-          <td class="left2">이메일*</td>
-          <td> <input disabled type="text" id="res_email1" value="<?=$hp?>"></td>
+          <td class="left2">이메일</td>
+          <td> <input disabled type="text" id="res_email1" value="<?=$m_email?>"></td>
           <td></td><td></td>
         </tr>
       </table>

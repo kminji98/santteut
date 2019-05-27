@@ -66,6 +66,7 @@ $email=explode("@", $email);
 $result_status_sql=mysqli_query($conn,$reserve_status_sql);
 $total=0;
 $status ="예약가능";
+$status2 ="예약완료";
 for($i=0;$i<mysqli_num_rows($result_status_sql);$i++){
   $row1 = mysqli_fetch_array($result_status_sql);
   $sum = $row1['sum(`r_adult`+`r_kid`+`r_baby`)'];
@@ -75,9 +76,11 @@ for($i=0;$i<mysqli_num_rows($result_status_sql);$i++){
 }
 if($total>=$p_bus_half){
   $status="출발가능";
+  $status2="결제하기";
 }
 if($total==$p_bus){
   $status="예약마감";
+  $status2="예약마감";
 }
 
  ?>
