@@ -19,13 +19,14 @@ $name = $_SESSION['name'];
 //mode가 insert일때
 if(isset($_GET["mode"]) && $_GET["mode"]=="insert"){
     $title = trim($_POST["title"]);
+    $content = trim($_POST["content"]);
     if(empty($content)||empty($title)){
-      alert_back('1. 내용이나제목입력요망!');
+      alert_back('제목과 내용 입력요망!');
       exit;
     }
 
     $title = test_input($_POST["title"]);
-    $q_content = trim($_POST["content"]);
+    $content = $_POST["content"];
     $id = test_input($_SESSION['id']);
     $hit = 0;
     $secret_ok =test_input($_POST["secret_ok"]);
@@ -41,7 +42,7 @@ if(isset($_GET["mode"]) && $_GET["mode"]=="insert"){
     $sql="INSERT INTO `qna` VALUES (null,'$groupnum','$depth','$ord','$id','$q_title','$q_content','$regist_day','$hit','$secret_ok');";
 
     $result = mysqli_query($conn,$sql);
-    if (!$result) {alert_back('Error:5 ' . mysqli_error($conn));}
+    if (!$result) {alert_back('Error: ' . mysqli_error($conn));}
 
     //등록된사용자가 최근 입력한 qna_list를 보여주기 위하여 num 찾아서 전달하기 위함이다.
     // 최근에 삽입된 게시물이 큰넘버가 맥스넘
@@ -125,11 +126,11 @@ if(isset($_GET["mode"]) && $_GET["mode"]=="insert"){
     $title = trim($_POST["title"]);
 
     if(empty($content)||empty($title)){
-      echo "<script>alert('내용이나제목입력요망!');history.go(-1);</script>";
+      alert_back('제목과 내용 입력요망!');
       exit;
     }
     $title = test_input($_POST["title"]);
-    $content = test_input($_POST["content"]);
+    $content = $_POST["content"];
     $id = test_input($_SESSION['id']);
     $num = test_input($_POST["num"]);
     $hit = test_input($_POST["hit"]);
@@ -144,7 +145,7 @@ if(isset($_GET["mode"]) && $_GET["mode"]=="insert"){
 
     $sql="SELECT * from qna where num =$q_num;";
     $result = mysqli_query($conn,$sql);
-    if (!$result) {die('1Error: ' . mysqli_error($conn));}
+    if (!$result) {die('Error: ' . mysqli_error($conn));}
     $row=mysqli_fetch_array($result);
     $groupnum=(int)$row['groupnum'];
     $depth=(int)$row['depth'] + 1;
@@ -152,16 +153,16 @@ if(isset($_GET["mode"]) && $_GET["mode"]=="insert"){
 
     $sql="UPDATE `qna` SET `ord`=`ord`+1 WHERE `groupnum` = $groupnum and `ord` >= $ord";
     $result = mysqli_query($conn,$sql);
-    if (!$result) {die('2Error: ' . mysqli_error($conn));}
+    if (!$result) {die('Error: ' . mysqli_error($conn));}
 
     $sql="INSERT INTO `qna` VALUES (null,'$groupnum','$depth','$ord','$id','$q_title','$q_content','$regist_day','$hit','$secret_ok');";
 
     $result = mysqli_query($conn,$sql);
-    if (!$result) {die('3Error: ' . mysqli_error($conn));}
+    if (!$result) {die('Error: ' . mysqli_error($conn));}
 
     $sql="SELECT max(num) from qna;";
     $result = mysqli_query($conn,$sql);
-    if (!$result) {die('4Error: ' . mysqli_error($conn));}
+    if (!$result) {die('Error: ' . mysqli_error($conn));}
     $row=mysqli_fetch_array($result);
     $max_num=$row['max(num)'];
 

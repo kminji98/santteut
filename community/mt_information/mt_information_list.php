@@ -7,9 +7,7 @@ $total_record=0;
 //******************************************************************
 session_start();
 
-include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/create_table.php";
-
-create_table($conn, 'mt_information');//명산정보 메인 테이블 생성
+include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
 
 //1. 게시물수 정의
 define('ROW_SCALE', 9);

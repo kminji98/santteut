@@ -23,7 +23,7 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="insert"){
   $title = trim($_POST["title"]);
   $content = trim($_POST["content"]);
   if(empty($content)||empty($title)){
-    alert_back('1.제목과 내용 입력요망!');
+    alert_back('제목과 내용 입력요망!');
   }
   $title = test_input($_POST["title"]);
   $content = $_POST["content"];
