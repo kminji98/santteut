@@ -4,15 +4,16 @@ session_start();
 // isset함수는 불리언값을 리턴 true or false
 // 비회원이면 권한없음
 if(!isset($_SESSION['id'])){
-  echo "<script>alert('권한없음!');history.go(-1);</script>";
+  echo "<script>alert('회원가입 후 이용해주세요.');history.go(-1);</script>";
   exit;
 }
 
 $name = $_SESSION['name'];
 
 //0-0. 인클루드 디비
-include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
+include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/create_table.php";
 
+create_table($conn, 'official_review');
 //1. 게시물수 정의
 define('ROW_SCALE', 10);
 define('PAGE_SCALE', 5);
