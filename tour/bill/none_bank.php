@@ -4,7 +4,9 @@ $r_pay=$_GET["r_pay"];
 $p_code=$_GET["p_code"];
 $p_name=$_GET["p_name"];
 $bank=$_GET["bank"];
+$b_seat=$_GET["b_seat"];
 $date=date("Y-m-d");
+
 ?>
 <!DOCTYPE html>
 <html lang="ko" dir="ltr">
@@ -26,7 +28,7 @@ $date=date("Y-m-d");
         <td class="change_grey">결제 날짜</td>
         <td class="info"> <p><?=$date?></p> </td>
         <td class="change_grey">좌석 번호</td>
-        <td class="info"> <p></p> </td>
+        <td class="info"> <p><?=$b_seat?></p></td>
       </tr>
       <tr>
         <td class="change_grey">예금주</td>
