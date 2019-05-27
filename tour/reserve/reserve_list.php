@@ -17,7 +17,8 @@ define('ROW_SCALE', 10);
 define('PAGE_SCALE', 10);
 //r_cancel=0 -> 예약내역
 //r_cancel=1 -> 예약내역
-$reserve_flag = 0;
+$reserve_flag =empty($_POST['reserve_flag']) ? 0 : $_POST['reserve_flag'];
+
 
 $sql="SELECT * from `reserve` join `package` on `reserve`.`r_code` = `package`.`p_code` where `reserve`.`r_id` = '$id' and `reserve`.`r_cancel`='$reserve_flag';";
 
@@ -70,38 +71,55 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
   $t = $now -> format("t");
 
 
-
-
  ?>
 <!DOCTYPE html>
 <html lang="ko" dir="ltr">
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css?ver=2">
-    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/tour/reserve/css/reserve_list.css?ver=3">
+    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/tour/reserve/css/reserve_list.css?ver=4">
     <title>산뜻 :: 즐거운 산행</title>
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
     <script type="text/javascript">
     // 예약내역 취소내역 선택 부분
       $(document).ready(function() {
-        $("#list_head1").click(function(){
-          if($("#list_head1").css("background-color")!="white"){
-            $("#list_head1").css('background-color', 'white');
-            $("#list_head1").css('border', '1px solid #3d3d3d');
-            $("#list_head1").css('border-bottom-color', 'white');
-            $("#list_head2").css('background-color', '#f2f2f2');
-            $("#list_head2").css('border', '1px solid #dedede');
-            $("#list_head1").css('border-right-color', '#3d3d3d');
+        // var reserve_flag = <?=json_encode($reserve_flag)?>;
+        $("#reserve_flag").val(<?=json_encode($reserve_flag)?>);
+        alert($("#reserve_flag").val());
+        if($("#reserve_flag").val()*1){
+          if($("#list_head_cancel").css('background-color')!="white"){
+            $("#list_head_cancel").css('background-color', 'white');
+            $("#list_head_cancel").css('border', '1px solid #3d3d3d');
+            $("#list_head_cancel").css('border-bottom-color', 'white');
+            $("#list_head_reserve").css('background-color', '#f2f2f2');
+            $("#list_head_reserve").css('border', '1px solid #dedede');
+            $("#list_head_reserve").css('border-right-color', '#3d3d3d');
+          }
+        }
+        //예약내역
+        $("#list_head_reserve").click(function(){
+          if($("#list_head_reserve").css("background-color")!="white"){
+            $("#list_head_reserve").css('background-color', 'white');
+            $("#list_head_reserve").css('border', '1px solid #3d3d3d');
+            $("#list_head_reserve").css('border-bottom-color', 'white');
+            $("#list_head_cancel").css('background-color', '#f2f2f2');
+            $("#list_head_cancel").css('border', '1px solid #dedede');
+            $("#list_head_reserve").css('border-right-color', '#3d3d3d');
+            $("#reserve_flag").val('0');
+            document.reserve_flag_form.submit();
           }
         });
-        $("#list_head2").click(function(){
-          if($("#list_head2").css('background-color')!="white"){
-            $("#list_head2").css('background-color', 'white');
-            $("#list_head2").css('border', '1px solid #3d3d3d');
-            $("#list_head2").css('border-bottom-color', 'white');
-            $("#list_head1").css('background-color', '#f2f2f2');
-            $("#list_head1").css('border', '1px solid #dedede');
-            $("#list_head1").css('border-right-color', '#3d3d3d');
+        //결제
+        $("#list_head_cancel").click(function(){
+          if($("#list_head_cancel").css('background-color')!="white"){
+            $("#list_head_cancel").css('background-color', 'white');
+            $("#list_head_cancel").css('border', '1px solid #3d3d3d');
+            $("#list_head_cancel").css('border-bottom-color', 'white');
+            $("#list_head_reserve").css('background-color', '#f2f2f2');
+            $("#list_head_reserve").css('border', '1px solid #dedede');
+            $("#list_head_reserve").css('border-right-color', '#3d3d3d');
+            $("#reserve_flag").val('1');
+            document.reserve_flag_form.submit();
           }
         });
         //월 클릭 -> days 변화 이벤트
@@ -119,8 +137,6 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
           $("#day2").append("<option value="+i+">"+i+"</option>");
           }
         });
-
-
         $("input[name='review_btn']").click(function(event) {
           // alert($(this).attr('id'));
           var popupX = (window.screen.width / 2) - (800 / 2);
@@ -138,6 +154,9 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
     </script>
   </head>
   <body>
+    <form name="reserve_flag_form" action="reserve_list.php" method="post">
+      <input type="hidden" name="reserve_flag" id="reserve_flag">
+    </form>
     <div id="wrap">
     <header><?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/login_menu.php";?></header>
     <hr>
@@ -239,7 +258,7 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
       <br><br>
       <fieldset id="list_field" >
          <h4 id="sub_title"><b class="symbol_greater_than">></b>산뜻 예약/결제</h4>
-        <table id="list_tbl_head"><tr><td id="list_head1">예약내역</td><td id="list_head2">취소내역</td></tr></table>
+        <table id="list_tbl_head"><tr><td id="list_head_reserve">예약내역</td><td id="list_head_cancel">취소내역</td></tr></table>
         <table id="list_tbl_body">
           <tr>
             <td>예약날짜</td>
