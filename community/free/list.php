@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <?php
 session_start();
-include $_SERVER['DOCUMENT_ROOT']."/free/db_connector.php";
+include $_SERVER['DOCUMENT_ROOT']."/santtuet/common/lib/db_connector.php";
 define('SCALE', 10);
 //*****************************************************
 $sql=$result=$total_record=$total_page=$start="";

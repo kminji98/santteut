@@ -1,10 +1,7 @@
 <!DOCTYPE html>
 <?php
 session_start();
-include $_SERVER['DOCUMENT_ROOT']."/free/db_connector.php";
-$_SESSION['userid']="id1";
-$_SESSION['username']="가나다";
-$id= $_SESSION['userid'];
+include $_SERVER['DOCUMENT_ROOT']."/santtuet/common/lib/db_connector.php";
 if(!isset($_SESSION['userid'])){echo "<script>alert('권한없음!');history.go(-1);</script>";
 exit;}
 $mode="insert";

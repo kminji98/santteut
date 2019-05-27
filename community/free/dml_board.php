@@ -4,7 +4,7 @@ if(!isset($_SESSION['userid'])){
   echo "<script>alert('권한없음!');history.go(-1);</script>";
   exit;
 }
-include $_SERVER['DOCUMENT_ROOT']."/free/db_connector.php";
+include $_SERVER['DOCUMENT_ROOT']."/santtuet/common/lib/db_connector.php";
 $userid = $_SESSION['userid'];
 $username = $_SESSION['username'];
 $title = $_POST["title"];
