@@ -307,7 +307,7 @@ $divide=$_GET['divide'];
     <div id="main_big3">
       <!-- ///@@@@@@ MINJI 테스트중 BEST3 수정 중 -->
       <div id="best3" >
-        <?php // include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/best3.php";?>
+        <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/best3.php";?>
       </div>
     </div>
       <div id="kCalendar" onclick="KCalendar_go()"></div>
