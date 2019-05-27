@@ -1127,7 +1127,16 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
             }
           })
           .done(function(result) {
-            location.href='reserve_complete.php?p_code=<?=json_encode($p_code)?>&p_name=<?=json_encode($p_name)?>&member_num='+member_num+'&adult_val='+adult_val+'&kid_val='+kid_val+'&baby_val='+baby_val;
+            var output = $.parseJSON(result);
+            var status = output[0].status;
+            var r_pk = output[0].r_pk;
+            alert(status);
+            alert(r_pk);
+            if(status=="결제가능"){
+              location.href='../bill/bill_view.php?r_pk='+r_pk;
+            }else{
+              location.href='reserve_complete.php?p_code=<?=json_encode($p_code)?>&p_name=<?=json_encode($p_name)?>&member_num='+member_num+'&adult_val='+adult_val+'&kid_val='+kid_val+'&baby_val='+baby_val;
+            }
           })
           .fail(function() {
             console.log("error");
