@@ -255,6 +255,18 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="insert"){
 }
 
 }else if(isset($_GET["mode"]) && $_GET["mode"] == "delete_ripple"){
+  $ripple_num = $_POST['num'];
+  $sql = "SELECT * FROM `mt_information_ripple` WHERE num='$ripple_num';";
+  $result = mysqli_query($conn, $sql);
+  if(!$result){
+    alert_back('Error: ' .mysqli_error($conn));
+  }
+  $row = mysqli_fetch_array($result);
+  $id = $row['id'];
+
+  if(!($_SESSION["id"]=="admin" || $id==$_SESSION["id"])){
+    alert_back('삭제 권한이 없습니다.');
+  }
   $num = test_input($_POST["num"]);
   $parent = test_input($_POST["parent"]);
   $q_num = mysqli_real_escape_string($conn, $num);

@@ -221,7 +221,33 @@ function create_table($conn, $table_name){
       ) DEFAULT CHARSET=utf8;
       ";
      break;
-
+    case 'free' :
+     $sql = "CREATE TABLE `free` (
+     `num` int(11) NOT NULL AUTO_INCREMENT,
+     `id` char(15) NOT NULL,
+     `name` char(10) NOT NULL,
+     `title` varchar(100) NOT NULL,
+     `content` text NOT NULL,
+     `destination` char(100) NOT NULL,
+     `file_name` char(25) NOT NULL,
+     `file_type` char(25) NOT NULL,
+     `del` text NOT NULL,
+     `regist_day` char(20) DEFAULT NULL,
+     `hit` int(11) DEFAULT NULL,
+     PRIMARY KEY (`num`)
+     ) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
+     break;
+     case 'free_ripple' :
+     $sql = "CREATE TABLE `free_ripple` (
+     `num` int(11) NOT NULL AUTO_INCREMENT,
+     `parent` int(11) NOT NULL,
+     `id` char(15) NOT NULL,
+     `name` char(10) NOT NULL,
+     `content` text NOT NULL,
+     `regist_day` char(20) DEFAULT NULL,
+     PRIMARY KEY (`num`)
+     ) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
+      break;
     default:
       echo "<script>alert('해당 테이블이름이 없습니다. ');</script>";
       exit;
