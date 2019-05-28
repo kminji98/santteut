@@ -5,10 +5,10 @@ session_start();
 
 // isset함수는 불리언값을 리턴 true or false
 // 비회원이면 권한없음
-// if(!isset($_SESSION['id'])){
-//   echo "<script>alert('권한없음!');history.go(-1);</script>";
-//   exit;
-// }
+if(!isset($_SESSION['id'])){
+  echo "<script>alert('권한없음!');history.go(-1);</script>";
+  exit;
+}
 ?>
 <meta charset="utf-8">
 <?php

@@ -3,12 +3,12 @@ session_start();
 
 // isset함수는 불리언값을 리턴 true or false
 // 비회원이면 권한없음
-// if(!isset($_SESSION['id'])){
-//   echo "<script>alert('회원가입 후 이용해주세요.');history.go(-1);</script>";
-//   exit;
-// }
+if(!isset($_SESSION['id'])){
+  echo "<script>alert('회원가입 후 이용해주세요.');history.go(-1);</script>";
+  exit;
+}
 
-//$name = $_SESSION['name'];
+$name = $_SESSION['name'];
 
 //0-0. 인클루드 디비
 include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
@@ -87,7 +87,7 @@ $view_num = $total_record - $start_record;
   <body>
     <header>
       <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/login_menu.php";?>
-      <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/mini_menu.php";?>
+      <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/custom_menu.php";?>
     </header>
     <br><br><br>
     <section id="qna">

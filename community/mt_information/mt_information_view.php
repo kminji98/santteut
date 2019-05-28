@@ -56,12 +56,22 @@ if(isset($_GET["num"])&&!empty($_GET["num"])){
     <meta charset="utf-8">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/community/mt_information/css/mt_information_form.css">
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $("#infomation_mini").css("font-weight","bold");
+        $("#infomation_mini").css("color","black");
+        $("#infomation_mini").css("font-size","23px");
+      });
+      </script>
         <script src="./js/mt_information.js?ver=0"></script>
     <title><?=$title?></title>
   </head>
   <body>
     <header>
       <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/login_menu.php"; ?>
+      <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/commu_menu.php";?>
+
     </header>
     <br><br><br>
     <section id="notice">
@@ -191,7 +201,7 @@ if(isset($_GET["num"])&&!empty($_GET["num"])){
                     echo ('<a href="./mt_information_form.php?mode=update&num='.$num.'"><input type="button" style="width:50px; height:24px; background-color: #2F9D27; border: 1px solid #2F9D27; color: white;" value="수정">&nbsp;</a>&nbsp;');
                     echo ('<input type="button" style="width:50px; height:24px; background-color: #2F9D27; border: 1px solid #2F9D27; color: white;" value="삭제" onclick="check_delete('.$num.')">&nbsp;</a>&nbsp;');
                     echo '<a href="mt_information_form.php"><input type="button" style="width:60px; height:24px; background-color: #2F9D27; border: 1px solid #2F9D27; color: white;" value="글쓰기">&nbsp;</a>';
-                // }    
+                // }
                  ?>
               </div><!--end of view_button -->
     </section>

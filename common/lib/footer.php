@@ -1,5 +1,8 @@
-<!-- stylesheet : login_menu -->
-
+<!-- =================================================================
++ [DESC] 푸터 수정
++ [DATE] 2019-05-27
++ [NAME] 이우주
+================================================================= -->
 <div id="footer_wrap">
   <table>
     <tr>
@@ -13,10 +16,8 @@
         <b>TEL.02-000-0000</b> <br><br>
         서울특별시 성동구 무학로 2길 54 4-5층 <br><br>
         고객센터 상담 : 월~금 9:00 - 18:00 / [공휴일 휴무]
-<br><br>
+        <br><br>
       </td>
-
-
       <td>
         <ul id="bottom_menu_history">
           <li><a href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/introduction/history.php">연혁</a></li>

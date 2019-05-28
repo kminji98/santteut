@@ -1,3 +1,8 @@
+<!-- =================================================================
++ [DESC] 로그인 메뉴 수정
++ [DATE] 2019-05-27
++ [NAME] 이우주
+================================================================= -->
 <div id="logo">
   <a href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/index.php">
     <img src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/img/sanlogo.png" border=0></a>

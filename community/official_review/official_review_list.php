@@ -66,11 +66,21 @@ $view_num = $total_record - $start_record;
     <title>공식산행후기</title>
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/community/official_review/css/official_review_list.css?ver=0">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css">
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $("#official_mini").css("font-weight","bold");
+        $("#official_mini").css("color","black");
+        $("#official_mini").css("font-size","23px");
+      });
+      </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   </head>
   <body>
     <header>
       <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/login_menu.php";?>
+      <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/commu_menu.php";?>
+
     </header>
     <div class="community_section">
       <section>

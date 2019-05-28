@@ -1,3 +1,8 @@
+<!-- =================================================================
+// + [DESC] notice_view 총괄
+// + [DATE] 2019-05-26
+// + [NAME] 이우주
+// ================================================================= -->
 <?php
 session_start();
 
@@ -72,13 +77,20 @@ if(isset($_GET["num"]) && !empty($_GET["num"])){
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/customer_support/notice/css/notice_view.css">
     <script type="text/javascript" src="./js/notice_view.js?ver=1"></script>
-
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $("#not_mini").css("font-weight","bold");
+        $("#not_mini").css("color","black");
+        $("#not_mini").css("font-size","23px");
+      });
+      </script>
     <title>공지사항</title>
   </head>
   <body>
     <header>
       <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/login_menu.php";?>
-      <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/mini_menu.php";?>
+      <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/custom_menu.php";?>
     </header>
     <br><br><br><br>
 
