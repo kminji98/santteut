@@ -1,12 +1,6 @@
 <?php
 session_start();
-/////////테스트
-$_SESSION['name']="관리자";
-$_SESSION['id']="admin";
-/////////테스트
 
-// isset함수는 불리언값을 리턴 true or false
-// 회원 or 비회원이면 권한없음, 관리자일때만 입장
 if(!(isset($_SESSION['id']) &&  $_SESSION['id']=="admin")){
   echo "<script>alert('권한없음!');history.go(-1);</script>";
   exit;
@@ -28,7 +22,6 @@ define('PAGE_SCALE', 5);
 $sql=$result=$total_record=$total_pages=$start_record=$row="";
 $total_record=0;
 
-
 //3. 검색모드를 세팅()
 if(isset($_GET["mode"])&&$_GET["mode"]=="search"){
 
@@ -44,9 +37,9 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="search"){
     exit;
   }
 
-  $sql="SELECT * from `member` where $find_option like '%$q_find_input%';";
+  $sql="SELECT id, name, address1, address2, hp1, hp2, email from `member` where $find_option like '%$q_find_input%';";
 }else{
-  $sql="SELECT * from `member` order by num desc";
+  $sql="SELECT id, name, address1, address2, hp1, hp2, email from `member`";
 }
 
 // 쿼리문실행문장
@@ -88,6 +81,8 @@ $view_num = $total_record - $start_record;
     <meta charset="utf-8">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/member/admin/css/member_admin_list.css?ver=0">
+    <script type="text/javascript" src="./js/member_admin_del.js?ver=1"></script>
+
     <title>회원관리</title>
   </head>
   <body>
@@ -115,9 +110,31 @@ $view_num = $total_record - $start_record;
       </div>
 
       <!--게시물 제목-->
+      <script type="text/javascript">
+        function delete_submit(){
+          var check = document.getElementsByName('select_del');
+          var del_value = '';
+          for (var i = 0; i < check.length; i++) {
+
+            // check가 되어있으면 삭제
+            // check된 체크박스의  value = id
+            if(check[i].checked){
+              // 체크된 아이디들의  배열 생성
+              // ex) admin/wooju00/minji/
+              del_value += check[i].value +"/";
+            }
+          }
+          // member_admin_query.php 로 넘기기 위한 작업
+          document.getElementsByName('del_value')[0].value = del_value;
+          document.del_form.submit();
+        }
+      </script>
+      <form name="del_form" action="member_admin_query.php?mode=delete" method="post">
+        <!-- delete 하고 싶은 멤버들 -->
+        <input type="hidden" name="del_value" value="">
       <table id="list_tbl" border="1">
         <tr>
-          <th>번호</th>
+          <th>선택</th>
           <th>아이디</th>
           <th>이름</th>
           <th>주소1</th>
@@ -125,7 +142,6 @@ $view_num = $total_record - $start_record;
           <th>일반전화</th>
           <th>휴대폰번호</th>
           <th>이메일</th>
-          <th>회원삭제</th>
         </tr>
 
       <!--게시물 내용-->
@@ -133,27 +149,26 @@ $view_num = $total_record - $start_record;
         for ($record = $start_record; $record  < $start_record+ROW_SCALE && $record<$total_record; $record++){
           mysqli_data_seek($result,$record);
           $row=mysqli_fetch_array($result);
-          $num=$row['num'];
+          $view_num=$row['num'];
           $id=$row['id'];
+          $name=$row['name'];
           $address1=$row['address1'];
           $address2=$row['address2'];
           $hp1=$row['hp1'];
           $hp2=$row['hp2'];
           $email=$row['email'];
       ?>
+
         <tr>
           <!--번호-->
-          <td><?=$view_num?></td>
+          <td> <input type="checkbox" id="" name="select_del" value="<?=$id?>"> </td>
+          <td><?=$id?></td>
           <td><?=$name?></td>
           <td><?=$address1?></td>
           <td><?=$address2?></td>
           <td><?=$hp1?></td>
           <td><?=$hp2?></td>
           <td><?=$email?></td>
-          <td></td>
-          <!--제목-->
-          <!-- <td><a href="./notice_view.php?num=<?=$num?>&present_page=<?=$page?>&hit=<?=$hit+1?>"><?=$title?></a></td> -->
-
         </tr>
         <?php
           $view_num--;
@@ -161,17 +176,21 @@ $view_num = $total_record - $start_record;
         ?>
       </table>
 
-<!--다시 -->
+<br><br>
+
 <?php
 if(!empty($_SESSION['id'])){
-  echo '<a href="../member/join/join_member.php"><button id="admin_write_btn" type="button" name="button">
-  회원등록</button></a>';
-  echo '<a href="notice_form.php"><button id="admin_write_btn" type="button" name="button">
-  회원정보수정</button></a>';
-  echo '<a href="notice_form.php"><button id="admin_write_btn" type="button" name="button">
-  회원삭제</button></a>';
+  echo ('<a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/member/join/join_member.php" class="hov"><button id="admin_write_btn" type="button" name="button">
+  회원등록</button></a>');
+  echo ('<a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/member/join/join_member.php" class="hov"><button id="admin_write_btn" type="button" name="button">
+  회원정보수정</button></a>');
+  echo ('<button id="admin_write_btn" onclick="delete_submit()" type="button" name="button">
+  회원삭제</button>');
+
 }
+
 ?>
+</form>
 <br>
 <!--$page 는 현재페이지를 의미 x / 각 페이지를 의미-->
       <div class="page_button_group">
@@ -179,16 +198,16 @@ if(!empty($_SESSION['id'])){
         //현재 블럭의 시작 페이지가 페이지 스케일 보다 클 때 -> 처음으로 버튼 생성 + 이전 블럭 존재
         //[ex]  page가 9개 있고 현재 페이지가 6페이지인 경우  / 12345/ 6789     =>  <<(처음으로) <(이전) 6 7 8 9
         if( $start_page > PAGE_SCALE ){
-          // echo( '<a href='notice_list.php?page=1'> << </a>' );
-          echo( '<a href="notice_list.php?page=1"><button type="button" name="button" title="처음으로"><<</button></a>' );
+          // echo( '<a href='member_admin_list.php?page=1'> << </a>' );
+          echo( '<a href="member_admin_list.php?page=1"><button type="button" name="button" title="처음으로"><<</button></a>' );
 
           // 이전 블럭 클릭 시 -> 현재 블럭의 시작 페이지 - 페이지 스케일
           // 현재 6 page 인 경우 '<(이전블럭)' 클릭 -> $pre_page = 6-PAGE_SCALE  -> 1 페이지로 이동
           $pre_block= $start_page - PAGE_SCALE;
           if(isset($_GET['mode']) && $_GET['mode']=="search"){
-            echo( '<a href="notice_list.php?mode=search&find_option=$find_option&find_input=$find_input&page='.$pre_block.'"><button type="button" name="button" title="이전"><</button></a>' );
+            echo( '<a href="member_admin_list.php?mode=search&find_option=$find_option&find_input=$find_input&page='.$pre_block.'"><button type="button" name="button" title="이전"><</button></a>' );
           }else{
-            echo( '<a href="notice_list.php?page='.$pre_block.'"><button type="button" name="button" title="이전"><</button></a>' );
+            echo( '<a href="member_admin_list.php?page='.$pre_block.'"><button type="button" name="button" title="이전"><</button></a>' );
           }
         }
 
@@ -214,13 +233,13 @@ if(!empty($_SESSION['id'])){
           $next_block= $start_page + PAGE_SCALE;
 
           if(isset($_GET['mode']) && $_GET['mode']=="search"){
-            echo( '<a href="notice_list.php?mode=search&find_option=$find_option&find_input=$find_input&page='.$next_block.'"><button type="button" name="button">></button></a>' );
+            echo( '<a href="member_admin_list.php?mode=search&find_option=$find_option&find_input=$find_input&page='.$next_block.'"><button type="button" name="button">></button></a>' );
           }else{
-            echo( '<a href="notice_list.php?page='.$next_block.'"><button type="button" name="button" title="다음">></button></a>' );
+            echo( '<a href="member_admin_list.php?page='.$next_block.'"><button type="button" name="button" title="다음">></button></a>' );
           }
 
           //맨끝페이지로 이동
-          echo( '<a href="notice_list.php?page='.$total_pages.'"><button type="button" name="button" title="맨끝으로">>></button></a>' );
+          echo( '<a href="member_admin_list.php?page='.$total_pages.'"><button type="button" name="button" title="맨끝으로">>></button></a>' );
         }
         ?>
       </div>
