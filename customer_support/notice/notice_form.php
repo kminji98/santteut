@@ -95,7 +95,6 @@ if (isset($_GET["mode"]) && $_GET["mode"]=="update") {
       <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/login_menu.php";?>
       <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/custom_menu.php";?>
     </header>
-    <br><br><br>
 
     <section id="notice">
       <form class="notice_insert_form" action="notice_query.php?mode=<?php echo $mode; ?>" method="post" enctype="multipart/form-data">
@@ -108,11 +107,11 @@ if (isset($_GET["mode"]) && $_GET["mode"]=="update") {
         </tr>
         <tr>
           <th>제목</th>
-          <td><input type="text" style="font-size:15px; width:100px;" name="title" value="<?=$title?>"></td>
+          <td><input type="text" style="font-size:15px; width:700px;" name="title" value="<?=$title?>"></td>
         </tr>
-        <tr style="height:400px;">
+        <tr>
           <th>내용</th>
-          <td><textarea name="content" id="summernote"><?=$content?></textarea></td>
+          <td><textarea style="width:700px;" name="content" id="summernote"><?=$content?></textarea></td>
         </tr>
         <tr>
           <th>파일</th>
