@@ -107,25 +107,21 @@ $view_num = $total_record - $start_record;
       <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/login_menu.php";?>
       <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/custom_menu.php";?>
     </header>
-    <br><br><br>
-    <section id="notice">
 
+    <section id="notice">
       <form name="notice_form" action="notice_list?mode=search" method="post">
-      <div class="notice_list_search">
-        <select>
-          <option value="">제목</option>
-          <option value="">내용</option>
-        </select>
-        <input type="text" name="" value="">
-        <button type="button" name="button">검색</button>
+        <div class="notice_list_search">
+          <li id="total_title"><b>total <?=$total_record?></b></li>
+          <li id="search_option">
+            <select>
+            <option value="">제목</option>
+            <option value="">내용</option>
+          </select>
+          <input type="text" name="" value="">
+          <button type="button" name="button">검색</button>
+        </li>
       </div>
       </form>
-
-      <!--총 게시물-->
-      <div class="total_title">
-        <h4>total <?=$total_record?></h4>
-      </div>
-
       <!--게시물 제목-->
       <table id="list_tbl">
         <tr>
@@ -152,7 +148,7 @@ $view_num = $total_record - $start_record;
           <!--번호-->
           <td><?=$view_num?></td>
           <!--제목-->
-          <td><a href="./notice_view.php?num=<?=$num?>&present_page=<?=$page?>&hit=<?=$hit+1?>"><?=$title?></a></td>
+          <td style="text-align: left;"><a style="text-decoration: none;" href="./notice_view.php?num=<?=$num?>&present_page=<?=$page?>&hit=<?=$hit+1?>"><?=$title?></a></td>
           <!--작성자-->
           <td><?=$name?></td>
           <!--작성일-->
@@ -172,7 +168,7 @@ if(!empty($_SESSION['id'])){
   글쓰기</button></a>';
 }
 ?>
-<br>
+
 <!--$page 는 현재페이지를 의미 x / 각 페이지를 의미-->
       <div class="page_button_group">
         <?php
@@ -229,8 +225,8 @@ if(!empty($_SESSION['id'])){
       </div>
     </section>
 
-  <footer>
-    <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/footer.php";?>
-  </footer>
+    <footer>
+      <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/footer.php";?>
+    </footer>
   </body>
 </html>
