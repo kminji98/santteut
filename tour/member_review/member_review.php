@@ -12,6 +12,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
 
 // 1. 모드 = 후기작성
 $mode="insert";
+$readonly=$disabled='';
 
 $id= $_SESSION['id'];
 $name= $_SESSION['name'];
@@ -20,7 +21,9 @@ $r_pk=isset($_GET["r_pk"])?$_GET["r_pk"]:'';
 $date =date("Y-m-d");
 // 2. 모드 = 후기 확인
 if((isset($_GET["mode"])&&$_GET["mode"]=="view") ){
-
+  // view -> 수정 불가
+    $readonly ='readonly';
+    $disabled ='disabled';
     $num = test_input($_GET["num"]);
     $q_num = mysqli_real_escape_string($conn, $num);
 
@@ -37,7 +40,7 @@ if((isset($_GET["mode"])&&$_GET["mode"]=="view") ){
     $content= htmlspecialchars($row['content']);
     $content=str_replace("\n", "<br>",$content);
     $content=str_replace(" ", "&nbsp;",$content);
-    $write_date=$row['write_date'];
+    $date=$row['write_date'];
     $grade=$row['grade'];
     mysqli_close($conn);
 }
@@ -79,14 +82,14 @@ if((isset($_GET["mode"])&&$_GET["mode"]=="view") ){
         </tr>
         <tr>
           <th style="padding:0">제목</th>
-          <td colspan="3"><input type="text" id="title" name="title" value="<?=$title?>" maxlength="30" ></td>
+          <td colspan="3"><input type="text" id="title" name="title" value="<?=$title?>" <?=$readonly?> maxlength="30"></td>
         </tr>
         <tr>
           <th style="padding:0">작성일</th>
           <td><?=$date?></td>
           <td><b>평점</b></td>
           <td>
-            <select class="" name="grade" style="padding:3%;margin:2%;width:80px;">
+            <select class="" name="grade" style="padding:3%;margin:2%;width:80px;" <?=$disabled?>>
               <option value="5">5</option>
               <option value="4">4</option>
               <option value="3">3</option>
@@ -97,7 +100,7 @@ if((isset($_GET["mode"])&&$_GET["mode"]=="view") ){
         </tr>
         <tr>
           <th>내용</th>
-          <td colspan="3"><textarea name="content" cols="80" rows="17"><?=$content?></textarea></td>
+          <td colspan="3"><textarea name="content" cols="80" rows="10" maxlength="100" placeholder="100자 이내로 입력해주세요." <?=$readonly?>><?=$content?></textarea></td>
         </tr>
       </table>
       <br>
