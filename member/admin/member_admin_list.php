@@ -188,7 +188,7 @@ $view_num = $total_record - $start_record;
 if(!empty($_SESSION['id'])){
   echo ('<a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/member/join/join_member.php" class="hov"><button id="admin_write_btn" type="button" name="button">
   회원등록</button></a>');
-  echo ('<a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/member/join/join_member.php" class="hov"><button id="admin_write_btn" type="button" name="button">
+  echo ('<a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/member/join/join_edit.php" class="hov"><button id="admin_write_btn" type="button" name="button">
   회원정보수정</button></a>');
   echo ('<button id="admin_write_btn" onclick="delete_submit()" type="button" name="button">
   회원삭제</button>');

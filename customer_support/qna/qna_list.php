@@ -35,14 +35,13 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="search"){
   $sql="SELECT num, groupnum, depth, ord, name, title, content, regist_day, hit, pw from `qna` inner join member on `qna`.`id` = `member`.`id` where $find_option like '%$q_find_input%' order by num desc;";
 }else{
   //"select num, groupnum, depth, ord, name, title, content, regist_day, hit FROM qna inner join member on qna.id = member.id;"
-  $sql="SELECT num, groupnum, depth, ord, name, title, content, regist_day, hit, pw FROM `qna` inner join member on `qna`.`id` = `member`.`id` order by groupnum desc, ord asc;";
+  $sql="SELECT num, groupnum, depth, ord, name, title, content, regist_day, hit, pw FROM `qna` inner join member on `qna`.`id` = `member`.`id` order by `groupnum` desc, `ord` asc;";
 }
-
 // 쿼리문실행문장
 $result=mysqli_query($conn,$sql);
 
 $total_record=mysqli_num_rows($result);
-
+var_export($total_record);
 // 조건?참:거짓
 $total_pages=ceil($total_record/ROW_SCALE);
 
