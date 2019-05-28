@@ -10,6 +10,7 @@ session_start();
 $content = $sql= $result = $name=$q_title=$q_content=$regist_day=$hit=$secret_ok="";
 $name = $_SESSION['name'];
 $id = $_SESSION['id'];
+$date =date("Y-m-d");
 
 //mode가 insert일때
 if(isset($_GET["mode"]) && $_GET["mode"]=="insert"){
@@ -17,6 +18,7 @@ if(isset($_GET["mode"]) && $_GET["mode"]=="insert"){
     $content = trim($_POST["content"]);
     $code = $_POST["code"];
     $r_pk = $_POST["r_pk"];
+    $grade = $_POST["grade"];
 
     if(empty($content)||empty($title)){
       alert_back('1. 내용이나제목입력요망!');
@@ -28,7 +30,7 @@ if(isset($_GET["mode"]) && $_GET["mode"]=="insert"){
     $q_title = mysqli_real_escape_string($conn, $title);
     $q_content = mysqli_real_escape_string($conn, $content);
 
-    //p_code 를 r_pk 로 찾아서 삽입 (p_code = r_code)
+    //r_code 를 r_pk 로 찾아서 삽입
 
     $sql="SELECT `r_code` from reserve where `r_pk`= '$r_pk';";
     $result = mysqli_query($conn,$sql);
@@ -38,7 +40,7 @@ if(isset($_GET["mode"]) && $_GET["mode"]=="insert"){
     $r_code=$row['r_code'];
 
 
-    $sql="INSERT INTO `member_review` VALUES (null,'$r_code','$r_pk','$q_title','$q_content','$id');";
+    $sql="INSERT INTO `member_review` VALUES (null,'$r_code','$r_pk','$q_title','$q_content','$id','$name','$date','$grade');";
 
     $result = mysqli_query($conn,$sql);
     if (!$result) {alert_back('Error:5 ' . mysqli_error($conn));}
@@ -47,7 +49,6 @@ if(isset($_GET["mode"]) && $_GET["mode"]=="insert"){
     echo "<script>alert('후기등록완료! 소중한 후기 감사합니다.');";
     echo "opener.location.replace('../reserve/reserve_list.php');";
     echo "window.close();</script>";
-    // echo "<script>location.href='../reserve/reserve_list.php';</script>";
 
 }else if(isset($_GET["mode"]) && $_GET["mode"]=="delete"){
     //1. 삭제할 해당 게시물의 넘버

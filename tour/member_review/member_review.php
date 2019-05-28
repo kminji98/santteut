@@ -17,7 +17,7 @@ $id= $_SESSION['id'];
 $name= $_SESSION['name'];
 $mode=isset($_GET["mode"])?$_GET["mode"]:'';
 $r_pk=isset($_GET["r_pk"])?$_GET["r_pk"]:'';
-
+$date =date("Y-m-d");
 // 2. 모드 = 후기 확인
 if((isset($_GET["mode"])&&$_GET["mode"]=="view") ){
 
@@ -25,7 +25,7 @@ if((isset($_GET["mode"])&&$_GET["mode"]=="view") ){
     $q_num = mysqli_real_escape_string($conn, $num);
 
     //view 이면 후기테이블에서 해당된 예약 번호를 조회.
-    $sql="SELECT num from `member_review` where `r_pk` ='$r_pk';";
+    $sql="SELECT * from `member_review` where `r_pk` ='$r_pk';";
     $result = mysqli_query($conn,$sql);
     if (!$result) {die('Error: ' . mysqli_error($conn));}
     $row=mysqli_fetch_array($result);
@@ -36,10 +36,9 @@ if((isset($_GET["mode"])&&$_GET["mode"]=="view") ){
     $title=str_replace(" ", "&nbsp;",$title);
     $content= htmlspecialchars($row['content']);
     $content=str_replace("\n", "<br>",$content);
-
     $content=str_replace(" ", "&nbsp;",$content);
-    $regist_day=$row['regist_day'];
-    $hit=$row['hit'];
+    $write_date=$row['write_date'];
+    $grade=$row['grade'];
     mysqli_close($conn);
 }
 ?>
@@ -72,25 +71,38 @@ if((isset($_GET["mode"])&&$_GET["mode"]=="view") ){
   <body>
     <section id="review_section" >
       <form class="member_review_insert_form" action="member_review_query.php?mode=<?=$mode?>" method="post">
-        <input type="hidden" name="code" value="<?=$code?>">
         <input type="hidden" name="r_pk" value="<?=$r_pk?>">
       <table id="review_tbl" border="1">
         <tr>
-          <th  style="padding:8px">작성자</th>
-          <td ><?=$name?></td>
+          <th style="padding:8px">작성자</th>
+          <td colspan="3"><?=$name?></td>
         </tr>
         <tr>
           <th style="padding:0">제목</th>
-          <td><input type="text" id="title" name="title" value="<?=$title?>" maxlength="30"></td>
+          <td colspan="3"><input type="text" id="title" name="title" value="<?=$title?>" maxlength="30" ></td>
+        </tr>
+        <tr>
+          <th style="padding:0">작성일</th>
+          <td><?=$date?></td>
+          <td><b>평점</b></td>
+          <td>
+            <select class="" name="grade" style="padding:3%;margin:2%;width:80px;">
+              <option value="5">5</option>
+              <option value="4">4</option>
+              <option value="3">3</option>
+              <option value="2">2</option>
+            <option value="1">1</option>
+            </select>
+          </td>
         </tr>
         <tr>
           <th>내용</th>
-          <td><textarea name="content" cols="80" rows="17"><?=$content?></textarea></td>
+          <td colspan="3"><textarea name="content" cols="80" rows="17"><?=$content?></textarea></td>
         </tr>
       </table>
       <br>
         <div>
-          <button id="admin_write_btn" style="margin-left:40%" onclick='document.member_review_insert_form.submit();" type="button" name="button"'>완료</button>
+          <button id="admin_write_btn" style="margin-left:36%; padding:2%" onclick='document.member_review_insert_form.submit();" type="button" name="button"'>완료</button>
         </div>
       </form>
     </section>
