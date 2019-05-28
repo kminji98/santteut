@@ -63,7 +63,6 @@ if(isset($_GET["mode"]) && $_GET["mode"]=='update'){
       $(document).ready(function() {
         $("#infomation_mini").css("font-weight","bold");
         $("#infomation_mini").css("color","black");
-        $("#infomation_mini").css("font-size","23px");
       });
       </script>
     <!-- include libraries(jQuery,bootstrap) -->

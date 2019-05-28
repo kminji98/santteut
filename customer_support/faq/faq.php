@@ -1,5 +1,3 @@
-
-
 <?php
 session_start();
 ?>
@@ -15,7 +13,6 @@ session_start();
     $(document).ready(function(){
       $("#faq_mini").css("font-weight","bold");
       $("#faq_mini").css("color","black");
-      $("#faq_mini").css("font-size","23px");
       $("#li1").click(function(){
         $("#li1_1").slideToggle("fast");
         if($("#li1").css("color")=="rgb(0, 0, 0)"){
@@ -28,6 +25,9 @@ session_start();
       });
     });
     </script>
+    <style media="screen">
+      #faq_mini{color:red;}
+    </style>
   </head>
   <body>
     <div id="wrap">

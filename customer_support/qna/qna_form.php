@@ -59,7 +59,6 @@ if((isset($_GET["mode"])&&$_GET["mode"]=="update") || (isset($_GET["mode"])&&$_G
     $(document).ready(function() {
       $("#qna_mini").css("font-weight","bold");
       $("#qna_mini").css("color","black");
-      $("#qna_mini").css("font-size","23px");
     });
     </script>
     <!-- include libraries(jQuery, bootstrap) -->

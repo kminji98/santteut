@@ -60,7 +60,6 @@ if(isset($_GET["num"]) && !empty($_GET["num"])){
       $(document).ready(function() {
         $("#qna_mini").css("font-weight","bold");
         $("#qna_mini").css("color","black");
-        $("#qna_mini").css("font-size","23px");
       });
       </script>
   </head>

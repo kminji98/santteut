@@ -71,7 +71,6 @@ $view_num = $total_record - $start_record;
       $(document).ready(function() {
         $("#official_mini").css("font-weight","bold");
         $("#official_mini").css("color","black");
-        $("#official_mini").css("font-size","23px");
       });
       </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

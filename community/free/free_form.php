@@ -74,7 +74,6 @@ if (isset($_GET["mode"]) && $_GET["mode"]=="update") {
     $(document).ready(function() {
       $("#free_mini").css("font-weight","bold");
       $("#free_mini").css("color","black");
-      $("#free_mini").css("font-size","23px");
     });
     </script>
     <!-- include libraries(jQuery, bootstrap) -->

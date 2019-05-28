@@ -79,7 +79,6 @@ $view_num = $total_record - $start_record;
       $(document).ready(function() {
         $("#qna_mini").css("font-weight","bold");
         $("#qna_mini").css("color","black");
-        $("#qna_mini").css("font-size","23px");
       });
     </script>
   </head>

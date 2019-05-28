@@ -61,7 +61,6 @@ if(isset($_GET["num"])&&!empty($_GET["num"])){
       $(document).ready(function() {
         $("#infomation_mini").css("font-weight","bold");
         $("#infomation_mini").css("color","black");
-        $("#infomation_mini").css("font-size","23px");
       });
       </script>
         <script src="./js/mt_information.js?ver=0"></script>

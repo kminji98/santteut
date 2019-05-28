@@ -94,7 +94,6 @@ $view_num = $total_record - $start_record;
       $(document).ready(function() {
         $("#free_mini").css("font-weight","bold");
         $("#free_mini").css("color","black");
-        $("#free_mini").css("font-size","23px");
       });
       </script>
   </head>
