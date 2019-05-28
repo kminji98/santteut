@@ -56,12 +56,22 @@ if(isset($_GET["num"])&&!empty($_GET["num"])){
     <meta charset="utf-8">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/community/official_review/css/official_review_form.css">
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $("#official_mini").css("font-weight","bold");
+        $("#official_mini").css("color","black");
+        $("#official_mini").css("font-size","23px");
+      });
+      </script>
         <script src="./js/official_review.js?ver=1"></script>
     <title><?=$title?></title>
   </head>
   <body>
     <header>
       <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/login_menu.php"; ?>
+      <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/commu_menu.php";?>
+
     </header>
     <br><br><br>
     <section id="notice">

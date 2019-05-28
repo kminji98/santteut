@@ -1,3 +1,9 @@
+<!-- =================================================================
+// + [DESC] notice_list 총괄
+// + [DATE] 2019-05-26
+// + [NAME] 이우주
+// ================================================================= -->
+
 <?php
 session_start();
 
@@ -100,7 +106,7 @@ $view_num = $total_record - $start_record;
   <body>
     <header>
       <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/login_menu.php";?>
-      <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/mini_menu.php";?>
+      <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/custom_menu.php";?>
     </header>
     <br><br><br>
     <section id="notice">

@@ -1,3 +1,5 @@
+
+
 <?php
 session_start();
 ?>
@@ -32,7 +34,7 @@ session_start();
 
     <header>
       <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/login_menu.php";?>
-      <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/mini_menu.php";?>
+      <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/custom_menu.php";?>
     <!--FAQ 자주 찾는 질문 페이지-->
     <div id="faq_main">
      <br>

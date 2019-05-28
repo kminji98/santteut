@@ -1,3 +1,4 @@
+
 <?php
 session_start();
 
@@ -91,16 +92,16 @@ $view_num = $total_record - $start_record;
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
     <script type="text/javascript">
       $(document).ready(function() {
-        $("#not_mini").css("font-weight","bold");
-        $("#not_mini").css("color","black");
-        $("#not_mini").css("font-size","23px");
+        $("#free_mini").css("font-weight","bold");
+        $("#free_mini").css("color","black");
+        $("#free_mini").css("font-size","23px");
       });
       </script>
   </head>
   <body>
     <header>
       <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/login_menu.php";?>
-      <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/mini_menu.php";?>
+      <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/commu_menu.php";?>
     </header>
     <br><br><br>
     <section id="free">
@@ -110,6 +111,7 @@ $view_num = $total_record - $start_record;
         <select>
           <option value="">제목</option>
           <option value="">내용</option>
+          <option value="">작성자</option>
         </select>
         <input type="text" name="" value="">
         <button type="button" name="button">검색</button>
@@ -194,9 +196,9 @@ if(!empty($_SESSION['id'])){
             if ( $i == $page ){
               echo( '<a href="#"><button type="button" name="button" style="background-color: #2F9D27; border: 1px solid #2F9D27; color: white;">'.$i.'</button></a>' );
             }else if(isset($_GET['mode']) && $_GET['mode']=="search"){
-              echo( '<a href="qna_list.php?mode=search&find_option=$find_option&find_input=$find_input&page='.$i.'"><button type="button" name="button">'.$i.'</button></a>' );
+              echo( '<a href="free_list.php?mode=search&find_option=$find_option&find_input=$find_input&page='.$i.'"><button type="button" name="button">'.$i.'</button></a>' );
             }else{
-              echo( '<a href="qna_list.php?page='.$i.'"><button type="button" name="button">'.$i.'</button></a>' );
+              echo( '<a href="free_list.php?page='.$i.'"><button type="button" name="button">'.$i.'</button></a>' );
             }
         }
 

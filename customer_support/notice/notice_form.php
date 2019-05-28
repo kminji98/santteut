@@ -1,3 +1,9 @@
+<!-- =================================================================
+// + [DESC] notice_form 총괄
+// + [DATE] 2019-05-26
+// + [NAME] 이우주
+// ================================================================= -->
+
 <?php
 //세션아이디가 관리자인지 확인
 session_start();
@@ -67,6 +73,14 @@ if (isset($_GET["mode"]) && $_GET["mode"]=="update") {
     <meta charset="utf-8">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/customer_support/notice/css/notice_form.css">
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+      $("#not_mini").css("font-weight","bold");
+      $("#not_mini").css("color","black");
+      $("#not_mini").css("font-size","23px");
+    });
+    </script>
     <!-- include libraries(jQuery, bootstrap) -->
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
@@ -80,7 +94,7 @@ if (isset($_GET["mode"]) && $_GET["mode"]=="update") {
   <body>
     <header>
       <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/login_menu.php";?>
-      <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/mini_menu.php";?>
+      <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/custom_menu.php";?>
     </header>
     <br><br><br>
 
