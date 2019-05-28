@@ -42,6 +42,7 @@ if((isset($_GET["mode"])&&$_GET["mode"]=="view") ){
     $content=str_replace(" ", "&nbsp;",$content);
     $date=$row['write_date'];
     $grade=$row['grade'];
+
     mysqli_close($conn);
 }
 ?>
@@ -90,11 +91,17 @@ if((isset($_GET["mode"])&&$_GET["mode"]=="view") ){
           <td><b>평점</b></td>
           <td>
             <select class="" name="grade" style="padding:3%;margin:2%;width:80px;" <?=$disabled?>>
-              <option value="5">5</option>
-              <option value="4">4</option>
-              <option value="3">3</option>
-              <option value="2">2</option>
-            <option value="1">1</option>
+              <?php
+              define('GRADE',5);
+              for ($g=GRADE; $g > 0; $g--) {
+                $selected='';
+                if(isset($grade) && $grade==$g){
+                  $selected='selected';
+                }
+                echo '<option value="'.$g.'" '.$selected.'>'.$g.'</option>';
+
+              }
+               ?>
             </select>
           </td>
         </tr>
