@@ -9,6 +9,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css?ver=3">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/tour/package/css/package_view.css?ver=3">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/tour/member_review/css/member_review_list.css?ver=1">
+    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/side_bar.css">
     <title>산뜻 :: 즐거운 산행</title>
   </head>
     <script type="text/javascript">
@@ -24,6 +25,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
     <header>
       <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/login_menu.php";?>
     </header>
+        <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/side_bar.php";?>
     <!-- 윗부분  -->
     <div id="head" >
       <div id="top_box">
@@ -65,10 +67,12 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
           <td id="res_now">예약: <?=$total?>명 좌석: <?=$p_bus?>석 (최소출발 <?=$p_bus_half?>명)</td>
         </tr>
       </table>
-      <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/member_review/member_review_list.php";?>
+
       <div id="detail_view1">
         <?=$p_detail_content?>
       </div>
+
+      <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/member_review/member_review_list.php";?>
     </div>
 
     <div id="detail_menu">
