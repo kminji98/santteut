@@ -57,18 +57,18 @@
     <!-- 사진경로  변수로 설정해주셔야 합니다 -->
   <div id="side_bar_recent">
     <br> <p style="display:block">최근 본 상품</p>
-    <a href="#"><img class="side_bar_recent_img" src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/lib/editor/data/<?=$menu1?>"></a>
-    <div class="side_bar_recent_val"><a href="#" style=" text-decoration:none;font-size:5px; color:gray; <?=$color1?>"><?=$mt1?></a></div>
-    <a href="#"><img class="side_bar_recent_img" src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/lib/editor/data/<?=$menu2?>"></a>
-    <div class="side_bar_recent_val"><a href="#" style="text-decoration:none; font-size:5px; color:gray; <?=$color2?>"><?=$mt2?></a></div>
-    <a href="#"><img class="side_bar_recent_img" src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/lib/editor/data/<?=$menu3?>"></a>
-    <div class="side_bar_recent_val"><a href="#" style="text-decoration:none; font-size:5px; color:gray; <?=$color3?>"><?=$mt3?></a></div>
+    <a href="../../tour/package/package_view.php?mode=<?=$cookie1?>"><img class="side_bar_recent_img" src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/lib/editor/data/<?=$menu1?>"></a>
+    <div class="side_bar_recent_val"><a href="../../tour/package/package_view.php?mode=<?=$cookie1?>" style=" text-decoration:none;font-size:5px; color:gray; <?=$color1?>"><?=$mt1?></a></div>
+    <a href="../../tour/package/package_view.php?mode=<?=$cookie1?>"><img class="side_bar_recent_img" src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/lib/editor/data/<?=$menu2?>"></a>
+    <div class="side_bar_recent_val"><a href="../../tour/package/package_view.php?mode=<?=$cookie2?>" style="text-decoration:none; font-size:5px; color:gray; <?=$color2?>"><?=$mt2?></a></div>
+    <a href="../../tour/package/package_view.php?mode=<?=$cookie1?>"><img class="side_bar_recent_img" src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/lib/editor/data/<?=$menu3?>"></a>
+    <div class="side_bar_recent_val"><a href="../../tour/package/package_view.php?mode=<?=$cookie3?>" style="text-decoration:none; font-size:5px; color:gray; <?=$color3?>"><?=$mt3?></a></div>
   </div>
   <div class="side_bar_middle">
   <br>
-   <a class="side_bar_qna" href="#">소개</a><br>
-   <a class="side_bar_qna" href="#">자주하는 질문</a><br>
-   <a class="side_bar_qna" href="#">커뮤니티</a><br>
+   <a class="side_bar_qna" href="../../introduction/history.php">소개</a><br>
+   <a class="side_bar_qna" href="../../customer_support/faq/faq.php">자주하는 질문</a><br>
+   <a class="side_bar_qna" href="../../community/free/free_list.php">커뮤니티</a><br>
    <br>
   </div>
   <div class="side_bar_bottom">
