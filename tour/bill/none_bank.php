@@ -44,7 +44,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/bill/bill_insert_query.php";
 
         alert('결제가완료되었습니다.');
         // self.opener = self;
-        opener.location.href="http://127.0.0.1/santteut/index.php";
+        opener.location.href="../../index.php";
         window.close();
 
       }

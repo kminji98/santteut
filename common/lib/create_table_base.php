@@ -185,6 +185,7 @@ function create_table($conn, $table_name){
         `b_pay` varchar(15)
         ) DEFAULT CHARSET=utf8;";
         break;
+
      case 'qna' :
        $sql = "CREATE TABLE `qna` (
        `num` int(11) unsigned NOT NULL AUTO_INCREMENT,
@@ -192,11 +193,11 @@ function create_table($conn, $table_name){
        `depth` int(11) unsigned NOT NULL,
        `ord` int(11) unsigned NOT NULL,
        `id` varchar(20) NOT NULL,
-       `title` varchar(20) NOT NULL,
+       `title` varchar(100) NOT NULL,
        `content` text NOT NULL,
        `regist_day` date NOT NULL,
        `hit` int(11) unsigned NOT NULL,
-       `secret_ok` varchar(10) NOT NULL,
+       `pw` varchar(50) DEFAULT NULL,
        PRIMARY KEY (`num`)
        ) DEFAULT CHARSET=utf8;
        ";

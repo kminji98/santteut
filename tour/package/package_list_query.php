@@ -5,12 +5,24 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
 $sql=$result=$total_record=$total_pages=$start_record=$row="";
 $total_record=0;
 
-
-//@@@@@@ MINJI 테스트
+//@@@@@@ MINJI 테스트//@@성훈테스트
 define('ROW_SCALE', 10);
 define('PAGE_SCALE', 5);
+if(isset($_GET['divide'])){
+  $dicide=$_GET['divide'];
+}
+if(isset($_POST['divide'])){
+  $dicide=$_POST['divide'];
+}
 
-$sql="SELECT * from `package`";
+
+if($_GET['divide']=="domestic"){
+  $sql="SELECT * from `package` where `p_airplane_num` ='0'";
+}else if($_GET['divide']=="abroad"){
+  $sql="SELECT * from `package` where `p_airplane_num` !='0'";
+}else{
+  $sql="SELECT * from `package`";
+}
 
 if(isset($_GET['mode'])){
   switch ($_GET['mode']) {
@@ -19,7 +31,13 @@ if(isset($_GET['mode'])){
     case 'search':
     $find_option= $_GET['find_option'];
     $find_input= $_GET['find_input'];
+    if($_GET['divide']=="domestic"){
+    $sql="SELECT * from `package` where $find_option like '%$find_input%' and `p_airplane_num` ='0';";
+  }else if($_GET['divide']=="abroad"){
+    $sql="SELECT * from `package` where $find_option like '%$find_input%' and `p_airplane_num` !='0';";
+  }else{
     $sql="SELECT * from `package` where $find_option like '%$find_input%';";
+  }
     break;
 
     //B. [DETAIL] 상세검색 : 조건이 sql값으로 넘어옴(POST)
@@ -45,7 +63,13 @@ if(isset($_GET['mode'])){
     //D. [DATE] 날짜검색 : 모드가 날짜로 넘어옴(GET)
     default:
       $date=$_GET['mode'];
-      $sql=$sql." where `p_dp_date` = '$date';";
+      $sql="SELECT * from `package`";
+      $sql=$sql." where `p_dp_date` = '$date'";
+      if($_GET['divide']=="domestic"){
+        $sql=$sql." and `p_airplane_num` ='0';";
+      }else if($_GET['divide']=="abroad"){
+        $sql=$sql." and `p_airplane_num` !='0';";
+      }
       break;
   }
 
@@ -65,6 +89,7 @@ if(isset($_GET['mode'])){
         break;
     }
     $sql= $sql." ".$_POST['order_option'];
+
   }
 
 }
@@ -106,5 +131,6 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
 $view_num = $total_record - $start_record;
 
 
+// echo $sql;
 // 테이블 값가져오기
  ?>

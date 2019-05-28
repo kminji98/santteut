@@ -314,6 +314,13 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
           document.reserve_search_form.submit();
         }
 
+        function cancel(mode,pk){
+          var result=confirm("삭제하시겠습니까?");
+          if(result){
+            window.location.href="reserve_list_query.php?r_pk="+pk+"&mode="+mode;
+          }
+        }
+
       </script>
       <br><br>
       <fieldset id="list_field" >
@@ -339,6 +346,7 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
               //예약날짜/ 예약 코드/ 상품명/ 총 결제금액/ 인원/ 출발일*귀국일 / 예약/결제상태 /취소 / 후기
               //예약 pk 저장
               $r_pk = $row['r_pk'];
+              $id = $_SESSION['id'];
               $r_date = $row['r_date'];
               $r_code=$row['r_code'];
               //상품명
@@ -361,17 +369,6 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
               //총 상품금액
               $b_pay=$row['b_pay'];
 
-
-              $bill_sql = "SELECT * FROM `bill` where `b_code`='$r_code'";
-              //결제상태
-              $bill_result=mysqli_query($conn,$bill_sql);
-              $count=mysqli_num_rows($bill_result);
-              $bill_row=mysqli_fetch_array($bill_result);
-
-              $bill_status =$bill_row['b_pay'];
-              if(empty($count)){
-                $bill_status = "결제미완료";
-              }
               // $b_pay=$bill_row['b_pay'];
 
               $p_pay=$row['p_pay'];
@@ -380,7 +377,7 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
               $reserve_status_sql = "SELECT sum(`r_adult`+`r_kid`+`r_baby`),`p_bus` from `package` inner join `reserve` on `package`.`p_code` = `reserve`.`r_code` where `reserve`.`r_code` = '$r_code';";
               $result_status_sql=mysqli_query($conn,$reserve_status_sql);
               $total=0;
-              $states="";
+              $status="";
               for($i=0;$i<mysqli_num_rows($result_status_sql);$i++){
                 $row1 = mysqli_fetch_array($result_status_sql);
                 $sum = $row1['sum(`r_adult`+`r_kid`+`r_baby`)'];
@@ -389,14 +386,27 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
                 $total+=$sum;
               }
 
-
+              // $bill_done_sql = "SELECT * FROM `bill` inner join `reserve` on `reserve`.`r_code` = `bill`.`b_code`"
+              $bill_sql = "SELECT * FROM `bill` where `b_code`='$r_code' and `b_pk`='$r_pk' and `b_id`='$id';";
+              //결제상태
+              $bill_result=mysqli_query($conn,$bill_sql);
+              $count=mysqli_num_rows($bill_result);
+              $bill_row=mysqli_fetch_array($bill_result);
 
               if($total<$p_bus_half){
                 $status="예약완료";
+                $cancel_status = '<input type="button" onclick="cancel(\'update\',\''.$r_pk.'\')" name="cancel_btn" id="'.$r_pk.'" value="취소">';
               }
 
               if($total>=$p_bus_half){
-                $status="<a style='color:red;' href='../bill/bill_view.php?&r_pk=$r_pk'>결제대기</a>";
+                if($count!=0){
+                  $status = "<p style='color:green;'>결제완료</p>";
+                  $cancel_status = '<input type="button" onclick="cancel(\'delete\',\''.$r_pk.'\')" name="cancel_btn" id="'.$r_pk.'" value="취소">';
+                }else{
+                  $status="<a style='color:red;' href='../bill/bill_view.php?&r_pk=$r_pk'>결제대기</a>";
+                  $cancel_status = '<input type="button" onclick="cancel(\'update\',\''.$r_pk.'\')" name="cancel_btn" id="'.$r_pk.'" value="취소">';
+                }
+
               }
 
               //산행후기 review @@@@@@@@@MINJI0527
@@ -414,7 +424,12 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
               }else{
                 $review_status='<button type="button" name="button" onclick="review("../member_review/member_review.php?r_pk='.$r_pk.'");" >후기확인</button>';
               }
+
              ?>
+             <script type="text/javascript">
+
+             </script>
+
              <tr>
                <td><?=$r_date?></td >
                <td><?=$r_code?></td>
@@ -424,14 +439,15 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
                <td><?=$p_dp_date?><br><?=$p_arr_date2?></td>
 
                <td><?=$status?></td>
-               <td><?=$bill_status?></td>
-
+               <td> <?=$cancel_status?> </td>
                <!-- 후기 버튼 -->
                <td><?=$review_status?></td>
              </tr>
+
              <?php
                }
               ?>
+
           </output>
         </table>
       </fieldset>

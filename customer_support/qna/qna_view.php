@@ -3,14 +3,14 @@ session_start();
 
 // isset함수는 불리언값을 리턴 true or false
 // 비회원이면 권한없음
-if(!isset($_SESSION['id'])){
-  echo "<script>alert('권한없음!');history.go(-1);</script>";
-  exit;
-}
+// if(!isset($_SESSION['id'])){
+//   echo "<script>alert('회원가입 후 이용해주세요.');history.go(-1);</script>";
+//   exit;
+// }
 include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
 
 $num=$name=$title=$content=$regist_day=$hit="";
-$secret_ok="";
+$secret="";
 
 // 페이지가 없으면 디폴트 페이지 1페이지
 if(empty($_GET['page'])){$page=1;}else{$page=$_GET['page'];}
@@ -25,12 +25,14 @@ if(isset($_GET["num"]) && !empty($_GET["num"])){
     if (!$result) {die('Error: ' . mysqli_error($conn));}
 
 // 디비에서 값을 가져와서 보여줌
-    $sql="SELECT * from `qna` where num ='$q_num';";
+    $sql="SELECT num, groupnum, depth, ord, name, `qna`.id, title, content, regist_day, hit, pw FROM `qna` inner join member on `qna`.`id` = `member`.`id` WHERE num=$q_num;";
     $result = mysqli_query($conn,$sql);
     if (!$result) {die('Error: ' . mysqli_error($conn));}
     $row=mysqli_fetch_array($result);
     $hit=$row['hit'];
-    $secret_ok=$row['secret_ok'];
+    $pw=$row['pw'];
+    $id=$row['id'];
+    $name=$row['name'];
     $title= htmlspecialchars($row['title']);
     $content= $row['content'];
     $title=str_replace("\n", "<br>",$title);
@@ -65,7 +67,7 @@ if(isset($_GET["num"]) && !empty($_GET["num"])){
       <table border="1">
         <tr>
           <th>작성자</th>
-          <td style="width:600px; text-align:center;"><?=$_SESSION['name']?></td>
+          <td style="width:600px; text-align:center;"><?=$name?></td>
         </tr>
         <tr>
           <th>제목</th>
@@ -80,8 +82,15 @@ if(isset($_GET["num"]) && !empty($_GET["num"])){
           <td><?=$content?></td>
         </tr>
         <tr>
-          <th>비밀여부</th>
-          <td><?=$secret_ok?></td>
+          <?php
+          if(empty($pw)){
+            $secret = "공개글";
+          }else{
+            $secret = "비밀글";
+          }
+           ?>
+          <th>공개여부</th>
+          <td><?=$secret?></td>
         </tr>
 
       </table>

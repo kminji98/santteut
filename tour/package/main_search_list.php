@@ -263,7 +263,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
                 </script>";
           }
 
-          for ($i = 0; $i  <= $total_record; $i++){
+          for ($i = 0; $i  < $total_record; $i++){
             $row=mysqli_fetch_array($main_search_result);
             $p_code=$row['p_code'];
             $p_name=$row['p_name'];
@@ -285,7 +285,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
             $status ="예약가능";
             $reserve_status_sql = "SELECT sum(`r_adult`+`r_kid`+`r_baby`),`p_bus` from `package` inner join `reserve` on `package`.`p_code` = `reserve`.`r_code` where `package`.`p_code` = '$p_code';";
             $result_status_sql=mysqli_query($conn,$reserve_status_sql);
-            for($i=0;$i<mysqli_num_rows($result_status_sql);$i++){
+            for($j=0;$j<mysqli_num_rows($result_status_sql);$j++){
               $row1 = mysqli_fetch_array($result_status_sql);
               $sum = $row1['sum(`r_adult`+`r_kid`+`r_baby`)'];
               $p_bus = $row1['p_bus'];
@@ -330,4 +330,4 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
 <footer>
   <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/footer.php";?>
 </footer>
-</html>
+</html>4

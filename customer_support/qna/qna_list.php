@@ -3,12 +3,12 @@ session_start();
 
 // isset함수는 불리언값을 리턴 true or false
 // 비회원이면 권한없음
-if(!isset($_SESSION['id'])){
-  echo "<script>alert('회원가입 후 이용해주세요.');history.go(-1);</script>";
-  exit;
-}
+// if(!isset($_SESSION['id'])){
+//   echo "<script>alert('회원가입 후 이용해주세요.');history.go(-1);</script>";
+//   exit;
+// }
 
-$name = $_SESSION['name'];
+//$name = $_SESSION['name'];
 
 //0-0. 인클루드 디비
 include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
@@ -32,11 +32,10 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="search"){
     exit;
   }
 //검색시
-  $sql="SELECT num, groupnum, depth, ord, name, title, content, regist_day, hit from `qna` inner join member on `qna`.`id` = `member`.`id` where $find_option like '%$q_find_input%' order by num desc;";
+  $sql="SELECT num, groupnum, depth, ord, name, title, content, regist_day, hit, pw from `qna` inner join member on `qna`.`id` = `member`.`id` where $find_option like '%$q_find_input%' order by num desc;";
 }else{
-
   //"select num, groupnum, depth, ord, name, title, content, regist_day, hit FROM qna inner join member on qna.id = member.id;"
-  $sql="SELECT num, groupnum, depth, ord, name, title, content, regist_day, hit FROM `qna` inner join member on `qna`.`id` = `member`.`id` order by groupnum desc, ord asc;";
+  $sql="SELECT num, groupnum, depth, ord, name, title, content, regist_day, hit, pw FROM `qna` inner join member on `qna`.`id` = `member`.`id` order by groupnum desc, ord asc;";
 }
 
 // 쿼리문실행문장
@@ -93,13 +92,15 @@ $view_num = $total_record - $start_record;
     <br><br><br>
     <section id="qna">
       <div class="qna_list_search">
-        <select>
-          <option value="">제목</option>
-          <option value="">내용</option>
-          <option value="">작성자</option>
+      <form name="board_form" action="qna_list.php?mode=search" method="post">
+        <select name="find_option">
+          <option value="title">제목</option>
+          <option value="content">내용</option>
+          <option value="name">작성자</option>
         </select>
-        <input type="text" name="" value="">
-        <button type="button" name="button">검색</button>
+        <input type="text" name="find_input">
+        <input type="submit" value="검색" style="width:53px; height:27px; background-color: #2F9D27; border: 1px solid #2F9D27; color: white;"></input>
+      </form>
       </div>
       <br>
       <table border="1">
@@ -109,6 +110,7 @@ $view_num = $total_record - $start_record;
           <th>작성자</th>
           <th>작성일</th>
           <th>조회</th>
+          <th style="width:50px;">공개</th>
         </tr>
 
         <!--게시물 내용-->
@@ -118,6 +120,12 @@ $view_num = $total_record - $start_record;
             $row=mysqli_fetch_array($result);
             $num=$row['num'];
             $name=$row['name'];
+            $pw=$row['pw'];
+            if(empty($pw)){
+              $secret="공개";
+            }else{
+              $secret="비공개";
+            }
             $hit=$row['hit'];
             $regist_day= substr($row['regist_day'],0,10);
             $title=$row['title'];
@@ -134,13 +142,18 @@ $view_num = $total_record - $start_record;
             <!--보여지는번호-->
             <td><?=$view_num?></td>
             <!--제목-->
-            <td><a href="./qna_view.php?num=<?=$num?>&page=<?=$page?>&hit=<?=$hit+1?>"><?=$space.$title?></a></td>
+            <td>
+              <a onclick="window.open('./qna_pw.php?num=<?=$num?>&page=<?=$page?>&hit=<?=$hit?>','',
+              'scrollbars=yes,toolbars=yes,top=200,left=450,width=500,height=140')"><?=$space.$title?>
+              </a>
+            </td>
             <!--작성자-->
             <td><?=$name?></td>
             <!--작성일-->
             <td><?=$regist_day?></td>
             <!--조회-->
             <td><?=$hit?></td>
+            <td><?=$secret?></td>
           </tr>
 
           <?php

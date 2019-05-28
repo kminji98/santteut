@@ -3,8 +3,8 @@
     <img src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/img/sanlogo.png" border=0></a>
   <div id="menus">
   <ul id="top_menu">
-    <li><a href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/tour/package/package_list.php">국내산행</a></li>
-    <li><a href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/tour/package/package_abroad_list.php">해외산행</a></li>
+    <li><a href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/tour/package/package_list.php?divide=domestic">국내산행</a></li>
+    <li><a href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/tour/package/package_list.php?divide=abroad">해외산행</a></li>
   </ul>
   </div>
   <div id="login_menu">
