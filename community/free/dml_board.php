@@ -1,12 +1,12 @@
 <?php
 session_start();
-if(!isset($_SESSION['id'])){
+if(!isset($_SESSION['userid'])){
   echo "<script>alert('권한없음!');history.go(-1);</script>";
   exit;
 }
-include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
-$id = $_SESSION['id'];
-$username = $_SESSION['name'];
+include $_SERVER['DOCUMENT_ROOT']."/free/db_connector.php";
+$userid = $_SESSION['userid'];
+$username = $_SESSION['username'];
 $title = $_POST["title"];
 $content = $_POST["content"];
 $image = $_POST["del"];
@@ -14,22 +14,22 @@ $day=date("Y-m-d (H:i)");
 $hit = $_POST["hit"];
 if ($_FILES['upfile']['name']){
       if (!$_FILES['upfile']['error']) {
-        $name=date("Y_m_d_H_i_s");
-        $ext = explode('.', $_FILES['upfile']['name']);
-        $filename = $name . '.' . $ext[1];
-        $destination = './data/' . $filename;//change this directory
-        $location = $_FILES["upfile"]["tmp_name"];
-        $upfilename = $_FILES["upfile"]["name"];
-        $file_type= $_FILES['upfile']['type'];
-        move_uploaded_file($location, $destination);
-      }
-      else
-      {
-        echo  $message = 'Ooops!  Your upload triggered the following error:  '.$_FILES['file']['error'];
-      }
-}
+          $name=date("Y_m_d_H_i_s");
+          $ext = explode('.', $_FILES['upfile']['name']);
+          $filename = $name . '.' . $ext[1];
+          $destination = './upload/' . $filename;//change this directory
+          $location = $_FILES["upfile"]["tmp_name"];
+          $upfilename = $_FILES["upfile"]["name"];
+          $file_type= $_FILES['upfile']['type'];
+          move_uploaded_file($location, $destination);
+          }
+          else
+          {
+          echo  $message = 'Ooops!  Your upload triggered the following error:  '.$_FILES['file']['error'];
+          }
+        }
         if(isset($_GET["mode"])&&$_GET["mode"]=="insert"){
-        $sql="INSERT INTO `free` VALUES (null,'$id','$username','$title','$content','$destination','$upfilename','$file_type','$image','$day',0);";
+        $sql="INSERT INTO `free` VALUES (null,'$userid','$username','$title','$content','$destination','$upfilename','$file_type','$image','$day',0);";
         $result = mysqli_query($conn,$sql);
         if (!$result) {
           alert_back('Error: ' . mysqli_error($conn));
@@ -93,12 +93,6 @@ if ($_FILES['upfile']['name']){
           die('Error: ' . mysqli_error($conn));
         }
 
-        $sql ="DELETE FROM `free_ripple` WHERE parent=$num";
-        $result = mysqli_query($conn,$sql);
-        if (!$result) {
-          die('Error: ' . mysqli_error($conn));
-        }
-
         mysqli_close($conn);
         echo "<script>location.href='./list.php';</script>";
 
@@ -109,17 +103,17 @@ if ($_FILES['upfile']['name']){
         if(empty($_POST["ripple_content"])){
           echo "<script>alert('내용입력요망!');history.go(-1);</script>";
           exit;
-        }
-        //덧글 다는사람은 로그인 해야한다.
+        }//덧글 다는사람은 로그인 해야한다.
+
           $content = test_input($_POST["ripple_content"]);
           $page = test_input($_POST["page"]);
           $parent = test_input($_POST["parent"]);
           $hit = test_input($_POST["hit"]);
-          $q_username = mysqli_real_escape_string($conn, $_SESSION['name']);
+          $q_username = mysqli_real_escape_string($conn, $_SESSION['username']);
           $q_content = mysqli_real_escape_string($conn, $content);
           $q_parent = mysqli_real_escape_string($conn, $parent);
           $regist_day=date("Y-m-d (H:i)");
-          $sql="INSERT INTO `free_ripple` VALUES (null,'$q_parent','$id','$q_username','$q_content','$regist_day')";
+          $sql="INSERT INTO `free_ripple` VALUES (null,'$q_parent','$q_userid','$q_username', '$q_usernick','$q_content','$regist_day')";
           $result = mysqli_query($conn,$sql);
           if (!$result) {
             die('Error: ' . mysqli_error($conn));

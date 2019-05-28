@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <?php
 session_start();
-include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
-if(!isset($_SESSION['id'])){echo "<script>alert('권한없음!');history.go(-1);</script>";
+include $_SERVER['DOCUMENT_ROOT']."/free/db_connector.php";
+$_SESSION['userid']="id1";
+$_SESSION['username']="가나다";
+$id= $_SESSION['userid'];
+if(!isset($_SESSION['userid'])){echo "<script>alert('권한없음!');history.go(-1);</script>";
 exit;}
 $mode="insert";
 $update="";
@@ -29,13 +32,10 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="update"){
 
 }
 ?>
-<!DOCTYPE html>
 <html lang="ko" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css">
-    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/community/free/css/free_form.css">
-    <!-- include libraries(jQuery, bootstrap) -->
+    <title></title>
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
     <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
@@ -43,13 +43,46 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="update"){
     <!-- include summernote css/js -->
     <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.css" rel="stylesheet">
     <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.js"></script>
-    <script src="./js/free_form.js?ver=0"></script>
-    <title>자유게시판</title>
-    <!-- <style media="screen">
-      img {
-        width:400px;
-      }
-    </style> -->
+    <script type="text/javascript">
+    $(document).ready(function() {
+      var del = "";
+       $('#summernote').summernote({
+               height: 1000,
+               minHeight: null,
+               maxHeight: null,
+               focus: true,
+               callbacks: {
+                 onImageUpload : function(files, editor, welEditable){
+                  sendFile(files[0], editor, welEditable);
+
+                }
+               }
+             });
+               function sendFile(file,editor,welEditable){
+                 data = new FormData();
+                 data.append("file", file);
+                 $.ajax({
+                   data: data,
+                   type: "POST",
+                   url: "./saveimage.php",
+                   cache: false,
+                   contentType: false,
+                   processData: false,
+                   success: function(url) {
+                     del = $('#del').val();
+                     del = del.concat("!"+url);
+                     $('#del').val(del);
+                     var html = '<img src="'+url+'">';
+                     $('#summernote').summernote('pasteHTML', html);
+                     $('#summernote').summernote('insertImage', url, filename);
+
+                   }
+       });
+     }
+
+    });
+
+    </script>
   </head>
   <body>
     <header style="text-align : center; margin-bottom : 30px; font-size : 30px;">

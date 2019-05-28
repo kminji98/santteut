@@ -129,7 +129,7 @@ if (isset($_GET["mode"]) && $_GET["mode"]=="update") {
             }
            ?>
           <button id="admin_write_btn" onclick='<?=$action?> document.notice_insert_form.submit();" type="button" name="button'>완료</button>
-          <button id="admin_write_btn" type="button" name="button"><a href="./notice_list.php">목록</a></button>
+          <a href="./notice_list.php"><button id="admin_write_btn" type="button" name="button">목록</button></a>
         </div>
       </form>
     </section>
