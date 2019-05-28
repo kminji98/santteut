@@ -69,7 +69,7 @@ if($_SESSION['id']){
           <div id="top_my_content">
             <ul id="top_my_content_ul">
               <li><a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/?" class="hov">쪽지</a></li>
-              <li><a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/member/join/join_edit.php/?id='.$id.'" class="hov">정보수정</a></li>
+              <li><a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/member/join/join_edit.php?id='.$id.'" class="hov">정보수정</a></li>
               <li><a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/mypage/myboard/myboard.php" class="hov">참여내역</a></li>
               <li><a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/tour/reserve/reserve_list.php" class="hov">예약/결제내역</a></li>
               <li><a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/customer_support//qna/qna_form.php" class="hov">상담문의</a></li>

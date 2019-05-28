@@ -1,21 +1,26 @@
 <?php
 session_start();
 include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
-echo "<script>location.href='../../index.php';</script>";
-
-
 if($_GET['mode']=="update"){
-echo "<script>alert('z');</script>";
-$id = $_POST['join_id'];
+
+
+$id = $_GET['id'];
 $join_passwd = $_POST["join_passwd"];
 $join_passwdconfirm = $_POST["join_passwdconfirm"];
 $join_name= $_POST["join_name"];
 $join_zip= $_POST["join_zip"];
 $join_foundational= $_POST["join_foundational"];
 $join_detail= $_POST["join_detail"];
+// var_export($id);
+// var_export($join_passwd);
+// var_export($join_passwdconfirm);
+// var_export($join_name);
+// var_export($join_zip);
+// var_export($join_foundational);
+// var_export($join_detail);
+// exit;
 
-
-$sql="UPDATE `member` SET `passwd`='$join_passwd', `passwd_confirm` ='$join_passwdconfirm' , `name` ='$join_name', `zip` ='$join_zip' , `address1` ='$join_foundational' , `address2` ='$join_detail' WHERE `id`=$id;";
+$sql="UPDATE `member` SET `passwd`='$join_passwd', `passwd_confirm` ='$join_passwdconfirm' , `name` ='$join_name', `zip` ='$join_zip' , `address1` ='$join_foundational' , `address2` ='$join_detail' WHERE `id`='$id';";
 $result = mysqli_query($conn,$sql);
 
 }else{
