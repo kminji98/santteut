@@ -43,14 +43,14 @@ if(isset($_POST['mode'])){
       break;
 
     // 보류중 구현 아직안됨
-    case 'update':
-    $sql = "UPDATE `member` SET `passwd` = $join_passwd, `passwd_confirm` = $join_passwdconfirm, `name` =$join_name, ";
-    $sql.= "`zip` = $join_zip, `address1` = $join_foundational, `address2` = $join_detail,`hp1` = $hp1,`hp2` = '$hp2', `email` = '$email' ";
-    $sql.= "where `id`= $q_id;"
-    $result = mysqli_query($conn,$sql);
-    if (!$result) {die('Error: ' . mysqli_error($conn));}
-    echo "<script>location.href='./member_admin_list.php';</script>";
-      break;
+    // case 'update':
+    // $sql = "UPDATE `member` SET `passwd` = $join_passwd, `passwd_confirm` = $join_passwdconfirm, `name` =$join_name, ";
+    // $sql.= "`zip` = $join_zip, `address1` = $join_foundational, `address2` = $join_detail,`hp1` = $hp1,`hp2` = '$hp2', `email` = '$email' ";
+    // $sql.= "where `id`= $q_id;"
+    // $result = mysqli_query($conn,$sql);
+    // if (!$result) {die('Error: ' . mysqli_error($conn));}
+    // echo "<script>location.href='./member_admin_list.php';</script>";
+    //   break;
     default:
       break;
   }
