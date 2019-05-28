@@ -348,17 +348,34 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
         <table id="list_tbl_head"><tr><td id="list_head_reserve">예약내역</td><td id="list_head_cancel">취소내역</td></tr></table>
 
         <table id="list_tbl_body">
-          <tr>
-            <td>예약날짜</td>
-            <td>예약코드</td>
-            <td>상품명</td>
-            <td>총 결제금액</td>
-            <td>인원</td>
-            <td>출발일/귀국일</td>
-            <td>예약/결제상태</td>
-            <td>취소</td>
-            <td id="after">후기</td>
-          </tr>
+          <?php
+          if($id=="admin"){
+            echo '<tr>
+              <td>예약날짜</td>
+              <td>예약코드</td>
+              <td>상품명</td>
+              <td>총 결제금액</td>
+              <td>인원(ID)</td>
+              <td>출발일/귀국일</td>
+              <td>예약/결제상태</td>
+              <td>취소</td>
+              <td id="after">후기</td>
+            </tr>';
+          }else{
+            echo '<tr>
+              <td>예약날짜</td>
+              <td>예약코드</td>
+              <td>상품명</td>
+              <td>총 결제금액</td>
+              <td>인원</td>
+              <td>출발일/귀국일</td>
+              <td>예약/결제상태</td>
+              <td>취소</td>
+              <td id="after">후기</td>
+            </tr>';
+          }
+          ?>
+
           <output id="list_tbl_body_output">
             <?php
             mysqli_data_seek($result,$start_record);
@@ -368,6 +385,7 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
               //예약 pk 저장
               $r_pk = $row['r_pk'];
               $id = $_SESSION['id'];
+              $r_id = $row['r_id'];
               $r_date = $row['r_date'];
               $r_code=$row['r_code'];
               $r_cancel=$row['r_cancel'];
@@ -447,16 +465,13 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
               $review_status =$review_row['num'];
               // $r_pk = "aaa";
               if(empty(mysqli_num_rows($review_result))){
-
                 // $review_status='<button type="button" name="button" onclick="review("../member_review/member_review.php");" >후기작성</button>';
                 $review_status='<input type="button" name="review_btn" id="'.$r_pk.'" value="후기작성">';
-
-
-                $review_status='<input type="button" name="review_btn" id="'.$r_pk.'" value="후기">';
-
               }else{
                 $review_status='<input type="button" name="review_btn" id="'.$r_pk.'" value="후기확인">';
               }
+
+
               if($r_cancel=="1"){
                 $status="예약취소";
                 if($count=="0"){
@@ -468,22 +483,37 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
 
              ?>
 
-
-             <tr>
-               <td><?=$r_date?></td >
-               <td><a href="../package/package_view.php?mode=<?=$r_code?>"><?=$r_code?></a></td>
-               <td><?=$p_name?></td>
-               <td><?=$r_pay?></td>
-               <td><?=$r_total?></td>
-               <td><?=$p_dp_date?><br><?=$p_arr_date2?></td>
-
-               <td><?=$status?></td>
-               <td> <?=$cancel_status?> </td>
-               <!-- 후기 버튼 -->
-               <td><?=$review_status?></td>
-             </tr>
-
              <?php
+             if($id=="admin"){
+               echo '<tr>
+                 <td>'.$r_date.'</td >
+                 <td><a href="../package/package_view.php?mode='.$r_code.'">'.$r_code.'</a></td>
+                 <td>'.$p_name.'</td>
+                 <td>'.$r_pay.'</td>
+                 <td>'.$r_total.'명<br>('.$r_id.')</td>
+                 <td>'.$p_dp_date.'<br>'.$p_arr_date2.'</td>
+
+                 <td>'.$status.'</td>
+                 <td> '.$cancel_status.' </td>
+
+                 <td>'.$review_status.'</td>
+               </tr>';
+             }else{
+               echo '<tr>
+                 <td>'.$r_date.'</td >
+                 <td><a href="../package/package_view.php?mode='.$r_code.'">'.$r_code.'</a></td>
+                 <td>'.$p_name.'</td>
+                 <td>'.$r_pay.'</td>
+                 <td>'.$r_total.'</td>
+                 <td>'.$p_dp_date.'<br>'.$p_arr_date2.'</td>
+
+                 <td>'.$status.'</td>
+                 <td> '.$cancel_status.' </td>
+
+                 <td>'.$review_status.'</td>
+               </tr>';
+             }
+
                }
               ?>
 
