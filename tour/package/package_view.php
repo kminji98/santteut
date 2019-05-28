@@ -1,6 +1,13 @@
 <?php
 session_start();
 include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
+setcookie("cookie3",$_COOKIE["cookie2"]);
+setcookie("cookie2",$_COOKIE["cookie1"]);
+setcookie("cookie1",$p_code);
+// header("Refresh:0");
+echo $_COOKIE["cookie1"];
+echo $_COOKIE["cookie2"];
+echo $_COOKIE["cookie3"];
 ?>
 <!DOCTYPE html>
 <html lang="ko" dir="ltr">

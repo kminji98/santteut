@@ -544,7 +544,7 @@ $divide=$_GET['divide'];
               <output><?php echo $p_arr_date2." "."(".$day2.")".$p_arr_time; ?></output>
             </td>
             <td class="package_list_period_value"><?=$p_period?>일</td>
-            <td class="package_list_view_name_value"><a href="package_view.php?mode=<?=$p_code?>"><?=$p_name?></a></td>
+            <td class="package_list_view_name_value"><a id="<?=$p_code?>" href="package_view.php?mode=<?=$p_code?>"><?=$p_name?></a></td>
             <td class="package_list_view_pay_value"><?=$p_pay?></td>
             <td>
               <output class="package_list_view_state_value" id="list_status"><?=$status?></output>
@@ -555,7 +555,22 @@ $divide=$_GET['divide'];
           }
            ?>
         </table>
-
+        <!-- 쿠키값 저장 함수 -->
+      <!-- <script type="text/javascript">
+        var num=0;
+        function cookie_start(id){
+          var id=document.getElementById(id);
+          document.cookie = id.id+"="+id.id;
+          alert(document.cookie);
+          // var val = document.cookie.split(';');
+          // val[1]=val[0];
+          // vla[2]=val[1];
+          // val[0]=id_val.id;
+          // alert(val[0]);
+          // alert(val[1]);
+          // alert(val[2]);
+        }
+      </script> -->
     </div>
     <br><br><br>
     <!--$page 는 현재페이지를 의미 x / 각 페이지를 의미-->

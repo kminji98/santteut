@@ -1,3 +1,4 @@
+
 <script type="text/javascript">
   function control_display(){
       var con = document.getElementById("side_bar");
@@ -8,6 +9,39 @@
       }
   }
 </script>
+<?php
+  $menu1="none.png";$mt1="최근 본 상품이 없습니다.";$color1="";
+  $menu2="none.png";$mt2="최근 본 상품이 없습니다.";$color2="";
+  $menu3="none.png";$mt3="최근 본 상품이 없습니다.";$color3="";
+  if(isset($_COOKIE["cookie1"])){
+    $cookie1=$_COOKIE["cookie1"];
+    $sql_side1="SELECT * from `package` where `p_code`='$cookie1';";
+    $side_result1 = mysqli_query($conn,$sql_side1) or die("실패원인1: ".mysqli_error($conn));
+    $row1 = mysqli_fetch_array($side_result1);
+    $menu1 = $row1['p_main_img_copy1'];
+    $mt1 = $row1['p_arr_mt'];
+    $color1="color:blue;";
+  }
+  if(isset($_COOKIE["cookie2"])){
+    $cookie2=$_COOKIE["cookie2"];
+    $sql_side2="SELECT * from `package` where `p_code`='$cookie2';";
+    $side_result2 = mysqli_query($conn,$sql_side2) or die("실패원인1: ".mysqli_error($conn));
+    $row2 = mysqli_fetch_array($side_result2);
+    $menu2 = $row2['p_main_img_copy1'];
+    $mt2 = $row2['p_arr_mt'];
+    $color2="color:blue;";
+  }
+  if(isset($_COOKIE["cookie3"])){
+    $cookie3=$_COOKIE["cookie3"];
+    $sql_side3="SELECT * from `package` where `p_code`='$cookie3';";
+    $side_result3 = mysqli_query($conn,$sql_side3) or die("실패원인1: ".mysqli_error($conn));
+    $row3 = mysqli_fetch_array($side_result3);
+    $menu3 = $row3['p_main_img_copy1'];
+    $mt3 = $row3['p_arr_mt'];
+    $color3="color:blue;";
+  }
+ ?>
+
 <!-- 사이드바 컨트롤러 -->
 <div id="side_bar_control">
   <button title="산뜻바 열기" id="side_bar_open_btn" type="button" name="button" onclick="control_display()"><b>+</b></button><br>
@@ -22,13 +56,13 @@
   </div>
     <!-- 사진경로  변수로 설정해주셔야 합니다 -->
   <div id="side_bar_recent">
-    최근 본 상품
-    <a href="#"><img class="side_bar_recent_img" src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/img/백두산.jpg"></a>
-    <div class="side_bar_recent_val"><a href="#">상품명/가격</a></div>
-    <a href="#"><img class="side_bar_recent_img" src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/img/한라산.jpg"></a>
-    <div class="side_bar_recent_val"><a href="#">상품명/가격</a></div>
-    <a href="#"><img class="side_bar_recent_img" src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/img/지리산.jpg"></a>
-    <div class="side_bar_recent_val"><a href="#">상품명/가격</a></div>
+    <br> <p style="display:block">최근 본 상품</p>
+    <a href="#"><img class="side_bar_recent_img" src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/lib/editor/data/<?=$menu1?>"></a>
+    <div class="side_bar_recent_val"><a href="#" style=" text-decoration:none;font-size:5px; color:gray; <?=$color1?>"><?=$mt1?></a></div>
+    <a href="#"><img class="side_bar_recent_img" src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/lib/editor/data/<?=$menu2?>"></a>
+    <div class="side_bar_recent_val"><a href="#" style="text-decoration:none; font-size:5px; color:gray; <?=$color2?>"><?=$mt2?></a></div>
+    <a href="#"><img class="side_bar_recent_img" src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/lib/editor/data/<?=$menu3?>"></a>
+    <div class="side_bar_recent_val"><a href="#" style="text-decoration:none; font-size:5px; color:gray; <?=$color3?>"><?=$mt3?></a></div>
   </div>
   <div class="side_bar_middle">
   <br>
