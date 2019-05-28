@@ -502,7 +502,7 @@
     			</div>
     		</div>
     		<div id="tx_canvas_text_holder" class="tx-holder" name="p_detail_content">
-    			<textarea id="tx_canvas_text" rows="30" cols="30"><?=$p_content?></textarea>
+    			<textarea id="tx_canvas_text" rows="30" cols="30"></textarea>
     		</div>
     	</div>
     					<!-- 높이조절 Start -->
@@ -685,7 +685,7 @@
     </script>
     <!-- <div><button onclick='saveContent()' id="btn_submit">저장</button></div> -->
     <!-- End: Saving Contents -->
-
+    <textarea id="detail_content" rows="8" cols="80" style="display:none;"><?=$p_content?></textarea>
     <!-- Sample: Loading Contents -->
     <textarea id="sample_contents_source" style="display:none;">
     	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
@@ -721,16 +721,10 @@
     	// 		}
     	// 	});
     	// 	/* 저장된 컨텐츠를 불러오기 위한 함수 호출 */
-    	// 	Editor.modify({
-    	// 		"attachments": function () { /* 저장된 첨부가 있을 경우 배열로 넘김, 위의 부분을 수정하고 아래 부분은 수정없이 사용 */
-    	// 			var allattachments = [];
-    	// 			for (var i in attachments) {
-    	// 				allattachments = allattachments.concat(attachments[i]);
-    	// 			}
-    	// 			return allattachments;
-    	// 		}(),
-    	// 		"content": document.getElementById("sample_contents_source") /* 내용 문자열, 주어진 필드(textarea) 엘리먼트 */
-    	// 	});
+    		Editor.modify({
+
+    			"content": document.getElementById("detail_content") /* 내용 문자열, 주어진 필드(textarea) 엘리먼트 */
+    		});
     	// }
     </script>
     <!-- <div><button onclick='loadContent()'>SAMPLE - load contents to editor</button></div> -->

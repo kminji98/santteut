@@ -49,26 +49,20 @@ if($_GET['id']){
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
     <script type="text/javascript">
     window.onload = function () {
-  var r_email1=document.getElementById('r_email1');
-  var r_email2=document.getElementById('r_email2');
-  var r_phon=document.getElementById('r_phon');
-  var e_mail_id=document.getElementById('e_mail_id');
-  var e_mail_adress_2=document.getElementById('e_mail_adress_2');
-  var join_phone_write=document.getElementById('join_phone_write');
-  r_email1.value=<?=json_encode($email_value[0])?>;
-  r_email2.value=<?=json_encode($email_value[1])?>;
-  r_phon.value=<?=json_encode($h1)?>;
-  join_phone_write.value=<?=json_encode($h2)?>;
-  join_select_2.selected;
-  e_mail_id.value=r_email1.value;
-  e_mail_adress_2.value=r_email2.value;
-
-  // var hidden_email = document.getElementsByName("hidden_email")[0];
-  // hidden_email.value=r_email1.value+"@"+r_email2.value;
-}
-
-
-
+    var r_email1=document.getElementById('r_email1');
+    var r_email2=document.getElementById('r_email2');
+    var r_phon=document.getElementById('r_phon');
+    var e_mail_id=document.getElementById('e_mail_id');
+    var e_mail_adress_2=document.getElementById('e_mail_adress_2');
+    var join_phone_write=document.getElementById('join_phone_write');
+    r_email1.value=<?=json_encode($email_value[0])?>;
+    r_email2.value=<?=json_encode($email_value[1])?>;
+    r_phon.value=<?=json_encode($h1)?>;
+    join_phone_write.value=<?=json_encode($h2)?>;
+    join_select_2.selected;
+    e_mail_id.value=r_email1.value;
+    e_mail_adress_2.value=r_email2.value;
+    }
     </script>
     <!-- 약관모두체크 -->
     <script type="text/javascript">
@@ -386,33 +380,19 @@ if($_GET['id']){
     <!-- 패턴검사 -->
     <script type="text/javascript">
       function goto_join(){
-         var join_id = document.getElementById("join_id");
-         var possibility = document.getElementById("possibility");
          var join_passwd = document.getElementById("join_passwd");
          var join_passwdconfirm = document.getElementById("join_passwdconfirm");
          var join_name = document.getElementById("join_name");
          var join_zip = document.getElementById("join_zip");
          var join_foundational = document.getElementById("join_foundational");
          var join_detail = document.getElementById("join_detail");
-         var e_mail_id = document.getElementById("e_mail_id");
-         var e_mail_adress_1 = document.getElementById("e_mail_adress_1");
-         var e_mail_adress_2 = document.getElementById("e_mail_adress_2");
-         var join_select = document.getElementById("join_select");
-         var join_phone_write = document.getElementById("join_phone_write");
-         var check_1 = document.getElementById("check_1");
-         var check_2 = document.getElementById("check_2");
-         var check_3 = document.getElementById("check_3");
-         var hidden_email = document.getElementsByName("hidden_email")[0];
-         var hidden_phone = document.getElementsByName("hidden_phone")[0];
+
 
          var join_id_Patt = /^[a-zA-Z0-9]{3,15}$/;
          var join_passwd_Patt = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
          var join_name_Patt = /^[가-힣]{2,5}$/;
          var e_mailPatt = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
          var join_phone_write_Patt =/^[0-9]*$/;
-
-         var phone_value=join_select.value.concat(join_phone_write.value);
-         var e_mail_id_value=e_mail_id.value.concat('@'+e_mail_adress_2.value);
 
          if(!join_passwd_Patt.test(join_passwd.value)){
            alert("특수문자/문자/숫자 모두포함(8~15)");
@@ -440,6 +420,7 @@ if($_GET['id']){
            join_detail.value="";
            return false;
          }
+
          document.join_member_form.submit();
          // alert("성공");
       }
@@ -458,7 +439,7 @@ if($_GET['id']){
     <h2 id="join_title">정보수정</h2>
     <hr>
     <section>
-      <form name="join_member_form" action="join_query.php?mode=update" method="post">
+      <form name="join_member_form" action="join_query.php?mode=update&id=<?=$id?>" method="post">
         <input type="hidden" name="mode" value="id_check">
         <div class="join_form">
           <h3>정보수정</h3>
