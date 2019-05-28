@@ -206,7 +206,7 @@ function create_table($conn, $table_name){
      case 'member_review' :
        $sql = "CREATE TABLE `member_review` (
        `num` int(11) NOT NULL AUTO_INCREMENT,
-       `p_code` varchar(10) NOT NULL,
+       `r_code` varchar(10) NOT NULL,
        `r_pk` char(30) NOT NULL,
        `title` varchar(100) NOT NULL,
        `content` text NOT NULL,
@@ -226,7 +226,7 @@ function create_table($conn, $table_name){
       ) DEFAULT CHARSET=utf8;
       ";
      break;
-     
+
     case 'free' :
      $sql = "CREATE TABLE `free` (
      `num` int(11) NOT NULL AUTO_INCREMENT,
