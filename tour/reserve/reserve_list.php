@@ -160,12 +160,25 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
           }
         });
         $("input[name='review_btn']").click(function(event) {
-          // alert($(this).attr('id'));
           var popupX = (window.screen.width / 2) - (800 / 2);
           var popupY= (window.screen.height /2) - (500 / 2);
           var r_pk = $(this).attr('id');
-          // $p_code 가 들어가야함
-          window.open("../member_review/member_review.php?code="+r_pk, '', 'status=no, width=800, height=500, left='+ popupX + ', top='+ popupY + ', screenX='+ popupX + ', screenY= '+ popupY);
+          //후기작성 or 후기확인
+          var flag = $(this).val();
+          var mode = '';
+          if(flag !== null){
+            switch (flag) {
+              case '후기작성':
+                mode = 'insert';
+                break;
+              case '후기확인':
+                mode = 'view';
+                break;
+              default:
+                break;
+            }
+          }
+          window.open("../member_review/member_review.php?mode="+mode+"&r_pk="+r_pk, '', 'status=no, width=800, height=500, left='+ popupX + ', top='+ popupY + ', screenX='+ popupX + ', screenY= '+ popupY);
         });
       });
       function lastday(year, month){
@@ -420,9 +433,9 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
               // $r_pk = "aaa";
               if(empty(mysqli_num_rows($review_result))){
                 // $review_status='<button type="button" name="button" onclick="review("../member_review/member_review.php");" >후기작성</button>';
-                $review_status='<input type="button" name="review_btn" id="'.$r_pk.'" value="후기">';
+                $review_status='<input type="button" name="review_btn" id="'.$r_pk.'" value="후기작성">';
               }else{
-                $review_status='<button type="button" name="button" onclick="review("../member_review/member_review.php?r_pk='.$r_pk.'");" >후기확인</button>';
+                $review_status='<input type="button" name="review_btn" id="'.$r_pk.'" value="후기확인">';
               }
 
              ?>
