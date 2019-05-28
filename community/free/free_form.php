@@ -36,7 +36,7 @@ if (isset($_GET["mode"]) && $_GET["mode"]=="update") {
   $q_num = mysqli_real_escape_string($conn, $num);
 
   //쿼리문
-  $sql="SELECT * from `notice` where num ='$q_num';";
+  $sql="SELECT * from `free` where num ='$q_num';";
 
   //쿼리문 실행
   $result = mysqli_query($conn,$sql);
@@ -66,7 +66,7 @@ if (isset($_GET["mode"]) && $_GET["mode"]=="update") {
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css">
-    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/customer_support/notice/css/notice_form.css">
+    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/community/free/css/free_form.css">
     <!-- include libraries(jQuery, bootstrap) -->
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
@@ -74,7 +74,7 @@ if (isset($_GET["mode"]) && $_GET["mode"]=="update") {
     <!-- include summernote css/js -->
     <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.css" rel="stylesheet">
     <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.js"></script>
-    <script src="./js/notice_form.js?ver=0"></script>
+    <script src="./js/free_form.js?ver=0"></script>
     <title>공지사항</title>
   </head>
   <body>
@@ -84,8 +84,8 @@ if (isset($_GET["mode"]) && $_GET["mode"]=="update") {
     </header>
     <br><br><br>
 
-    <section id="notice">
-      <form class="notice_insert_form" action="notice_query.php?mode=<?php echo $mode; ?>" method="post" enctype="multipart/form-data">
+    <section id="free">
+      <form class="free_insert_form" action="free_query.php?mode=<?php echo $mode; ?>" method="post" enctype="multipart/form-data">
         <input type="hidden" name="num" value="<?=$num?>">
         <input type="hidden" name="hit" value="<?=$hit?>">
       <table border="1">
@@ -128,8 +128,8 @@ if (isset($_GET["mode"]) && $_GET["mode"]=="update") {
               $action='document.getElementById("del_file").disabled=false;';
             }
            ?>
-          <button id="admin_write_btn" onclick='<?=$action?> document.notice_insert_form.submit();" type="button" name="button'>완료</button>
-          <a href="./notice_list.php"><button id="admin_write_btn" type="button" name="button">목록</button></a>
+          <button id="admin_write_btn" onclick='<?=$action?> document.free_insert_form.submit();" type="button" name="button'>완료</button>
+          <a href="./free_list.php"><button id="admin_write_btn" type="button" name="button">목록</button></a>
         </div>
       </form>
     </section>

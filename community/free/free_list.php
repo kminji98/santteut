@@ -43,9 +43,9 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="search"){
     exit;
   }
 
-  $sql="SELECT * from `notice` where $find_option like '%$q_find_input%';";
+  $sql="SELECT * from `free` where $find_option like '%$q_find_input%';";
 }else{
-  $sql="SELECT * from `notice` order by num desc";
+  $sql="SELECT * from `free` order by num desc";
 }
 
 // 쿼리문실행문장
@@ -86,7 +86,7 @@ $view_num = $total_record - $start_record;
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css">
-    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/customer_support/notice/css/notice_list.css?ver=0">
+    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/community/free/css/free_list.css?ver=0">
     <title>공지사항</title>
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
     <script type="text/javascript">
@@ -103,10 +103,10 @@ $view_num = $total_record - $start_record;
       <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/mini_menu.php";?>
     </header>
     <br><br><br>
-    <section id="notice">
+    <section id="free">
 
-      <form name="notice_form" action="notice_list?mode=search" method="post">
-      <div class="notice_list_search">
+      <form name="free_form" action="free_list?mode=search" method="post">
+      <div class="free_list_search">
         <select>
           <option value="">제목</option>
           <option value="">내용</option>
@@ -125,7 +125,7 @@ $view_num = $total_record - $start_record;
       <table id="list_tbl">
         <tr>
           <th>번호</th>
-          <th id="notice_list_title" style="width:600px;">제목</th>
+          <th id="free_list_title" style="width:600px;">제목</th>
           <th>작성자</th>
           <th>작성일</th>
           <th>조회</th>
@@ -147,7 +147,7 @@ $view_num = $total_record - $start_record;
           <!--번호-->
           <td><?=$view_num?></td>
           <!--제목-->
-          <td><a href="./notice_view.php?num=<?=$num?>&present_page=<?=$page?>&hit=<?=$hit+1?>"><?=$title?></a></td>
+          <td><a href="./free_view.php?num=<?=$num?>&present_page=<?=$page?>&hit=<?=$hit+1?>"><?=$title?></a></td>
           <!--작성자-->
           <td><?=$name?></td>
           <!--작성일-->
@@ -163,7 +163,7 @@ $view_num = $total_record - $start_record;
 
 <?php
 if(!empty($_SESSION['id'])){
-  echo '<a href="notice_form.php"><button id="admin_write_btn" type="button" name="button">
+  echo '<a href="free_form.php"><button id="admin_write_btn" type="button" name="button">
   글쓰기</button></a>';
 }
 ?>
@@ -174,16 +174,16 @@ if(!empty($_SESSION['id'])){
         //현재 블럭의 시작 페이지가 페이지 스케일 보다 클 때 -> 처음으로 버튼 생성 + 이전 블럭 존재
         //[ex]  page가 9개 있고 현재 페이지가 6페이지인 경우  / 12345/ 6789     =>  <<(처음으로) <(이전) 6 7 8 9
         if( $start_page > PAGE_SCALE ){
-          // echo( '<a href='notice_list.php?page=1'> << </a>' );
-          echo( '<a href="notice_list.php?page=1"><button type="button" name="button" title="처음으로"><<</button></a>' );
+          // echo( '<a href='free_list.php?page=1'> << </a>' );
+          echo( '<a href="free_list.php?page=1"><button type="button" name="button" title="처음으로"><<</button></a>' );
 
           // 이전 블럭 클릭 시 -> 현재 블럭의 시작 페이지 - 페이지 스케일
           // 현재 6 page 인 경우 '<(이전블럭)' 클릭 -> $pre_page = 6-PAGE_SCALE  -> 1 페이지로 이동
           $pre_block= $start_page - PAGE_SCALE;
           if(isset($_GET['mode']) && $_GET['mode']=="search"){
-            echo( '<a href="notice_list.php?mode=search&find_option=$find_option&find_input=$find_input&page='.$pre_block.'"><button type="button" name="button" title="이전"><</button></a>' );
+            echo( '<a href="free_list.php?mode=search&find_option=$find_option&find_input=$find_input&page='.$pre_block.'"><button type="button" name="button" title="이전"><</button></a>' );
           }else{
-            echo( '<a href="notice_list.php?page='.$pre_block.'"><button type="button" name="button" title="이전"><</button></a>' );
+            echo( '<a href="free_list.php?page='.$pre_block.'"><button type="button" name="button" title="이전"><</button></a>' );
           }
         }
 
@@ -212,13 +212,13 @@ if(!empty($_SESSION['id'])){
           $next_block= $start_page + PAGE_SCALE;
 
           if(isset($_GET['mode']) && $_GET['mode']=="search"){
-            echo( '<a href="notice_list.php?mode=search&find_option=$find_option&find_input=$find_input&page='.$next_block.'"><button type="button" name="button">></button></a>' );
+            echo( '<a href="free_list.php?mode=search&find_option=$find_option&find_input=$find_input&page='.$next_block.'"><button type="button" name="button">></button></a>' );
           }else{
-            echo( '<a href="notice_list.php?page='.$next_block.'"><button type="button" name="button" title="다음">></button></a>' );
+            echo( '<a href="free_list.php?page='.$next_block.'"><button type="button" name="button" title="다음">></button></a>' );
           }
 
           //맨끝페이지로 이동
-          echo( '<a href="notice_list.php?page='.$total_pages.'"><button type="button" name="button" title="맨끝으로">>></button></a>' );
+          echo( '<a href="free_list.php?page='.$total_pages.'"><button type="button" name="button" title="맨끝으로">>></button></a>' );
         }
         ?>
       </div>
