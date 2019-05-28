@@ -46,7 +46,7 @@ if (!$result) {
  ?>
   <head>
     <meta charset="utf-8">
-    <title>산뜻 :: 즐거운 산행</title>
+    <title>자유게시판</title>
   </head>
   <body>
 <table style="width : 80%;">
@@ -69,7 +69,7 @@ if (!$result) {
   </tr>
   <tr>
     <td colspan="2" ><a style="float : right; margin-left : 15px;" href="./dml_board.php?mode=delete&num=<?=$num?>"><input type="button" name="" value="삭제"></a>
-      <a style="float : right;" href="./write_edit_form.php?mode=update&num=<?=$num?>"><input type="button" name="" value="수정"></a>
+      <a style="float : right;" href="./free_form.php?mode=update&num=<?=$num?>"><input type="button" name="" value="수정"></a>
     </td>
   </tr>
 </table>

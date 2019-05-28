@@ -17,7 +17,7 @@ if ($_FILES['upfile']['name']){
         $name=date("Y_m_d_H_i_s");
         $ext = explode('.', $_FILES['upfile']['name']);
         $filename = $name . '.' . $ext[1];
-        $destination = './upload/' . $filename;//change this directory
+        $destination = './data/' . $filename;//change this directory
         $location = $_FILES["upfile"]["tmp_name"];
         $upfilename = $_FILES["upfile"]["name"];
         $file_type= $_FILES['upfile']['type'];
