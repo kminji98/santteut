@@ -1,4 +1,42 @@
+<?php
+include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
 
+if($_GET['id']){
+ $id = $_GET['id'];
+ $sql="SELECT * from `member` where `id`= '$id';";
+ $result = mysqli_query($conn,$sql) or die("실패원인1: ".mysqli_error($conn));
+ $row = mysqli_fetch_array($result);
+ $name = $row['name'];
+ $zip = $row['zip'];
+ $address1 = $row['address1'];
+ $address2 = $row['address2'];
+ $h1 = $row['hp1'];
+ $h2 = $row['hp2'];
+ $email = $row['email'];
+ $email_value=explode('@', $email);
+ $selected=$selected1=$selected6=$selected7=$selected8=$selected9="";
+ if($h1=="010"){
+   $selected='selected';
+ }elseif ($h1=="011") {
+   $selected1='selected';
+ }elseif ($h1=="016") {
+   $selected6='selected';
+ }elseif ($h1=="017") {
+   $selected7='selected';
+ }elseif ($h1=="018") {
+   $selected8='selected';
+ }elseif ($h1=="019") {
+   $selected9='selected';
+ }
+
+
+
+}else{
+  echo "오류";
+}
+
+
+ ?>
 <!DOCTYPE html>
 <html lang="ko" dir="ltr">
   <head>
@@ -9,7 +47,29 @@
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/member/join/css/join_member.css">
     <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript">
+    window.onload = function () {
+  var r_email1=document.getElementById('r_email1');
+  var r_email2=document.getElementById('r_email2');
+  var r_phon=document.getElementById('r_phon');
+  var e_mail_id=document.getElementById('e_mail_id');
+  var e_mail_adress_2=document.getElementById('e_mail_adress_2');
+  var join_phone_write=document.getElementById('join_phone_write');
+  r_email1.value=<?=json_encode($email_value[0])?>;
+  r_email2.value=<?=json_encode($email_value[1])?>;
+  r_phon.value=<?=json_encode($h1)?>;
+  join_phone_write.value=<?=json_encode($h2)?>;
+  join_select_2.selected;
+  e_mail_id.value=r_email1.value;
+  e_mail_adress_2.value=r_email2.value;
 
+  // var hidden_email = document.getElementsByName("hidden_email")[0];
+  // hidden_email.value=r_email1.value+"@"+r_email2.value;
+}
+
+
+
+    </script>
     <!-- 약관모두체크 -->
     <script type="text/javascript">
       var check_val=false;
@@ -54,7 +114,6 @@
            id_check=false;
            return false;
          }
-
        }
        $.ajax({
          url: 'check_id.php',
@@ -355,18 +414,8 @@
          var phone_value=join_select.value.concat(join_phone_write.value);
          var e_mail_id_value=e_mail_id.value.concat('@'+e_mail_adress_2.value);
 
-        if(!join_id_Patt.test(join_id.value)){
-           alert("아이디 형식이 잘못 되었습니다");
-           join_id.focus();
-           join_id.value="";
-           return false;
-         }else if(id_check==false){
-           alert("아이디가 이미 존재합니다.");
-           join_id.focus();
-           join_id.value="";
-           return false;
-         }else if(!join_passwd_Patt.test(join_passwd.value)){
-           alert("특수문자/문자/숫자 모두포함(8~15");
+         if(!join_passwd_Patt.test(join_passwd.value)){
+           alert("특수문자/문자/숫자 모두포함(8~15)");
            join_passwd.focus();
            join_passwd.value="";
            return false;
@@ -390,70 +439,17 @@
            join_detail.focus();
            join_detail.value="";
            return false;
-         }else if(!e_mail_id.value){
-           alert("이메일 아이디를 입력해주세요");
-           e_mail_id.focus();
-           e_mail_id.value="";
-           return false;
-         }else if(e_mail_id_value!=hidden_email.value){
-           alert("이메일이 바뀌었습니다");
-           return false;
          }
-         else if(!e_mailPatt.test(e_mail_id_value)){
-           alert("이메일 형식을 확인해주세요");
-           e_mail_adress_1.focus();
-           return false;
-         }else if (!final_email_check) {
-           alert("이메일을 인증해주세요");
-           e_mail_adress_1.focus();
-           return false;
-         }else if(phone_value!=hidden_phone.value){
-           alert("전화번호가 바뀌었습니다");
-           return false;
-         }else if (!join_phone_write_Patt.test(join_phone_write.value)) {
-           alert("전화번호를 확인해주세요");
-           join_phone_write.focus();
-           join_phone_write.value="";
-           return false;
-         }else if (!join_phone_write.value) {
-           alert("전화번호를 확인해주세요");
-           join_phone_write.focus();
-           join_phone_write.value="";
-           return false;
-         }else if (join_phone_write.value.length<8) {
-           alert("전화번호를 확인해주세요");
-           join_phone_write.focus();
-           join_phone_write.value="";
-           return false;
-         }
-         else
-         if (!final_phone_check) {
-           alert("문자인증을 해주세요");
-           join_phone_write.focus();
-           join_phone_write.value="";
-           return false;
-         }else if(!check_1.checked){
-          alert("약관에 동의해주세요");
-          check_1.focus();
-          return false;
-         }else if(!check_2.checked){
-           alert("약관에 동의해주세요");
-           check_2.focus();
-           return false;
-         }else if(!check_3.checked){
-           alert("약관에 동의해주세요");
-           check_3.focus();
-           return false;
-         }
-         // 여기1
-
          document.join_member_form.submit();
-         alert("성공");
+         // alert("성공");
       }
     </script>
 
   </head>
   <body>
+    <input id="r_email1" type="hidden" name="" value="">
+    <input id="r_email2" type="hidden" name="" value="">
+    <input id="r_phon" type="hidden" name="" value="">
     <!--로그인 회원가입 로그아웃-->
     <header>
       <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/login_menu.php";?>
@@ -462,7 +458,7 @@
     <h2 id="join_title">정보수정</h2>
     <hr>
     <section>
-      <form name="join_member_form" action="join_query.php" method="post">
+      <form name="join_member_form" action="join_query.php?mode=update" method="post">
         <input type="hidden" name="mode" value="id_check">
         <div class="join_form">
           <h3>정보수정</h3>
@@ -476,7 +472,7 @@
             <!--아이디-->
             <tr>
               <th><label>아이디</label>&nbsp;<span>*</span></th>
-              <td  colspan="3"><input id="join_id" type="text" name="join_id" placeholder="대/소문자/숫자 3글자 이상 15글자이하" size="40"><p id="possibility" style="display:inline; font-size:13px;"></p></td>
+              <td  colspan="3"><input id="join_id" type="text" name="join_id" placeholder="대/소문자/숫자 3글자 이상 15글자이하" disabled size="40"  value="<?=$id?>"><p id="possibility" style="display:inline; font-size:13px;"></p></td>
             </tr>
 
             <!--비밀번호-->
@@ -494,13 +490,13 @@
             <!--이름-->
             <tr>
               <th><label>이름</label>&nbsp;<span>*</span></th>
-              <td colspan="3"><input placeholder="2~5글자" id="join_name" type="text" name="join_name" size="40"></td>
+              <td colspan="3"><input value="<?=$name?>" placeholder="2~5글자" id="join_name" type="text" name="join_name" size="40"></td>
             </tr>
 
             <!--주소_우편번호-->
             <tr>
               <th rowspan="3"><label>주소</label>&nbsp;<span>*</span></th>
-              <td colspan="3" id="td_this"><input readonly id="join_zip" type="text" name="join_zip" size="10">
+              <td colspan="3" id="td_this"><input value="<?=$zip?>" readonly id="join_zip" type="text" name="join_zip" size="10">
                 <button type="button" name="button" id="zip_btn" onclick="execDaumPostcode()" >우편번호</button>
               </td>
 
@@ -508,30 +504,30 @@
 
             <!--주소_기본-->
             <tr>
-              <td colspan="3"><input readonly id="join_foundational" type="text" name="join_foundational" placeholder="기본주소" size="40"></td>
+              <td colspan="3"><input readonly id="join_foundational" type="text" name="join_foundational" value="<?=$address1?>" placeholder="기본주소" size="40"></td>
             </tr>
 
             <!--주소_상세-->
             <tr>
-              <td colspan="3"><input id="join_detail" type="text" name="join_detail" placeholder="상세주소" size="40"></td>
+              <td colspan="3"><input id="join_detail" type="text" name="join_detail" value="<?=$address2?>" placeholder="상세주소" size="40"></td>
             </tr>
             <tr>
               <th><label>이메일</label></th>
               <td id="e_mail_box">
-                <input id="e_mail_id" type="text" name="e_mail_id" size="17"> @
-                <select onclick="choice_email()" id="e_mail_adress_1" class="" name="e_mail_adress_1" style=" padding: 9px; font-size:13px;">
+                <input disabled id="e_mail_id" type="text" name="e_mail_id" size="17"> @
+                <select disabled onclick="choice_email()" id="e_mail_adress_1" class="" name="e_mail_adress_1" style=" padding: 9px; font-size:13px;">
                   <option value="naver.com" >naver.com</option>
                   <option value="gmail.com" >gmail.com</option>
                   <option value="daum.net" >daum.net</option>
                   <option value="nate.com" >nate.com</option>
                   <option value="yahoo.com" >yahoo.com</option>
-                  <option value="직접입력" >직접입력</option>
+                  <option value="직접입력" selected>직접입력</option>
                 </select>
-                <input readonly id="e_mail_adress_2" value="naver.com"  placeholder="naver.com" type="text" name="e_mail_adress_2" size="13" style="text-align: center;">
-                <button id="email_btn" type="button" name="email_btn">인증하기</button>
+                <input disabled id="e_mail_adress_2" value="naver.com"  placeholder="naver.com" type="text" name="e_mail_adress_2" size="13" style="text-align: center;">
+                <!-- <button id="email_btn" type="button" name="email_btn">인증하기</button> -->
                 <input type="hidden" name="hidden_email" >
                 <input type="hidden" name="check_email1" size="8" placeholder="인증번호" id="check_email1">
-                <input type="hidden" name="check_email2" value="확인" style="background-color: #FFFFFF" id="check_email2"></button>
+                <!-- <input type="hidden" name="check_email2" value="확인" style="background-color: #FFFFFF" id="check_email2"></button> -->
                 <p id="email_final_alert" style="display:inline;"></p>
               </td>
             </tr>
@@ -547,21 +543,21 @@
             <tr>
               <th id="last_td1">&nbsp;&nbsp;&nbsp;<label>휴대전화</label>&nbsp;<span>*</span></th>
               <td id="last_td2"  colspan="3">
-                <select id="join_select" name="join_select">
+                <select  disabled id="join_select" name="join_select">
                   <option value="선택">선택</option>
-                  <option value="010">010</option>
-                  <option value="011">011</option>
-                  <option value="016">016</option>
-                  <option value="017">017</option>
-                  <option value="018">018</option>
-                  <option value="019">019</option>
+                  <option <?=$selected?> id="join_select_1" value="010">010</option>
+                  <option <?=$selected1?> id="join_select_2" value="011">011</option>
+                  <option <?=$selected6?> id="join_select_3" value="016">016</option>
+                  <option <?=$selected7?> id="join_select_4" value="017">017</option>
+                  <option <?=$selected8?> id="join_select_5" value="018">018</option>
+                  <option <?=$selected9?> id="join_select_6" value="019">019</option>
                 </select>
 
-              <input id="join_phone_write" type="tel" name="join_cellphone" size="19" maxlength="8">
-              <input type="hidden" name="hidden_phone">
-              <button id="hp_btn" type="button" name="button" >인증하기</button> <br>
+              <input disabled id="join_phone_write" type="tel" name="join_cellphone" size="19" maxlength="8">
+              <input disabled type="hidden" name="hidden_phone">
+              <!-- <button id="hp_btn" type="button" name="button" >인증하기</button> <br>
               <input id="cellphone_authentication" type="text" name="cellphone_authentication" placeholder="인증번호를 입력하세요." size="25" style="display:none; ">
-              <button id="hp_btn_done" type="button" name="button" style="display:none; ">확인</button><p id="final_phone_check" style="display:inline; "></p>
+              <button id="hp_btn_done" type="button" name="button" style="display:none; ">확인</button><p id="final_phone_check" style="display:inline; "></p> -->
               </td>
             </tr>
           </table>

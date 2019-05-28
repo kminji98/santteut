@@ -165,10 +165,11 @@
             .done(function(result) {
               code=result;
               alert(code);
+              if(result!="존재하는 이메일입니다."){
               check_email1.setAttribute('type', 'text');
               check_email2.setAttribute('type', 'button');
-              alert('이메일로 코드가 발송 되었습니다.');
-
+              // alert('이메일로 코드가 발송 되었습니다.');
+              }
             })
             .fail(function() {
               alert("인증 번호 발송실패!");
