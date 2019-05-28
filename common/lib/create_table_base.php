@@ -167,6 +167,7 @@ function create_table($conn, $table_name){
         `r_code` CHAR(10) NOT NULL,
         `r_id` VARCHAR(45) NOT NULL,
         `r_date` VARCHAR(45) NOT NULL,
+        `r_cancel_date` VARCHAR(45),
         `r_adult` INT NOT NULL,
         `r_kid` INT NOT NULL,
         `r_baby` INT NOT NULL,
@@ -238,7 +239,7 @@ function create_table($conn, $table_name){
      PRIMARY KEY (`num`)
      ) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
      break;
-     
+
      case 'free_ripple' :
      $sql = "CREATE TABLE `free_ripple` (
      `num` int(11) NOT NULL AUTO_INCREMENT,
