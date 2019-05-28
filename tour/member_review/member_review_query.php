@@ -14,38 +14,40 @@ $id = $_SESSION['id'];
 //mode가 insert일때
 if(isset($_GET["mode"]) && $_GET["mode"]=="insert"){
     $title = trim($_POST["title"]);
+    $content = trim($_POST["content"]);
+    $code = $_POST["code"];
+    $r_pk = $_POST["r_pk"];
+
     if(empty($content)||empty($title)){
       alert_back('1. 내용이나제목입력요망!');
       exit;
     }
 
-    $title = test_input($_POST["title"]);
+    $q_title  = trim($_POST["title"]);
     $q_content = trim($_POST["content"]);
     $q_title = mysqli_real_escape_string($conn, $title);
     $q_content = mysqli_real_escape_string($conn, $content);
 
+    //p_code 를 r_pk 로 찾아서 삽입 (p_code = r_code)
 
-    // 메인글 저장 삽입한다. (디비변수명 적지x)
-    $sql="INSERT INTO `member_review` VALUES (null,'$groupnum','$depth','$ord','$id','$q_title','$q_content','$regist_day','$hit','$secret_ok');";
-
-    $result = mysqli_query($conn,$sql);
-    if (!$result) {alert_back('Error:5 ' . mysqli_error($conn));}
-
-    //등록된사용자가 최근 입력한 qna_list를 보여주기 위하여 num 찾아서 전달하기 위함이다.
-    // 최근에 삽입된 게시물이 큰넘버가 맥스넘
-    $sql="SELECT max(num) from qna;";
+    $sql="SELECT `r_code` from reserve where `r_pk`= '$r_pk';";
     $result = mysqli_query($conn,$sql);
     if (!$result) {alert_back('Error: 6' . mysqli_error($conn));}
 
     $row=mysqli_fetch_array($result);
-    $max_num=$row['max(num)'];
+    $r_code=$row['r_code'];
 
-    $sql="UPDATE `qna` SET `groupnum`= $max_num WHERE `num`=$max_num;";
+
+    $sql="INSERT INTO `member_review` VALUES (null,'$r_code','$r_pk','$q_title','$q_content','$id');";
+
     $result = mysqli_query($conn,$sql);
-    if (!$result) {die('Error: ' . mysqli_error($conn));}
-    mysqli_close($conn);
+    if (!$result) {alert_back('Error:5 ' . mysqli_error($conn));}
 
-    echo "<script>location.href='./qna_view.php?num=$max_num&hit=$hit';</script>";
+
+    echo "<script>alert('후기등록완료! 소중한 후기 감사합니다.');";
+    echo "opener.location.replace('../reserve/reserve_list.php');";
+    echo "window.close();</script>";
+    // echo "<script>location.href='../reserve/reserve_list.php';</script>";
 
 }else if(isset($_GET["mode"]) && $_GET["mode"]=="delete"){
     //1. 삭제할 해당 게시물의 넘버

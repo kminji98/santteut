@@ -10,21 +10,22 @@ if(!isset($_SESSION['id'])){
 
 include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
 
-// 변수선언(번호 이름 제목 내용 작성일 조회수 비밀여부)
+// 1. 모드 = 후기작성
 $mode="insert";
 
 $id= $_SESSION['id'];
 $name= $_SESSION['name'];
+$mode=isset($_GET["mode"])?$_GET["mode"]:'';
+$r_pk=isset($_GET["r_pk"])?$_GET["r_pk"]:'';
 
-// 모드가 수정 or 답글일때
-if((isset($_GET["mode"])&&$_GET["mode"]=="update") ){
+// 2. 모드 = 후기 확인
+if((isset($_GET["mode"])&&$_GET["mode"]=="view") ){
 
-    $mode=$_GET["mode"];//update 또는 response $mode="update"
     $num = test_input($_GET["num"]);
     $q_num = mysqli_real_escape_string($conn, $num);
 
-    //update 이면 해당된글
-    $sql="SELECT * from `member_review` where num ='$q_num';";
+    //view 이면 후기테이블에서 해당된 예약 번호를 조회.
+    $sql="SELECT num from `member_review` where `r_pk` ='$r_pk';";
     $result = mysqli_query($conn,$sql);
     if (!$result) {die('Error: ' . mysqli_error($conn));}
     $row=mysqli_fetch_array($result);
@@ -39,13 +40,6 @@ if((isset($_GET["mode"])&&$_GET["mode"]=="update") ){
     $content=str_replace(" ", "&nbsp;",$content);
     $regist_day=$row['regist_day'];
     $hit=$row['hit'];
-    mysqli_close($conn);
-
-    if($mode == "response"){
-      $title="";
-      $content=str_replace("<br>", "<br>▶",$content);
-      $content="";
-    }
     mysqli_close($conn);
 }
 ?>
@@ -78,7 +72,8 @@ if((isset($_GET["mode"])&&$_GET["mode"]=="update") ){
   <body>
     <section id="review_section" >
       <form class="member_review_insert_form" action="member_review_query.php?mode=<?=$mode?>" method="post">
-        <input type="hidden" name="code" value="<?=$r_pk?>">
+        <input type="hidden" name="code" value="<?=$code?>">
+        <input type="hidden" name="r_pk" value="<?=$r_pk?>">
       <table id="review_tbl" border="1">
         <tr>
           <th  style="padding:8px">작성자</th>

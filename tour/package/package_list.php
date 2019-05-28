@@ -391,19 +391,41 @@ $divide=$_GET['divide'];
 
           </script>
 
+
+          <?php
+          if($divide=="domestic"){
+            $pay_2="0~5만원"; $pay_2_query="and `p_pay` between 0 and 59999";
+            $pay_3="6~10만원"; $pay_3_query="and `p_pay` between 60000 and 109999";
+            $pay_4="11~20만원"; $pay_4_query="and `p_pay` between 110000 and 209999";
+            $pay_5="21~30만원"; $pay_5_query="and `p_pay` between 210000 and 309999";
+            $pay_6="31~40만원"; $pay_6_query="and `p_pay` between 210000 and 409999";
+            $pay_7="41~50만원"; $pay_7_query="and `p_pay` between 310000 and 509999";
+            $pay_8="51만원↑"; $pay_8_query="and `p_pay` >=510000";
+            $won="";
+          }else if($divide=="abroad"){
+            $pay_2="0~50"; $pay_2_query="and `p_pay` between 0 and 509999";
+            $pay_3="51~100"; $pay_3_query="and `p_pay` between 510000 and 1099999";
+            $pay_4="101~200"; $pay_4_query="and `p_pay` between 1100000 and 2099999";
+            $pay_5="201~300"; $pay_5_query="and `p_pay` between 2100000 and 3099999";
+            $pay_6="301~400"; $pay_6_query="and `p_pay` between 2100000 and 4099999";
+            $pay_7="401~500"; $pay_7_query="and `p_pay` between 3100000 and 5099999";
+            $pay_8="501↑"; $pay_8_query="and `p_pay` >=5100000";
+            $won="단위(만원)";
+          }
+
+           ?>
           <tr>
             <td class="package_search_detail_option">상품가격</td>
             <td onclick="detail_function('pay_1','pay_div','')"><div id="pay_1" name="pay_div" class="package_search_detail_option_all"><p id="전체" name="상품가격" style="display:inline;">전체</p></div></td>
-            <td onclick="detail_function('pay_2','pay_div','and `p_pay` between 50000 and 209999')"><div id="pay_2" name="pay_div" class="package_search_detail_option_all"><p id="5~20만원" name="상품가격" style="display:inline;">5~20만원</p></div></td>
-            <td onclick="detail_function('pay_3','pay_div','and `p_pay` between 210000 and 409999')"><div id="pay_3" name="pay_div" class="package_search_detail_option_all"><p id="21~40만원" name="상품가격" style="display:inline;">21~40만원</p></div></td>
-            <td onclick="detail_function('pay_4','pay_div','and `p_pay` between 410000 and 609999')"><div id="pay_4" name="pay_div" class="package_search_detail_option_all"><p id="41~60만원" name="상품가격" style="display:inline;">41~60만원</p></div></td>
-            <td onclick="detail_function('pay_5','pay_div','and `p_pay` between 610000 and 809999')"><div id="pay_5" name="pay_div" class="package_search_detail_option_all"><p id="61~80만원" name="상품가격" style="display:inline;">61~80만원</p></div></td>
-            <td onclick="detail_function('pay_6','pay_div','and `p_pay` between 810000 and 909999')"><div id="pay_6" name="pay_div" class="package_search_detail_option_all"><p id="81~99만원" name="상품가격" style="display:inline;">81~99만원</p></div></td>
-            <td onclick="detail_function('pay_7','pay_div','and `p_pay` >=1000000')"><div id="pay_7" name="pay_div" class="package_search_detail_option_all"><p id="100만원" name="상품가격" style="display:inline;">100만원<b>↑</b></p></div></td>
-            </td><td id="nbsp"></td></td></td><td id="nbsp"></td></td></td><td id="nbsp"></td>
+            <td onclick="detail_function('pay_2','pay_div','<?=$pay_2_query?>')"><div id="pay_2" name="pay_div" class="package_search_detail_option_all"><p id="<?=$pay_2?>" name="상품가격" style="display:inline;"><?=$pay_2?></p></div></td>
+            <td onclick="detail_function('pay_3','pay_div','<?=$pay_3_query?>')"><div id="pay_3" name="pay_div" class="package_search_detail_option_all"><p id="<?=$pay_3?>" name="상품가격" style="display:inline;"><?=$pay_3?></p></div></td>
+            <td onclick="detail_function('pay_4','pay_div','<?=$pay_4_query?>')"><div id="pay_4" name="pay_div" class="package_search_detail_option_all"><p id="<?=$pay_4?>" name="상품가격" style="display:inline;"><?=$pay_4?></p></div></td>
+            <td onclick="detail_function('pay_5','pay_div','<?=$pay_5_query?>')"><div id="pay_5" name="pay_div" class="package_search_detail_option_all"><p id="<?=$pay_5?>" name="상품가격" style="display:inline;"><?=$pay_5?></p></div></td>
+            <td onclick="detail_function('pay_6','pay_div','<?=$pay_6_query?>')"><div id="pay_6" name="pay_div" class="package_search_detail_option_all"><p id="<?=$pay_6?>" name="상품가격" style="display:inline;"><?=$pay_6?></p></div></td>
+            <td onclick="detail_function('pay_7','pay_div','<?=$pay_7_query?>')"><div id="pay_7" name="pay_div" class="package_search_detail_option_all"><p id="<?=$pay_7?>" name="상품가격" style="display:inline;"><?=$pay_7?><b></b></p></div></td>
+            <td onclick="detail_function('pay_8','pay_div','<?=$pay_8_query?>')"><div id="pay_8" name="pay_div" class="package_search_detail_option_all"><p id="<?=$pay_8?>" name="상품가격" style="display:inline;"><?=$pay_8?></p></div></td>
+          </td><td id="nbsp"><b><?=$won?></b></td></td></td><td id="nbsp"></td></td></td><td id="nbsp"></td>
           </tr>
-
-
 
           <tr>
             <td class="package_search_detail_option">출발시간</td>

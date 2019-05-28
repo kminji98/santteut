@@ -12,7 +12,6 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
 $sql=$result=$total_record=$total_pages=$start_record=$row="";
 $total_record=0;
 
-
 define('ROW_SCALE', 10);
 define('PAGE_SCALE', 10);
 //r_cancel=0 -> 예약내역
@@ -43,7 +42,12 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="search"){
   $search_end = $year2."-".$month2."-".$day2;
   $sql="SELECT * from `reserve` join `package` on `reserve`.`r_code` = `package`.`p_code` where `package`.`p_dp_date` between '$search_start' and '$search_end' and `reserve`.`r_id` = '$id' and `reserve`.`r_cancel`='$reserve_flag';";
 }else{
-  $sql="SELECT * from `reserve` join `package` on `reserve`.`r_code` = `package`.`p_code` where `reserve`.`r_id` = '$id' and `reserve`.`r_cancel`='$reserve_flag';";
+  if($id=="admin"){
+    $sql="SELECT * from `reserve` join `package` on `reserve`.`r_code` = `package`.`p_code` where `reserve`.`r_cancel`='$reserve_flag';";
+  }else{
+    $sql="SELECT * from `reserve` join `package` on `reserve`.`r_code` = `package`.`p_code` where `reserve`.`r_id` = '$id' and `reserve`.`r_cancel`='$reserve_flag';";
+  }
+
   if(isset($_GET['mode'])){
       $date=$_GET['mode'];
       $sql=$sql." where `package`.`p_dp_date` = '$date';";
@@ -108,6 +112,8 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
       $(document).ready(function() {
         // var reserve_flag = <?=json_encode($reserve_flag)?>;
         $("#reserve_flag").val(<?=json_encode($reserve_flag)?>);
+        //여기
+
         if($("#reserve_flag").val()*1){
           if($("#list_head_cancel").css('background-color')!="white"){
             $("#list_head_cancel").css('background-color', 'white');
@@ -116,6 +122,7 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
             $("#list_head_reserve").css('background-color', '#f2f2f2');
             $("#list_head_reserve").css('border', '1px solid #dedede');
             $("#list_head_reserve").css('border-right-color', '#3d3d3d');
+            $("#after").html("취소일");
           }
         }
         //예약내역
@@ -339,6 +346,7 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
       <fieldset id="list_field" >
          <h4 id="sub_title"><b class="symbol_greater_than">></b>산뜻 예약/결제</h4>
         <table id="list_tbl_head"><tr><td id="list_head_reserve">예약내역</td><td id="list_head_cancel">취소내역</td></tr></table>
+
         <table id="list_tbl_body">
           <tr>
             <td>예약날짜</td>
@@ -349,7 +357,7 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
             <td>출발일/귀국일</td>
             <td>예약/결제상태</td>
             <td>취소</td>
-            <td>산행후기</td>
+            <td id="after">후기</td>
           </tr>
           <output id="list_tbl_body_output">
             <?php
@@ -362,6 +370,8 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
               $id = $_SESSION['id'];
               $r_date = $row['r_date'];
               $r_code=$row['r_code'];
+              $r_cancel=$row['r_cancel'];
+              $r_cancel_date=$row['r_cancel_date'];
               //상품명
               $p_name=$row['p_name'];
               //총 결제금액(결제 해야할 금액 - reserve.r_pay)
@@ -399,8 +409,12 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
                 $total+=$sum;
               }
 
-              // $bill_done_sql = "SELECT * FROM `bill` inner join `reserve` on `reserve`.`r_code` = `bill`.`b_code`"
-              $bill_sql = "SELECT * FROM `bill` where `b_code`='$r_code' and `b_pk`='$r_pk' and `b_id`='$id';";
+              if($id=="admin"){
+                $bill_sql = "SELECT * FROM `bill` where `b_code`='$r_code' and `b_pk`='$r_pk';";
+              }else{
+                $bill_sql = "SELECT * FROM `bill` where `b_code`='$r_code' and `b_pk`='$r_pk' and `b_id`='$id';";
+              }
+
               //결제상태
               $bill_result=mysqli_query($conn,$bill_sql);
               $count=mysqli_num_rows($bill_result);
@@ -410,6 +424,7 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
                 $status="예약완료";
                 $cancel_status = '<input type="button" onclick="cancel(\'update\',\''.$r_pk.'\')" name="cancel_btn" id="'.$r_pk.'" value="취소">';
               }
+
 
               if($total>=$p_bus_half){
                 if($count!=0){
@@ -432,20 +447,31 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
               $review_status =$review_row['num'];
               // $r_pk = "aaa";
               if(empty(mysqli_num_rows($review_result))){
+<<<<<<< HEAD
                 // $review_status='<button type="button" name="button" onclick="review("../member_review/member_review.php");" >후기작성</button>';
                 $review_status='<input type="button" name="review_btn" id="'.$r_pk.'" value="후기작성">';
+=======
+
+                $review_status='<input type="button" name="review_btn" id="'.$r_pk.'" value="후기">';
+>>>>>>> 568f05c43cc5ebc5fdb37aa31e598b6e975202a8
               }else{
                 $review_status='<input type="button" name="review_btn" id="'.$r_pk.'" value="후기확인">';
               }
+              if($r_cancel=="1"){
+                $status="예약취소";
+                if($count=="0"){
+                  $cancel_status = "<p style='color:red;'>취소완료</p>";
+                }
+                $review_status =$r_cancel_date;
+              }
+
 
              ?>
-             <script type="text/javascript">
 
-             </script>
 
              <tr>
                <td><?=$r_date?></td >
-               <td><?=$r_code?></td>
+               <td><a href="../package/package_view.php?mode=<?=$r_code?>"><?=$r_code?></a></td>
                <td><?=$p_name?></td>
                <td><?=$r_pay?></td>
                <td><?=$r_total?></td>
