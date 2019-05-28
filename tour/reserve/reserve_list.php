@@ -11,13 +11,19 @@ $id=$_SESSION['id'];
 include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
 $sql=$result=$total_record=$total_pages=$start_record=$row="";
 $total_record=0;
+$alert = '';
 
 define('ROW_SCALE', 10);
 define('PAGE_SCALE', 10);
 //r_cancel=0 -> 예약내역
-//r_cancel=1 -> 예약내역
+//r_cancel=1 -> 취소내역
 $reserve_flag =empty($_POST['reserve_flag']) ? 0 : $_POST['reserve_flag'];
+if($reserve_flag){
 
+}
+$alert = ($reserve_flag==0) ? "예약 내역이 없습니다." : "취소내역이 없습니다.";
+
+//검색모드
 if(isset($_GET["mode"])&&$_GET["mode"]=="search"){
   $year1=$_POST["h_year1"];
   $year2=$_POST["h_year2"];
@@ -48,22 +54,17 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="search"){
     $sql="SELECT * from `reserve` join `package` on `reserve`.`r_code` = `package`.`p_code` where `reserve`.`r_id` = '$id' and `reserve`.`r_cancel`='$reserve_flag';";
   }
 
+  // 날짜로 검색
   if(isset($_GET['mode'])){
       $date=$_GET['mode'];
       $sql=$sql." where `package`.`p_dp_date` = '$date';";
   }
 }
 
-// 쿼리문실행문장
 $result=mysqli_query($conn,$sql);
 $total_record=mysqli_num_rows($result);
-// 조건?참:거짓
 $total_pages=ceil($total_record/ROW_SCALE);
-
-
-// 페이지가 없으면 디폴트 페이지 1페이지
 $page=(empty($_GET['page']))?1:$_GET['page'];
-
 if(isset($_POST['page'])){
   $page=(empty($_POST['page']))?1:$_POST['page'];
 }
@@ -103,8 +104,8 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
 <html lang="ko" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css?ver=2">
-    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/tour/reserve/css/reserve_list.css?ver=4">
+    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css">
+    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/tour/reserve/css/reserve_list.css">
     <title>산뜻 :: 즐거운 산행</title>
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
     <script type="text/javascript">
@@ -522,12 +523,10 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
       </fieldset>
       <?php
       if(empty($total_record)){
-        echo '<p id="no_result" style="text-align:center; padding:2%;margin-bottom:3%;">예약된 산행 내역이 없습니다.</p>';
+        echo '<p id="no_result" style="text-align:center; padding:2%;margin-bottom:3%;">'.$alert.'</p><hr><br>';
       }
 
        ?>
-
-
     </div> <!-- end of div "reserve_list" -->
     <footer> <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/footer.php";?> </footer>
     </div>  <!-- end of div "wrap" -->

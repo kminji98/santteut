@@ -10,8 +10,8 @@
 #search_date{margin-left: 60px;}
 .date_select{width :100px; padding:10px; margin:2px;}
 #list_field{border: none; margin:0;padding:0;}
-#list_tbl_head{border-collapse: collapse; font-size: 13.5px; border:1px solid #dedede; text-align: center;}
-#list_tbl_head td{font-weight: 600; width:549px; height:37px; background-color: #f2f2f2;}
+#list_tbl_head{width:100%; border-collapse: collapse; font-size: 13.5px; border:1px solid #dedede; text-align: center;}
+#list_tbl_head td{font-weight: 600; width:50%; height:37px; background-color: #f2f2f2;}
 #list_tbl_head td:first-child{background-color: white;border:1px solid #3d3d3d; border-bottom-color: white;}
 #list_head_reserve:hover,#list_head_cancel:hover {cursor: pointer; text-decoration: underline;}
 #list_tbl_body {-webkit-border-horizontal-spacing: 0px;-webkit-border-vertical-spacing: 0px;border-top-width: 0px;border-right-width: 0px;border-bottom-width: 0px;border-left-width: 0px;font-size: 0.89em; margin: 20px 0; border-collapse: separate; border: 1px solid #3d3d3d; border-bottom-color:#dedede; text-align: center;}
