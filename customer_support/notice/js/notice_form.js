@@ -4,8 +4,6 @@
 // + [NAME] 이우주
 // ================================================================= -->
 
-
-
 $(document).ready(function() {
    $('#summernote').summernote({
            height: 800,

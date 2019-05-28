@@ -45,8 +45,6 @@ if(isset($_GET["num"]) && !empty($_GET["num"])){
     $content= $row['content'];
     $title=str_replace("\n", "<br>",$title);
     $title=str_replace(" ", "&nbsp;",$title);
-    // $content=str_replace("\n", "<br>",$content);
-    // $content=str_replace(" ", "&nbsp;",$content);
     $file_name=$row['file_name'];
     $file_copied=$row['file_copied'];
     $file_type=$row['file_type'];
@@ -91,7 +89,6 @@ if(isset($_GET["num"]) && !empty($_GET["num"])){
       <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/login_menu.php";?>
       <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/custom_menu.php";?>
     </header>
-    <br><br><br><br>
 
     <section id="notice">
       <table border="1">
@@ -121,23 +118,22 @@ if(isset($_GET["num"]) && !empty($_GET["num"])){
         </tr>
         <tr>
           <th>파일</th>
-          <td style="text-align:center;">
+          <td style="text-align:center; text-decoration: none;">
 <?php
 //2. 업로드된 이름을 보여주고 [저장] 할것인지 선택한다.
             echo ("
               첨부파일 : $file_name &nbsp; [ $file_size Byte ]
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>
-              <a href='notice_download.php?mode=download&num=$q_num'>[저장]</a></b><br>
+              <a style='text-decoration: none; color:black;' href='notice_download.php?mode=download&num=$q_num'>[저장]</a></b><br>
             ");
              ?>
           </td>
         </tr>
       </table>
     <div class="admin">
-
-      <button id="admin_write_btn" type="button" name="button"><a href="./notice_form.php?mode=update&num=<?=$num?>">수정</a></button>
+      <a href="./notice_form.php?mode=update&num=<?=$num?>"><button id="admin_write_btn" type="button" name="button">수정</button></a>
       <button id="admin_write_btn" type="button" name="button" onclick="check_delete(<?=$num?>)">삭제</button>
-      <button id="admin_write_btn" type="button" name="button"><a href="./notice_list.php?page=<?=$page?>">목록</a></button>
+      <a href="./notice_list.php?page=<?=$page?>"><button id="admin_write_btn" type="button" name="button">목록</button></a>
     </div>
     </section>
     <br>

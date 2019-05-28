@@ -122,6 +122,7 @@ $view_num = $total_record - $start_record;
         </li>
       </div>
       </form>
+
       <!--게시물 제목-->
       <table id="list_tbl">
         <tr>
