@@ -7,6 +7,6 @@
 .overlay {cursor:pointer; position: absolute; bottom: 0; left: 0; right: 0; background-color: white; overflow: hidden; width: 83.5%; height: 20%; transition: height 0.5s; border:1px solid #ddd; padding:3%;}
 .container:hover .overlay {height: 70%;}
 .button1 button:hover{background-color: #d10e0e; opacity: 0.5;}
-.text {margin-bottom: 22%; color: black; font-size: 15px; }
+.text {margin-bottom: 15%; color: black; font-size: 15px; }
 .text1{font-size: 12px;}
 .button1{text-align: center;}
