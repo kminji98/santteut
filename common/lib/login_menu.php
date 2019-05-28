@@ -37,6 +37,7 @@
           <div id="top_my_content">
             <ul id="top_my_content_ul">
               <li><a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/tour/admin/admin_add_package.php" class="hov">상품등록</a></li>
+              <li><a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/tour/admin/admin_manage_package.php" class="hov">상품관리</a></li>
               <li><a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/tour/reserve/reserve_list.php" class="hov">예약/결제목록</a></li>
               <li><a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/customer_support/qna/qna_list.php" class="hov">답변글관리</a></li>
               <li><a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/revenue/revenue_management.php" class="hov">매출관리</a></li>
