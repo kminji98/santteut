@@ -110,7 +110,7 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
     <script type="text/javascript">
     // 예약내역 취소내역 선택 부분
       $(document).ready(function() {
-        // var reserve_flag = <?=json_encode($reserve_flag)?>;
+
         $("#reserve_flag").val(<?=json_encode($reserve_flag)?>);
         //여기
 
@@ -447,13 +447,13 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
               $review_status =$review_row['num'];
               // $r_pk = "aaa";
               if(empty(mysqli_num_rows($review_result))){
-<<<<<<< HEAD
+
                 // $review_status='<button type="button" name="button" onclick="review("../member_review/member_review.php");" >후기작성</button>';
                 $review_status='<input type="button" name="review_btn" id="'.$r_pk.'" value="후기작성">';
-=======
+
 
                 $review_status='<input type="button" name="review_btn" id="'.$r_pk.'" value="후기">';
->>>>>>> 568f05c43cc5ebc5fdb37aa31e598b6e975202a8
+
               }else{
                 $review_status='<input type="button" name="review_btn" id="'.$r_pk.'" value="후기확인">';
               }
