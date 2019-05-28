@@ -16,9 +16,6 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
 //0-1. 인클루드 크리테이블
 include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/create_table_base.php";
 
-//0-2. 공지사항테이블생성
-create_table($conn,'notice');
-
 //1. 게시물수 정의
 define('ROW_SCALE', 10);
 define('PAGE_SCALE', 5);
