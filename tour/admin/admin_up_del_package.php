@@ -28,7 +28,7 @@ include '../../common/lib/db_connector.php';
     <div id="content">
       <br><br>
       <h2>패키지 수정.삭제</h2><br>
-        <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/editor/editor.php"; ?>
+        <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/editor/editor2.php"; ?>
     </div>
     <footer>
       <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/footer.php";?>
