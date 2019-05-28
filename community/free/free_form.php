@@ -1,5 +1,3 @@
-
-
 <?php
 //세션아이디가 관리자인지 확인
 session_start();
@@ -91,7 +89,6 @@ if (isset($_GET["mode"]) && $_GET["mode"]=="update") {
       <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/login_menu.php";?>
       <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/commu_menu.php";?>
     </header>
-    <br><br><br>
 
     <section id="free">
       <form class="free_insert_form" action="free_query.php?mode=<?php echo $mode; ?>" method="post" enctype="multipart/form-data">
@@ -106,7 +103,7 @@ if (isset($_GET["mode"]) && $_GET["mode"]=="update") {
           <th>제목</th>
           <td><input type="text" style="font-size:15px; width:100px;" name="title" value="<?=$title?>"></td>
         </tr>
-        <tr style="height:400px;">
+        <tr>
           <th>내용</th>
           <td><textarea name="content" id="summernote"><?=$content?></textarea></td>
         </tr>

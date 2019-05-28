@@ -88,7 +88,7 @@ $view_num = $total_record - $start_record;
     <meta charset="utf-8">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/community/free/css/free_list.css?ver=0">
-    <title>공지사항</title>
+    <title>자유게시판</title>
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
     <script type="text/javascript">
       $(document).ready(function() {
@@ -102,26 +102,21 @@ $view_num = $total_record - $start_record;
       <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/login_menu.php";?>
       <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/commu_menu.php";?>
     </header>
-    <br><br><br>
     <section id="free">
-
       <form name="free_form" action="free_list?mode=search" method="post">
-      <div class="free_list_search">
-        <select>
-          <option value="">제목</option>
-          <option value="">내용</option>
-          <option value="">작성자</option>
-        </select>
-        <input type="text" name="" value="">
-        <button type="button" name="button">검색</button>
+        <div class="free_list_search">
+          <li id="total_title"><b>total <?=$total_record?></b></li>
+          <li id="search_option">
+            <select>
+            <option value="">제목</option>
+            <option value="">내용</option>
+            <option value="">작성자</option>
+          </select>
+          <input type="text" name="" value="">
+          <button type="button" name="button">검색</button>
+        </li>
       </div>
       </form>
-
-      <!--총 게시물-->
-      <div class="total_title">
-        <h4>total <?=$total_record?></h4>
-      </div>
-
       <!--게시물 제목-->
       <table id="list_tbl">
         <tr>
@@ -148,7 +143,7 @@ $view_num = $total_record - $start_record;
           <!--번호-->
           <td><?=$view_num?></td>
           <!--제목-->
-          <td><a href="./free_view.php?num=<?=$num?>&present_page=<?=$page?>&hit=<?=$hit+1?>"><?=$title?></a></td>
+        <td style="text-align: left;"><a style="text-decoration: none;" href="./free_view.php?num=<?=$num?>&present_page=<?=$page?>&hit=<?=$hit+1?>"><?=$title?></a></td>
           <!--작성자-->
           <td><?=$name?></td>
           <!--작성일-->
