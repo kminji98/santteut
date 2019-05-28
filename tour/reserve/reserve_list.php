@@ -12,7 +12,6 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
 $sql=$result=$total_record=$total_pages=$start_record=$row="";
 $total_record=0;
 
-
 define('ROW_SCALE', 10);
 define('PAGE_SCALE', 10);
 //r_cancel=0 -> 예약내역
@@ -43,7 +42,12 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="search"){
   $search_end = $year2."-".$month2."-".$day2;
   $sql="SELECT * from `reserve` join `package` on `reserve`.`r_code` = `package`.`p_code` where `package`.`p_dp_date` between '$search_start' and '$search_end' and `reserve`.`r_id` = '$id' and `reserve`.`r_cancel`='$reserve_flag';";
 }else{
-  $sql="SELECT * from `reserve` join `package` on `reserve`.`r_code` = `package`.`p_code` where `reserve`.`r_id` = '$id' and `reserve`.`r_cancel`='$reserve_flag';";
+  if($id=="admin"){
+    $sql="SELECT * from `reserve` join `package` on `reserve`.`r_code` = `package`.`p_code` where `reserve`.`r_cancel`='$reserve_flag';";
+  }else{
+    $sql="SELECT * from `reserve` join `package` on `reserve`.`r_code` = `package`.`p_code` where `reserve`.`r_id` = '$id' and `reserve`.`r_cancel`='$reserve_flag';";
+  }
+
   if(isset($_GET['mode'])){
       $date=$_GET['mode'];
       $sql=$sql." where `package`.`p_dp_date` = '$date';";
@@ -392,8 +396,12 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
                 $total+=$sum;
               }
 
-              // $bill_done_sql = "SELECT * FROM `bill` inner join `reserve` on `reserve`.`r_code` = `bill`.`b_code`"
-              $bill_sql = "SELECT * FROM `bill` where `b_code`='$r_code' and `b_pk`='$r_pk' and `b_id`='$id';";
+              if($id=="admin"){
+                $bill_sql = "SELECT * FROM `bill` where `b_code`='$r_code' and `b_pk`='$r_pk';";
+              }else{
+                $bill_sql = "SELECT * FROM `bill` where `b_code`='$r_code' and `b_pk`='$r_pk' and `b_id`='$id';";
+              }
+
               //결제상태
               $bill_result=mysqli_query($conn,$bill_sql);
               $count=mysqli_num_rows($bill_result);
