@@ -211,6 +211,9 @@ function create_table($conn, $table_name){
        `title` varchar(100) NOT NULL,
        `content` text NOT NULL,
        `id` char(20) NOT NULL,
+       `name` char(10) NOT NULL,
+       `write_date` date NOT NULL,
+       `grade` int not null,
        PRIMARY KEY (`num`)
        ) DEFAULT CHARSET=utf8;
        ";
@@ -223,6 +226,7 @@ function create_table($conn, $table_name){
       ) DEFAULT CHARSET=utf8;
       ";
      break;
+     
     case 'free' :
      $sql = "CREATE TABLE `free` (
      `num` int(11) NOT NULL AUTO_INCREMENT,
