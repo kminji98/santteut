@@ -33,7 +33,7 @@ setcookie("cookie1",$p_code,time() + 3600);
       <div id="top_box">
 
       <div id="code"><p>상품코드:<?= $p_code?></p></div>
-      <div id="name"><b><?= $p_name?></b> <p>간단설명</p> </div>
+      <div id="name"><b><?= $p_name?></b> <p><?=$p_arr_mt?> 트레킹 코스 중 가장 인기있는 코스. <?=$p_arr_mt?> 정상까지 가는 일정 입니다.</p> </div>
       <div id="image_zone">
         <img src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/lib/editor/data/<?=$p_main_img_copy1?>" alt="">
         <img src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/lib/editor/data/<?=$p_main_img_copy2?>" alt="">
