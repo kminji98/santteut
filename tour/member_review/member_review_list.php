@@ -9,6 +9,7 @@ define('PAGE_SCALE', 10);
 $after_sql = "SELECT * FROM `member_review` where `r_code`='$p_code' and `id`='$id';";
 $after_result = mysqli_query($conn,$after_sql);
 $total_record=mysqli_num_rows($after_result);
+
 // 조건?참:거짓
 $total_pages=ceil($total_record/ROW_SCALE);
 
@@ -61,12 +62,13 @@ for ($record = $start_record; $record  < $start_record+ROW_SCALE && $record<$tot
   $title = $row['title'];
   $w_date = $row['write_date'];
   $grade = $row['grade'];
+  $pk = $row['r_pk'];
 
 
  ?>
     <tr>
       <td class="td1"><?=$num?></td>
-      <td class="td2"><?=$title?></td>
+      <td class="td2"><a href="../member_review/member_review.php?mode=view&r_pk=<?=$pk?>"><?=$title?></a></td>
       <td class="td3"><?=$id?></td>
       <td class="td4"><?=$w_date?></td>
       <td class="td5"><?=$grade?></td>
