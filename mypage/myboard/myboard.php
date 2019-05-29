@@ -49,9 +49,9 @@ session_start();
         </tr></table>
         <table id="list_tbl_body">
           <tr>
-            <td>예약날짜</td>
-            <td>예약코드</td>
-            <td>상품명</td>
+            <td>제목</td>
+            <td>작성일</td>
+            <td></td>
             <td>총 결제금액</td>
             <td>인원</td>
             <td>출발일/귀국일</td>
