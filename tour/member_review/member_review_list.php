@@ -3,8 +3,8 @@
 $id=isset($_SESSION['id'])?$_SESSION['id']:'';
 $r_code = isset($_GET["code"]);
 
-define('ROW_SCALE', 10);
-define('PAGE_SCALE', 10);
+define('ROW_SCALE', 5);
+define('PAGE_SCALE', 5);
 
 
 $after_sql = "SELECT * FROM `member_review` where `r_code`='$p_code';";
@@ -44,13 +44,16 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
 .page_button_group{ position: relative; margin-top: auto; margin-left: auto;text-align:center; width: 100%; height: auto;}
 a{text-decoration: none;}
 </style>
+<div class="" style="margin-left:12%;">
+  <h3 style="display:inline;">상품평</h3><b style="display:inline; margin-left:1%; color:#2F9D27;">(<?=$total_record?>건)</b>
+</div>
 <table id="tbl1">
   <tr>
-    <td class="td1">NO</td>
-    <td class="td2">제목</td>
-    <td class="td3">작성자</td>
-    <td class="td4">등록날짜</td>
-    <td class="td5">평점</td>
+    <td id="top_td" class="td1"><b>NO</b></td>
+    <td id="top_td" class="td2"> <b>제목</b> </td>
+    <td id="top_td" class="td3"><b>작성자</b></td>
+    <td id="top_td" class="td4"><b>등록날짜</b></td>
+    <td id="top_td" class="td5"><b>평점</b></td>
   </tr>
 <?php
 mysqli_data_seek($after_result,$start_record);
