@@ -355,7 +355,7 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
               <td>예약날짜</td>
               <td>예약코드</td>
               <td>상품명</td>
-              <td>총 결제금액</td>
+              <td>총 결제금액(원)</td>
               <td>인원(ID)</td>
               <td>출발일/귀국일</td>
               <td>예약/결제상태</td>
@@ -367,7 +367,7 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
               <td>예약날짜</td>
               <td>예약코드</td>
               <td>상품명</td>
-              <td>총 결제금액</td>
+              <td>총 결제금액(원)</td>
               <td>인원</td>
               <td>출발일/귀국일</td>
               <td>예약/결제상태</td>
