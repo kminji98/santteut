@@ -12,7 +12,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
 
 // 1. 모드 = 후기작성
 $mode="insert";
-$readonly=$disabled='';
+$readonly=$disabled=$title=$content=$name='';
 
 $id= $_SESSION['id'];
 $name= $_SESSION['name'];

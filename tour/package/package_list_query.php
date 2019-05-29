@@ -11,7 +11,7 @@ define('PAGE_SCALE', 5);
 if(isset($_GET['divide'])){ $divide = $_GET['divide'];}
 if(isset($_POST['divide'])){ $divide = $_POST['divide'];}
 
-if($divide=="domestic"){
+if(isset($divide) && $divide=="domestic"){
   $sql="SELECT * from `package` where `p_airplane_num` = '0'";
   $head_text = "국내산행";
   $pay_2="0~5만원"; $pay_2_query="and `p_pay` between 0 and 59999";
@@ -22,7 +22,7 @@ if($divide=="domestic"){
   $pay_7="41~50만원"; $pay_7_query="and `p_pay` between 310000 and 509999";
   $pay_8="51만원↑"; $pay_8_query="and `p_pay` >=510000";
   $won="";
-}else if($divide=="abroad"){
+}else if(isset($divide) && $divide=="abroad"){
   $sql="SELECT * from `package` where `p_airplane_num` != '0'";
   $head_text = "해외산행";
   $pay_2="0~50"; $pay_2_query="and `p_pay` between 0 and 509999";

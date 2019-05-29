@@ -4,9 +4,7 @@
 + [NAME] 이우주
 ================================================================= -->
 <?php
-if($_SESSION['id']){
-  $id=$_SESSION['id'];
-}
+if(isset($_SESSION['id'])){ $id=$_SESSION['id'];}
  ?>
 
 <div id="logo">
@@ -22,7 +20,7 @@ if($_SESSION['id']){
     <ul id="login_menu_ul" >
       <?php
       // 비회원일때
-      if(!isset($_SESSION['id'])){
+      if(!isset($id)){
          echo ('<li ><a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/member/login/login.php" class="hov">로그인</a></li>');
         echo ('<li><a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/member/join/join_member.php" class="hov">회원가입</a></li>');
         echo ('<li id="top_my" class="hov">커뮤니티<small>▼</small>
@@ -36,8 +34,9 @@ if($_SESSION['id']){
         </li> ');
 
         //관리자일때
-      }else if($_SESSION['id']=="admin"){
-        echo ("<b> {$_SESSION['name']} </b> 님 환영합니다. ");
+      }else if($id=="admin"){
+        $name = $_SESSION['name'];
+        echo ("<b> {$name} </b> 님 환영합니다. ");
         echo ('<li id="logout">[<a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/member/login/logout.php">로그아웃</a>]</li> ');
         echo ('<li id="top_my" class="hov">관리자모드<small>▼</small>
           <div id="top_my_content">
@@ -63,7 +62,8 @@ if($_SESSION['id']){
 
         //회원일때
       }else{
-        echo ("<b> {$_SESSION['name']} </b> 님 환영합니다. ");
+        $name = $_SESSION['name'];
+        echo ("<b> {$name} </b> 님 환영합니다. ");
         echo ('<li id="logout">[<a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/member/login/logout.php">로그아웃</a>]</li> ');
         echo ('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<li id="top_my" class="hov">My<small>▼</small>
           <div id="top_my_content">
