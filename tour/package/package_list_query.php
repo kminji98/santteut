@@ -8,17 +8,35 @@ $total_record=0;
 //@@@@@@ MINJI 테스트//@@성훈테스트
 define('ROW_SCALE', 10);
 define('PAGE_SCALE', 5);
-if(isset($_GET['divide'])) $divide=$_GET['divide'];
-if(isset($_POST['divide'])) $divide=$_POST['divide'];
+if(isset($_GET['divide'])){ $divide = $_GET['divide'];}
+if(isset($_POST['divide'])){ $divide = $_POST['divide'];}
 
-
-if(isset($_GET['divide'])=="domestic"){
-  $sql="SELECT * from `package` where `p_airplane_num` ='0'";
-}else if(isset($_GET['divide'])=="abroad"){
-  $sql="SELECT * from `package` where `p_airplane_num` !='0'";
+if($divide=="domestic"){
+  $sql="SELECT * from `package` where `p_airplane_num` = '0'";
+  $head_text = "국내산행";
+  $pay_2="0~5만원"; $pay_2_query="and `p_pay` between 0 and 59999";
+  $pay_3="6~10만원"; $pay_3_query="and `p_pay` between 60000 and 109999";
+  $pay_4="11~20만원"; $pay_4_query="and `p_pay` between 110000 and 209999";
+  $pay_5="21~30만원"; $pay_5_query="and `p_pay` between 210000 and 309999";
+  $pay_6="31~40만원"; $pay_6_query="and `p_pay` between 210000 and 409999";
+  $pay_7="41~50만원"; $pay_7_query="and `p_pay` between 310000 and 509999";
+  $pay_8="51만원↑"; $pay_8_query="and `p_pay` >=510000";
+  $won="";
+}else if($divide=="abroad"){
+  $sql="SELECT * from `package` where `p_airplane_num` != '0'";
+  $head_text = "해외산행";
+  $pay_2="0~50"; $pay_2_query="and `p_pay` between 0 and 509999";
+  $pay_3="51~100"; $pay_3_query="and `p_pay` between 510000 and 1099999";
+  $pay_4="101~200"; $pay_4_query="and `p_pay` between 1100000 and 2099999";
+  $pay_5="201~300"; $pay_5_query="and `p_pay` between 2100000 and 3099999";
+  $pay_6="301~400"; $pay_6_query="and `p_pay` between 2100000 and 4099999";
+  $pay_7="401~500"; $pay_7_query="and `p_pay` between 3100000 and 5099999";
+  $pay_8="501↑"; $pay_8_query="and `p_pay` >=5100000";
+  $won="단위(만원)";
 }else{
   $sql="SELECT * from `package`";
 }
+
 
 if(isset($_GET['mode'])){
   switch ($_GET['mode']) {
@@ -27,9 +45,9 @@ if(isset($_GET['mode'])){
     case 'search':
     $find_option= $_GET['find_option'];
     $find_input= $_GET['find_input'];
-    if($_GET['divide']=="domestic"){
+    if($divide=="domestic"){
     $sql="SELECT * from `package` where $find_option like '%$find_input%' and `p_airplane_num` ='0';";
-  }else if($_GET['divide']=="abroad"){
+  }else if($divide=="abroad"){
     $sql="SELECT * from `package` where $find_option like '%$find_input%' and `p_airplane_num` !='0';";
   }else{
     $sql="SELECT * from `package` where $find_option like '%$find_input%';";
@@ -42,8 +60,6 @@ if(isset($_GET['mode'])){
     $output=$_POST['output'];
     $page=$_POST['page'];
     break;
-
-    //@@@@@@ MINJI 테스트
 
     //C. [ORDER] 최신순▼요금순▼ : 조건, 내림차순/오름차순(POST)
     //최신순▼요금순▼
@@ -61,9 +77,9 @@ if(isset($_GET['mode'])){
       $date=$_GET['mode'];
       $sql="SELECT * from `package`";
       $sql=$sql." where `p_dp_date` = '$date'";
-      if($_GET['divide']=="domestic"){
+      if($divide=="domestic"){
         $sql=$sql." and `p_airplane_num` ='0';";
-      }else if($_GET['divide']=="abroad"){
+      }else if($divide=="abroad"){
         $sql=$sql." and `p_airplane_num` !='0';";
       }
       break;
@@ -89,7 +105,6 @@ if(isset($_GET['mode'])){
   }
 
 }
-
 // 쿼리문실행문장
 $result=mysqli_query($conn,$sql);
 $total_record=mysqli_num_rows($result);

@@ -1,6 +1,6 @@
 <?php
 include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php";
-$divide=isset($_GET['divide']);
+
 ?>
 
 <!DOCTYPE html>
@@ -12,7 +12,7 @@ $divide=isset($_GET['divide']);
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/side_bar.css">
     <link href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/lib/calendar/css/style.css?ver=0" rel="stylesheet">
     <script type="text/javascript">
-      var divide= <?=json_encode($_GET['divide'])?>;
+      var divide=<?=json_encode($divide)?>;
     </script>
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
     <script src="../../common/lib/calendar/js/script.js"></script>
@@ -296,7 +296,7 @@ $divide=isset($_GET['divide']);
     <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/side_bar.php";?>
     <hr>
     <div id="head_text">
-      <h2>국내산행</h2>
+      <h2><?=$head_text?></h2>
     </div>
     <!--인기 산행 일정 TOP3-->
     <div id="best3">
@@ -305,7 +305,6 @@ $divide=isset($_GET['divide']);
       </div>
     </div>
     <div id="main_big3">
-      <!-- ///@@@@@@ MINJI 테스트중 BEST3 수정 중 -->
       <div id="best3" >
         <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/best3.php";?>
       </div>
@@ -322,7 +321,7 @@ $divide=isset($_GET['divide']);
           <input id="package_search_input" placeholder="검색어를 입력하세요" type="text" name="find_input" <?php if(isset($find_input)) echo "value='$find_input'";?>>
           <button id="package_search_btn" type="button" name="button" onclick="document.search_form.submit()"><b>검색</b></button>
           <strong  id="package_search_detail_control" onclick="control_display2();">상세검색▼</strong>
-          <input type="hidden" name="divide" value="<?=$_GET['divide']?>">
+          <input type="hidden" name="divide" value="<?=$divide?>">
         </form>
       </div>
 
@@ -382,37 +381,12 @@ $divide=isset($_GET['divide']);
               }
               detail_id.style.backgroundColor="#2F9D27";
               detail_id.style.color="white";
-              detail_id.style.color="white";
-              detail_id.style.color="white";
               detail_id.style.border="1px solid #2F9D27";
               detail_id.value=value;
             }
 
           </script>
 
-
-          <?php
-          if($divide=="domestic"){
-            $pay_2="0~5만원"; $pay_2_query="and `p_pay` between 0 and 59999";
-            $pay_3="6~10만원"; $pay_3_query="and `p_pay` between 60000 and 109999";
-            $pay_4="11~20만원"; $pay_4_query="and `p_pay` between 110000 and 209999";
-            $pay_5="21~30만원"; $pay_5_query="and `p_pay` between 210000 and 309999";
-            $pay_6="31~40만원"; $pay_6_query="and `p_pay` between 210000 and 409999";
-            $pay_7="41~50만원"; $pay_7_query="and `p_pay` between 310000 and 509999";
-            $pay_8="51만원↑"; $pay_8_query="and `p_pay` >=510000";
-            $won="";
-          }else if($divide=="abroad"){
-            $pay_2="0~50"; $pay_2_query="and `p_pay` between 0 and 509999";
-            $pay_3="51~100"; $pay_3_query="and `p_pay` between 510000 and 1099999";
-            $pay_4="101~200"; $pay_4_query="and `p_pay` between 1100000 and 2099999";
-            $pay_5="201~300"; $pay_5_query="and `p_pay` between 2100000 and 3099999";
-            $pay_6="301~400"; $pay_6_query="and `p_pay` between 2100000 and 4099999";
-            $pay_7="401~500"; $pay_7_query="and `p_pay` between 3100000 and 5099999";
-            $pay_8="501↑"; $pay_8_query="and `p_pay` >=5100000";
-            $won="단위(만원)";
-          }
-
-           ?>
           <tr>
             <td class="package_search_detail_option">상품가격</td>
             <td onclick="detail_function('pay_1','pay_div','')"><div id="pay_1" name="pay_div" class="package_search_detail_option_all"><p id="전체" name="상품가격" style="display:inline;">전체</p></div></td>
