@@ -10,7 +10,7 @@ session_start();
 include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
 
 //1. 게시물수 정의
-define('ROW_SCALE', 9);
+define('ROW_SCALE', 3);
 define('PAGE_SCALE', 5);
 
 //2. 변수정의
@@ -73,7 +73,6 @@ $view_num = $total_record - $start_record;
         $("#infomation_mini").css("color","black");
       });
       </script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   </head>
   <body>
     <header>
@@ -82,26 +81,25 @@ $view_num = $total_record - $start_record;
     </header>
     <div class="community_section">
       <section>
-        <div id="official_review">명산정보</div>
-      </section>
-      <section>
         <form name="board_form" action="mt_information_list.php?mode=search" method="post">
           <table>
             <!-- <input type="hidden" name="mode" value="search"> -->
-            <tr id="list_search">
-              <td id="list_search1">총 <?=$total_record?> 개의 게시물이 있습니다.</td>
-              <td id="list_search3">
+            <ul id="list_search">
+              <li id="list_search1">total <?=$total_record?></li>
+
+              <li id="list_search3">
                 <select name="find_option">
                   <option value="title">제목</option>
+                  <option value="title">내용</option>
                 </select>
-              </td>
-              <td id="list_search4"><input type="text" name="find_input"></td>
-              <td id="list_search5"><input type="submit" value="검색" style="width:50px; height:24px; background-color: #2F9D27; border: 1px solid #2F9D27; color: white;"></td>
-            </tr>
+                <input id="list_search4" type="text" name="find_input">
+                <input id="list_search5" type="submit" value="검색">
+              </li>
+            </ul>
           </table>
         </form>
       </section>
-      <section style="padding-top: 50px;">
+      <section>
         <?php
           $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
 
@@ -114,20 +112,19 @@ $view_num = $total_record - $start_record;
             $regist_day = $row['regist_day'];
             $main_img = $row['main_img'];
             ?>
-            <a href="./mt_information_view.php?num=<?=$num?>" id="review_a">
               <div class="review">
+                <a href="./mt_information_view.php?num=<?=$num?>" id="review_a">
               <div class="review_img"><img src="./img/<?=$main_img?>" width="350px" height="400px"></div>
               <div class="review_title"><b><?=$title?></b></div><br>
-              </div>
             </a>
+              </div>
             <?php
             }
             ?>
       </section>
     </div>
-    <div class="clear"></div>
-    <div style="padding-bottom: 40px;">
-      <a href="./mt_information_form.php"><input type="button" style="width:60px; height:24px; background-color: #2F9D27; border: 1px solid #2F9D27; color: white; margin-left:1200px;" value="글쓰기"></a>
+    <div>
+      <a href="./mt_information_form.php"><button id="write_but" type="button" name="button">글쓰기</button></a>
     </div>
     <div class="page_button_group">
       <?php

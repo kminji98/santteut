@@ -56,7 +56,7 @@
   </div>
     <!-- 사진경로  변수로 설정해주셔야 합니다 -->
   <div id="side_bar_recent">
-    <br> <p style="display:block">최근 본 상품</p>
+    <br><br><p style="display:block">최근 본 상품</p>
     <a href="../../tour/package/package_view.php?mode=<?=$cookie1?>"><img class="side_bar_recent_img" src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/lib/editor/data/<?=$menu1?>"></a>
     <div class="side_bar_recent_val"><a href="../../tour/package/package_view.php?mode=<?=$cookie1?>" style=" text-decoration:none;font-size:5px; color:gray; <?=$color1?>"><?=$mt1?></a></div>
     <a href="../../tour/package/package_view.php?mode=<?=$cookie1?>"><img class="side_bar_recent_img" src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/lib/editor/data/<?=$menu2?>"></a>
@@ -74,6 +74,6 @@
   <div class="side_bar_bottom">
     <a href="#"><button title="맨 위로" id="side_bar_top_btn"  type="button" name="button"><b>▲</b></button></a>
     <button title="산뜻바 닫기" id="side_bar_cancel_btn"  type="button" name="button" onclick="control_display()"><b>X</b></button>
-    <br><br><p>TEL:02-000-0000</p>
+    <br><p>TEL:02-000-0000</p>
   </div>
 </div>
