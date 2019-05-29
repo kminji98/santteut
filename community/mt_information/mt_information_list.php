@@ -123,9 +123,16 @@ $view_num = $total_record - $start_record;
             ?>
       </section>
     </div>
-    <div>
-      <a href="./mt_information_form.php"><button id="write_but" type="button" name="button">글쓰기</button></a>
-    </div>
+  
+    <?php
+    if(!empty($_SESSION['id'])){
+      echo '<a href="mt_information_form.php"><button id="write_but" type="button" name="button">
+      글쓰기</button></a>';
+    }
+     ?>
+
+
+
     <div class="page_button_group">
       <?php
       //현재 블럭의 시작 페이지가 페이지 스케일 보다 클 때 -> 처음으로 버튼 생성 + 이전 블럭 존재
