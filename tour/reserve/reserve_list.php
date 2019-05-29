@@ -46,7 +46,11 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="search"){
   }
   $search_start = $year1."-".$month1."-".$day1;
   $search_end = $year2."-".$month2."-".$day2;
-  $sql="SELECT * from `reserve` join `package` on `reserve`.`r_code` = `package`.`p_code` where `package`.`p_dp_date` between '$search_start' and '$search_end' and `reserve`.`r_id` = '$id' and `reserve`.`r_cancel`='$reserve_flag';";
+  if($id=="admin"){
+    $sql="SELECT * from `reserve` join `package` on `reserve`.`r_code` = `package`.`p_code` where `package`.`p_dp_date` between '$search_start' and '$search_end' and `reserve`.`r_cancel`='$reserve_flag';";
+  }else{
+    $sql="SELECT * from `reserve` join `package` on `reserve`.`r_code` = `package`.`p_code` where `package`.`p_dp_date` between '$search_start' and '$search_end' and `reserve`.`r_id` = '$id' and `reserve`.`r_cancel`='$reserve_flag';";
+  }
 }else{
   if($id=="admin"){
     $sql="SELECT * from `reserve` join `package` on `reserve`.`r_code` = `package`.`p_code` where `reserve`.`r_cancel`='$reserve_flag';";
@@ -54,11 +58,6 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="search"){
     $sql="SELECT * from `reserve` join `package` on `reserve`.`r_code` = `package`.`p_code` where `reserve`.`r_id` = '$id' and `reserve`.`r_cancel`='$reserve_flag';";
   }
 
-  // 날짜로 검색
-  if(isset($_GET['mode'])){
-      $date=$_GET['mode'];
-      $sql=$sql." where `package`.`p_dp_date` = '$date';";
-  }
 }
 
 $result=mysqli_query($conn,$sql);
@@ -97,8 +96,6 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
   $d = $now -> format("d");
   //t = the number of days in the given month
   $t = $now -> format("t");
-
-
  ?>
 <!DOCTYPE html>
 <html lang="ko" dir="ltr">
@@ -111,10 +108,8 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
     <script type="text/javascript">
     // 예약내역 취소내역 선택 부분
       $(document).ready(function() {
-
         $("#reserve_flag").val(<?=json_encode($reserve_flag)?>);
         //여기
-
         if($("#reserve_flag").val()*1){
           if($("#list_head_cancel").css('background-color')!="white"){
             $("#list_head_cancel").css('background-color', 'white');
@@ -449,23 +444,21 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
                 }
 
               }
-
-              //산행후기 review @@@@@@@@@MINJI0527
               $review_sql = "SELECT * FROM `member_review` where `r_pk`='$r_pk'";
               //취소
               $review_result=mysqli_query($conn,$review_sql);
               $review_row=mysqli_fetch_array($review_result);
 
               //해당 예약 항목의 후기 여부 확인 -> 후기 없으면 작성 form /있으면 보여주기
+              //예약 목록의 도착 날짜와 현재 날짜 비교 => 여행을 다녀와야 후기 작성 가능
               $review_status =$review_row['num'];
-              // $r_pk = "aaa";
               if(empty(mysqli_num_rows($review_result))){
-                // $review_status='<button type="button" name="button" onclick="review("../member_review/member_review.php");" >후기작성</button>';
-                $review_status='<input type="button" name="review_btn" id="'.$r_pk.'" value="후기작성">';
+                $disabled = '';
+                if($p_dp_date>= date("Y-m-d")){ $disabled = 'disabled';}
+                $review_status='<input type="button" name="review_btn" '.$disabled.' id="'.$r_pk.'" value="후기작성">';
               }else{
                 $review_status='<input type="button" name="review_btn" id="'.$r_pk.'" value="후기확인">';
               }
-
 
               if($r_cancel=="1"){
                 $status="예약취소";
@@ -493,8 +486,7 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
              }else{
                echo '<tr>
                  <td>'.$r_date.'</td >
-                 <td><a href="../package/package_view.php?mode='.$r_code.'">'.$r_code.'</a></td>
-                 <td>'.$p_name.'</td>
+                 <td colspan="2" style="width:"><a href="../package/package_view.php?mode='.$r_code.'">['.$r_code.']'.$p_name.'</a></td>
                  <td>'.$r_pay.'</td>
                  <td>'.$r_total.'</td>
                  <td>'.$p_dp_date.'<br>'.$p_arr_date2.'</td>

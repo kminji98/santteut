@@ -7,7 +7,6 @@ if(!isset($_SESSION['id'])){
   echo "<script>alert('권한없음!');history.go(-1);</script>";
   exit;
 }
-
 include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
 
 // 1. 모드 = 후기작성
@@ -24,8 +23,6 @@ if((isset($_GET["mode"])&&$_GET["mode"]=="view") ){
   // view -> 수정 불가
     $readonly ='readonly';
     $disabled ='disabled';
-    $num = test_input($_GET["num"]);
-    $q_num = mysqli_real_escape_string($conn, $num);
 
     //view 이면 후기테이블에서 해당된 예약 번호를 조회.
     $sql="SELECT * from `member_review` where `r_pk` ='$r_pk';";
@@ -71,10 +68,20 @@ if((isset($_GET["mode"])&&$_GET["mode"]=="view") ){
       }
 
     </style>
+    <script type="text/javascript">
+      function review_complete(){
+        var mode = <?=json_encode($_GET['mode'])?>;
+        if(mode == "insert"){
+          document.member_review_insert_form.submit();
+        }else if (mode == "view"){
+            window.close();
+        }
+      }
+    </script>
   </head>
   <body>
     <section id="review_section" >
-      <form class="member_review_insert_form" action="member_review_query.php?mode=<?=$mode?>" method="post">
+      <form name="member_review_insert_form" action="member_review_query.php?mode=<?=$mode?>" method="post">
         <input type="hidden" name="r_pk" value="<?=$r_pk?>">
       <table id="review_tbl" border="1">
         <tr>
@@ -112,7 +119,7 @@ if((isset($_GET["mode"])&&$_GET["mode"]=="view") ){
       </table>
       <br>
         <div>
-          <button id="admin_write_btn" style="margin-left:36%; padding:2%" onclick='document.member_review_insert_form.submit();" type="button" name="button"'>완료</button>
+          <button id="admin_write_btn" style="margin-left:36%; padding:2%" onclick="review_complete()" type="button" name="button"'>완료</button>
         </div>
       </form>
     </section>

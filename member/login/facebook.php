@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 require_once './src/Facebook/autoload.php'; // download official fb sdk for php @ https://github.com/facebook/php-graph-sdk
 $fb = new Facebook\Facebook([
   'app_id' => '2504643382879573', //님의 앱ID 적어주세요
