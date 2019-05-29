@@ -4,7 +4,7 @@
 + [NAME] 이우주
 ================================================================= -->
 <?php
-if(isset($_SESSION['id'])){ $id=$_SESSION['id'];}
+if(isset($_SESSION['id'])){$id=$_SESSION['id'];}
  ?>
 
 <div id="logo">

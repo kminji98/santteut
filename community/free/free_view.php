@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <?php
 session_start();
-include $_SERVER['DOCUMENT_ROOT']."/free/db_connector.php"; ?>
+include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
+
+ ?>
 
 <html lang="ko" dir="ltr">
 <?php
@@ -55,8 +57,8 @@ if (!$result) {
     <td colspan="2"><?=$content?></td>
   </tr>
   <tr>
-    <td colspan="2" ><a style="float : right; margin-left : 15px;" href="./dml_board.php?mode=delete&num=<?=$num?>"><input type="button" name="" value="삭제"></a>
-      <a style="float : right;" href="./write_edit_form.php?mode=update&num=<?=$num?>"><input type="button" name="" value="수정"></a>
+    <td colspan="2" ><a style="float : right; margin-left : 15px;" href="./free_query.php?mode=delete&num=<?=$num?>"><input type="button" name="" value="삭제"></a>
+      <a style="float : right;" href="./free_form.php?mode=update&num=<?=$num?>"><input type="button" name="" value="수정"></a>
     </td>
   </tr>
 </table>

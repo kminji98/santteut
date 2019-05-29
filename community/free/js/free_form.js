@@ -1,9 +1,3 @@
-// <!-- =================================================================
-// + [DESC] notice_form.js 총괄
-// + [DATE] 2019-05-26
-// + [NAME] 이우주
-// ================================================================= -->
-
 $(document).ready(function() {
    $('#summernote').summernote({
            height: 500,
@@ -22,7 +16,7 @@ function sendFile(file,editor,welEditable){
   $.ajax({
       data: data,
       type: "POST",
-      url: "http://localhost/santteut/customer_support/notice/notice_saveimage.php",
+      url: "http://localhost/santteut/community/free/free_saveimage.php",
       cache: false,
       contentType: false,
       processData: false,

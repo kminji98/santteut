@@ -1,6 +1,6 @@
 #history h2{margin-left: 12%;}
 #title_history {list-style: none; color: gray; font-size: 20px; margin-left: 17%;}
 #field {text-decoration: none; padding: 10px; margin-left: 35%; margin-bottom: 2.5%; margin-top: 2.5%;}
-.fieldset{margin-left: 27%;}
-fieldset{width: 800px; height: 500px;}
+#field li{list-style: none;}
 #history h4{margin-left: 50%;}
+#second li{list-style: none;}
