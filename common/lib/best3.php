@@ -6,9 +6,9 @@
 <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/best3.css?ver=3">
 <body>
 <?php
-define(SCALE, 3);
-
-  if($_GET['divide']){
+define('SCALE', 3);
+$divide_flag='';
+  if(isset($_GET['divide'])){
     switch ($_GET['divide']) {
       case 'domestic':
       $divide_flag="where `package`.`p_airplane_num`='0'";
@@ -32,13 +32,13 @@ define(SCALE, 3);
     $p_pay[$best3_record]=$row['p_pay'];
     $p_main_img_copy1[$best3_record]=$row['p_main_img_copy1'];
     $p_period[$best3_record]=$row['p_period'];
-    $timestamp = strtotime("$p_dp_date[$best3_record] +$p_period[$best3_record] days");
+    $timestamp = strtotime("$p_dp_date[$best3_record]+$p_period[$best3_record] days");
     $p_arr_date1[$best3_record] = date('y-m-d', $timestamp);
     $p_arr_date2[$best3_record] = "20".$p_arr_date1[$best3_record];
     $yoil = array("일","월","화","수","목","금","토");
-    $day[$best3_record] = $yoil[date('w', strtotime($p_dp_date))];
-    $day2[$best3_record] = $yoil[date('w', strtotime($p_arr_date2))];
-    $p_pay[$best3_record]=number_format($p_pay[$best3_record]);
+    $day[$best3_record] = $yoil[date('w', strtotime(isset($p_dp_date)))];
+    $day2[$best3_record] = $yoil[date('w', strtotime(isset($p_arr_date2)))];
+    $p_pay[$best3_record]=number_format(isset($p_pay[$best3_record]));
 
  ?>
  <div class="container" id="con<?=($best3_record+1)?>">
@@ -56,7 +56,7 @@ define(SCALE, 3);
        <br><br>
        <div class="text1">
          &nbsp; <?=$p_dp_date[$best3_record]?> (<?=$day[$best3_record]?>) ~
-         <?=$p_dp_time[$best3_record]?><?php echo $p_arr_date2[$best3_record]." "."(".$day2[$best3_record].")"?>
+        <?php echo $p_arr_date2[$best3_record]." "."(".$day2[$best3_record].")"?>
        </div>
        <br>
        <div class="button1">

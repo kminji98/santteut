@@ -1,5 +1,4 @@
 <?php
-session_start();
 include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
 setcookie("cookie3",$_COOKIE["cookie2"],time() + 3600);
 setcookie("cookie2",$_COOKIE["cookie1"],time() + 3600);

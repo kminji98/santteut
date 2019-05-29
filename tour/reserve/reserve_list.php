@@ -409,9 +409,7 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
               $p_arr_date2 = "20".$p_arr_date1;
               //예약상태
               //총 상품금액
-              $b_pay=$row['b_pay'];
-
-              // $b_pay=$bill_row['b_pay'];
+              $b_pay=isset($row['b_pay']);
 
               $p_pay=$row['p_pay'];
               //후기

@@ -1,6 +1,6 @@
 <?php
-$id=$_SESSION['id'];
-$r_code = $_GET["code"];
+$id=isset($_SESSION['id'])?$_SESSION['id']:'';
+$r_code = isset($_GET["code"]);
 
 define('ROW_SCALE', 10);
 define('PAGE_SCALE', 10);

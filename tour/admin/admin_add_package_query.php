@@ -1,5 +1,4 @@
 <?php
-session_start();
 include '../../common/lib/db_connector.php';
 
 // echo "<script>alert($_POST['p_code']);history.go(-1);</script>";

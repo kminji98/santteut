@@ -1,6 +1,4 @@
 <?php
-session_start();
-
 include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php";
 ?>
 
@@ -9,7 +7,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css">
-    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/tour/package/css/package_list.css?ver=2">
+    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/tour/package/css/package_list.css">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/side_bar.css">
 
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
@@ -254,8 +252,6 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
           </tr>
 
           <?php
-          define('ROW_SCALE', 5);
-          define('PAGE_SCALE', 10);
           $sql = "SELECT * FROM `package`;";
           $manage_result=mysqli_query($conn,$sql);
           $total_record=mysqli_num_rows($manage_result);

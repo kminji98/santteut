@@ -155,7 +155,6 @@ $view_num = $total_record - $start_record;
         for ($record = $start_record; $record  < $start_record+ROW_SCALE && $record<$total_record; $record++){
           mysqli_data_seek($result,$record);
           $row=mysqli_fetch_array($result);
-          $view_num=$row['num'];
           $id=$row['id'];
           $name=$row['name'];
           $address1=$row['address1'];

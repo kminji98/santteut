@@ -8,17 +8,13 @@ $total_record=0;
 //@@@@@@ MINJI 테스트//@@성훈테스트
 define('ROW_SCALE', 10);
 define('PAGE_SCALE', 5);
-if(isset($_GET['divide'])){
-  $dicide=$_GET['divide'];
-}
-if(isset($_POST['divide'])){
-  $dicide=$_POST['divide'];
-}
+if(isset($_GET['divide'])) $divide=$_GET['divide'];
+if(isset($_POST['divide'])) $divide=$_POST['divide'];
 
 
-if($_GET['divide']=="domestic"){
+if(isset($_GET['divide'])=="domestic"){
   $sql="SELECT * from `package` where `p_airplane_num` ='0'";
-}else if($_GET['divide']=="abroad"){
+}else if(isset($_GET['divide'])=="abroad"){
   $sql="SELECT * from `package` where `p_airplane_num` !='0'";
 }else{
   $sql="SELECT * from `package`";

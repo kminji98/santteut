@@ -1,9 +1,11 @@
 <?php
+session_start();
 include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
 
+$id = $_SESSION['id'];
 if(isset($_GET["mode"])){
   $p_code=$_GET["mode"];
-
+  $str='';
   $sql="SELECT * from `package` where `p_code` = '$p_code';";
   $member_sql="SELECT * from `member` where `id` = '$id';";
   $bus_sql="SELECT * from `bus` where `b_code`='$p_code';";
