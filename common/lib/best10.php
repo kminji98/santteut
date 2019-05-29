@@ -27,7 +27,7 @@ $divide = "";
       break;
     }
 
-  $sql = "SELECT `package`.`p_code`, `package`.`p_name`, sum(`r_adult`+`r_kid`+`r_baby`) FROM `reserve` JOIN `package` ON `reserve`.`r_code` = `package`.`p_code` $divide_flag GROUP BY `r_code` ORDER BY sum(`r_adult`+`r_kid`+`r_baby`) DESC LIMIT 10;";
+  $sql = "SELECT `package`.`p_code`, `package`.`p_arr_mt`, sum(`r_adult`+`r_kid`+`r_baby`) FROM `reserve` JOIN `package` ON `reserve`.`r_code` = `package`.`p_code` $divide_flag GROUP BY `r_code` ORDER BY sum(`r_adult`+`r_kid`+`r_baby`) DESC LIMIT 10;";
   $result = mysqli_query($conn,$sql) or die(mysqli_error($conn));
   //$total_record = mysqli_num_rows($result);
   //var_export($total_record);
@@ -35,131 +35,121 @@ $divide = "";
   $row = mysqli_fetch_array($result);
     $p_code0 = $row[0];
     $p_name0 = $row[1];
-    $p_name0 = substr($p_name0, 0, 5);
     $sum0 = $row[2];
     if($sum0==NULL){
       $sum0=0;
     }
-    var_export($p_code0);
-    var_dump($p_name0);
-    var_export($sum0);
+    // var_export($p_code0);
+    // var_export($p_name0);
+    // var_export($sum0);
 
   mysqli_data_seek($result, 1);
   $row = mysqli_fetch_array($result);
     $p_code1 = $row[0];
     $p_name1 = $row[1];
-    $p_name1 = substr($p_name1, 0, 5);
     $sum1 = $row[2];
     if($sum1==NULL){
       $sum1=0;
     }
-    var_export($p_code1);
-    var_export($p_name1);
-    var_export($sum1);
+    // var_export($p_code1);
+    // var_export($p_name1);
+    // var_export($sum1);
 
   mysqli_data_seek($result, 2);
     $row = mysqli_fetch_array($result);
     $p_code2 = $row[0];
     $p_name2 = $row[1];
-    $p_name2 = substr($p_name2, 0, 5);
     $sum2 = $row[2];
     if($sum2==NULL){
       $sum2=0;
     }
-    var_export($p_code2);
-    var_export($p_name2);
-    var_export($sum2);
+    // var_export($p_code2);
+    // var_export($p_name2);
+    // var_export($sum2);
 
   mysqli_data_seek($result, 3);
   $row = mysqli_fetch_array($result);
   $p_code3 = $row[0];
   $p_name3 = $row[1];
-  $p_name3 = substr($p_name3, 0, 5);
   $sum3 = $row[2];
   if($sum3==NULL){
     $sum3=0;
   }
-  var_export($p_code3);
-  var_export($p_name3);
-  var_export($sum3);
+  // var_export($p_code3);
+  // var_export($p_name3);
+  // var_export($sum3);
 
   mysqli_data_seek($result, 4);
   $row = mysqli_fetch_array($result);
   $p_code4 = $row[0];
   $p_name4 = $row[1];
-  $p_name4 = substr($p_name4, 0, 5);
   $sum4 = $row[2];
   if($sum4==NULL){
     $sum4=0;
   }
-  var_export($p_code4);
-  var_export($p_name4);
-  var_export($sum4);
+  // var_export($p_code4);
+  // var_export($p_name4);
+  // var_export($sum4);
 
   mysqli_data_seek($result, 5);
   $row = mysqli_fetch_array($result);
   $p_code5 = $row[0];
   $p_name5 = $row[1];
-  $p_name5 = substr($p_name5, 0, 5);
   $sum5 = $row[2];
   if($sum5==NULL){
     $sum5=0;
   }
-  var_export($p_code5);
-  var_export($p_name5);
-  var_export($sum5);
+  // var_export($p_code5);
+  // var_export($p_name5);
+  // var_export($sum5);
 
   mysqli_data_seek($result, 6);
   $row = mysqli_fetch_array($result);
   $p_code6 = $row[0];
   $p_name6 = $row[1];
-  $p_name6 = substr($p_name6, 0, 5);
   $sum6 = $row[2];
   if($sum6==NULL){
     $sum6=0;
   }
-  var_export($p_code6);
-  var_export($p_name6);
-  var_export($sum6);
+  // var_export($p_code6);
+  // var_export($p_name6);
+  // var_export($sum6);
 
   mysqli_data_seek($result, 7);
   $row = mysqli_fetch_array($result);
   $p_code7 = $row[0];
   $p_name7 = $row[1];
-  $p_name7 = substr($p_name7, 0, 5);
   $sum7 = $row[2];
   if($sum7==NULL){
     $sum7=0;
   }
-  var_export($p_code7);
-  var_export($p_name7);
-  var_export($sum7);
+  // var_export($p_code7);
+  // var_export($p_name7);
+  // var_export($sum7);
 
   mysqli_data_seek($result, 8);
   $row = mysqli_fetch_array($result);
   $p_code8 = $row[0];
   $p_name8 = $row[1];
-  $p_name8 = substr($p_name8, 0, 5);
   $sum8 = $row[2];
   if($sum8==NULL){
     $sum8=0;
   }
-  var_export($p_code8);
-  var_export($p_name8);
-  var_export($sum8);
+  // var_export($p_code8);
+  // var_export($p_name8);
+  // var_export($sum8);
 
   mysqli_data_seek($result, 9);
   $row = mysqli_fetch_array($result);
   $p_code9 = $row[0];
   $p_name9 = $row[1];
-  $p_name9 = substr($p_name9, 0, 5);
   $sum9 = $row[2];
   if($sum9==NULL){
     $sum9=0;
   }
-  var_export($p_code9);
-  var_export($p_name9);
-  var_export($sum9);
+  // var_export($p_code9);
+  // var_export($p_name9);
+  // var_export($sum9);
 
 ?>
 <!DOCTYPE html>
@@ -208,6 +198,7 @@ $divide = "";
 </script>
 </head>
 <body>
+  <section style="margin-left: 700px; margin-top: 50px;">
   <form name="form" action="best10.php" method="post">
     <select name="divide" style="width: 100px; height:30px;">
       <option value="" hidden>선택</option>
@@ -217,7 +208,8 @@ $divide = "";
     </select>
     <input type="submit" value="검색" style="width: 60px; height:30px; background-color: #2F9D27; border: 1px solid #2F9D27; color: white;">
   </form>
+</section>
   <!--파이 차트를 저장할 div-->
-  <div id="chart_div"></div>
+  <div id="chart_div" style="margin-left: 230px;"></div>
 </body>
 </html>
