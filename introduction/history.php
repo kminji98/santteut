@@ -62,6 +62,7 @@ session_start();
             10명의 젊은 대원들을 잃는 산악조난사고 발생<br><br>
           </li>
         </ul>
+        
         <h3 style="color:#2F9D27; margin-left: 33%;">2020's</h3>
         <ul id="second" style="margin-left: 33.5%;">
           <li><i class='fas fa-tree'></i>&nbsp;<strong>6월 25일</strong><br><br>

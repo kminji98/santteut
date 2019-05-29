@@ -101,21 +101,19 @@ $view_num = $total_record - $start_record;
     <section id="notice">
 
       <form name="notice_form" action="member_admin_list.php?mode=search" method="post">
-      <div class="notice_list_search">
-        <select name="find_option">
-          <option value="id">아이디</option>
-          <option value="name">이름</option>
-          <option value="email">이메일</option>
-        </select>
-        <input type="text" name="find_input" value="">
-        <button type="submit" name="button" >검색</button>
-      </div>
+        <div class="notice_list_search">
+          <li id="total_title"><b>총 <?=$total_record?> 명</b></li>
+          <li id="search_option">
+            <select name="find_option">
+              <option value="id">아이디</option>
+              <option value="name">이름</option>
+              <option value="email">이메일</option>
+            </select>
+          <input type="text" name="find_input" value="">
+          <button type="submit" name="button" >검색</button>
+          </li>
+        </div>
       </form>
-
-      <!--총 회원수-->
-      <div class="total_title">
-        <h4 >총 <?=$total_record?> 명</h4>
-      </div>
       <?php
       if(!empty($_SESSION['id'])){
         echo ('<a  href="http://'.$_SERVER['HTTP_HOST'].'/santteut/member/join/join_member.php" class="hov"><button id="admin_write_btn" type="button" name="button">
