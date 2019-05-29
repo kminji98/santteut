@@ -75,7 +75,7 @@ if(isset($_GET["mode"]) && $_GET["mode"]=='update'){
     <script src="./js/official_review_form.js?ver=0"></script>
     <script type="text/javascript">
     </script>
-    <title>공식산행후기</title>
+    <title>명산정보</title>
   </head>
   <body>
     <header>
@@ -83,8 +83,7 @@ if(isset($_GET["mode"]) && $_GET["mode"]=='update'){
       <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/commu_menu.php";?>
 
     </header>
-    <br>
-    <br>
+
     <section id="notice">
       <form name="board_form" action="official_review_query.php?mode=<?=$mode?>" method="post" enctype="multipart/form-data">
       <input type="hidden" name="num" value="<?=$num?>">
@@ -95,15 +94,15 @@ if(isset($_GET["mode"]) && $_GET["mode"]=='update'){
         </tr>
         <tr>
           <th>제목</th>
-          <td><input type="text" name="title" value="<?=$title?>" style="font-size:15px; width:400px;"></td>
+          <td><input type="text" name="title" value="<?=$title?>" style="font-size:15px; width:700px;"></td>
         </tr>
-        <tr style="height:300px;">
+        <tr>
           <th>내용</th>
-          <td><textarea name="content" id="summernote"><?=$content?></textarea></td>
+          <td><textarea style="width:700px;" name="content" id="summernote"><?=$content?></textarea></td>
         </tr>
         <tr>
           <th>파일</th>
-          <td>
+          <td style="text-align: center;">
             <?php
             if($mode=="insert"){
              echo '<input type="file" name="upfile[]">';
@@ -158,12 +157,13 @@ if(isset($_GET["mode"]) && $_GET["mode"]=='update'){
         </tr>
       </table>
       <div id="write_button">
-        <input type="submit" style="width:50px; height:24px; background-color: #2F9D27; border: 1px solid #2F9D27; color: white;" value="완료">&nbsp;
-        <a href="./official_review_list.php"><input type="button" style="width:50px; height:24px; background-color: #2F9D27; border: 1px solid #2F9D27; color: white;" value="목록"></a>
+        <input id="submit_ok" type="submit" value="완료">&nbsp;
+        <a href="./official_review_list.php"><input type="button" value="목록"></a>
       </div><!--end of write_button-->
     </form>
     </section>
     <br>
+
     <br>
     <footer>
       <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/footer.php"; ?>

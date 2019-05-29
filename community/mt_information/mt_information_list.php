@@ -62,7 +62,6 @@ $view_num = $total_record - $start_record;
 <html lang="ko" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>명산정보</title>
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/community/mt_information/css/mt_information_list.css?ver=0">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css">
@@ -123,7 +122,7 @@ $view_num = $total_record - $start_record;
             ?>
       </section>
     </div>
-  
+
     <?php
     if(!empty($_SESSION['id'])){
       echo '<a href="mt_information_form.php"><button id="write_but" type="button" name="button">

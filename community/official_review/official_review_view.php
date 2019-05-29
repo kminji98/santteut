@@ -3,7 +3,7 @@
 $page=$num=$q_num=$sql=$result=$row=$title=$content=$file_name_0=$file_copied_0=$file_type_0="";
 $file_name_1=$file_copied_1=$file_type_1=$file_name_2=$file_copied_2=$file_type_2="";
 $file_name_3=$file_copied_3=$file_type_3=$file_name_4=$file_copied_4=$file_type_4="";
-$regist_day=$id="";
+$regist_day="";
 //***************************************************************************
 session_start();
 include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/create_table.php";
@@ -55,7 +55,7 @@ if(isset($_GET["num"])&&!empty($_GET["num"])){
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css">
-    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/community/official_review/css/official_review_form.css">
+    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/community/official_review/css/official_review_view.css">
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
     <script type="text/javascript">
       $(document).ready(function() {
@@ -63,7 +63,7 @@ if(isset($_GET["num"])&&!empty($_GET["num"])){
         $("#official_mini").css("color","black");
       });
       </script>
-        <script src="./js/official_review.js?ver=1"></script>
+        <script src="./js/official_review.js?ver=0"></script>
     <title><?=$title?></title>
   </head>
   <body>
@@ -72,7 +72,7 @@ if(isset($_GET["num"])&&!empty($_GET["num"])){
       <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/commu_menu.php";?>
 
     </header>
-    <br><br><br>
+
     <section id="notice">
       <table border="1">
         <tr>
@@ -81,11 +81,11 @@ if(isset($_GET["num"])&&!empty($_GET["num"])){
         </tr>
         <tr>
           <th>제목</th>
-          <td><input type="text" name="title" value="<?=$title?>" style="font-size:15px; width:400px;" readonly></td>
+          <td><input type="text" name="title" value="<?=$title?>" style="font-size:15px; width:700px;" readonly></td>
         </tr>
-        <tr style="height:600px;">
+        <tr>
           <th>내용</th>
-          <td>
+          <td style="width:700px; height:600px;">
             <?php
             $content=str_replace('<p>','', $content);
             $content=str_replace('</p>','', $content);
@@ -149,7 +149,24 @@ if(isset($_GET["num"])&&!empty($_GET["num"])){
           </td>
         </tr>
       </table>
-      <table border="1">
+      <div id="view_button">
+        <?php
+        //관리자일경우 수정,삭제가 가능하도록 설정
+        if(!empty($_SESSION['id']) && ($_SESSION['id']=="admin")){
+        echo ('<a href="./official_review_form.php?mode=update&num='.$num.'"><input type="button" value="수정">&nbsp;</a>&nbsp;');
+        echo ('<input type="button" value="삭제" onclick="check_delete('.$num.')">&nbsp;</a>&nbsp;');
+        echo ('<a href="./official_review_list.php?page='.$page.'"><input type="button" value="목록">&nbsp;</a>');
+      }else{
+        echo ('<div class="mt_list" style="margin-left: 25.5%;">
+          <a href="./official_review_list.php?page='.$page.'"><input type="button" value="목록">&nbsp;</a>
+          </div>');
+      }
+        ?>
+      </div><!--end of view_button -->
+
+
+
+      <table id="ripple_tb" border="1">
         <th>댓글</th>
         <td>
           <?php
@@ -187,22 +204,12 @@ if(isset($_GET["num"])&&!empty($_GET["num"])){
             <input type="hidden" name="parent" value="<?=$q_num?>">
             <div id="ripple_insert">
             <div id="ripple_textarea"><textarea name="ripple_content" rows="3" cols="80"></textarea></div>
-            <div id="ripple_button"><input type="submit" value="댓글입력" style="width:102px; height:28px; background-color: #2F9D27; border: 1px solid #2F9D27; color: white;"></div>
+            <div id="ripple_button"><input type="submit" value="댓글입력"></div>
             </div><!--end of ripple_insert  -->
             </form>
         </td>
       </table>
-      <div id="view_button">
-      <a href="./official_review_list.php?page=<?=$page?>"><input type="button" style="width:50px; height:24px; background-color: #2F9D27; border: 1px solid #2F9D27; color: white;" value="목록">&nbsp;</a>
-                <?php
-                  //관리자일경우 수정,삭제가 가능하도록 설정
-                   // if($id=="admin"){
-                    echo ('<a href="./official_review_form.php?mode=update&num='.$num.'"><input type="button" style="width:50px; height:24px; background-color: #2F9D27; border: 1px solid #2F9D27; color: white;" value="수정">&nbsp;</a>&nbsp;');
-                    echo ('<input type="button" style="width:50px; height:24px; background-color: #2F9D27; border: 1px solid #2F9D27; color: white;" value="삭제" onclick="check_delete('.$num.')">&nbsp;</a>&nbsp;');
-                    echo '<a href="official_review_form.php"><input type="button" style="width:60px; height:24px; background-color: #2F9D27; border: 1px solid #2F9D27; color: white;" value="글쓰기">&nbsp;</a>';
-                   // }
-                 ?>
-              </div><!--end of view_button -->
+
     </section>
     <br>
     <br>
