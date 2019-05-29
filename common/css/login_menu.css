@@ -8,7 +8,7 @@ body{margin: 0; min-width: 100%;}
 #logout a{font-weight: bold; color: #363636; text-decoration: none;}
 #menus{ display: inline-block;}
 #login_menu_ul > li {list-style: none; display: inline-block; font-size:15px; width:100px;}
-#top_menu li{font-size: 18px; font-weight: bold; display: inline; padding:30px;}
+#top_menu li{font-size: 18px;  display: inline; padding:30px;}
 #top_menu a{text-decoration: none; color: #363636;}
 #login_menu{float: right; margin-right: 10%; padding: 1px 1px;}
 #login_menu a{color:#363636;}
@@ -29,8 +29,9 @@ footer h2, footer h3{color: #999999; }
 footer h3 {text-align: center; margin-left: 350%; width: 100%;}
 #footer_wrap{color: white; margin-left: 2%; float: left; clear: both; height:180px;}
 #footer_wrap b{font-size: 25px;}
-#footer_wrap  tr > td{width : 10%; }
-#footer_wrap  a{color: #999999;}
+#footer_wrap  tr > td{width : 10%;}
+#footer_wrap  a{color: #999999; }
 #footer_wrap  tr > td:first-child{width : 70%;}
 #bottom_menu_history, #bottom_menu_customer{width: 100%; margin-left: 350%; padding:0; list-style: none; text-align: center;}
 #bottom_menu_history{margin-bottom: 140%;}
+#footer_wrap
