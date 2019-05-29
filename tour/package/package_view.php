@@ -220,6 +220,4 @@ setcookie("cookie1",$p_code,time() + 3600);
   </body>
 
 
-<br><br><br>
-
 </html>
