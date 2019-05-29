@@ -3,7 +3,7 @@
 + [DATE] 2019-05-27
 + [NAME] 이우주
 ================================================================= -->
-<div id="footer_wrap">
+<fieldset id="footer_wrap">
   <table>
     <tr>
       <td><h2>SANTTEUT mountaineering club 산뜻산악회</h2></td>
@@ -33,4 +33,4 @@
       </td>
     </tr>
   </table>
-</div>
+</fieldset>

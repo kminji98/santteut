@@ -1157,5 +1157,5 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
   </footer>
   </body>
 
-<br><br><br>
+
 </html>
