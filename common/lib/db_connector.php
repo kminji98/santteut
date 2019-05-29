@@ -1,7 +1,7 @@
 <?php
 date_default_timezone_set("Asia/Seoul");
 
-$servername = "127.0.0.1";
+$servername = "localhost";
 $username = "root";
 $password = "123456";
 $dbflag ="NO";
