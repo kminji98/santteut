@@ -8,6 +8,20 @@ if($_GET['mode']=="delete"){
   echo "<script>alert('패키지가 삭제되었습니다.')</script>";
   echo '<script>location.href="admin_manage_package.php";</script>';
 }
+if($_GET['mode']=="update"){
+  $code = $_GET['code'];
+  $sql = "SELECT * FROM `package` where `p_code`='$code';";
+  $result = mysqli_query($conn,$sql);
+  $row = mysqli_fetch_array($result);
+  $copied_file_name1 = $row['p_main_img_copy1'];
+  $copied_file_name2 = $row['p_main_img_copy2'];
+  $copied_file_name3 = $row['p_main_img_copy3'];
+
+  $main_img_copy_name1 = $row['p_main_img1'];
+  $main_img_copy_name2 = $row['p_main_img2'];
+  $main_img_copy_name3 = $row['p_main_img3'];
+
+}
 
 // echo "<script>alert($_POST['p_code']);history.go(-1);</script>";
 //--------------------------------------
@@ -106,28 +120,23 @@ if(!empty($_POST['content'])){
     echo "<script>alert('내용을 입력하세요');history.go(-1);</script>";
     return false;
 }
-if(!empty($_FILES['p_main_img1'])){
+if(!empty($_FILES['p_main_img1']['name'])){
     $main_img1 = $_FILES['p_main_img_copy1'];
 }else{
     $main_img1 = "";
-    echo "<script>alert('메인 이미지1을 선택하세요');history.go(-1);</script>";
-    return false;
+
 }
-if(!empty($_FILES['p_main_img2'])){
+if(!empty($_FILES['p_main_img2']['name'])){
     $main_img2 = $_FILES['p_main_img_copy2'];
 }else{
     $main_img2 = "";
-    echo "<script>alert('메인 이미지2을 선택하세요');history.go(-1);</script>";
-    return false;
 }
-if(!empty($_FILES['p_main_img3'])){
+if(!empty($_FILES['p_main_img3']['name'])){
     $main_img3 = $_FILES['p_main_img_copy3'];
 }else{
     $main_img3 = "";
-    echo "<script>alert('메인 이미지3을 선택하세요');history.go(-1);</script>";
-    return false;
 }
-if(!empty($_FILES['p_main_img1'])){
+if(!empty($_FILES['p_main_img1']['name'])){
 
     //1. $_FILES['upfile']로부터 5가지 배열명을 가져와서 저장한다.
     $main_img_copy1 = $_FILES['p_main_img1'];//한개파일업로드정보(5가지정보배열로들어있음)
@@ -177,16 +186,18 @@ if(!empty($_FILES['p_main_img1'])){
 
     //7. 임시저장소에 있는 파일을 서버에 지정한 위치로 이동한다.
     if(!move_uploaded_file($main_img_copy_tmp_name1, $uploaded_file1)){
-      alert_back('1. 서버 전송에러!!');
+      alert_back($main_img1);
     }
 
 
 
 
 }else{
-    $main_img_copy1 = "";
+    $main_img_copy_name1=$main_img_copy_name1;
 }
-if(!empty($_FILES['p_main_img2'])){
+
+
+if(!empty($_FILES['p_main_img2']['name'])){
     //1. $_FILES['upfile']로부터 5가지 배열명을 가져와서 저장한다.
     $main_img_copy2 = $_FILES['p_main_img2'];//한개파일업로드정보(5가지정보배열로들어있음)
     $main_img_copy_name2= $_FILES['p_main_img2']['name'];//f03.jpg
@@ -243,10 +254,10 @@ if(!empty($_FILES['p_main_img2'])){
 
 
 }else{
-    $main_img_copy2 = "";
-    echo "<script>alert('메인 이미지2을 선택하세요');history.go(-1);</script>";
+    $main_img_copy_name2=$main_img_copy_name2;
+
 }
-if(!empty($_FILES['p_main_img3'])){
+if(!empty($_FILES['p_main_img3']['name'])){
     //1. $_FILES['upfile']로부터 5가지 배열명을 가져와서 저장한다.
     $main_img_copy3 = $_FILES['p_main_img3'];//한개파일업로드정보(5가지정보배열로들어있음)
     $main_img_copy_name3= $_FILES['p_main_img3']['name'];//f03.jpg
@@ -301,8 +312,8 @@ if(!empty($_FILES['p_main_img3'])){
 
 
 }else{
-    $main_img_copy3 = "";
-    echo "<script>alert('메인 이미지3을 선택하세요');history.go(-1);</script>";
+    $main_img_copy_name3=$main_img_copy_name3;
+
 }
 if(!empty($_POST['p_bus'])){
     $bus = $_POST['p_bus'];
