@@ -16,6 +16,7 @@
     $row=mysqli_fetch_array($manage_result);
     $p_name=$row['p_name'];
     $p_code=$row['p_code'];
+    $p_period=$row['p_period'];
     $p_dp_date=$row['p_dp_date'];
     $p_dp_time=$row['p_dp_time'];
     $p_arr_time=$row['p_arr_time'];
@@ -23,9 +24,54 @@
     $p_dp_city=$row['p_dp_city'];
     $p_arr_mt=$row['p_arr_mt'];
     $p_content=$row['p_detail_content'];
+    $p_main_img1=$row['p_main_img1'];
+    $p_main_img2=$row['p_main_img2'];
+    $p_main_img3=$row['p_main_img3'];
+    $p_add_pay=$row['p_add_pay'];
+    $p_free_time=$row['p_free_time'];
+    $p_airplane_num=$row['p_airplane_num'];
+    $p_bus=$row['p_bus'];
+    $selected = "";
+    $selected2 = "";
+    $checked = "";
+    $checked2 = "";
+    $checked3 = "";
+    $checked4 = "";
+    $checked5 = "";
+    $checked6 = "";
+
+    if($p_airplane_num == "0"){
+      $selected = "selected";
+      $selected2 = "";
+    }else{
+      $selected = "";
+      $selected2 = "selected";
+    }
+    if($p_add_pay == "1"){
+      $checked = "checked";
+      $checked2 = "";
+    }else{
+      $checked = "";
+      $checked2 = "checked";
+    }
+    if($p_free_time == "1"){
+      $checked3 = "checked";
+      $checked4 = "";
+    }else{
+      $checked3 = "";
+      $checked4 = "checked";
+    }
+    if($p_bus == "41"){
+      $checked5 = "checked";
+      $checked6 = "";
+    }else{
+      $checked5 = "";
+      $checked6 = "checked";
+    }
+
     ?>
     <div class="body">
-    	<form name="tx_editor_form" id="tx_editor_form" action="../../tour/admin/admin_up_del_package_query.php" method="post" enctype="multipart/form-data" accept-charset="utf-8">
+    	<form name="tx_editor_form" id="tx_editor_form" action="../../tour/admin/admin_up_del_package_query.php?mode=update&code=<?=$p_code?>" method="post" enctype="multipart/form-data" accept-charset="utf-8">
         <table id="insert_form">
           <tr>
             <td><p>패키지 코드</p></td>
@@ -33,8 +79,8 @@
 
               <select  name="p_place">
                 <option value="">선택</option>;
-                <option value="1">국내</option>;
-                <option value="2">해외</option>;
+                <option value="1" <?=$selected?>>국내</option>;
+                <option value="2" <?=$selected2?>>해외</option>;
               </select>
 
             </td>
@@ -42,7 +88,9 @@
 
           <tr>
             <td><p>메인 이미지</p></td>
-            <td>  <input type="file" class="up_img" name="p_main_img1"> <input type="file" class="up_img" name="p_main_img2"> <input type="file" class="up_img" name="p_main_img3"> </td>
+            <td>  <input type="file" class="up_img" name="p_main_img1" onclick='document.getElementById("del_file1").checked=true; document.getElementById("del_file1").disabled=true;'> <?=$p_main_img1?>파일등록 <input type="checkbox" name="del_file1" value="1" id="del_file1">삭제 <br>
+              <input type="file" class="up_img" name="p_main_img2" onclick='document.getElementById("del_file2").checked=true; document.getElementById("del_file2").disabled=true;'> <?=$p_main_img2?>파일등록 <input type="checkbox" name="del_file2" value="1" id="del_file2">삭제 <br>
+              <input type="file" class="up_img" name="p_main_img3" onclick='document.getElementById("del_file3").checked=true; document.getElementById("del_file3").disabled=true;'> <?=$p_main_img3?>파일등록 <input type="checkbox" name="del_file3" value="1" id="del_file3">삭제 </td>
           </tr>
 
           <tr>
@@ -58,12 +106,17 @@
               <?php
                 for($i=1;$i<=9;$i++){
               ?>
-              <option value="<?=$i?>"><?=$i?>일</option>;
+              <option value="<?=$i?>" <?=$selected?>><?=$i?>일</option>;
               <?php
                 if($i==9){
               ?>
-              <option value="">10일 이상</option>;
+              <option value="10">10일 이상</option>;
               <?php
+                }
+                if($p_period==$i+1){
+                  $selected = "selected";
+                }else{
+                  $selected = "";
                 }
               }
               ?>
@@ -92,12 +145,12 @@
 
           <tr>
             <td><p>추가요금</p></td>
-            <td> <b>Y</b><input type="radio" name="p_add_pay" value="1"> <b>N</b><input type="radio" name="p_add_pay" value="2"> </td>
+            <td> <b>Y</b><input type="radio" name="p_add_pay" value="1" <?=$checked?>> <b>N</b><input type="radio" name="p_add_pay" value="2" <?=$checked2?>> </td>
           </tr>
 
           <tr>
             <td><p>자유일정</p></td>
-            <td> <b>Y</b><input type="radio" name="p_free_time" value="1"> <b>N</b><input type="radio" name="p_free_time" value="2"> </td>
+            <td> <b>Y</b><input type="radio" name="p_free_time" value="1" <?=$checked3?>> <b>N</b><input type="radio" name="p_free_time" value="2" <?=$checked4?>> </td>
           </tr>
 
           <tr>
@@ -112,7 +165,7 @@
 
           <tr>
             <td><p>버스선택</p></td>
-            <td><b>일반</b><input type="radio" name="p_bus" value="41"><b>우등</b><input type="radio" name="p_bus" value="28"></td>
+            <td><b>일반</b><input type="radio" name="p_bus" value="41" <?=$checked5?>><b>우등</b><input type="radio" name="p_bus" value="28" <?=$checked6?>></td>
           </tr>
 
 
@@ -542,6 +595,7 @@
          <tr>
            <td colspan="2" id="insert_btn_td">
              <input type="button" id="insert_btn" onclick="check_input()" value="패키지수정하기">
+             <a href="../../tour/admin/admin_up_del_package_query.php?mode=delete&code=<?=$p_code?>"><input type="button" id="insert_btn" value="패키지삭제하기"></a>
            </td>
          </tr>
         </table><br><br><br>
