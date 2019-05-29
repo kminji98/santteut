@@ -242,7 +242,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/bill/bil_query.php";
 
 
 
-        <a href="../reserve/reserve_list.php>"><div id="go_cart"> <b>예약목록 보기</b></div></a>
+        <a href="../reserve/reserve_list.php" style="text-decoration:none;"><div id="go_cart" > <b>예약목록 보기</b></div></a>
       </div>
       <div id="right_footer"></div>
     </div>
