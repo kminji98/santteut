@@ -202,7 +202,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/bill/bil_query.php";
         <?php
         $p_pay= number_format($p_pay);
          ?>
-        <b id="money"><?=$r_pay?></b> <p id="won">원</p>
+        <b id="money"><?=$p_pay?></b> <p id="won">원</p>
         <p class="subtext1">유류할증료,제세공과금 포함</p>
         <p class="subtext1">※유류할증료 및 제세공과금은 유가와 환율에</p>
         <p class="subtext1">따라 변동될 수 있습니다.</p>
@@ -314,23 +314,27 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/bill/bil_query.php";
           <td class="package_detail_imformation_pay_field_value"><?=$p_pay*0.7?></td>
           <td class="package_detail_imformation_pay_field_value"><?=$p_pay*0.5?></td>
         </tr> -->
+        <?php
+        $p_pay=str_replace(",","",$p_pay);
+        $p_pay=$p_pay;
+         ?>
         <tr>
           <td id="package_detail_imformation_pay" class="package_detail_imformation_pay_field"><b>기본상품가격</b></td>
-          <td class="package_detail_imformation_pay_field_value"> <?=$p_pay*1000*0.922?>원</td>
-          <td class="package_detail_imformation_pay_field_value"> <?=$p_pay*1000*0.922*0.7?>원</td>
-          <td class="package_detail_imformation_pay_field_value"><?=$p_pay*1000*0.922*0.5?>원</td>
+          <td class="package_detail_imformation_pay_field_value"> <?=$p_pay?>원</td>
+          <td class="package_detail_imformation_pay_field_value"> <?=$p_pay*0.7?>원</td>
+          <td class="package_detail_imformation_pay_field_value"><?=$p_pay*0.922*0.5?>원</td>
         </tr>
         <tr>
           <td class="package_detail_imformation_pay_field"><b>유류할증료</b></td>
-          <td class="package_detail_imformation_pay_field_value"> <?=$p_pay*1000*0.078?>원</td>
-          <td class="package_detail_imformation_pay_field_value"> <?=$p_pay*1000*0.7*0.078?>원</td>
-          <td class="package_detail_imformation_pay_field_value"><?=$p_pay*1000*0.5*0.078?>원</td>
+          <td class="package_detail_imformation_pay_field_value"> <?=$p_pay*0.078?>원</td>
+          <td class="package_detail_imformation_pay_field_value"> <?=$p_pay*0.7*0.078?>원</td>
+          <td class="package_detail_imformation_pay_field_value"><?=$p_pay*0.5*0.078?>원</td>
         </tr>
         <tr>
           <td class="package_detail_imformation_pay_field"><b>소계</b></td>
-          <td class="package_detail_imformation_pay_field_value_final"><?=$p_pay*1000?>원</td>
-          <td class="package_detail_imformation_pay_field_value_final"><?=$p_pay*1000*0.7?>원</td>
-          <td class="package_detail_imformation_pay_field_value_final"><?=$p_pay*1000*0.5?>원</td>
+          <td class="package_detail_imformation_pay_field_value_final"><?=$p_pay?>원</td>
+          <td class="package_detail_imformation_pay_field_value_final"><?=$p_pay*0.7?>원</td>
+          <td class="package_detail_imformation_pay_field_value_final"><?=$p_pay*0.5?>원</td>
         </tr>
       </table>
     </div>
@@ -340,6 +344,9 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/bill/bil_query.php";
       <table id="package_minimum_person_imformation_table">
         <tr>
           <td id="person_standard"><b>최소출발인원 기준</b></td>
+          <<?php
+          $p_bus=ceil($p_bus/2);
+           ?>>
           <td id="person_standard_value"> <b style="color:#35cc2b;font-size:17px;"><?=$p_bus?></b> </td>
           <td id="commission_standard"><b>최소수수료 부과 기준</b></td>
           <td class="commission_standard_value"><b>V </b>표준약관 적용</td>

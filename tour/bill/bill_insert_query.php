@@ -1,6 +1,7 @@
 <?php
 if(isset($_GET["r_pay"])){
   $r_pay=$_GET["r_pay"];
+  $r_pay= str_replace(",","",$r_pay);
 }else{
   $r_pay="";
 }

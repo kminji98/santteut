@@ -444,7 +444,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
       <p style="position: relative; margin-top: auto; margin-left: auto;text-align:center; font-weight: bold; font-size:13px;"><?=isset($output)?></p>
     </form>
       <div id="package_list_view_btn">
-        <form name="order_form" action="package_list.php?mode=order&divide=<?=$divide?>" method="post">
+        <form name="order_form" action="package_list.php?mode=order&divide=<?=isset($divide)?>" method="post">
           <input type="hidden" name="page" value="">
           <input type="hidden" name="order_sql" value="">
           <input type="hidden" name="order_condition" value="">

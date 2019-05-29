@@ -9,8 +9,8 @@
   $kid=$_POST['kid'];
   $baby=$_POST['baby'];
 
-
   $money=$_POST['money'];
+  $money= str_replace(",","",$money);
 
   // echo $money;
 
