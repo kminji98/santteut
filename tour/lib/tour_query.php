@@ -84,5 +84,6 @@ if($total==$p_bus){
   $status="예약마감";
   $status2="예약마감";
 }
+if($p_dp_date<= date("Y-m-d")){ $status="마감";}
 
  ?>

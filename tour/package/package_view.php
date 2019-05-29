@@ -174,8 +174,9 @@ setcookie("cookie1",$p_code,time() + 3600);
         <p class="subtext1">※ 1인 객실 사용시 추가요금 발생</p>
         <p id="line">-------------------------------------------------------------------</p>
       </div>
+
       <div id="button">
-        <div id="reserve_status" onclick="people_submit()"> <b id="status"><?=$status?></b></div><br>
+        <div id="reserve_status" onclick="people_submit()" <?=$disabled?>> <b id="status"><?=$status?></b></div><br>
         <form id="people_form" name="people_form" action="../reserve/reserve_view.php?mode=<?=$p_code?>" method="post">
           <input id="adult_val" type="hidden" name="adult_val" value="">
           <input id="kid_val" type="hidden" name="kid_val" value="">
@@ -186,7 +187,7 @@ setcookie("cookie1",$p_code,time() + 3600);
           function onload_button_status(){
           var reserve_status = document.getElementById('reserve_status');
           var status = document.getElementById('status');
-          if(status.innerHTML=="예약마감"){
+          if(status.innerHTML=="예약마감" || status.innerHTML=="마감"){
             reserve_status.style.backgroundColor = "#aaaaaa";
           }
         }
@@ -196,10 +197,18 @@ setcookie("cookie1",$p_code,time() + 3600);
         <script type="text/javascript">
           function people_submit(){
             var empty_flag =<?=json_encode($_SESSION['id'])?>;
+            var reserve_status = document.getElementById('reserve_status');
+            var status = document.getElementById('status');
 
             if(empty_flag==null){
               alert('로그인 해주세요!');
               location.href='../../member/login/login.php';
+              return false;
+            }
+
+            if(status.innerHTML=="예약마감" || status.innerHTML=="마감"){
+              alert("마감되었습니다.");
+              location.href='../../index.php';
               return false;
             }
 
