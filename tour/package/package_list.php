@@ -13,6 +13,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
     <link href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/lib/calendar/css/style.css?ver=0" rel="stylesheet">
     <script type="text/javascript">
       var divide=<?=json_encode($divide)?>;
+      alert(divide);
     </script>
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
     <script src="../../common/lib/calendar/js/script.js"></script>
@@ -444,7 +445,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
       <p style="position: relative; margin-top: auto; margin-left: auto;text-align:center; font-weight: bold; font-size:13px;"><?=isset($output)?></p>
     </form>
       <div id="package_list_view_btn">
-        <form name="order_form" action="package_list.php?mode=order&divide=<?=isset($divide)?>" method="post">
+        <form name="order_form" action="package_list.php?mode=order&divide=<?=$divide?>" method="post">
           <input type="hidden" name="page" value="">
           <input type="hidden" name="order_sql" value="">
           <input type="hidden" name="order_condition" value="">
@@ -466,8 +467,6 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
           </tr>
 
           <?php
-
-
 
           mysqli_data_seek($result,$start_record);
 
