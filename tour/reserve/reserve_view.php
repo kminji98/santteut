@@ -459,12 +459,12 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
 
 
       <div id="check_eql">
-        <input type="checkbox" id="box1" onclick="set_imfo()"><p>성인1이 예약자와 동일</p>
+        <input type="checkbox" id="box1" onclick="set_info()"><label for="box1"><p>성인1이 예약자와 동일</p></label>
       </div>
 
       <script type="text/javascript">
       var set_check=false;
-        function set_imfo(){
+        function set_info(){
           var set_name =document.getElementById('set_name');
           var phone_num =document.getElementById('phone_num');
           if(set_check==false){
@@ -611,12 +611,12 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
               $style='style="color:#000000;"';
             }
             // 여기
-            echo '<input id="'.((row+1)*$j+$i+1).'"  onclick="check_seat(\''.((row+1)*$j+$i+1).'\');" name="bus_seat_check" type="checkbox" value="'.((row+1)*$j+$i+1).'" '.$checked.'><b '.$style.'  >'.((row+1)*$j+$i+1).'</b>';
+            echo '<input id="'.((row+1)*$j+$i+1).'"  onclick="check_seat(\''.((row+1)*$j+$i+1).'\');" name="bus_seat_check" type="checkbox" value="'.((row+1)*$j+$i+1).'" '.$checked.'><b '.$style.'><label for="'.((row+1)*$j+$i+1).'">'.((row+1)*$j+$i+1).'</label></b>';
             echo "&nbsp;";
             if($j==col){
               echo "<br>";
               if($i==1){
-                echo '<input  onclick="check_seat(\'last_seat\');" name="bus_seat_check" type="checkbox" id="last_seat" style="margin-left:'.margin.'px; margin-top:15px; margin-bottom:15px;" value="'.last.'" '.$checked.'><b '.$style.'>'.last.'</b><br>';
+                echo '<input  onclick="check_seat(\'last_seat\');" name="bus_seat_check" type="checkbox" id="last_seat" style="margin-left:'.margin.'px; margin-top:15px; margin-bottom:15px;" value="'.last.'" '.$checked.'><b '.$style.' ><label for="last_seat">'.last.'</label></b><br>';
               }
             }else if(((row+1)*$j+$i+1)==9 && !($bus=="1")){
                echo "&nbsp;&nbsp;";
@@ -663,7 +663,8 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
 <!-- style="color:#35cc2b;" -->
         <div id="terms_view">
           <div id="all_agree">
-            <input id="all_agree_btn" type="checkbox" name="all_choice_value" value="" onclick="all_choice_value()">전체동의하기
+            <input id="all_agree_btn" type="checkbox" name="all_choice_value" value="" onclick="all_choice_value()">
+            <label for="all_agree_btn">전체동의하기</label>
             <script type="text/javascript">
               var choice =false;
               function all_choice_value(){

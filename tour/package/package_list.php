@@ -13,7 +13,6 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
     <link href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/lib/calendar/css/style.css?ver=0" rel="stylesheet">
     <script type="text/javascript">
       var divide=<?=json_encode($divide)?>;
-      alert(divide);
     </script>
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
     <script src="../../common/lib/calendar/js/script.js"></script>
@@ -467,6 +466,8 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
           </tr>
 
           <?php
+
+
 
           mysqli_data_seek($result,$start_record);
 
