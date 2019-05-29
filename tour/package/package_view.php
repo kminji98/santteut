@@ -74,7 +74,6 @@ setcookie("cookie1",$p_code,time() + 3600);
         <?=$p_detail_content?>
       </div>
 
-      <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/member_review/member_review_list.php";?>
     </div>
 
     <div id="detail_menu">
@@ -213,6 +212,9 @@ setcookie("cookie1",$p_code,time() + 3600);
       <div id="right_footer"></div>
     </div>
 
+    </div>
+    <div class="">
+      <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/member_review/member_review_list.php";?>
     </div>
     <footer>
       <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/footer.php";?>

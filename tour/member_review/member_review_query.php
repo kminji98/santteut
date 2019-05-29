@@ -9,6 +9,7 @@ $content = $sql= $result = $name=$q_title=$q_content=$regist_day=$hit=$secret_ok
 $name = $_SESSION['name'];
 $id = $_SESSION['id'];
 $date =date("Y-m-d");
+var_export($id);
 
 //mode가 insert일때
 if(isset($_GET["mode"]) && $_GET["mode"]=="insert"){

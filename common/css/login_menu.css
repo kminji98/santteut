@@ -27,7 +27,7 @@ body{margin: 0; min-width: 100%;}
 footer{background-color: #363c48; height: auto;}
 footer h2, footer h3{color: #999999; }
 footer h3 {text-align: center; margin-left: 450%; width: 100%;}
-#footer_wrap{ color: white; height:100%; width: 100%; margin-bottom: 0;}
+#footer_wrap{ color: white; height:auto; width: 100%; margin-bottom: 0;}
 #footer_wrap b{font-size: 25px; color: white;}
 /* #footer_wrap  tr > td{width : 10%;} */
 #footer_wrap  a{color: #ffffff; }
