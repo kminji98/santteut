@@ -105,7 +105,7 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css">
-    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/tour/reserve/css/reserve_list.css">
+    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/tour/reserve/css/reserve_list.css?ver=0">
     <title>산뜻 :: 즐거운 산행</title>
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
     <script type="text/javascript">
@@ -330,8 +330,6 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
           h_day1.value = day1.value;
           h_day2.value = day2.value;
 
-          alert(h_year1.value);
-
           document.reserve_search_form.submit();
         }
 
@@ -353,8 +351,7 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
           if($id=="admin"){
             echo '<tr>
               <td>예약날짜</td>
-              <td>예약코드</td>
-              <td>상품명</td>
+              <td colspan="2">상품코드/상품명</td>
               <td>총 결제금액(원)</td>
               <td>인원(ID)</td>
               <td>출발일/귀국일</td>
@@ -365,8 +362,7 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
           }else{
             echo '<tr>
               <td>예약날짜</td>
-              <td>예약코드</td>
-              <td>상품명</td>
+              <td colspan="2">상품코드/상품명</td>
               <td>총 결제금액(원)</td>
               <td>인원</td>
               <td>출발일/귀국일</td>
@@ -478,16 +474,13 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
                 }
                 $review_status =$r_cancel_date;
               }
-
-
              ?>
 
              <?php
              if($id=="admin"){
                echo '<tr>
                  <td>'.$r_date.'</td >
-                 <td><a href="../package/package_view.php?mode='.$r_code.'">'.$r_code.'</a></td>
-                 <td>'.$p_name.'</td>
+                 <td colspan="2" style="width:"><a href="../package/package_view.php?mode='.$r_code.'">['.$r_code.']'.$p_name.'</a></td>
                  <td>'.$r_pay.'</td>
                  <td>'.$r_total.'명<br>('.$r_id.')</td>
                  <td>'.$p_dp_date.'<br>'.$p_arr_date2.'</td>

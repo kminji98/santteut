@@ -34,7 +34,7 @@ function create_table($conn, $table_name){
       case 'package' :
           $sql = "CREATE TABLE `package` (
           `p_code` char(10) NOT NULL,
-          `p_name` varchar(10) NOT NULL,
+          `p_name` varchar(150) NOT NULL,
           `p_period` varchar(30) NOT NULL,
           `p_dp_date` varchar(20) NOT NULL,
           `p_dp_day`  char(1) ,
