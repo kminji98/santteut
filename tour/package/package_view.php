@@ -3,10 +3,6 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
 if(isset($_COOKIE["cookie2"])){  setcookie("cookie3",$_COOKIE["cookie2"],time() + 3600);  }
 if(isset($_COOKIE["cookie1"])){  setcookie("cookie2",$_COOKIE["cookie1"],time() + 3600);  }
 setcookie("cookie1",$p_code,time() + 3600);
-// header("Refresh:0");
-// echo $_COOKIE["cookie1"];
-// echo $_COOKIE["cookie2"];
-// echo $_COOKIE["cookie3"];
 ?>
 <!DOCTYPE html>
 <html lang="ko" dir="ltr">
