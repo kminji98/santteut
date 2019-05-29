@@ -18,206 +18,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
     .page_button_group{ position: relative; margin-top: auto; margin-left: auto;text-align:center;}
     </style>
     <script type="text/javascript">
-    window.onscroll = function() {
-      window.onscroll = function() {
-      check_offsetTop();
-      };
-    }
 
-    window.onload = function () {
-
-      default_detail_value('period_div');
-      default_detail_value('pay_div');
-      default_detail_value('time_div');
-      default_detail_value('day_div');
-      default_detail_value('add_div');
-      default_detail_value('free_div');
-      // 상세검색 조건에 따른 결과
-      document.getElementsByName('output')[0].value=<?=json_encode($output)?>;
-      document.getElementsByName('sql')[0].value=<?=json_encode($sql)?>;
-      document.getElementsByName('order_condition')[0].value=<?=json_encode($order_condition)?>;
-      document.getElementsByName('order_option')[0].value=<?=json_encode($order_option)?>;
-      document.getElementsByName('order_btn')[0].value=<?=json_encode($order_btn)?>;
-      // document.getElementsByName('order_sql')[0].value=<?=json_encode($sql)?>;
-      // 최신순/요금순/ 조건에 따른 결과
-      var order_condition = <?=json_encode($order_condition)?>;
-      var order_option = <?=json_encode($order_option)?>;
-      var order_btn = <?=json_encode($order_btn)?>;
-      document.getElementById(order_condition).value=<?=json_encode($order_btn)?>;
-
-      var list_status = document.getElementById('list_status');
-      if(list_status.innerHTML=="예약마감"){
-        list_status.style.color ="grey";
-      }
-    };
-
-
-    function detail_search_function(){
-      var period_value="";var pay_value="";var time_value="";var day_value="";var add_value="";var free_value="";var after_pay_value="";
-
-      var period_div=document.getElementsByName('period_div');
-      var pay_div=document.getElementsByName('pay_div');
-      var time_div=document.getElementsByName('time_div');
-      var day_div=document.getElementsByName('day_div');
-      var add_div=document.getElementsByName('add_div');
-      var free_div=document.getElementsByName('free_div');
-      var package_search_detail_option_city=document.getElementById('package_search_detail_option_city');
-      var dp_date_value = document.getElementById('dp_date_value');
-      var after_pay_value =document.getElementsByName('상품가격');
-      var after_period_value =document.getElementsByName('여행기간');
-      var after_time_value =document.getElementsByName('출발시간');
-      var after_day_value =document.getElementsByName('출발요일');
-      var after_add_value =document.getElementsByName('추가경비');
-      var after_free_value =document.getElementsByName('자유일정');
-      var output = '※해당 게시물의 검색조건 → | ';
-
-
-        for(var i=0;i<=period_div.length-1;i++){
-          id = after_period_value[i].id;
-          if(period_div[i].style.backgroundColor!='white'){
-            period_value=period_div[i].value;
-            keyword=document.getElementById(id);
-            output += "여행기간 : " + keyword.id+" | ";
-          }
-        }
-        for(var i=0;i<=pay_div.length-1;i++){
-          id = after_pay_value[i].id;
-          if(pay_div[i].style.backgroundColor!='white'){
-            pay_value=pay_div[i].value;
-            keyword=document.getElementById(id);
-            output+= "상품검색 : " + keyword.id+" | ";
-          }
-        }
-        for(var i=0;i<=time_div.length-1;i++){
-          id = after_time_value[i].id;
-          if(time_div[i].style.backgroundColor!='white'){
-            time_value=time_div[i].value;
-            keyword=document.getElementById(id);
-            output+= "출발시간 : " + keyword.id+" | ";
-          }
-        }
-        for(var i=0;i<=day_div.length-1;i++){
-          id = after_day_value[i].id;
-          if(day_div[i].style.backgroundColor!='white'){
-            day_value=day_div[i].value;
-            keyword=document.getElementById(id);
-            output+= "출발요일 : " + keyword.id+" | ";
-          }
-        }
-        for(var i=0;i<=add_div.length-1;i++){
-          id = after_add_value[i].id;
-          if(add_div[i].style.backgroundColor!='white'){
-            add_value=add_div[i].value;
-            keyword=document.getElementById(id);
-            output+= "추가경비 : " + keyword.id+" | ";
-          }
-        }
-        for(var i=0;i<=free_div.length-1;i++){
-          id = after_free_value[i].id;
-          if(free_div[i].style.backgroundColor!='white'){
-            free_value=free_div[i].value;
-            keyword=document.getElementById(id);
-            output+= "자유일정 : " + keyword.id+" | ";
-          }
-        }
-        document.getElementsByName('output')[0].value=output;
-        $.ajax({
-          url: 'package_list_detail.php',
-          type: 'POST',
-          data: {
-            mode:'detail'
-            ,dp_date_value:dp_date_value.value
-            ,city: package_search_detail_option_city.value
-            ,period_value: period_value
-            ,pay_value:pay_value
-            ,time_value:time_value
-            ,day_value:day_value
-            ,add_value:add_value
-            ,free_value:free_value
-          }
-        })
-        .done(function(result) {
-         var sql=document.getElementById('sql');
-         sql.value=result;
-         document.query_form.submit();
-        })
-        .fail(function() {
-          console.log("error");
-        })
-        .always(function() {
-          console.log("complete");
-
-        });
-
-      }
-
-    //[PAGE BUTTON ACTION]
-    function detail_search_mv_page(p){
-        $.ajax({
-          url: 'package_list_post_page.php',
-          type: 'POST',
-          data: {
-            page: p
-          }
-        })
-        .done(function(result) {
-         document.query_form.page.value = result;
-         document.query_form.submit();
-        })
-        .fail(function() {
-          console.log("error");
-        })
-        .always(function() {
-          console.log("complete");
-        });
-
-  }
-    //[PAGE BUTTON ACTION]
-    function order_mv_page(p){
-        $.ajax({
-          url: 'package_list_post_page.php',
-          type: 'POST',
-          data: {
-            page: p
-          }
-        })
-        .done(function(result) {
-         document.order_form.page.value = result;
-         document.order_form.submit();
-        })
-        .fail(function() {
-          console.log("error");
-        })
-        .always(function() {
-          console.log("complete");
-        });
-
-  }
-
-
-
-
-    function default_detail_value(name){
-      var detail_name=document.getElementsByName(name);
-      for(var i=0;i<=detail_name.length-1;i++){
-        // if(detail_name[0].value!="전체"){
-        //   detail_name[0].value="";
-        // }
-        detail_name[i].style.backgroundColor='white';
-        detail_name[i].style.color='black';
-        detail_name[i].style.border='none';
-      }
-      detail_name[0].style.backgroundColor='#2F9D27';
-      detail_name[0].style.color='white';
-    }
-    function check_offsetTop(){
-      var value = document.getElementById("package_list_view_btn");
-      var value2 = document.getElementById("kCalendar");
-      var value3 = document.getElementById("package_search");
-        if(value.offsetTop<=value2.offsetTop+250){
-          value2.style.position="static";
-        }
-    }
     </script>
     <title>산뜻 :: 즐거운 산행</title>
     <style media="screen">
@@ -237,7 +38,26 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
     <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/side_bar.php";?>
     <hr>
     <div id="head_text">
-      <h2>전체상품관리</h2>
+      <h2>전체상품관리
+        <form style="display:inline" class="" action="admin_manage_package.php?mode=search" method="post">
+          <select style="padding-bottom:8px; padding-top:3px;margin-left:480px;"name="find_option">
+            <option value="p_code">코드명</option>
+            <option value="p_name">상품명</option>
+            <option value="p_dp_date">출발날짜</option>
+          </select>
+          <input style="padding:5px; margin-right:0px;"type="text" name="find_input" value="">
+          <input style="font-weight:bold; width:70px; height:28px;"type="submit" value="검색">
+      </form>
+      <?php
+      if($_GET['mode']=="search"){
+        echo '
+        <form style="display:inline" class="" action="admin_manage_package.php?" method="post">
+        <input style="font-weight:bold; width:70px; height:28px;"type="submit" value="새로고침">
+        </form>
+        ';
+      }
+       ?>
+    </h2>
     </div>
 
       <div id="package_list_view">
@@ -249,10 +69,17 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
             <td id="package_list_view_name">상품명</td>
             <td id="package_list_view_pay">가격</td>
             <td id="package_list_view_state">상태</td>
+            <td id="package_list_view_state">상품코드</td>
           </tr>
 
           <?php
+          if($_GET['mode']=="search"){
+          $find_option = $_POST["find_option"];
+          $find_input = $_POST["find_input"];
+          $sql="SELECT * from `package` where `$find_option` like '%$find_input%';";
+          }else{
           $sql = "SELECT * FROM `package`;";
+          }
           $manage_result=mysqli_query($conn,$sql);
           $total_record=mysqli_num_rows($manage_result);
 
@@ -262,25 +89,20 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
                 </script>";
           }
 
+
+
+
+
           $total_pages=ceil($total_record/ROW_SCALE);
-
-
           // 페이지가 없으면 디폴트 페이지 1페이지
           $page=(empty($_GET['page']))?1:$_GET['page'];
-
-
-
           // 현재 블럭의 시작 페이지 = (ceil(현재페이지/블럭당 페이지 제한 수)-1) * 블럭당 페이지 제한 수 +1
           //[[  EX) 현재 페이지 5일 때 => ceil(5/3)-1 * 3  +1 =  (2-1)*3 +1 = 4 ]]
           $start_page= (ceil($page / PAGE_SCALE ) -1 ) * PAGE_SCALE +1 ;
-
-
           // 현재페이지 시작번호 계산함.
           //[[  EX) 현재 페이지 1일 때 => (1 - 1)*10 -> 0   ]]
           //[[  EX) 현재 페이지 5일 때 => (5 - 1)*10 -> 40  ]]
           $start_record=($page -1) * ROW_SCALE;
-
-
           // 현재 블럭 마지막 페이지
           // 전체 페이지가 (시작 페이지+페이지 스케일) 보다 크거나 같으면 마지막 페이지는 (시작페이지 + 페이지 스케일) -1 / 아니면 전체페이지 수 .
           //[[  EX) 현재 블럭 시작 페이지가 6/ 전체페이지 : 10 -> '10 >= (6+10)' 성립하지 않음 -> 10이 현재블럭의 가장 마지막 페이지 번호  ]]
@@ -324,6 +146,8 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
 
            ?>
 
+
+
           <tr class="package_list_view_value">
             <td>
               <img class="package_list_view_img_value" src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/lib/editor/data/<?=$p_main_img_copy1?>">
@@ -337,6 +161,9 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
             <td class="package_list_view_pay_value"><?=$p_pay?></td>
             <td>
               <output class="package_list_view_state_value" id="list_status"><?=$status?></output>
+            </td>
+            <td>
+              <?=$p_code?>
             </td>
           </tr>
           <?php
