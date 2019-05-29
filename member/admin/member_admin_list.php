@@ -114,15 +114,7 @@ $view_num = $total_record - $start_record;
           </li>
         </div>
       </form>
-      <?php
-      if(!empty($_SESSION['id'])){
-        echo ('<a  href="http://'.$_SERVER['HTTP_HOST'].'/santteut/member/join/join_member.php" class="hov"><button id="admin_write_btn" type="button" name="button">
-        회원등록</button></a>');
-        echo ('<button id="admin_write_btn" onclick="delete_submit()" type="button" name="button">
-        회원삭제</button>');
-      }
 
-      ?>
       <!--게시물 제목-->
       <script type="text/javascript">
         function delete_submit(){
@@ -175,23 +167,35 @@ $view_num = $total_record - $start_record;
 
         <tr>
           <!--번호-->
-          <td> <input type="checkbox" id="" name="select_del" value="<?=$id?>"> </td>
+          <td style="width:4%;"> <input type="checkbox" id="" name="select_del" value="<?=$id?>"> </td>
           <td><?=$id?></td>
-          <td><?=$name?></td>
-          <td style="width:300px;"><?=$address1?></td>
+          <td style="width:7%;"><?=$name?></td>
+          <td><?=$address1?></td>
           <td><?=$address2?></td>
           <td><?=$hp1?><?=$hp2?></td>
           <td><?=$email?></td>
-          <td><a href="http://<?=$_SERVER['HTTP_HOST']?>/santteut/member/join/join_edit.php?id=<?=$id?>" class="hov">
-          <button style="margin-left:30px;" type="button" name="button">정보수정</button></a></td>
+          <td style="width:7%;"><a href="http://<?=$_SERVER['HTTP_HOST']?>/santteut/member/join/join_edit.php?id=<?=$id?>" class="hov">
+          <button type="button" name="button">정보수정</button></a></td>
         </tr>
         <?php
           $view_num--;
          }//end of for
         ?>
       </table>
+      <div class="another_btn">
 
-<br><br>
+
+      <?php
+      if(!empty($_SESSION['id'])){
+        echo ('<a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/member/join/join_member.php" class="hov"><button id="admin_write_btn" style="margin-left:72.3%; margin-right:1%;" type="button" name="button">
+        회원등록</button></a>');
+        echo ('<button id="admin_write_btn" onclick="delete_submit()" type="button" name="button">
+        회원삭제</button>');
+      }
+
+      ?>
+      </div>
+<br>
 
 
 </form>

@@ -60,7 +60,7 @@ $divide_flag='';
        </div>
        <br>
        <div class="button1">
-         <a href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/tour/package/package_view.php?mode=<?=$p_code[$best3_record]?>"><button style="margin-top: 1%;padding:3%; border: 1px solid #d10e0e; font-size: 12px; color: white; background-color: #d10e0e; cursor: pointer; border-radius: 5px;" type="button" name="button">상품보기</button></a>
+         <a href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/tour/package/package_view.php?mode=<?=$p_code[$best3_record]?>"><button style="margin-top: 1%;padding:3%; border: 1px solid #2F9D27; font-size: 12px; color: white; background-color: #2F9D27; cursor: pointer; border-radius: 5px;" type="button" name="button">상품보기</button></a>
        </div>
      </div>
    </div>
