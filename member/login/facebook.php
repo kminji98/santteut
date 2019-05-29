@@ -1,5 +1,7 @@
 <?php
-
+if(!session_id()) {
+    session_start();
+}
 require_once './src/Facebook/autoload.php'; // download official fb sdk for php @ https://github.com/facebook/php-graph-sdk
 $fb = new Facebook\Facebook([
   'app_id' => '2504643382879573', //님의 앱ID 적어주세요
@@ -50,7 +52,6 @@ if (isset($accessToken)) {
     // PRINT basic info
     $profile = $profile_request->getGraphNode()->asArray();
 
-    // var_dump($profile);
     //결과 예시 array(5) { ["name"]=> string(9) "Minji Kim"
     // ["first_name"]=> string(5) "Minji"
     //["last_name"]=> string(3) "Kim"
