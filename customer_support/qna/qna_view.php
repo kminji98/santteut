@@ -47,6 +47,7 @@ if(isset($_GET["num"]) && !empty($_GET["num"])){
     <meta charset="utf-8">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/customer_support/qna/css/qna_view.css">
+    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/side_bar.css">
     <script type="text/javascript" src="./js/qna_view.js?ver=1"></script>
 
     <title>문의하기</title>
@@ -67,6 +68,7 @@ if(isset($_GET["num"]) && !empty($_GET["num"])){
     <header>
       <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/login_menu.php";?>
       <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/custom_menu.php";?>
+      <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/side_bar.php";?>
     </header>
     <br><br><br>
 

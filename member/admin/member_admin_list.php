@@ -39,7 +39,9 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="search"){
   $q_find_input = mysqli_real_escape_string($conn, $find_input);
 
   if(empty($find_input)){
-    echo ("<script>window.alert('검색할 단어를 입력해 주세요')history.go(-1)</script>");
+    echo ("<script>window.alert('검색할 단어를 입력해 주세요')
+    location.href='member_admin_list.php';
+    </script>");
     exit;
   }
 
@@ -98,23 +100,31 @@ $view_num = $total_record - $start_record;
     <br><br><br>
     <section id="notice">
 
-      <form name="notice_form" action="notice_list?mode=search" method="post">
+      <form name="notice_form" action="member_admin_list.php?mode=search" method="post">
       <div class="notice_list_search">
-        <select>
-          <option value="">아이디</option>
-          <option value="">이름</option>
-          <option value="">이메일</option>
+        <select name="find_option">
+          <option value="id">아이디</option>
+          <option value="name">이름</option>
+          <option value="email">이메일</option>
         </select>
-        <input type="text" name="" value="">
-        <button type="button" name="button">검색</button>
+        <input type="text" name="find_input" value="">
+        <button type="submit" name="button" >검색</button>
       </div>
       </form>
 
       <!--총 회원수-->
       <div class="total_title">
-        <h4>총 <?=$total_record?> 명</h4>
+        <h4 >총 <?=$total_record?> 명</h4>
       </div>
+      <?php
+      if(!empty($_SESSION['id'])){
+        echo ('<a  href="http://'.$_SERVER['HTTP_HOST'].'/santteut/member/join/join_member.php" class="hov"><button id="admin_write_btn" type="button" name="button">
+        회원등록</button></a>');
+        echo ('<button id="admin_write_btn" onclick="delete_submit()" type="button" name="button">
+        회원삭제</button>');
+      }
 
+      ?>
       <!--게시물 제목-->
       <script type="text/javascript">
         function delete_submit(){
@@ -145,9 +155,10 @@ $view_num = $total_record - $start_record;
           <th>이름</th>
           <th>주소1</th>
           <th>주소2</th>
-          <th>일반전화</th>
-          <th>휴대폰번호</th>
+          <th>전화번호</th>
           <th>이메일</th>
+          <th>정보수정</th>
+
         </tr>
 
       <!--게시물 내용-->
@@ -169,11 +180,12 @@ $view_num = $total_record - $start_record;
           <td> <input type="checkbox" id="" name="select_del" value="<?=$id?>"> </td>
           <td><?=$id?></td>
           <td><?=$name?></td>
-          <td><?=$address1?></td>
+          <td style="width:300px;"><?=$address1?></td>
           <td><?=$address2?></td>
-          <td><?=$hp1?></td>
-          <td><?=$hp2?></td>
+          <td><?=$hp1?><?=$hp2?></td>
           <td><?=$email?></td>
+          <td><a href="http://<?=$_SERVER['HTTP_HOST']?>/santteut/member/join/join_edit.php?id=<?=$id?>" class="hov">
+          <button style="margin-left:30px;" type="button" name="button">정보수정</button></a></td>
         </tr>
         <?php
           $view_num--;
@@ -183,18 +195,7 @@ $view_num = $total_record - $start_record;
 
 <br><br>
 
-<?php
-if(!empty($_SESSION['id'])){
-  echo ('<a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/member/join/join_member.php" class="hov"><button id="admin_write_btn" type="button" name="button">
-  회원등록</button></a>');
-  echo ('<a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/member/join/join_edit.php" class="hov"><button id="admin_write_btn" type="button" name="button">
-  회원정보수정</button></a>');
-  echo ('<button id="admin_write_btn" onclick="delete_submit()" type="button" name="button">
-  회원삭제</button>');
 
-}
-
-?>
 </form>
 <br>
 <!--$page 는 현재페이지를 의미 x / 각 페이지를 의미-->
