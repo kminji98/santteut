@@ -430,17 +430,17 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
 
               if($total<$p_bus_half){
                 $status="예약완료";
-                $cancel_status = '<input type="button" onclick="cancel(\'update\',\''.$r_pk.'\')" name="cancel_btn" id="'.$r_pk.'" value="취소">';
+                $cancel_status = '<input type="button" class="cancel_btn" onclick="cancel(\'update\',\''.$r_pk.'\')" name="cancel_btn" id="'.$r_pk.'" value="취소">';
               }
 
 
               if($total>=$p_bus_half){
                 if($count!=0){
                   $status = "<p style='color:green;'>결제완료</p>";
-                  $cancel_status = '<input type="button" onclick="cancel(\'delete\',\''.$r_pk.'\')" name="cancel_btn" id="'.$r_pk.'" value="취소">';
+                  $cancel_status = '<input type="button" class="cancel_btn" onclick="cancel(\'delete\',\''.$r_pk.'\')" name="cancel_btn" id="'.$r_pk.'" value="취소">';
                 }else{
                   $status="<a style='color:red;' href='../bill/bill_view.php?&r_pk=$r_pk'>결제대기</a>";
-                  $cancel_status = '<input type="button" onclick="cancel(\'update\',\''.$r_pk.'\')" name="cancel_btn" id="'.$r_pk.'" value="취소">';
+                  $cancel_status = '<input type="button" class="cancel_btn" onclick="cancel(\'update\',\''.$r_pk.'\')" name="cancel_btn" id="'.$r_pk.'" value="취소">';
                 }
 
               }
@@ -454,10 +454,10 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
               $review_status =$review_row['num'];
               if(empty(mysqli_num_rows($review_result))){
                 $disabled = '';
-                if($p_dp_date>= date("Y-m-d")){ $disabled = 'disabled';}
-                $review_status='<input type="button" name="review_btn" '.$disabled.' id="'.$r_pk.'" value="후기작성">';
+                if($p_arr_date2>= date("Y-m-d")){ $disabled = 'disabled';}
+                $review_status='<input type="button" class="review_btn" name="review_btn" '.$disabled.' id="'.$r_pk.'" value="후기작성">';
               }else{
-                $review_status='<input type="button" name="review_btn" id="'.$r_pk.'" value="후기확인">';
+                $review_status='<input type="button" class="review_btn" name="review_btn" id="'.$r_pk.'" value="후기확인">';
               }
 
               if($r_cancel=="1"){

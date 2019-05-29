@@ -1,12 +1,13 @@
+
 <?php
 $id=isset($_SESSION['id'])?$_SESSION['id']:'';
 $r_code = isset($_GET["code"]);
 
-define('ROW_SCALE', 10);
-define('PAGE_SCALE', 10);
+define('ROW_SCALE', 5);
+define('PAGE_SCALE', 5);
 
 
-$after_sql = "SELECT * FROM `member_review` where `r_code`='$p_code' and `id`='$id';";
+$after_sql = "SELECT * FROM `member_review` where `r_code`='$p_code';";
 $after_result = mysqli_query($conn,$after_sql);
 $total_record=mysqli_num_rows($after_result);
 
@@ -38,18 +39,21 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
 
 ?>
 <style media="screen">
-.page_button_group button{border-radius: 3px; margin-bottom:3%; width: 35px; height: 35px; font-weight: bold; margin-right: 5px; cursor: pointer; border: 1px solid #464646; background-color: white;}
+.page_button_group button{border-radius: 3px; margin-bottom:3%; width: 35px; height: 35px; font-weight: bold; margin-right: 17%; margin-top: 2%; cursor: pointer; border: 1px solid #464646; background-color: white;}
 .page_button_group button:hover{background-color: #2F9D27; color: white; border-radius: 3px; border: 1px solid #2F9D27;}
-.page_button_group{ position: relative; margin-top: auto; margin-left: auto;text-align:center; margin-left: 12%; width: 100%; height: auto;}
+.page_button_group{ position: relative; margin-top: auto; margin-left: auto;text-align:center; width: 100%; height: auto;}
 a{text-decoration: none;}
 </style>
+<div class="" style="margin-left:12%;">
+  <h3 style="display:inline;">상품평</h3><b style="display:inline; margin-left:1%; color:#2F9D27;">(<?=$total_record?>건)</b>
+</div>
 <table id="tbl1">
   <tr>
-    <td class="td1">NO</td>
-    <td class="td2">제목</td>
-    <td class="td3">작성자</td>
-    <td class="td4">등록날짜</td>
-    <td class="td5">평점</td>
+    <td id="top_td" class="td1"><b>NO</b></td>
+    <td id="top_td" class="td2"> <b>제목</b> </td>
+    <td id="top_td" class="td3"><b>작성자</b></td>
+    <td id="top_td" class="td4"><b>등록날짜</b></td>
+    <td id="top_td" class="td5"><b>평점</b></td>
   </tr>
 <?php
 mysqli_data_seek($after_result,$start_record);
@@ -58,7 +62,7 @@ for ($record = $start_record; $record  < $start_record+ROW_SCALE && $record<$tot
   //예약날짜/ 예약 코드/ 상품명/ 총 결제금액/ 인원/ 출발일*귀국일 / 예약/결제상태 /취소 / 후기
   $row = mysqli_fetch_array($after_result);
   $num = $row['num'];
-  $id = $row['id'];
+  $writer_id = $row['id'];
   $title = $row['title'];
   $w_date = $row['write_date'];
   $grade = $row['grade'];
@@ -69,7 +73,7 @@ for ($record = $start_record; $record  < $start_record+ROW_SCALE && $record<$tot
     <tr>
       <td class="td1"><?=$num?></td>
       <td class="td2"><a href="../member_review/member_review.php?mode=view&r_pk=<?=$pk?>"><?=$title?></a></td>
-      <td class="td3"><?=$id?></td>
+      <td class="td3"><?=$writer_id?></td>
       <td class="td4"><?=$w_date?></td>
       <td class="td5"><?=$grade?></td>
     </tr>

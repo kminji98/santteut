@@ -13,7 +13,10 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
         </script>";
     }else{
       $row = mysqli_fetch_array($result);
-      $id = "아이디는".$row['id']."입니다.";
+      // $id = "아이디는".$row['id']."입니다.";
+      echo "<script>
+          alert('아이디는 ".$row['id']."입니다.');
+        </script>";
     }
   }else if(isset($email1)&&isset($email2)&&!empty($id)){
     $sql = "select * from member where id='$id'";
@@ -24,7 +27,10 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
         </script>";
     }else{
       $row = mysqli_fetch_array($result);
-      $id = "비밀번호는".$row['passwd']."입니다.";
+      echo "<script>
+          alert('비밀번호는 ".$row['passwd']."입니다.');
+        </script>";
+      // $id = "비밀번호는".$row['passwd']."입니다.";
     }
   }
 ?>
@@ -110,11 +116,6 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
           <th id="forgot_id">ID찾기</th>
           <th id="forgot_pw">비밀번호찾기</th>
           <th style="border:0;"></th>
-        </tr>
-        <tr>
-          <td id="find_by_email">이메일로 찾기</td>
-          <td id="find_by_phone">핸드폰으로 찾기</td>
-
         </tr>
 
         <tr >

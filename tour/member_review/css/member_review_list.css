@@ -1,6 +1,7 @@
-#tbl1{ width: 100%; border:1px solid black; border-collapse: collapse; text-align: center; margin-left: 12%;}
-.td1{width: 8%; border-right: 1px solid black; border-top: 1px solid black;}
-.td2{width: 54%; border-right: 1px solid black; border-top: 1px solid black;}
-.td3{width: 15%; border-right: 1px solid black; border-top: 1px solid black;}
-.td4{width: 15%; border-right: 1px solid black; border-top: 1px solid black;}
-.td5{width: 8%; border-top: 1px solid black;}
+#tbl1{ width: 56%; border:1px solid #DDDDDD; border-collapse: collapse; text-align: center; margin-left: 11.8%; }
+.td1{ width: 8%; border-right: 1px solid #DDDDDD; border-top: 1px solid #DDDDDD; padding:1%;}
+.td2{width: 54%; border-right: 1px solid none; border-top: 1px solid #DDDDDD;}
+.td3{width: 15%; border-right: 1px solid none; border-top: 1px solid #DDDDDD;}
+.td4{width: 15%; border-right: 1px solid none; border-top: 1px solid #DDDDDD;}
+.td5{width: 8%; border-top: 1px solid #DDDDDD;}
+#top_td{background-color: #F2F2F2;}
