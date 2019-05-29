@@ -505,6 +505,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
             if($total==$p_bus){
               $status="예약마감";
             }
+            if($p_dp_date<= date("Y-m-d")){ $status="마감";}
 
            ?>
 

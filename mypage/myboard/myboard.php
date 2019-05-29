@@ -2,18 +2,21 @@
 /*
 =================================================================
 + [DESC] 내가 쓴 글 목록 확인
-+ [DATE] 2019-05-19
++ [DATE] 2019-05-29
 + [NAME] 김민지
 =================================================================
 */
-session_start();
+if(!session_id()) {session_start();}
+
+$alert = ($reserve_flag==0) ? "해당 게시물이 없습니다." : "취소내역이 없습니다.";
+
 ?>
 <!DOCTYPE html>
 <html lang="ko" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css?ver=1">
-    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/mypage/myboard/css/myboard.css">
+    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css">
+    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/mypage/myboard/css/myboard.css?ver=0">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/side_bar.css">
     <title>산뜻 :: 즐거운 산행</title>
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
@@ -30,9 +33,31 @@ session_start();
               $(this).css('border-bottom-color', 'white');
               $(this).css('border-left-color', 'black');
             }
+            var category = $(this).attr('id');
+            // alert(category);
+
+            $.ajax({
+              url: 'myboard_btn_action.php',
+              type: 'POST',
+              data: {category: category}
+            })
+            .done(function(result) {
+              // alert(result);
+              $("#list_tbl_body").html('');
+              $("#list_tbl_body").append('<tr><td style="width:70%;">제목</td><td>작성일</td><td>조회</td></tr>');
+              $("#list_tbl_body").append(result);
+            })
+            .fail(function() {
+              console.log("error");
+            })
+            .always(function() {
+              console.log("complete");
+            });
+
+
+
           });
         }
-
       });
     </script>
 
@@ -48,26 +73,22 @@ session_start();
     <div id="myboard_list">
         <h3 id="title" >참여내역</h3>
       <fieldset id="list_field">
-        <table id="list_tbl_head"><tr id="list_head_tr"><td id="list_head1">상담문의</td><td id="list_head2">여행후기</td>
-          <td id="list_head3">자유게시판</td>
-        </tr></table>
+        <table id="list_tbl_head">
+          <tr id="list_head_tr">
+            <td id="list_head1">상담문의</td>
+            <td id="list_head2">여행후기</td>
+            <td id="list_head3">자유게시판</td>
+          </tr></table>
         <table id="list_tbl_body">
-          <tr>
-            <td>제목</td>
-            <td>작성일</td>
-            <td></td>
-            <td>총 결제금액</td>
-            <td>인원</td>
-            <td>출발일/귀국일</td>
-            <!-- 취소내역 -> 예약상태 : 예약 취소  -->
-            <td>예약상태</td>
-            <td>결제상태</td>
-            <td>후기</td>
-          </tr>
-          <output id="list_tbl_body_output">
-            <tr><td colspan="9" style="padding:40px;">예약 내역이 없습니다.</td></tr>
-          </output>
+
         </table>
+          <output>
+          <?php
+          // if(empty($total_record)){
+          //   echo '<p id="no_result" style="text-align:center; padding:2%;margin-bottom:3%;">'.$alert.'</p><hr><br>';
+          // }
+           ?>
+         </output>
       </fieldset>
     </div> <!-- end of div "reserve_list" -->
     <footer> <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/footer.php";?> </footer>

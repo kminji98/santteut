@@ -110,7 +110,7 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
     // 예약내역 취소내역 선택 부분
       $(document).ready(function() {
         $("#reserve_flag").val(<?=json_encode($reserve_flag)?>);
-        //여기
+
         if($("#reserve_flag").val()*1){
           if($("#list_head_cancel").css('background-color')!="white"){
             $("#list_head_cancel").css('background-color', 'white');

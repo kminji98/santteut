@@ -38,7 +38,7 @@ $divide_flag='';
     $yoil = array("일","월","화","수","목","금","토");
     $day[$best3_record] = $yoil[date('w', strtotime(isset($p_dp_date)))];
     $day2[$best3_record] = $yoil[date('w', strtotime(isset($p_arr_date2)))];
-    $p_pay[$best3_record]=number_format(isset($p_pay[$best3_record]));
+    $p_pay[$best3_record]=number_format($p_pay[$best3_record]);
 
  ?>
  <div class="container" id="con<?=($best3_record+1)?>">
@@ -51,7 +51,7 @@ $divide_flag='';
          <h3><?=$p_name[$best3_record]?></h3>
        </div>
        <b>
-         <?=$p_pay[$best3_record]?>
+         <?=$p_pay[$best3_record].' \\'?>
        </b>
        <br><br>
        <div class="text1">
