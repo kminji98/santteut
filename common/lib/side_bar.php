@@ -58,11 +58,11 @@
   <div id="side_bar_recent">
     <br><br><p style="display:block">최근 본 상품</p>
     <a href="../../tour/package/package_view.php?mode=<?=$cookie1?>"><img class="side_bar_recent_img" src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/lib/editor/data/<?=$menu1?>"></a>
-    <div class="side_bar_recent_val"><a href="../../tour/package/package_view.php?mode=<?=$cookie1?>" style=" text-decoration:none;font-size:5px; color:gray; <?=$color1?>"><?=$mt1?></a></div>
+    <div class="side_bar_recent_val"><a href="../../tour/package/package_view.php?mode=<?=$cookie1?>" style=" text-decoration:none;font-size:0.7em; color:gray; <?=$color1?>"><?=$mt1?></a></div>
     <a href="../../tour/package/package_view.php?mode=<?=$cookie1?>"><img class="side_bar_recent_img" src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/lib/editor/data/<?=$menu2?>"></a>
-    <div class="side_bar_recent_val"><a href="../../tour/package/package_view.php?mode=<?=$cookie2?>" style="text-decoration:none; font-size:5px; color:gray; <?=$color2?>"><?=$mt2?></a></div>
+    <div class="side_bar_recent_val"><a href="../../tour/package/package_view.php?mode=<?=$cookie2?>" style="text-decoration:none; font-size:0.7em; color:gray; <?=$color2?>"><?=$mt2?></a></div>
     <a href="../../tour/package/package_view.php?mode=<?=$cookie1?>"><img class="side_bar_recent_img" src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/lib/editor/data/<?=$menu3?>"></a>
-    <div class="side_bar_recent_val"><a href="../../tour/package/package_view.php?mode=<?=$cookie3?>" style="text-decoration:none; font-size:5px; color:gray; <?=$color3?>"><?=$mt3?></a></div>
+    <div class="side_bar_recent_val"><a href="../../tour/package/package_view.php?mode=<?=$cookie3?>" style="text-decoration:none; font-size:0.7em; color:gray; <?=$color3?>"><?=$mt3?></a></div>
   </div>
   <div class="side_bar_middle">
   <br>
