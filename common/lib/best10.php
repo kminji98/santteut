@@ -19,7 +19,7 @@ $divide = "";
       break;
       case 'abroad':
       $divide_flag = "WHERE `package`.`p_airplane_num` != '0'";
-      $str_title = "국외";
+      $str_title = "해외";
       break;
       case '':
       $divide_flag = '';
