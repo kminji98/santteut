@@ -3,7 +3,6 @@ session_start();
 if(!isset($_SESSION['id'])){echo "<script>alert('권한없음!');history.go(-1);</script>";
 exit;}
 include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
-
 $row=$file_name_0=$file_copied_0=$file_type_0="";
 
 if(isset($_GET["mode"])&&$_GET["mode"]=="download"){

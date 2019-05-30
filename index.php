@@ -43,7 +43,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/create_table.php";
 <br>
     <!--인기 산행 일정 TOP3-->
     <div id="main_big3">
-      <h1>인기 산행 일정</h1>
+      <h2>산뜻에서 산행을 시작하세요!</h2>
       <div id="best3">
         <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/best3.php";?>
       </div>

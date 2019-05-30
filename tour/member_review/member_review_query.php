@@ -9,7 +9,6 @@ $content = $sql= $result = $name=$q_title=$q_content=$regist_day=$hit=$secret_ok
 $name = $_SESSION['name'];
 $id = $_SESSION['id'];
 $date =date("Y-m-d");
-var_export($id);
 
 //mode가 insert일때
 if(isset($_GET["mode"]) && $_GET["mode"]=="insert"){
@@ -17,7 +16,10 @@ if(isset($_GET["mode"]) && $_GET["mode"]=="insert"){
     $content = trim($_POST["content"]);
     $code = $_POST["code"];
     $r_pk = $_POST["r_pk"];
-    $grade = $_POST["grade"];
+    $satisfaction_grade = $_POST["satisfaction_grade"];
+    $schedule_grade = $_POST["schedule_grade"];
+    $cost_grade = $_POST["cost_grade"];
+    $meal_grade = $_POST["meal_grade"];
 
     if(empty($content)||empty($title)){
       alert_back('1. 내용이나제목입력요망!');
@@ -39,7 +41,7 @@ if(isset($_GET["mode"]) && $_GET["mode"]=="insert"){
     $r_code=$row['r_code'];
 
 
-    $sql="INSERT INTO `member_review` VALUES (null,'$r_code','$r_pk','$q_title','$q_content','$id','$name','$date','$grade');";
+    $sql="INSERT INTO `member_review` VALUES (null,'$r_code','$r_pk','$q_title','$q_content','$id','$name','$date','$satisfaction_grade','$schedule_grade','$cost_grade','$meal_grade');";
 
     $result = mysqli_query($conn,$sql);
     if (!$result) {alert_back('Error:5 ' . mysqli_error($conn));}

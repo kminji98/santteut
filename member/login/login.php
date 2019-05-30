@@ -90,7 +90,7 @@
           <th rowspan="2"><button type="button" name="button" id="login_button" onclick="login_action()">로그인</button> </th>
         </tr>
         <tr>
-          <th><label>비밀번호</label> </th>
+          <th><label>비밀번호</label></th>
           <td><input type="password" name="login_passwd"></td>
         </tr>
       </form>
@@ -101,7 +101,7 @@
         <tr>
           <td id="empty_row" colspan="3"><br></td>
         </tr>
-        <tr><td colspan="3">&nbsp;&nbsp;<a href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/member/login/forgot_id_pw.php?find=id">아이디 찾기</a>&nbsp; / &nbsp;<a href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/member/login/forgot_id_pw.php?find=pw">비밀번호 찾기</a></td></tr>
+        <tr><td colspan="3">&nbsp;&nbsp;<a href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/member/login/forgot_id_pw.php?find=id">아이디 찾기/비밀번호 찾기</a></td></tr>
         <tr>
           <td id="empty_row" colspan="3"><br></td>
         </tr>
