@@ -35,7 +35,6 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="search"){
 $result=mysqli_query($conn,$sql);
 
 $total_record=mysqli_num_rows($result);
-var_export($total_record);
 // 조건?참:거짓
 $total_pages=ceil($total_record/ROW_SCALE);
 // 페이지가 없으면 디폴트 페이지 1페이지
@@ -72,8 +71,66 @@ $view_num = $total_record - $start_record;
         $("#qna_mini").css("color","black");
       });
     </script>
+    <script type="text/javascript">
+      function modal_alert(msg1,msg2){
+        var modal = document.getElementById('myModal');
+        $("#modal-content").html("");
+        $("#modal-content").append("<form name='pw_check_form' id='pw_check_form' action='qna_modal_query.php?mode=pass' method='post'>");
+        $("#pw_check_form").append("<h2>"+msg1+"</h2>");
+        $("#pw_check_form").append("<h3>"+msg2+"</h3>");
+        $("#pw_check_form").append('<div class="button-8" id="button-3">');
+        $("#button-3").append('<div class="eff-8"></div>');
+        $("#button-3").append("<a class=\'btn\' onclick=\'document.pw_check_form.submit()\' ><span>확인</span></a>");
+        $("#button-3").append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class=\'btn\' onclick=\'modal_close();\' ><span>취소</span></a>");
+        $("#pw_check_form").append("</div>");
+        $("#modal-content").append("</form>");
+        modal.style.display="block";
+      }
+      function modal_close(){
+        var modal = document.getElementById('myModal');
+        modal.style.display="none";
+
+      }
+
+      function modal_alert_cancel(msg1,msg2,msg3){
+        var modal = document.getElementById('myModal');
+        modal.style.display="block";
+
+        $("#modal-content").html("<i class='fas fa-exclamation-circle 9x'></i>");
+        $("#modal-content").append("<h2>"+msg1+"</h2>");
+        $("#modal-content").append("<h3>"+msg2+"</h3>");
+        $("#modal-content").append("<div class='button-8' id='button-3' onclick='alert_confirm(\""+msg3+"\")'>");
+        $("#button-3").append("<div class='eff-8'></div>");
+        $("#button-3").append("<a href='#'><span>확인</span></a>");
+        $("#modal-content").append("</div>");
+        $("#modal-content").append("<div class='button-8' id='button-4'>");
+        $("#button-3").append("<div class='eff-8'></div>");
+        $("#button-3").append("<a href='#'><span>취소</span></a>");
+        $("#modal-content").append("</div>");
+      }
+
+      function alert_confirm(local){
+        var modal = document.getElementById('myModal');
+        modal.style.display = "none";
+        if(local!="undefined"){
+          window.location.href=local;
+        }
+      }
+
+      window.onclick = function(event) {
+        if (event.target == "modal") {
+          var modal = document.getElementById('myModal');
+            modal.style.display = "none";
+        }
+      };
+    </script>
   </head>
   <body>
+    <div id="myModal" class="modal">
+       <div class="modal-content" id="modal-content">
+        </div>
+        </div>
+    </div>
     <header>
       <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/login_menu.php";?>
       <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/custom_menu.php";?>
@@ -82,15 +139,15 @@ $view_num = $total_record - $start_record;
     <br><br><br>
     <section id="qna">
       <div class="qna_list_search">
-      <form name="board_form" action="qna_list.php?mode=search" method="post">
-        <select name="find_option">
-          <option value="title">제목</option>
-          <option value="content">내용</option>
-          <option value="name">작성자</option>
-        </select>
-        <input type="text" name="find_input">
-        <input type="submit" value="검색" style="width:53px; height:27px; background-color: #2F9D27; border: 1px solid #2F9D27; color: white;"></input>
-      </form>
+        <form name="board_form" action="qna_list.php?mode=search" method="post">
+          <select name="find_option">
+            <option value="title">제목</option>
+            <option value="content">내용</option>
+            <option value="name">작성자</option>
+          </select>
+          <input type="text" name="find_input">
+          <input type="submit" value="검색" style="width:53px; height:27px; background-color: #2F9D27; border: 1px solid #2F9D27; color: white;"></input>
+        </form>
       </div>
       <br>
       <table border="1">
@@ -133,9 +190,31 @@ $view_num = $total_record - $start_record;
             <td><?=$view_num?></td>
             <!--제목-->
             <td>
-              <a onclick="window.open('./qna_pw.php?num=<?=$num?>&page=<?=$page?>&hit=<?=$hit?>','',
-              'scrollbars=yes,toolbars=yes,top=200,left=450,width=500,height=140')"><?=$space.$title?>
-              </a>
+              <script type="text/javascript">
+                function view_pw(num_val,page,hit){
+                  $.ajax({
+                    url: 'qna_modal.php?mode=pass',
+                    type: 'POST',
+                    data: {
+                      num: num_val
+                    }
+                  })
+                  .done(function(result) {
+                    if(result != ''){
+                       modal_alert('비밀번호를 입력해주세요','<input style=\'height:34px;width:220px;\' type=\'password\' name=\'pw\'><input type=\"hidden\" name=\"num\" value=\''+num_val+'\'>');
+                    }
+                    console.log("success");
+                  })
+                  .fail(function() {
+                    console.log("error");
+                  })
+                  .always(function() {
+                    console.log("complete");
+                  });
+
+                }
+              </script>
+              <a onclick="view_pw(<?=$num?>,<?=$page?>,<?=$hit?>)"><?=$space.$title?></a>
             </td>
             <!--작성자-->
             <td><?=$name?></td>
@@ -150,7 +229,6 @@ $view_num = $total_record - $start_record;
             $view_num--;
            }//end of for
           ?>
-
       </table>
       <?php
       if(!empty($_SESSION['id'])){
