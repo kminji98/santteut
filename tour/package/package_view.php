@@ -22,15 +22,9 @@ setcookie("cookie1",$p_code,time() + 3600);
       var wrap=document.getElementById('wrap');
       var plus=wrap.offsetHeight;
       var middle=document.getElementById('middle');
-      // var middle=middle.offsetHeight;
-      // wrap.height=detail_view1.offsetHeight;
-      // middle.height=detail_view1.offsetHeight;
-      // alert(middle.height);
+
       wrap.style.height=parseInt(middle.offsetHeight)+615+"px";
-      alert(parseInt(detail_view1.offsetHeight));
-      // alert(parseInt(plus));
-      // alert(parseInt(middle));
-      // body_1.style.height=detail_view1.offsetHeight+"px";
+
     }
 
 
