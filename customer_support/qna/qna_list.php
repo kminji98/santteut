@@ -1,25 +1,19 @@
 <?php
 session_start();
-
 // isset함수는 불리언값을 리턴 true or false
 // 비회원이면 권한없음
 if(!isset($_SESSION['id'])){
   echo "<script>alert('회원가입 후 이용해주세요.');history.go(-1);</script>";
   exit;
 }
-
 $name = $_SESSION['name'];
-
 //0-0. 인클루드 디비
 include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
-
 //1. 게시물수 정의
 define('ROW_SCALE', 10);
 define('PAGE_SCALE', 5);
-
 $sql=$result=$total_record=$total_page=$start_record=$row="";
 $total_record=0;
-
 if(isset($_GET["mode"])&&$_GET["mode"]=="search"){
   //제목, 내용, 작성자
   $find_option = test_input($_POST["find_option"]);
@@ -44,25 +38,20 @@ $total_record=mysqli_num_rows($result);
 var_export($total_record);
 // 조건?참:거짓
 $total_pages=ceil($total_record/ROW_SCALE);
-
 // 페이지가 없으면 디폴트 페이지 1페이지
 // if(empty($_GET['page'])){$page=1; }else{ $page=$_GET['page']; }
 $page=(empty($_GET['page']))?1:$_GET['page'];
-
 // 현재 블럭의 시작 페이지 = (ceil(현재페이지/블럭당 페이지 제한 수)-1) * 블럭당 페이지 제한 수 +1
 //[[  EX) 현재 페이지 5일 때 => ceil(5/3)-1 * 3  +1 =  (2-1)*3 +1 = 4 ]]
 $start_page= (ceil($page / PAGE_SCALE ) -1 ) * PAGE_SCALE +1 ;
-
 // 현재페이지 시작번호 계산함.
 //[[  EX) 현재 페이지 1일 때 => (1 - 1)*10 -> 0   ]]
 //[[  EX) 현재 페이지 5일 때 => (5 - 1)*10 -> 40  ]]
 $start_record=($page -1) * ROW_SCALE;
-
 // 현재 블럭 마지막 페이지
 // 전체 페이지가 (시작 페이지+페이지 스케일) 보다 크거나 같으면 마지막 페이지는 (시작페이지 + 페이지 스케일) -1 / 아니면 전체페이지 수 .
 //[[  EX) 현재 블럭 시작 페이지가 6/ 전체페이지 : 10 -> '10 >= (6+10)' 성립하지 않음 -> 10이 현재블럭의 가장 마지막 페이지 번호  ]]
 $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCALE-1 : $total_pages;
-
 // 리스트에 보여줄 번호를 최근순으로 부여함.
 // 출력될 숫자
 $view_num = $total_record - $start_record;
@@ -223,7 +212,7 @@ $view_num = $total_record - $start_record;
             </div>
           </section>
   </body>
-</html>
-<footer>
+  <footer>
 <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/footer.php";?>
 </footer>
+</html>
