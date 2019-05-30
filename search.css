@@ -1,3 +1,5 @@
 #main_search input{font-size: 25px; width:90%; height: 50px;}
 
-#search1 i{color: white;}
+#search1 i{color: white;cursor: pointer;}
+
+/* #search1 i :hover{cursor: pointer;} */
