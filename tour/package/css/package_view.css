@@ -30,9 +30,9 @@
 #sel2{width: 55px; margin-left: 11px; padding: 4px 3px; border-radius: 2px;}
 #sel3{width: 55px; margin-left: 11px; padding: 4px 3px; border-radius: 2px;}
 #total_pay{margin-left: 15px; font-size: 16px; font-weight: bold; margin-bottom: 0px;}
-#money{font-size: 30px; color: #e85581; margin-left: 70px;}
-#won{font-size: 16px; color: #e85581;  display: inline-block;}
+#money{font-size: 30px; color: #35cc2b; margin-left: 70px;}
+#won{font-size: 16px; color: #35cc2b;  display: inline-block;}
 .subtext1{font-size: 9px; color: #6e6e6e; text-align: right; margin-right: 10px;}
 #line{font-size: 9px; color: #cccccc; margin-left: 2%;}
-#reserve_status{background-color: #35cc2b; color: white; font-size: 15px; font-weight: bold; width: 180px; margin-left: 23px; text-align: center; padding: 14px 5px;}
-#go_cart{ border: 1px solid #e85581; color: #e85581; font-size: 15px; font-weight: bold; width: 180px; margin-left: 23px; text-align: center; padding: 13px 4px; margin-bottom: 15px;}
+#reserve_status{background-color: #35cc2b; color: white; font-size: 15px; font-weight: bold; width: 180px; margin-left: 23px; text-align: center; padding: 14px 5px; cursor: pointer;}
+#go_cart{ border: 1px solid #35cc2b; color: #35cc2b; font-size: 15px; font-weight: bold; width: 180px; margin-left: 23px; text-align: center; padding: 13px 4px; margin-bottom: 15px;}
