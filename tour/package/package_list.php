@@ -8,9 +8,9 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css">
-    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/tour/package/css/package_list.css?ver=2">
+    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/tour/package/css/package_list.css">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/side_bar.css">
-    <link href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/lib/calendar/css/style.css?ver=0" rel="stylesheet">
+    <link href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/lib/calendar/css/style.css" rel="stylesheet">
     <script type="text/javascript">
       var divide=<?=json_encode($divide)?>;
     </script>
@@ -299,11 +299,6 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
       <h2><?=$head_text?></h2>
     </div>
     <!--인기 산행 일정 TOP3-->
-    <div id="best3">
-      <div id="best_text">
-        <h1>인기 산행 일정 TOP3</h1>
-      </div>
-    </div>
     <div id="main_big3">
       <div id="best3" >
         <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/best3.php";?>

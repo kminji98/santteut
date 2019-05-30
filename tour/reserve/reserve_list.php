@@ -72,7 +72,6 @@ if(isset($_POST['page'])){
 //[[  EX) 현재 페이지 5일 때 => ceil(5/3)-1 * 3  +1 =  (2-1)*3 +1 = 4 ]]
 $start_page= (ceil($page / PAGE_SCALE ) -1 ) * PAGE_SCALE +1 ;
 
-
 // 현재페이지 시작번호 계산함.
 //[[  EX) 현재 페이지 1일 때 => (1 - 1)*10 -> 0   ]]
 //[[  EX) 현재 페이지 5일 때 => (5 - 1)*10 -> 40  ]]
@@ -83,10 +82,6 @@ $start_record=($page -1) * ROW_SCALE;
 // 전체 페이지가 (시작 페이지+페이지 스케일) 보다 크거나 같으면 마지막 페이지는 (시작페이지 + 페이지 스케일) -1 / 아니면 전체페이지 수 .
 //[[  EX) 현재 블럭 시작 페이지가 6/ 전체페이지 : 10 -> '10 >= (6+10)' 성립하지 않음 -> 10이 현재블럭의 가장 마지막 페이지 번호  ]]
 $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCALE-1 : $total_pages;
-
-
-// 리스트에 보여줄 번호를 최근순으로 부여함.
-// 출력될 숫자
 
 ?>
 <?php
@@ -456,6 +451,7 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
               $review_status =$review_row['num'];
               if(empty(mysqli_num_rows($review_result))){
                 $disabled = '';
+                //@@@@@ MINJI test 0530
                 if($p_arr_date2>= date("Y-m-d")){ $disabled = 'disabled';}
                 $review_status='<input type="button" class="review_btn" name="review_btn" '.$disabled.' id="'.$r_pk.'" value="후기작성">';
               }else{

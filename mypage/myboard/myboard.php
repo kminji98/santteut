@@ -81,7 +81,7 @@ $alert = ($reserve_flag==0) ? "해당 게시물이 없습니다." : "취소내�
     </script>
 
   </head>
-  <body>
+  <body >
     <div id="wrap">
     <header>
       <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/login_menu.php";?>
