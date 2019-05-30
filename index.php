@@ -6,7 +6,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/create_table.php";
 <html lang="ko" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css?ver=2">
+    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css">
     <title>산뜻 :: 즐거운 산행</title>
   </head>
 
@@ -43,7 +43,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/create_table.php";
 <br>
     <!--인기 산행 일정 TOP3-->
     <div id="main_big3">
-      <h1>인기 산행 일정</h1>
+      <h2>산뜻에서 산행을 시작하세요!</h2>
       <div id="best3">
         <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/best3.php";?>
       </div>
