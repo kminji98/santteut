@@ -26,7 +26,7 @@ if(isset($_SESSION['id'])){$id=$_SESSION['id'];}
         echo ('<li id="top_my" class="hov">커뮤니티<small>▼</small>
           <div id="top_my_content">
             <ul id="top_my_content_ul">
-              <li><a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/community/free/free_list.php" class="hov">자유게시판</a></li>
+              <li><a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/community/free/list.php" class="hov">자유게시판</a></li>
               <li><a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/community/mt_information/mt_information_list.php" class="hov">명산정보</a></li>
               <li><a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/community/official_review/official_review_list.php" class="hov">공식산행후기</a></li>
             </ul>
@@ -53,7 +53,7 @@ if(isset($_SESSION['id'])){$id=$_SESSION['id'];}
         echo ('<li id="top_my" class="hov">커뮤니티<small>▼</small>
           <div id="top_my_content">
             <ul id="top_my_content_ul">
-              <li><a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/community/free/free_list.php" class="hov">자유게시판</a></li>
+              <li><a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/community/free/list.php" class="hov">자유게시판</a></li>
               <li><a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/community/mt_information/mt_information_list.php" class="hov">명산정보</a></li>
               <li><a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/community/official_review/official_review_list.php" class="hov">공식산행후기</a></li>
             </ul>
@@ -80,7 +80,7 @@ if(isset($_SESSION['id'])){$id=$_SESSION['id'];}
         echo ('<li id="top_my" class="hov">커뮤니티<small>▼</small>
           <div id="top_my_content">
             <ul id="top_my_content_ul">
-              <li><a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/community/free/free_list.php" class="hov">자유게시판</a></li>
+              <li><a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/community/free/list.php" class="hov">자유게시판</a></li>
               <li><a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/community/mt_information/mt_information_list.php" class="hov">명산정보</a></li>
               <li><a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/community/official_review/official_review_list.php" class="hov">공식산행후기</a></li>
             </ul>
