@@ -141,7 +141,7 @@ function create_table($conn, $table_name){
        $sql = "CREATE TABLE `official_review_ripple` (
        `num` int(11) NOT NULL AUTO_INCREMENT,
        `parent` int(11) NOT NULL,
-       `id` char(100) NOT NULL,
+       `id` char(20) NOT NULL,
        `name` char(50) NOT NULL,
        `content` text NOT NULL,
        `regist_day` char(20) DEFAULT NULL,
@@ -153,7 +153,7 @@ function create_table($conn, $table_name){
        $sql = "CREATE TABLE `mt_information_ripple` (
        `num` int(11) NOT NULL AUTO_INCREMENT,
        `parent` int(11) NOT NULL,
-       `id` char(100) NOT NULL,
+       `id` char(20) NOT NULL,
        `name` char(50) NOT NULL,
        `content` text NOT NULL,
        `regist_day` char(20) DEFAULT NULL,
@@ -233,7 +233,7 @@ function create_table($conn, $table_name){
     case 'free' :
      $sql = "CREATE TABLE `free` (
      `num` int(11) NOT NULL AUTO_INCREMENT,
-     `id` char(15) NOT NULL,
+     `id` char(20) NOT NULL,
      `name` char(10) NOT NULL,
      `title` varchar(100) NOT NULL,
      `content` text NOT NULL,
@@ -251,7 +251,7 @@ function create_table($conn, $table_name){
      $sql = "CREATE TABLE `free_ripple` (
      `num` int(11) NOT NULL AUTO_INCREMENT,
      `parent` int(11) NOT NULL,
-     `id` char(15) NOT NULL,
+     `id` char(20) NOT NULL,
      `name` char(10) NOT NULL,
      `content` text NOT NULL,
      `regist_day` char(20) DEFAULT NULL,

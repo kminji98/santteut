@@ -32,8 +32,7 @@ if ($_FILES['upfile']['name']){
         $sql="INSERT INTO `free` VALUES (null,'$userid','$username','$title','$content','$destination','$upfilename','$file_type','$image','$day',0);";
         $result = mysqli_query($conn,$sql);
         if (!$result) {
-          alert_back('Error: ' . mysqli_error($conn));
-          // die('Error: ' . mysqli_error($conn));
+          die('Error: ' . mysqli_error($conn));
         }
 
         mysqli_close($conn);
