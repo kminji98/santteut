@@ -57,16 +57,19 @@ if((isset($_GET["mode"])&&$_GET["mode"]=="view") ){
         width:60%; text-align:center;
         font-size: 15px;margin-top: 10%;
         border-collapse: collapse;
-        border-color: #828282;
+        border-color: #bdbdbd;
+        border: 1px solid #bdbdbd;
         color:  #252525;
       }
       #review_tbl tr th{
         padding:30px;
+        background-color: #eeeeee;
       }
       #title{
         font-size:15px; width:95%; padding:1%;
       }
-
+      #admin_write_btn{margin-left:36%; padding:2% 4%; background-color: white; border: 1px solid #bdbdbd; color: #3e3e3e; font-weight: bold; border-radius: 2px;}
+      #admin_write_btn:hover{border: 1px solid black; color: black; cursor: pointer;}
     </style>
     <script type="text/javascript">
       function review_complete(){
@@ -94,10 +97,55 @@ if((isset($_GET["mode"])&&$_GET["mode"]=="view") ){
         </tr>
         <tr>
           <th style="padding:0">작성일</th>
-          <td><?=$date?></td>
-          <td><b>평점</b></td>
-          <td>
-            <select class="" name="grade" style="padding:3%;margin:2%;width:80px;" <?=$disabled?>>
+          <td colspan="3"><?=$date?></td>
+
+        </tr>
+        <tr>
+          <th  style="padding:0"><b>평점</b></th>
+          <td colspan="3">
+            만족도:<select class="" name="grade" style="margin:2% 1%; padding:1%;width:80px;" <?=$disabled?>>
+              <?php
+              define('GRADE',5);
+              for ($g=GRADE; $g > 0; $g--) {
+                $selected='';
+                if(isset($grade) && $grade==$g){
+                  $selected='selected';
+                }
+                echo '<option value="'.$g.'" '.$selected.'>'.$g.'</option>';
+
+              }
+               ?>
+            </select>
+
+            일정:<select class="" name="grade" style="margin:2% 1%; padding:1%; width:80px;" <?=$disabled?>>
+              <?php
+              define('GRADE',5);
+              for ($g=GRADE; $g > 0; $g--) {
+                $selected='';
+                if(isset($grade) && $grade==$g){
+                  $selected='selected';
+                }
+                echo '<option value="'.$g.'" '.$selected.'>'.$g.'</option>';
+
+              }
+               ?>
+            </select>
+
+            가격:<select class="" name="grade" style="margin:2% 1%; padding:1%; width:80px;" <?=$disabled?>>
+              <?php
+              define('GRADE',5);
+              for ($g=GRADE; $g > 0; $g--) {
+                $selected='';
+                if(isset($grade) && $grade==$g){
+                  $selected='selected';
+                }
+                echo '<option value="'.$g.'" '.$selected.'>'.$g.'</option>';
+
+              }
+               ?>
+            </select>
+
+            식사:<select class="" name="grade" style="margin:2% 1%; padding:1%; width:80px;" <?=$disabled?>>
               <?php
               define('GRADE',5);
               for ($g=GRADE; $g > 0; $g--) {
@@ -119,7 +167,7 @@ if((isset($_GET["mode"])&&$_GET["mode"]=="view") ){
       </table>
       <br>
         <div>
-          <button id="admin_write_btn" style="margin-left:36%; padding:2%" onclick="review_complete()" type="button" name="button"'>완료</button>
+          <button id="admin_write_btn" style="" onclick="review_complete()" type="button" name="button">완료</button>
         </div>
       </form>
     </section>
