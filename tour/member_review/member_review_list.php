@@ -65,7 +65,12 @@ for ($record = $start_record; $record  < $start_record+ROW_SCALE && $record<$tot
   $writer_id = $row['id'];
   $title = $row['title'];
   $w_date = $row['write_date'];
-  $grade = $row['grade'];
+  $satisfaction_grade = $row['satisfaction_grade'];
+  $schedule_grade = $row['schedule_grade'];
+  $cost_grade = $row['cost_grade'];
+  $meal_grade = $row['meal_grade'];
+  $avg_grade = ($satisfaction_grade+$schedule_grade+$cost_grade+$meal_grade)/4;
+  $avg_grade = round($avg_grade,1);
   $pk = $row['r_pk'];
 
 
@@ -75,7 +80,7 @@ for ($record = $start_record; $record  < $start_record+ROW_SCALE && $record<$tot
       <td class="td2"><a href="../member_review/member_review.php?mode=view&r_pk=<?=$pk?>"><?=$title?></a></td>
       <td class="td3"><?=$writer_id?></td>
       <td class="td4"><?=$w_date?></td>
-      <td class="td5"><?=$grade?></td>
+      <td class="td5"><?=$avg_grade?></td>
     </tr>
   <?php } ?>
   </table>
