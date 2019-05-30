@@ -17,7 +17,7 @@ if ($_FILES['upfile']['name']){
           $name=date("Y_m_d_H_i_s");
           $ext = explode('.', $_FILES['upfile']['name']);
           $filename = $name . '.' . $ext[1];
-          $destination = './upload/' . $filename;//change this directory
+          $destination = './data/' . $filename;//change this directory
           $location = $_FILES["upfile"]["tmp_name"];
           $upfilename = $_FILES["upfile"]["name"];
           $file_type= $_FILES['upfile']['type'];
@@ -37,7 +37,7 @@ if ($_FILES['upfile']['name']){
 
         mysqli_close($conn);
 
-        echo "<script>location.href='./list.php';</script>";
+        echo "<script>location.href='./free_list.php';</script>";
       }else if(isset($_GET["mode"])&&$_GET["mode"]=="update"){
         $num = $_POST["num"];
         $sql="SELECT `destination` from `free` where num ='$num';";
@@ -62,7 +62,7 @@ if ($_FILES['upfile']['name']){
           die('Error: ' . mysqli_error($conn));
         }
       }
-        echo "<script>location.href='./list.php?num=$num';</script>";
+        echo "<script>location.href='./free_list.php?num=$num';</script>";
 
 
       }else if(isset($_GET["mode"])&&$_GET["mode"]=="delete"){
@@ -99,7 +99,7 @@ if ($_FILES['upfile']['name']){
         }
 
         mysqli_close($conn);
-        echo "<script>location.href='./list.php';</script>";
+        echo "<script>location.href='./free_list.php';</script>";
 
 
 

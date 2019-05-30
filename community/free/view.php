@@ -47,10 +47,22 @@ if (!$result) {
  ?>
   <head>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css">
+    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/community/free/css/free_view.css">
     <title></title>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $("#free_mini").css("font-weight","bold");
+        $("#free_mini").css("color","black");
+      });
+      </script>
   </head>
   <body>
-
+    <header>
+      <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/login_menu.php"; ?>
+      <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/commu_menu.php";?>
+    </header>
 <table style="width : 800px; margin : auto;">
   <tr>
     <td colspan="2" style="width : 700px; border-bottom : 1px solid black;">제목 : <?=$title?><span style="float : right;">작성자 : <?=$name?>
@@ -74,7 +86,7 @@ if (!$result) {
   </tr>
   <tr>
     <td colspan="2">
-      <a style="float : right; margin-left : 10px;" href="./list.php?page=<?=$page?>"><input type="button" name="" value="목록"></a>
+      <a style="float : right; margin-left : 10px;" href="./free_list.php?page=<?=$page?>"><input type="button" name="" value="목록"></a>
       <?php
         //관리자이거나 해당된 작성자일경우 수정, 삭제가 가능하도록 설정
         if($_SESSION['id']=="admin" || $_SESSION['id']==$id){
