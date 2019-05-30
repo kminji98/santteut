@@ -17,11 +17,33 @@ setcookie("cookie1",$p_code,time() + 3600);
     <script type="text/javascript">
     window.onload = function() {
       onload_button_status();
+      var middle=document.getElementById('middle');
+      var wrap=document.getElementById('wrap');
+      var wrap=document.getElementById('wrap');
+      var plus=wrap.offsetHeight;
+      var middle=document.getElementById('middle');
+
+      wrap.style.height=parseInt(middle.offsetHeight)+615+"px";
+
     }
+
+
+    // window.onscroll = function() {
+    //     window.onscroll = function() {
+    //   var detail_view1=document.getElementById('detail_view1');
+    //   var wrap=document.getElementById('wrap');
+    //   var middle=document.getElementById('middle');
+    //   // wrap.style.height=detail_view1.offsetHeight+"px";
+    //
+    //   // middle.style.height=detail_view1.offsetHeight+"px";
+    //   // alert(wrap.style.height);
+    //   }
+    // }
+
     </script>
 
 
-  <body>
+  <body id="body_1">
     <!--로그인 회원가입 로그아웃-->
     <div id="wrap">
     <header>
@@ -75,6 +97,7 @@ setcookie("cookie1",$p_code,time() + 3600);
       </div>
 
     </div>
+
 
     <div id="detail_menu">
       <div id="select_people">
@@ -218,17 +241,21 @@ setcookie("cookie1",$p_code,time() + 3600);
         </script>
         <a href="../cart/cart_list.php?mode=insert&code=<?=$p_code?>"><div id="go_cart"> <b>장바구니</b></div></a>
       </div>
-      <div id="right_footer"></div>
     </div>
 
+
+
+
     </div>
-    <div class="">
-      <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/member_review/member_review_list.php";?>
+
+
+    <div class="" style="margin:auto; max-height:20000px;">
+          <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/member_review/member_review_list.php";?>
     </div>
-    <footer>
-      <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/footer.php";?>
-    </footer>
+
   </body>
-
+  <footer>
+    <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/footer.php";?>
+  </footer>
 
 </html>

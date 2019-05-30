@@ -330,4 +330,4 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
 <footer>
   <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/footer.php";?>
 </footer>
-</html>4
+</html>

@@ -24,7 +24,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/cart/cart_list_query.php";
     <header><?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/login_menu.php";?></header>
     <hr>
     <!--장바구니 리스트 페이지-->
-    <div id="cart_list">
+    <div id="cart_list" style="height: 700px; max-height:2000px;">
       <h3 id="title" >장바구니</h3>
       <fieldset id="list_field" >
         <table id="list_tbl_body" style="">

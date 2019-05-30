@@ -29,7 +29,7 @@ if(!$upfile_error){
 }
 
 //5 업로드된 파일사이즈(2mb)를 체크해서 넘어버리면 돌려보낸다.
-if($upfile_size>500000){
+if($upfile_size>2000000){
     alert_back('2. 파일사이즈가 500KB이상입니다.');
 }
 
