@@ -97,9 +97,10 @@ $view_num = $total_record - $start_record;
     <header>
       <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/login_menu.php";?>
     </header>
-    <br><br><br>
+    <hr>
+    <h2 id="member_title">회원관리</h2>
+    <hr>
     <section id="notice">
-
       <form name="notice_form" action="member_admin_list.php?mode=search" method="post">
         <div class="notice_list_search">
           <li id="total_title"><b>총 <?=$total_record?> 명</b></li>
@@ -167,14 +168,14 @@ $view_num = $total_record - $start_record;
 
         <tr>
           <!--번호-->
-          <td style="width:4%;"> <input type="checkbox" id="" name="select_del" value="<?=$id?>"> </td>
+          <td> <input type="checkbox" id="" name="select_del" value="<?=$id?>"> </td>
           <td><?=$id?></td>
-          <td style="width:7%;"><?=$name?></td>
+          <td><?=$name?></td>
           <td><?=$address1?></td>
           <td><?=$address2?></td>
           <td><?=$hp1?><?=$hp2?></td>
           <td><?=$email?></td>
-          <td style="width:7%;"><a href="http://<?=$_SERVER['HTTP_HOST']?>/santteut/member/join/join_edit.php?id=<?=$id?>" class="hov">
+          <td><a href="http://<?=$_SERVER['HTTP_HOST']?>/santteut/member/join/join_edit.php?id=<?=$id?>" class="hov">
           <button type="button" name="button">정보수정</button></a></td>
         </tr>
         <?php
