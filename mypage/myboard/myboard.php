@@ -23,6 +23,7 @@ $alert = ($reserve_flag==0) ? "해당 게시물이 없습니다." : "취소내�
     <script type="text/javascript">
       $(document).ready(function() {
         // tap 메뉴 onclick action
+        //1. 상담문의 /2. 여행후기 /3. 자유게시판
         for (var i = 1; i < 4; i++) {
           $("#list_head"+i).click(function(){
             if($(this).css("background-color")!=="white"){
@@ -33,19 +34,20 @@ $alert = ($reserve_flag==0) ? "해당 게시물이 없습니다." : "취소내�
               $(this).css('border-bottom-color', 'white');
               $(this).css('border-left-color', 'black');
             }
-            var category = $(this).attr('id');
-            // alert(category);
-
             $.ajax({
               url: 'myboard_btn_action.php',
               type: 'POST',
-              data: {category: category}
+              data: {category: $(this).attr('id')}
             })
             .done(function(result) {
-              // alert(result);
+              var output = $.parseJSON(result);
               $("#list_tbl_body").html('');
-              $("#list_tbl_body").append('<tr><td style="width:70%;">제목</td><td>작성일</td><td>조회</td></tr>');
-              $("#list_tbl_body").append(result);
+              $("#no_result").html('');
+              $("#list_tbl_body").append('<tr><td style="width:60%;">'+output[0].th1+'</td><td>'+output[0].th2+'</td><td>'+output[0].th3+'</td></tr>');
+              $("#list_tbl_body").append(output[0].output);
+              if(output[0].output == ''){
+                $("#no_result").html('<p id="no_result" style="text-align:center; padding:2%;margin-bottom:3%;">해당 게시물의 내역이 없습니다.</p><hr><br>');
+              }
             })
             .fail(function() {
               console.log("error");
@@ -53,11 +55,28 @@ $alert = ($reserve_flag==0) ? "해당 게시물이 없습니다." : "취소내�
             .always(function() {
               console.log("complete");
             });
-
-
-
           });
         }
+        $.ajax({
+          url: 'myboard_btn_action.php',
+          type: 'POST',
+          data: {category: 'list_head1'}
+        })
+        .done(function(result) {
+          var output = $.parseJSON(result);
+          $("#list_tbl_body").html('');
+          $("#list_tbl_body").append('<tr><td style="width:60%;">'+output[0].th1+'</td><td>'+output[0].th2+'</td><td>'+output[0].th3+'</td></tr>');
+          $("#list_tbl_body").append(output[0].output);
+          if(output[0].output == ''){
+            $("#no_result").html('<p id="no_result" style="text-align:center; padding:2%;margin-bottom:3%;">해당 게시물의 내역이 없습니다.</p><hr><br>');
+          }
+        })
+        .fail(function() {
+          console.log("error");
+        })
+        .always(function() {
+          console.log("complete");
+        });
       });
     </script>
 
@@ -82,12 +101,8 @@ $alert = ($reserve_flag==0) ? "해당 게시물이 없습니다." : "취소내�
         <table id="list_tbl_body">
 
         </table>
-          <output>
-          <?php
-          // if(empty($total_record)){
-          //   echo '<p id="no_result" style="text-align:center; padding:2%;margin-bottom:3%;">'.$alert.'</p><hr><br>';
-          // }
-           ?>
+          <output id="no_result">
+
          </output>
       </fieldset>
     </div> <!-- end of div "reserve_list" -->
