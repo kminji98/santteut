@@ -88,7 +88,7 @@
 <fieldset id="footer_wrap"style="background-color:#2E333D; margin:0px; padding:0px; border:0px; color: white; height:auto; width: 100%; margin-bottom:0;">
   <br style="height:1%;">
   <p style=" display: inline; margin-left: 5%;font-size:12px;">Copyright ⓒ 2019 santteut.com, All Rights Reserved.
-  <p style=" display: inline; margin-left: 30%;font-size:12px;">제휴문의: santteut@earthtory.com | 02-1234-5678</p>
+  <p style=" display: inline; margin-left: 30%;font-size:12px;">제휴문의: santteut@naver.com | 02-1234-5678</p>
   </p>
 
 </fieldset>
