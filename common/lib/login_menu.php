@@ -7,16 +7,18 @@
 if(isset($_SESSION['id'])){$id=$_SESSION['id'];}
  ?>
 
-<div id="logo">
+<div id="logo" >
   <a href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/index.php">
     <img src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/img/sanlogo.png" border=0></a>
-  <div id="menus">
-  <ul id="top_menu">
-    <li><a href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/tour/package/package_list.php?divide=domestic">국내산행</a></li>
-    <li><a href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/tour/package/package_list.php?divide=abroad">해외산행</a></li>
-  </ul>
-  </div>
-  <div id="login_menu">
+  <div id="menus" style="width:74%;">
+    <div style="float:left;padding-top: 18px;" >
+      <ul id="top_menu" style="font-weight:bold; ">
+        <li><a href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/tour/package/package_list.php?divide=domestic">국내산행</a></li>
+        <li><a href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/tour/package/package_list.php?divide=abroad">해외산행</a></li>
+      </ul>
+    </div>
+  <!-- </div> end of menus div -->
+  <div id="login_menu" >
     <ul id="login_menu_ul" >
       <?php
       // 비회원일때
@@ -89,5 +91,6 @@ if(isset($_SESSION['id'])){$id=$_SESSION['id'];}
       }
       ?>
   </ul>
+  </div>
   </div>
 </div>
