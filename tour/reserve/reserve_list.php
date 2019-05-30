@@ -452,7 +452,7 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
               if(empty(mysqli_num_rows($review_result))){
                 $disabled = '';
                 //@@@@@ MINJI test 0530
-                if($p_arr_date2>= date("Y-m-d")){ $disabled = 'disabled';}
+                // if($p_arr_date2>= date("Y-m-d")){ $disabled = 'disabled';}
                 $review_status='<input type="button" class="review_btn" name="review_btn" '.$disabled.' id="'.$r_pk.'" value="후기작성">';
               }else{
                 $review_status='<input type="button" class="review_btn" name="review_btn" id="'.$r_pk.'" value="후기확인">';

@@ -38,7 +38,10 @@ if((isset($_GET["mode"])&&$_GET["mode"]=="view") ){
     $content=str_replace("\n", "<br>",$content);
     $content=str_replace(" ", "&nbsp;",$content);
     $date=$row['write_date'];
-    $grade=$row['grade'];
+    $satisfaction_grade=$row['satisfaction_grade'];
+    $schedule_grade=$row['schedule_grade'];
+    $cost_grade=$row['cost_grade'];
+    $meal_grade=$row['meal_grade'];
 
     mysqli_close($conn);
 }
@@ -103,12 +106,12 @@ if((isset($_GET["mode"])&&$_GET["mode"]=="view") ){
         <tr>
           <th  style="padding:0"><b>평점</b></th>
           <td colspan="3">
-            만족도:<select class="" name="grade" style="margin:2% 1%; padding:1%;width:80px;" <?=$disabled?>>
+            만족도:<select class="" name="satisfaction_grade" style="margin:2% 1%; padding:1%;width:80px;" <?=$disabled?>>
               <?php
               define('GRADE',5);
               for ($g=GRADE; $g > 0; $g--) {
                 $selected='';
-                if(isset($grade) && $grade==$g){
+                if(isset($satisfaction_grade) && $satisfaction_grade==$g){
                   $selected='selected';
                 }
                 echo '<option value="'.$g.'" '.$selected.'>'.$g.'</option>';
@@ -117,12 +120,12 @@ if((isset($_GET["mode"])&&$_GET["mode"]=="view") ){
                ?>
             </select>
 
-            일정:<select class="" name="grade" style="margin:2% 1%; padding:1%; width:80px;" <?=$disabled?>>
+            일정:<select class="" name="schedule_grade" style="margin:2% 1%; padding:1%; width:80px;" <?=$disabled?>>
               <?php
               define('GRADE',5);
               for ($g=GRADE; $g > 0; $g--) {
                 $selected='';
-                if(isset($grade) && $grade==$g){
+                if(isset($schedule_grade) && $schedule_grade==$g){
                   $selected='selected';
                 }
                 echo '<option value="'.$g.'" '.$selected.'>'.$g.'</option>';
@@ -131,12 +134,12 @@ if((isset($_GET["mode"])&&$_GET["mode"]=="view") ){
                ?>
             </select>
 
-            가격:<select class="" name="grade" style="margin:2% 1%; padding:1%; width:80px;" <?=$disabled?>>
+            가격:<select class="" name="cost_grade" style="margin:2% 1%; padding:1%; width:80px;" <?=$disabled?>>
               <?php
               define('GRADE',5);
               for ($g=GRADE; $g > 0; $g--) {
                 $selected='';
-                if(isset($grade) && $grade==$g){
+                if(isset($cost_grade) && $cost_grade==$g){
                   $selected='selected';
                 }
                 echo '<option value="'.$g.'" '.$selected.'>'.$g.'</option>';
@@ -145,12 +148,12 @@ if((isset($_GET["mode"])&&$_GET["mode"]=="view") ){
                ?>
             </select>
 
-            식사:<select class="" name="grade" style="margin:2% 1%; padding:1%; width:80px;" <?=$disabled?>>
+            식사:<select class="" name="meal_grade" style="margin:2% 1%; padding:1%; width:80px;" <?=$disabled?>>
               <?php
               define('GRADE',5);
               for ($g=GRADE; $g > 0; $g--) {
                 $selected='';
-                if(isset($grade) && $grade==$g){
+                if(isset($meal_grade) && $meal_grade==$g){
                   $selected='selected';
                 }
                 echo '<option value="'.$g.'" '.$selected.'>'.$g.'</option>';
