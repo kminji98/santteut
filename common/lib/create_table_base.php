@@ -213,7 +213,10 @@ function create_table($conn, $table_name){
        `id` char(20) NOT NULL,
        `name` char(10) NOT NULL,
        `write_date` date NOT NULL,
-       `grade` int not null,
+       `satisfaction_grade` int not null,
+       `schedule_grade` int not null,
+       `cost_grade` int not null,
+       `meal_grade` int not null,
        PRIMARY KEY (`num`)
        ) DEFAULT CHARSET=utf8;
        ";
