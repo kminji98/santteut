@@ -304,6 +304,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
         <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/best3.php";?>
       </div>
     </div>
+    <br>
       <div id="kCalendar" onclick="KCalendar_go()"></div>
       <!-- 검색/상세검색 -->
       <div id="package_search" >
@@ -436,10 +437,10 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
       <!--[DETAIL] 상세 검색 버튼 액션   -->
 
       </div>
-      <p style="position: relative; margin-top: auto; margin-left: auto;text-align:center; font-weight: bold; font-size:13px;"><?=isset($output)?></p>
+      <p style="position: relative; margin-top: auto; margin-left: auto;text-align:center; font-weight: bold; font-size:13px;"><?php if(isset($output)) echo $output;?></p>
     </form>
       <div id="package_list_view_btn">
-        <form name="order_form" action="package_list.php?mode=order&divide=<?=isset($divide)?>" method="post">
+        <form name="order_form" action="package_list.php?mode=order&divide=<?php if(isset($divide)) echo $divide;?>" method="post">
           <input type="hidden" name="page" value="">
           <input type="hidden" name="order_sql" value="">
           <input type="hidden" name="order_condition" value="">
