@@ -6,7 +6,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/create_table.php";
 <html lang="ko" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css?ver=2">
+    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css?ver=3">
     <title>산뜻 :: 즐거운 산행</title>
   </head>
 
