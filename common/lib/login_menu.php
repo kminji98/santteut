@@ -25,7 +25,7 @@ if(isset($_SESSION['id'])){$id=$_SESSION['id'];}
       if(!isset($id)){
          echo ('<li ><a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/member/login/login.php" class="hov">로그인</a></li>');
         echo ('<li><a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/member/join/join_member.php" class="hov">회원가입</a></li>');
-        echo ('<li id="top_my" class="hov">커뮤니티<small>▼</small>
+        echo ('<li id="top_my" class="hov">커뮤니티<small style="font-size:10px;"> ▼</small>
           <div id="top_my_content">
             <ul id="top_my_content_ul">
               <li><a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/community/free/free_list.php" class="hov">자유게시판</a></li>
@@ -40,7 +40,7 @@ if(isset($_SESSION['id'])){$id=$_SESSION['id'];}
         $name = $_SESSION['name'];
         echo ("<b> {$name} </b> 님 환영합니다. ");
         echo ('<li id="logout">[<a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/member/login/logout.php">로그아웃</a>]</li> ');
-        echo ('<li id="top_my" class="hov">관리자모드<small>▼</small>
+        echo ('<li id="top_my" class="hov">관리자모드<small style="font-size:10px;"> ▼</small>
           <div id="top_my_content">
             <ul id="top_my_content_ul">
               <li><a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/tour/admin/admin_add_package.php" class="hov">상품등록</a></li>
@@ -52,7 +52,7 @@ if(isset($_SESSION['id'])){$id=$_SESSION['id'];}
             </ul>
           </div>
         </li>&nbsp;&nbsp;');
-        echo ('<li id="top_my" class="hov">커뮤니티<small>▼</small>
+        echo ('<li id="top_my" class="hov">커뮤니티<small style="font-size:10px;"> ▼</small>
           <div id="top_my_content">
             <ul id="top_my_content_ul">
               <li><a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/community/free/free_list.php" class="hov">자유게시판</a></li>
@@ -67,7 +67,7 @@ if(isset($_SESSION['id'])){$id=$_SESSION['id'];}
         $name = $_SESSION['name'];
         echo ("<b> {$name} </b> 님 환영합니다. ");
         echo ('<li id="logout">[<a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/member/login/logout.php">로그아웃</a>]</li> ');
-        echo ('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<li id="top_my" class="hov">My<small>▼</small>
+        echo ('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<li id="top_my" class="hov">My<small style="font-size:10px;">▼</small>
           <div id="top_my_content">
             <ul id="top_my_content_ul">
               <li><a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/?" class="hov">쪽지</a></li>
@@ -79,7 +79,7 @@ if(isset($_SESSION['id'])){$id=$_SESSION['id'];}
             </ul>
           </div>
         </li> ');
-        echo ('<li id="top_my" class="hov">커뮤니티<small>▼</small>
+        echo ('<li id="top_my" class="hov">커뮤니티<small style="font-size:10px;">▼</small>
           <div id="top_my_content">
             <ul id="top_my_content_ul">
               <li><a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/community/free/free_list.php" class="hov">자유게시판</a></li>
