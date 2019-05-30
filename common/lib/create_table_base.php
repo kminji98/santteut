@@ -244,7 +244,7 @@ function create_table($conn, $table_name){
      `regist_day` char(20) DEFAULT NULL,
      `hit` int(11) DEFAULT NULL,
      PRIMARY KEY (`num`)
-     ) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
+     ) DEFAULT CHARSET=utf8;";
      break;
 
      case 'free_ripple' :
@@ -256,8 +256,20 @@ function create_table($conn, $table_name){
      `content` text NOT NULL,
      `regist_day` char(20) DEFAULT NULL,
      PRIMARY KEY (`num`)
-     ) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
+     ) DEFAULT CHARSET=utf8;";
       break;
+      case 'message' :
+      $sql = "CREATE TABLE `message` (
+          `num` int not null auto_increment,
+          `recv_id` varchar(15) not null,
+          `send_id` varchar(15) not null,
+          `name` char(10) not null,
+          `message` text not null,
+          `recv_read` char(2) not null default 'N',
+          `regist_day` char(20),
+          PRIMARY KEY(num)
+      ) DEFAULT CHARSET=utf8;";
+        break;
     default:
       echo "<script>alert('해당 테이블이름이 없습니다. ');</script>";
       exit;
