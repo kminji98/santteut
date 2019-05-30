@@ -19,18 +19,18 @@ Trex.module("attachbox.updateCapacity on Trex.Ev.__ATTACHBOX_SHOW",
 TrexConfig.addSidebar('capacity',
 	{
 		show: _TRUE,
-		maximum: 3145728, //3M <= 1024
+		maximum: 50000000, //3M <= 1024
         filemaximum: _NULL,
 		filter: {
 			use: '', //sound,movie
 			sound: {
 				title: 'sound file',
-				maximum: 3145728,
+				maximum: 50000000,
 				extensions: ",mp3,wav,ogg,wma,mp4,ape,wmv,asf,ra,ram,"
 			},
 			movie: {
 				title: 'movie file',
-				maximum: 3145728,
+				maximum: 50000000,
 				extensions: ",wmv,mpg,avi,"
 			}
 		}

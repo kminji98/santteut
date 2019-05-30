@@ -157,7 +157,7 @@ if(!empty($_FILES['p_main_img1'])){
           default:alert_back('3. gif jpg png 확장자가아닙니다.');
         }
         //6 업로드된 파일사이즈(2mb)를 체크해서 넘어버리면 돌려보낸다.
-        if($main_img_copy_size1>2000000){
+        if($main_img_copy_size1>10000000){
           alert_back('2. 이미지파일사이즈가 2MB이상입니다.');
         }
     }else{
@@ -228,7 +228,7 @@ if(!empty($_FILES['p_main_img2'])){
           default:alert_back('3. gif jpg png 확장자가아닙니다.');
         }
         //6 업로드된 파일사이즈(2mb)를 체크해서 넘어버리면 돌려보낸다.
-        if($main_img_copy_size2>2000000){
+        if($main_img_copy_size2>10000000){
           alert_back('2. 이미지파일사이즈가 2MB이상입니다.');
         }
     }else{
@@ -295,7 +295,7 @@ if(!empty($_FILES['p_main_img3'])){
           default:alert_back('3. gif jpg png 확장자가아닙니다.');
         }
         //6 업로드된 파일사이즈(2mb)를 체크해서 넘어버리면 돌려보낸다.
-        if($main_img_copy_size3>2000000){
+        if($main_img_copy_size3>10000000){
           alert_back('2. 이미지파일사이즈가 2MB이상입니다.');
         }
     }else{

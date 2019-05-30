@@ -176,7 +176,7 @@
                     return _config.styles;
                 }
             };
-			
+
 			var _sizeConfig = TrexConfig.get('size', rootConfig);
 			this.measureWrapWidth = function() {
                 _sizeConfig.wrapWidth = this.getContainerWidth(); // TODO FTDUEDTR-1214
@@ -752,7 +752,7 @@
         onScroll: function(event) {
             this.fireJobs(Trex.Ev.__CANVAS_PANEL_SCROLLING, event);
         },
-		
+
 		onPaste: function(event) {
 			this.fireJobs(Trex.Ev.__CANVAS_PANEL_PASTE, event);
 		},
