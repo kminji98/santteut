@@ -23,9 +23,9 @@ body{margin: 0; min-width: 100%;}
 #top_my_content_ul li{list-style: none; padding: 5px 2px;}
 #top_my_content_ul li:hover{color: black; background-color: #eee;}
 #logo img{width: 8%; height: 100px; margin-left: 17%; margin-top: 1%;}
-#main_search{background-image: url("../img/index.jpg"); width: 100%; height: 400px; background-repeat: no-repeat;}
-#main_search input{border: 4px solid #373737; height: 34px; font-size: 20px; width: 28%; text-align: center; margin-left: 35.5%;}
-#main_search button{ color: white;  background-color: #373737; border: 10px solid #373737; font-size: 1em; border-radius: 2px; font-weight: bold; cursor:pointer;}
+#main_search{background-image: url("../img/22.jpg"); width: 100%; height: 400px; background-repeat: no-repeat;}
+/* #main_search input{border: 4px solid #373737; height: 34px; font-size: 20px; width: 28%; text-align: center; margin-left: 35.5%;}
+#main_search button{ color: white;  background-color: #373737; border: 10px solid #373737; font-size: 1em; border-radius: 2px; font-weight: bold; cursor:pointer;} */
 #main_big3 h2{text-align: center;}
 
 
