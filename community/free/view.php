@@ -18,6 +18,7 @@ function free_ripple_delete($id1,$num1,$page1,$page,$hit,$parent){
   return $message;
 }
 $num = test_input($_GET["num"]);
+$page = test_input($_GET["page"]);
 $hit = test_input($_GET["hit"]);
 $q_num = mysqli_real_escape_string($conn, $num);
 
@@ -26,7 +27,7 @@ $result = mysqli_query($conn,$sql);
 if (!$result) {
   die('Error: ' . mysqli_error($conn));
 }
-  $num=$_GET['num'];
+
   $sql="SELECT * from `free` where num ='$num';";
   $result = mysqli_query($conn,$sql);
   if (!$result) {
@@ -41,7 +42,7 @@ if (!$result) {
   $file_name= $row['file_name'];
   $update= $row['del'];
   $day=$row['regist_day'];
-  $id=$row['hit'];
+  $hit=$row['hit'];
 
  ?>
   <head>
@@ -49,7 +50,7 @@ if (!$result) {
     <title></title>
   </head>
   <body>
-    
+
 <table style="width : 800px; margin : auto;">
   <tr>
     <td colspan="2" style="width : 700px; border-bottom : 1px solid black;">제목 : <?=$title?><span style="float : right;">작성자 : <?=$name?>
@@ -73,11 +74,17 @@ if (!$result) {
   </tr>
   <tr>
     <td colspan="2">
-      <a style="float : right; margin-left : 10px;" href="./dml_board.php?mode=delete&num=<?=$num?>"><input type="button" name="" value="삭제"></a>
-      <a style="float : right; margin-left : 10px;" href="./write_edit_form.php?mode=update&num=<?=$num?>"><input type="button" name="" value="수정"></a>
-      <a style="float : right;" href="./list.php?page=<?=$page?>"><input type="button" name="" value="목록"></a>
+      <a style="float : right; margin-left : 10px;" href="./list.php?page=<?=$page?>"><input type="button" name="" value="목록"></a>
+      <?php
+        //관리자이거나 해당된 작성자일경우 수정, 삭제가 가능하도록 설정
+        if($_SESSION['id']=="admin" || $_SESSION['id']==$id){
+          echo('<a style="float : right; margin-left : 10px;" href="./dml_board.php?mode=delete&num='.$num.'"><input type="button" name="" value="삭제"></a>&nbsp;');
+          echo('<a style="float : right; " href="./write_edit_form.php?mode=update&num='.$num.'"><input type="button" name="" value="수정"></a>&nbsp;');
+        }
+        //로그인하는 유저에게 글쓰기 기능을 부여함.
+      ?>
     </td>
-    <
+
   </tr>
 </table>
 <br><br>
