@@ -43,6 +43,13 @@ table{  border-collapse: collapse;}
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/side_bar.css">
     <title></title>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $("#free_mini").css("font-weight","bold");
+        $("#free_mini").css("color","black");
+      });
+      </script>
   </head>
   <body>
     <header>
@@ -53,7 +60,7 @@ table{  border-collapse: collapse;}
 <section>
 
 
-    <form class="" action="list.php?mode=search" method="post">
+    <form class="" action="free_list.php?mode=search" method="post">
 <table style="width : 800px; margin : auto;">
   <tr>
     <th style="text-align : left;">total <?=$total_record?></th>
@@ -105,7 +112,7 @@ $number--;
       if($page==$i){
         echo "<b>&nbsp;$i&nbsp;</b>";
       }else{
-        echo "<a href='./list.php?page=$i'>&nbsp;$i&nbsp;</a>";
+        echo "<a href='./free_list.php?page=$i'>&nbsp;$i&nbsp;</a>";
       }
     }
   ?>
@@ -117,7 +124,7 @@ $number--;
     echo '<a href="write_edit_form.php"><input type="button" name="" value="글쓰기"></a>';
     }
   ?></td>
-  <td><a href="./list.php?page=<?=$page?>"><input type="button" name="" value="목록"> </a></td>
+  <td><a href="./free_list.php?page=<?=$page?>"><input type="button" name="" value="목록"> </a></td>
 </tr>
     </table>
     </section>
