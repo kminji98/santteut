@@ -38,7 +38,7 @@ session_start();
       <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/custom_menu.php";?>
       <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/side_bar.php";?>
     <!--FAQ 자주 찾는 질문 페이지-->
-    <div id="faq_main">
+    <div id="faq_main" style="height: 600px; max-height:2000px;">
      <br>
      <h1 style="margin-left:15%;"></h1>
      <table id="table1">

@@ -110,7 +110,7 @@ $view_num = $total_record - $start_record;
       <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/side_bar.php";?>
     </header>
 
-    <section id="notice">
+    <section id="notice" style="height: 700px; max-height:2000px;">
       <form name="notice_form" action="notice_list?mode=search" method="post">
         <div class="notice_list_search">
           <li id="total_title"><b>total <?=$total_record?></b></li>
@@ -166,7 +166,7 @@ $view_num = $total_record - $start_record;
       </table>
 
 <?php
-if(!empty($_SESSION['id'])){
+if($_SESSION['id']=="admin"){
   echo '<a href="notice_form.php"><button id="admin_write_btn" type="button" name="button">
   글쓰기</button></a>';
 }

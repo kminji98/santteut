@@ -554,6 +554,7 @@ if($_GET['id']){
           <button id="end_btn2" type="button" name="button">취소</button>
         </div><!--end of join_form div-->
       </form>
+      <br><br><br><br><br>
     </section>
     <footer>
       <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/footer.php";?>

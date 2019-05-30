@@ -80,7 +80,7 @@ $view_num = $total_record - $start_record;
       <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/side_bar.php";?>
     </header>
     <br><br><br>
-    <section id="qna">
+    <section id="qna" style="height: 700px; max-height:2000px;">
       <div class="qna_list_search">
       <form name="board_form" action="qna_list.php?mode=search" method="post">
         <select name="find_option">
