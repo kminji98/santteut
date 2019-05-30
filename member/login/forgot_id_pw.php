@@ -39,10 +39,9 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css">
-    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/member/login/css/forgot_id.css?ver=1">
-    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/introduction/css/history.css">
+    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/member/login/css/forgot_id_pw.css?ver=1">
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
-    <title>아이디/패스워드 찾기</title>
+    <title>아이디/비밀번호 찾기</title>
     <script type="text/javascript">
     var code="";
     $(document).ready(function(){
@@ -60,7 +59,6 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
       var email1 = document.getElementById("email1");
       var email2 = document.getElementById("email2");
       var email=email1.value.concat('@'+email2.value);
-
       $.ajax({
         url: 'check_email.php',
         type: 'POST',
@@ -72,32 +70,15 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
         if(result!="등록되지않은 이메일입니다."){
         check_email1.setAttribute('type', 'text');
         check_email2.setAttribute('type', 'button');
-        // alert('이메일로 코드가 발송 되었습니다.');
         }
       })
-      .fail(function() {
-        alert("인증 번호 발송실패!");
-        console.log("error");
-      })
-      .always(function() {
-        console.log("complete");
-     });
-
-
+      .fail(function() {alert("인증 번호 발송실패!"); console.log("error");})
+      .always(function() {console.log("complete");});
     });
-
     $("#check_email2").click(function(e){
       var email1 = document.getElementById("check_email1");
-      if(email1.value==code){
-        alert("인증 완료");
-        document.form1.submit();
-      }else{
-        alert("인증 실패");
-
-      }
-      });
+      if(email1.value==code){alert("인증 완료"); document.form1.submit();}else{alert("인증 실패");}});
     });
-
     </script>
   </head>
   <body>
@@ -105,47 +86,36 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
       <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/login_menu.php";?>
     </header>
     <section id="forgot_id_pw">
-    <div class="forgot_id_pw_form">
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <table>
-        <tr>
-          <th id="forgot_id">ID찾기</th>
-          <th id="forgot_pw">비밀번호찾기</th>
-          <th style="border:0;"></th>
-        </tr>
-
-        <tr >
-
-        </tr>
-
-        <tr>
-          <td colspan="2" style="height:1%;">
-            <form class="" name="form1" action="forgot_id_pw.php" method="post">
-          <p id="id" style="display:none">아이디</p>
-          <input id="id2" size="14" style="display:none" name="id2"> <br id="id3" style="display:none">
-          이메일
-          <input  style="display:inline; margin-left:3%;" type="text" name="email1" value="" size="7" id="email1">  @
-          <input type="text" name="email2" value="" size="7" id="email2">
-          <button type="button" name="button" style="font-size: 13px; margin-left:3%;" id="sub" >인증하기</button>
-        </form>
-
-        </td>
-        </tr>
-        <tr>
-          <td colspan="2">본인확인 이메일 주소와 입력한 이메일 주소가 같아야,
-            인증번호를 받을 수 있습니다.
-          <br>
-          <input type="hidden" name="check_email1" size="8" placeholder="인증번호" id="check_email1">
-          <input type="hidden" name="check_email2" value="확인" style="background-color: #FFFFFF" id="check_email2"></button>
-          <p><?=$id?></p>
-         </td>
-        </tr>
-      </table>
-    </div>
+      <div class="forgot_id_pw_form">
+        <br><br><br><br><br><br><br><br><br><br>
+        <table id="id_pw_tbl">
+          <tr>
+            <th id="forgot_id" style="border-right:solid 1px #BDBDBD;"><b>아이디찾기</b></th>
+            <th id="forgot_pw"><b>비밀번호찾기</b></th>
+          </tr>
+          <tr>
+            <td colspan="2" style="padding: 15px;">
+              <form class="" name="form1" action="forgot_id_pw.php" method="post">
+              <output id="id">아이디</output>
+              <input style="margin-bottom: 1.5%;" id="id2" size="21" name="id2"><br id="id3">
+              이메일
+              <input type="text" name="email1" value="" size="7" id="email1">  @
+              <input type="text" name="email2" value="" size="7" id="email2">
+              <button type="button" name="button" id="sub" >인증하기</button>
+              </form>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2" style="padding-bottom: 1px; padding-top: 1px; padding-left:25px;">
+              본인확인 이메일 주소와 입력한 이메일 주소가 같아야,
+              인증번호를 받을 수 있습니다.
+              <input type="hidden" name="check_email1" size="8" placeholder="인증번호" id="check_email1">
+              <input type="hidden" name="check_email2" value="확인" id="check_email2"></button>
+              <p><?=$id?></p>
+           </td>
+          </tr>
+        </table>
+      </div>
     </section>
     <footer>
       <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/footer.php";?>
