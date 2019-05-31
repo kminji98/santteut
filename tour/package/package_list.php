@@ -38,12 +38,17 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
       default_detail_value('add_div');
       default_detail_value('free_div');
       // 상세검색 조건에 따른 결과
-      document.getElementsByName('output')[0].value=<?=json_encode($output)?>;
-      document.getElementsByName('sql')[0].value=<?=json_encode($sql)?>;
-      document.getElementsByName('order_condition')[0].value=<?=json_encode($order_condition)?>;
-      document.getElementsByName('order_option')[0].value=<?=json_encode($order_option)?>;
-      document.getElementsByName('order_btn')[0].value=<?=json_encode($order_btn)?>;
-      // document.getElementsByName('order_sql')[0].value=<?=json_encode($sql)?>;
+      var sql = <?=json_encode($sql)?>;
+      var output = <?=json_encode($output)?>;
+      var order_condition = <?=json_encode($order_condition)?>;
+      var order_option = <?=json_encode($order_option)?>;
+      var order_btn = <?=json_encode($order_btn)?>;
+      document.getElementsByName('output')[0].value=output;
+      document.getElementsByName('sql')[0].value=sql;
+      document.getElementsByName('order_condition')[0].value=order_condition;
+      document.getElementsByName('order_option')[0].value=order_option;
+      document.getElementsByName('order_btn')[0].value=order_btn;
+
       // 최신순/요금순/ 조건에 따른 결과
       var order_condition = <?=json_encode($order_condition)?>;
       var order_option = <?=json_encode($order_option)?>;

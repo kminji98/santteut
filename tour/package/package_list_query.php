@@ -58,6 +58,7 @@ if(isset($_GET['mode'])){
     case 'detail':
     $sql=$_POST['sql'];
     $output=$_POST['output'];
+
     $page=$_POST['page'];
     break;
 
@@ -105,6 +106,12 @@ if(isset($_GET['mode'])){
   }
 
 }
+if(!isset($output)){$output=null;}
+if(!isset($order_condition)){$order_condition=null;}
+if(!isset($order_option)){$order_option=null;}
+if(!isset($order_btn)){$order_btn=null;}
+
+
 // 쿼리문실행문장
 $result=mysqli_query($conn,$sql);
 $total_record=mysqli_num_rows($result);
