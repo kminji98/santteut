@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <?php
+if(!session_id()) {
+    session_start();
+}
 
 if(isset($_COOKIE["cookie_id"])){
   $cookie_id=$_COOKIE["cookie_id"];
