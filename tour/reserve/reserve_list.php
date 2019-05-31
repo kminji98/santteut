@@ -345,7 +345,7 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
               <td>예약날짜</td>
               <td colspan="2">상품코드/상품명</td>
               <td>총 결제금액(원)</td>
-              <td>인원(ID)</td>
+              <td>(ID)</td>
               <td>출발일/귀국일</td>
               <td>예약/결제상태</td>
               <td>취소</td>
@@ -476,7 +476,7 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
                  <td>'.$r_date.'</td >
                  <td colspan="2" style="width:"><a href="../package/package_view.php?mode='.$r_code.'">['.$r_code.']'.$p_name.'</a></td>
                  <td>'.$r_pay.'</td>
-                 <td>'.$r_total.'명<br>('.$r_id.')</td>
+                 <td style="font-size:20px;">'.$r_id.'</td>
                  <td>'.$p_dp_date.'<br>'.$p_arr_date2.'</td>
 
                  <td>'.$status.'</td>
