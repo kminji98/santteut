@@ -338,13 +338,12 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
             <td>
               <select id="package_search_detail_option_city">
                 <option >서울특별시</option>
-                <option >인천국제공항</option>
-                <option >김포</option>
+                <option >인천광역시</option>
+                <option >대구광역시</option>
+                <option >대전광역시</option>
+                <option >광주광역시</option>
+                <option >울산광역시</option>
                 <option >부산광역시</option>
-                <option >대구</option>
-                <option >대전</option>
-                <option >광주</option>
-                <option >울산</option>
               </select>
               <td id="nbsp">
             </td>

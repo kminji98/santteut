@@ -169,7 +169,7 @@ if(!empty($_FILES['p_main_img1'])){
 
     //7. 임시저장소에 있는 파일을 서버에 지정한 위치로 이동한다.
     if(!move_uploaded_file($main_img_copy_tmp_name1, $uploaded_file1)){
-      alert_back('4. 서버 전송에러!!');
+      alert_back('이미지가 없습니다!');
     }
 
 
@@ -240,7 +240,7 @@ if(!empty($_FILES['p_main_img2'])){
 
     //7. 임시저장소에 있는 파일을 서버에 지정한 위치로 이동한다.
     if(!move_uploaded_file($main_img_copy_tmp_name2, $uploaded_file2)){
-      alert_back('4. 서버 전송에러!!');
+      alert_back('이미지가 없습니다!');
     }
 
 
@@ -307,7 +307,7 @@ if(!empty($_FILES['p_main_img3'])){
 
     //7. 임시저장소에 있는 파일을 서버에 지정한 위치로 이동한다.
     if(!move_uploaded_file($main_img_copy_tmp_name3, $uploaded_file3)){
-      alert_back('4. 서버 전송에러!!');
+      alert_back('이미지가 없습니다!');
     }
 
 

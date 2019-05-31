@@ -837,7 +837,7 @@ SK플래닛, 슈어엠주식회사	광고성 메시지 발송업무 대행	계�
         </div><!--end of join_form div-->
       </form>
     </section>
-
+<br><br><br>
     <footer>
       <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/footer.php";?>
     </footer>
