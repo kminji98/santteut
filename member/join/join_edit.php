@@ -1,6 +1,5 @@
 <?php
 session_start();
-include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
 
 if($_GET['id']){
  $id = $_GET['id'];
@@ -549,6 +548,17 @@ if($_GET['id']){
           <!--인증번호입력-->
           <br>
           <br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <button id="end_btn" type="button" name="button" onclick="confirm_del()">삭제</button>
+          <script type="text/javascript">
+            function confirm_del(){
+              var result=confirm("삭제하시겠습니까?");
+              if(result){
+                window.location.href="delete_imformation.php?id=<?=$id?>";
+              }
+            }
+          </script>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <button id="end_btn" type="button" name="button" onclick="goto_join()">수정</button>
           &nbsp;&nbsp;
           <button id="end_btn2" type="button" name="button">취소</button>
