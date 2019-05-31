@@ -453,13 +453,16 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
                 $disabled = '';
                 //@@@@@ MINJI test 0530
                 // if($p_arr_date2>= date("Y-m-d")){ $disabled = 'disabled';}
-                $review_status='<input type="button" class="review_btn" name="review_btn" '.$disabled.' id="'.$r_pk.'" value="후기작성">';
+                if($_SESSION['id']=="admin"){
+                  $disabled="disabled";
+                }
+                $review_status='<input  type="button" class="review_btn" name="review_btn" '.$disabled.' id="'.$r_pk.'" value="후기작성">';
               }else{
                 $review_status='<input type="button" class="review_btn" name="review_btn" id="'.$r_pk.'" value="후기확인">';
               }
 
               if($r_cancel=="1"){
-                $status="예약취소";
+                $status="취소";
                 if($count=="0"){
                   $cancel_status = "<p style='color:red;'>취소완료</p>";
                 }
