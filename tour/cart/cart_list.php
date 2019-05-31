@@ -15,13 +15,17 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/cart/cart_list_query.php";
     <meta charset="utf-8">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css?ver=1">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/tour/cart/css/cart_list.css?ver=2">
+    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/side_bar.css">
   <title>산뜻 :: 즐거운 산행</title>
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
 
   </head>
   <body>
     <div id="wrap">
-    <header><?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/login_menu.php";?></header>
+    <header>
+      <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/login_menu.php";?>
+      <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/side_bar.php";?>
+    </header>
     <hr>
     <!--장바구니 리스트 페이지-->
     <div id="cart_list" style="height: 700px; max-height:2000px;">

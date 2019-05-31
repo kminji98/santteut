@@ -13,6 +13,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/create_table.php";
   </head>
 
   <body>
+
     <!--로그인 회원가입 로그아웃-->
     <div id="wrap">
     <header>
@@ -27,7 +28,8 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/create_table.php";
         <form name="main_search_form" action="./tour/package/main_search_list.php" method="post" style=" margin-left: 32%;">
           <div class="search_center" style="background-color: rgba(22, 43, 62, 0.48); width: 50%; height: 150px;">
             <div id="search_div" style="width:95%; padding: 20px;">
-              <input type="text" id="tex1" style="margin-right: 1%; text-align:center;"  name="search" size="30" placeholder="국가명 / 도시명 / 산 이름으로 검색">
+              <input type="text" id="tex1" style="margin-right: 1%; text-align:center;" onkeydown="JavaScript:main_search2()"  name="search" size="30" placeholder="국가명 / 도시명 / 산 이름으로 검색">
+
               <input type="hidden" name="main_search_word" id="main_search_word" value="">
               <i class='fas fa-search' style='font-size:36px' onclick="main_search()"></i>
 
@@ -47,6 +49,17 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/create_table.php";
         word.value = tex1.value;
         document.main_search_form.submit();
       }
+
+
+      function main_search2(){
+        if(event.keyCode == 13){
+          var tex1 = document.getElementById('tex1');
+          var word = document.getElementById('main_search_word');
+          word.value = tex1.value;
+          document.main_search_form.submit();
+        }
+      }
+      
     </script>
 
 <br>
