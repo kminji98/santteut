@@ -233,14 +233,11 @@ function create_table($conn, $table_name){
     case 'free' :
      $sql = "CREATE TABLE `free` (
      `num` int(11) NOT NULL AUTO_INCREMENT,
-     `id` char(20) NOT NULL,
-     `name` char(10) NOT NULL,
      `title` varchar(100) NOT NULL,
      `content` text NOT NULL,
-     `destination` char(100) NOT NULL,
      `file_name` char(25) NOT NULL,
      `file_type` char(25) NOT NULL,
-     `del` text NOT NULL,
+     `file_copied` char(25) NOT NULL,
      `regist_day` char(20) DEFAULT NULL,
      `hit` int(11) DEFAULT NULL,
      PRIMARY KEY (`num`)
@@ -258,6 +255,7 @@ function create_table($conn, $table_name){
      PRIMARY KEY (`num`)
      ) DEFAULT CHARSET=utf8;";
       break;
+
       case 'message' :
       $sql = "CREATE TABLE `message` (
           `num` int not null auto_increment,
