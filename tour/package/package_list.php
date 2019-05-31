@@ -310,7 +310,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
       </div>
     </div>
     <br>
-      <div id="kCalendar" onclick="KCalendar_go()"></div>
+      <div id="kCalendar"></div>
       <!-- 검색/상세검색 -->
       <div id="package_search" >
         <form name="search_form" action="package_list.php" method="get">
