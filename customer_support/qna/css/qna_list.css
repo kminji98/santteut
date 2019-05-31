@@ -3,7 +3,7 @@
 .page_button_group button:hover{background-color: #2F9D27; color: white; border-radius: 3px; border: 1px solid #2F9D27;}
 .page_button_group{ position: relative; margin-top: auto; margin-left: auto;text-align:center;}
 #qna table th{background-color: #f2f2f2; padding: 0 10px; width: 100px; height: 50px; border-right: 1px solid #D5D5D5; }
-#qna table td{border-right: 1px solid #BDBDBD; border-bottom: 1px solid #BDBDBD;}
+#qna table td{border-right: 1px solid #BDBDBD; border-bottom: 1px solid #BDBDBD;text-align: center;padding: 1%;}
 #admin_write_btn{margin: 0.5% 0 0.5% 83.5%;border-radius: 3px; width: 80px; height: 35px; font-weight: bold; margin-right: 5px; cursor: pointer; border: 1px solid #464646; background-color: white;}
 #admin_write_btn:hover{background-color: #2F9D27; border: 1px solid #2F9D27; color: white;}
 .qna_list_search{margin-top: 5%; margin-left: 67.5%;}
@@ -11,7 +11,7 @@
 .qna_list_search button{border-radius: 3px;  padding:1%; width: 15%; height: 25.5px; font-weight: bold; margin-right: 5px; cursor: pointer; border: 1px solid #464646; background-color: white;}
 .qna_list_search button:hover{background-color: #2F9D27; color: white; border-radius: 3px; border: 1px solid #2F9D27;}
 .qna_list_search input{font-size: 18px; height: 21px; width: 150px;}
-a{color:#000;}
+a{color:#000; cursor: pointer;}
 #search_btn{border-radius: 3px; font-size: 14px; width: 80px; height: 30px; font-weight: bold; cursor: pointer; border: 1px solid #464646; background-color: white;}
 .modal {
 display: none; /* Hidden by default */

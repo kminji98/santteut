@@ -199,8 +199,13 @@ $view_num = $total_record - $start_record;
                     }
                   })
                   .done(function(result) {
-                    if(result != ''){
-                       modal_alert('비밀번호를 입력해주세요','<input style=\'height:34px;width:220px;\' type=\'password\' name=\'pw\'><input type=\"hidden\" name=\"num\" value=\''+num_val+'\'>');
+                    switch (result) {
+                      case 'public':
+                      location.href="./qna_view.php?num="+num_val+"&hit="+hit;
+                        break;
+                      default:
+                      modal_alert('비밀번호를 입력해주세요','<input style=\'height:34px;width:220px;\' type=\'password\' name=\'pw\'><input type=\"hidden\" name=\"num\" value=\''+num_val+'\'>');
+                      break;
                     }
                     console.log("success");
                   })

@@ -77,7 +77,7 @@ if((isset($_GET["mode"])&&$_GET["mode"]=="update") || (isset($_GET["mode"])&&$_G
         check = check.checked;
         var pw = document.getElementById('pw');
         if(check){
-          pw.type = 'number';
+          pw.type = 'password';
         }else{
           pw.type = 'hidden';
         }
@@ -115,7 +115,7 @@ if((isset($_GET["mode"])&&$_GET["mode"]=="update") || (isset($_GET["mode"])&&$_G
           <th>비밀여부</th>
           <td>
             <input type="checkbox" id="secret_ok" name="secret_ok" value="">비밀글
-            <input type="hidden" name="pw" id="pw">
+            <input type="hidden" name="pw" id="pw" maxlength="4">
           </td>
         </tr>
       </table>

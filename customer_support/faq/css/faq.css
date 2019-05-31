@@ -1,7 +1,6 @@
-#table1{margin-left:40%; font-size: 18px; border-collapse: collapse;}
-#table1 tr{padding:5px;}
-#table1 td:first-child{font-size: 24px;}
-#faq td{border-bottom: 1px solid #464646; padding:10px;}
+#table1{margin-left:26%; font-size: 18px; border-collapse: collapse; width:51%;}
+#table1 td:first-child{font-size: 24px;padding-left: 10%;padding-bottom:1%;}
+#faq td{border-bottom: 1px solid #464646;}
 #faq_main {height: 500px;}
 #li1{cursor:pointer;}
-#li1:hover{opacity: 0.65;}
+#table1 td:hover{opacity: 0.65; cursor:pointer;}

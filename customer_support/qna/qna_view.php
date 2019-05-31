@@ -14,6 +14,7 @@ $secret="";
 
 // 페이지가 없으면 디폴트 페이지 1페이지
 if(empty($_GET['page'])){$page=1;}else{$page=$_GET['page'];}
+if(empty($_GET['hit'])){$hit=1;}else{$hit=$_GET['hit'];}
 
 if(isset($_GET["num"]) && !empty($_GET["num"])){
     $num = test_input($_GET["num"]);
@@ -46,7 +47,7 @@ if(isset($_GET["num"]) && !empty($_GET["num"])){
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css">
-    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/customer_support/qna/css/qna_view.css?ver=0.1">
+    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/customer_support/qna/css/qna_view.css?ver=1">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/side_bar.css">
     <script type="text/javascript" src="./js/qna_view.js?ver=1"></script>
 
@@ -76,7 +77,7 @@ if(isset($_GET["num"]) && !empty($_GET["num"])){
       <table border="1">
         <tr>
           <th>작성자</th>
-          <td style="width:50%; text-align:center;"><?=$name?></td>
+          <td style=><?=$name?></td>
         </tr>
         <tr>
           <th>제목</th>
