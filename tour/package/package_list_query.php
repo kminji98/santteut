@@ -12,7 +12,7 @@ if(isset($_GET['divide'])){ $divide = $_GET['divide'];}
 if(isset($_POST['divide'])){ $divide = $_POST['divide'];}
 
 if(isset($divide) && $divide=="domestic"){
-  $sql="SELECT * from `package` where `p_airplane_num` = '0'";
+  $sql="SELECT * from `package` where `p_airplane_num` = '0' order by `p_dp_date` asc;";
   $head_text = "국내산행";
   $pay_2="0~5만원"; $pay_2_query="and `p_pay` between 0 and 59999";
   $pay_3="6~10만원"; $pay_3_query="and `p_pay` between 60000 and 109999";
@@ -23,7 +23,7 @@ if(isset($divide) && $divide=="domestic"){
   $pay_8="51만원↑"; $pay_8_query="and `p_pay` >=510000";
   $won="";
 }else if(isset($divide) && $divide=="abroad"){
-  $sql="SELECT * from `package` where `p_airplane_num` != '0'";
+  $sql="SELECT * from `package` where `p_airplane_num` != '0' order by `p_dp_date` asc;";
   $head_text = "해외산행";
   $pay_2="0~50"; $pay_2_query="and `p_pay` between 0 and 509999";
   $pay_3="51~100"; $pay_3_query="and `p_pay` between 510000 and 1099999";
