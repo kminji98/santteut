@@ -92,11 +92,19 @@ setcookie("cookie1",$p_code,time() + 3600);
         </tr>
 
         <tr>
+          <td class="left" id="arr" >옵션</td>
+          <td id="arr_mt">추가경비: <?=$p_add_pay?>&nbsp;&nbsp;&nbsp;&nbsp; 자유일정: <?=$p_free_time?></td>
+        </tr>
+
+        <tr>
           <td class="left" id="res">예약현황</td>
           <td id="res_now">예약: <?=$total?>명 좌석: <?=$p_bus?>석 (최소출발 <?=$p_bus_half?>명)</td>
         </tr>
       </table>
 
+      <div id="tour_text2">  <b class="label_img">></b>  <b id="sel_text">상품약관</b>&nbsp;&nbsp; <input type="button" id="terms" name="" value="약관보기"> </div>
+      <br>
+      <div id="tour_text2">  <b class="label_img">></b>  <b id="sel_text">상세페이지</b></div>
       <div id="detail_view1">
         <?=$p_detail_content?>
       </div>

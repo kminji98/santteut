@@ -35,6 +35,8 @@ $p_dp_time=$row['p_dp_time'];
 $p_dp_city=$row['p_dp_city'];
 $p_arr_time=$row['p_arr_time'];
 $p_pay=$row['p_pay'];
+$p_add_pay=$row['p_add_pay'];
+$p_free_time=$row['p_free_time'];
 $p_main_img_copy1=$row['p_main_img_copy1'];
 $p_main_img_copy2=$row['p_main_img_copy2'];
 $p_main_img_copy3=$row['p_main_img_copy3'];
@@ -45,6 +47,17 @@ $timestamp = strtotime("$p_dp_date +$p_period days");
 $p_arr_date1 = date('y-m-d', $timestamp);
 $p_arr_date2 = "20".$p_arr_date1;
 $city = substr($p_dp_city, 0,6);
+if($p_add_pay=="1"){
+  $p_add_pay="포함";
+}else{
+  $p_add_pay="불포함";
+}
+
+if($p_free_time=="1"){
+  $p_free_time="포함";
+}else{
+  $p_free_time="불포함";
+}
 
 $yoil = array("일","월","화","수","목","금","토");
 $day = $yoil[date('w', strtotime($p_dp_date))];

@@ -36,3 +36,8 @@
 #line{font-size: 9px; color: #cccccc; margin-left: 2%;}
 #reserve_status{background-color: #35cc2b; color: white; font-size: 15px; font-weight: bold; width: 180px; margin-left: 23px; text-align: center; padding: 14px 5px; cursor: pointer;}
 #go_cart{ border: 1px solid #35cc2b; color: #35cc2b; font-size: 15px; font-weight: bold; width: 180px; margin-left: 23px; text-align: center; padding: 13px 4px; margin-bottom: 15px;}
+.label_img{ background-color: #1ae134; font-size: 12px; position: absolute; color: white; padding: 0 4px 1px 4px; border-radius: 4px; margin-top: 3px; font}
+#sel_text{display: inline-block; margin-left: 20px; }
+#tour_text2{margin-left: 12%;}
+#terms{background-color: white; border: 1px solid #bdbdbd; color: #3e3e3e;  font-weight: bold; border-radius: 2px;}
+#terms:hover{border: 1px solid black; color: black; cursor: pointer;}
