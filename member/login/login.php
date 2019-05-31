@@ -1,4 +1,16 @@
 <!DOCTYPE html>
+<?php
+
+if(isset($_COOKIE["cookie_id"])){
+  $cookie_id=$_COOKIE["cookie_id"];
+  $cookie_check="checked";
+}else{
+  $cookie_id="";
+  $cookie_check="";
+}
+
+
+ ?>
 <html lang="ko" dir="ltr">
   <head>
     <meta charset="utf-8">
@@ -38,6 +50,60 @@
                 });
               });
             }
+
+          function save_id(){
+            var login_id =document.getElementById('login_id');
+            var save_id =document.getElementById('save_id');
+
+            // alert(save_id.checked);
+            // alert(login_id.value);
+
+            if(save_id.checked==true){
+              $.ajax({
+                url: 'login_cookie.php',
+                type: 'POST',
+                data: {
+                  cookie_id:login_id.value
+                }
+              })
+              .done(function(result){
+                alert(result);
+              })
+              .fail(function() {
+                console.log("error");
+              })
+              .always(function() {
+                console.log("complete");
+
+              });
+
+
+            }else{
+
+              $.ajax({
+                url: 'login_cookie.php',
+                type: 'POST',
+                data: {
+                  cookie_id:"none"
+                }
+              })
+              .done(function(result) {
+                alert(result);
+              })
+              .fail(function() {
+                console.log("error");
+              })
+              .always(function() {
+                console.log("complete");
+
+              });
+
+
+            }
+
+          }
+
+
     </script>
     <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
     <script type="text/javascript">
@@ -84,9 +150,10 @@
       <table>
        <form name="login_form" action="login_query.php" method="post">
          <!-- <input type="hidden" name="mode" value="login"> -->
+
         <tr>
           <th><label>아이디</label></th>
-          <td><input type="text" name="login_id"></td>
+          <td><input id="login_id" type="text" name="login_id" value="<?=$cookie_id?>"></td>
           <th rowspan="2"><button type="button" name="button" id="login_button" onclick="login_action()">로그인</button> </th>
         </tr>
         <tr>
@@ -97,7 +164,7 @@
         <tr>
           <td id="empty_row" colspan="3"><br></td>
         </tr>
-        <tr><td id="id_storage" colspan="3"><input type="checkbox" name="id_storage">아이디저장&nbsp;&nbsp;<a href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/member/join/join_member.php"><b>회원가입</b></a></td></tr>
+        <tr><td id="id_storage" colspan="3"><input <?=$cookie_check?> id="save_id" type="checkbox" name="id_storage" onclick="save_id();">아이디저장&nbsp;&nbsp;<a href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/member/join/join_member.php"><b>회원가입</b></a></td></tr>
         <tr>
           <td id="empty_row" colspan="3"><br></td>
         </tr>
