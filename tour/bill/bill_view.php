@@ -344,9 +344,9 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/bill/bil_query.php";
       <table id="package_minimum_person_imformation_table">
         <tr>
           <td id="person_standard"><b>최소출발인원 기준</b></td>
-          <<?php
-          $p_bus=ceil($p_bus/2);
-           ?>>
+          <?php
+            $p_bus=ceil($p_bus/2);
+           ?>
           <td id="person_standard_value"> <b style="color:#35cc2b;font-size:17px;"><?=$p_bus?></b> </td>
           <td id="commission_standard"><b>최소수수료 부과 기준</b></td>
           <td class="commission_standard_value"><b>V </b>표준약관 적용</td>
