@@ -41,11 +41,21 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
 <style media="screen">
 .page_button_group button{border-radius: 3px; margin-bottom:3%; width: 35px; height: 35px; font-weight: bold; margin-right: 17%; margin-top: 2%; cursor: pointer; border: 1px solid #464646; background-color: white;}
 .page_button_group button:hover{background-color: #2F9D27; color: white; border-radius: 3px; border: 1px solid #2F9D27;}
-.page_button_group{ position: relative; margin-top: auto; margin-left: auto;text-align:center; width: 100%; height: auto;}
+.page_button_group{ position: relative; margin-top: auto; text-align:center; width: 100%; height: auto;}
 a{text-decoration: none;}
 </style>
-<div class="" style="margin-left:12%;">
-  <h3 style="display:inline;">상품평</h3><b style="display:inline; margin-left:1%; color:#2F9D27;">(<?=$total_record?>건)</b>
+<br><br><br><br><br>
+<div class="" style=" margin-left:12% ;width: 56%; height:100px; background-color:red; ">
+  here!
+ <!-- 누나 여기에 작업하시면 됩니다 height값 정해서 해주시면 되용~ -->
+</div>
+
+
+<br><br><br>
+
+<div class="" style="margin-left:12%">
+
+  <h3 style="display:inline; ">상품평</h3><b style="display:inline; margin-left:1%; color:#2F9D27;">(<?=$total_record?>건)</b>
 </div>
 <table id="tbl1">
   <tr>

@@ -18,7 +18,7 @@ if(isset($_GET["mode"]) && isset($_GET["code"]) && $_GET["mode"]=="insert"){
   }else{
     if(empty($c_id)){
       echo "<script>alert('로그인 해주세요.');
-          history.go(-1);
+          location.href='../../member/login/login.php';
           </script>";
     }else{
       echo "<script>alert('장바구니에 담았습니다.');

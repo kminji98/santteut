@@ -67,7 +67,6 @@ if(isset($_COOKIE["cookie_id"])){
                 }
               })
               .done(function(result){
-                alert(result);
               })
               .fail(function() {
                 console.log("error");
@@ -88,7 +87,6 @@ if(isset($_COOKIE["cookie_id"])){
                 }
               })
               .done(function(result) {
-                alert(result);
               })
               .fail(function() {
                 console.log("error");

@@ -249,7 +249,7 @@ setcookie("cookie1",$p_code,time() + 3600);
     </div>
 
 
-    <div class="" style="margin:auto; max-height:20000px;">
+    <div class="" style="max-height:20000px;">
           <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/member_review/member_review_list.php";?>
     </div>
 
