@@ -66,6 +66,7 @@ html{scroll-behavior:smooth;}
 #cost_info{background-color: #6e7689; padding-top: 1px;height: 35px;}
 #cost_info p{font-size: 13px; font-weight: bold; color: white; margin-left: 20px; margin-top: 7px;}
 #reserve_finish{background-color: #35cc2b; color: white; font-size: 15px; font-weight: bold; width: 74%; margin-left: 11%; text-align: center; padding: 14px 5px;}
+#reserve_finish:hover{cursor: pointer;}
 #terms_view{ margin-top: 10%; }
 #all_agree{}
 #term_btn{ float: left;  border: 1px solid #bdbdbd; display: inline; width: 82%; }
