@@ -53,9 +53,9 @@ $number = $total_record - $start;
     </header>
 <section style="height:700px; max-height:2000px;">
     <form class="" action="free_list.php?mode=search" method="post">
-      <div class="">
-        <ul>
-          <li>total <?=$total_record?></li>
+      <div class="search_free">
+
+          <li><b id="total">total <?=$total_record?></b></li>
           <li>
             <select  name="find">
               <option value="title">제목</option>
@@ -66,10 +66,9 @@ $number = $total_record - $start;
             <input type="text" name="" value="">
             <input type="submit" name="" value="검색">
           </li>
-        </ul>
       </div>
     </form>
-    <table border="1">
+    <table border="1" id="free_tbl">
       <tr class ="t1">
         <th>번호</th>
         <th>제목</th>
@@ -100,24 +99,27 @@ $number = $total_record - $start;
      }//end of for
     ?>
   </table>
-        이전< &nbsp;&nbsp;&nbsp;&nbsp;
-      <?php
-        for ($i=1; $i <= $total_page ; $i++) {
-          if($page==$i){
-            echo "<b>&nbsp;$i&nbsp;</b>";
-          }else{
-            echo "<a href='./free_list.php?page=$i'>&nbsp;$i&nbsp;</a>";
-          }
-        }
-      ?>
-      &nbsp;&nbsp;&nbsp;&nbsp;> 다음
 
     <?php
         if(!empty($_SESSION['id'])){
-        echo '<a href="write_edit_form.php"><input type="button" name="" value="글쓰기"></a>';
+        echo '<a href="write_edit_form.php"><button id="asmin_write_btn" style="  margin-left: 73.5%; margin-bottom:2.5%; border-radius: 3px; width: 80px; height: 35px; font-weight: bold; margin-right: 5px; cursor: pointer; border: 1px solid #464646; background-color: white;" type="button" name="button">글쓰기</button></a>';
         }
       ?>
       <a href="./free_list.php?page=<?=$page?>"><input type="button" name="" value="목록"> </a></td>
+
+
+
+      이전< &nbsp;&nbsp;&nbsp;&nbsp;
+    <?php
+      for ($i=1; $i <= $total_page ; $i++) {
+        if($page==$i){
+          echo "<b>&nbsp;$i&nbsp;</b>";
+        }else{
+          echo "<a href='./free_list.php?page=$i'>&nbsp;$i&nbsp;</a>";
+        }
+      }
+    ?>
+    &nbsp;&nbsp;&nbsp;&nbsp;> 다음
 
     </section>
     <footer>
