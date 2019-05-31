@@ -53,7 +53,7 @@ if((isset($_GET["mode"])&&$_GET["mode"]=="update") || (isset($_GET["mode"])&&$_G
     </style>
     <meta charset="utf-8">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css">
-    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/customer_support/qna/css/qna_form.css">
+    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/customer_support/qna/css/qna_form.css?ver=0">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/side_bar.css">
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
     <script type="text/javascript">
@@ -105,7 +105,7 @@ if((isset($_GET["mode"])&&$_GET["mode"]=="update") || (isset($_GET["mode"])&&$_G
         </tr>
         <tr>
           <th>제목</th>
-          <td><input type="text" style="font-size:15px; width:100px;" name="title" value="<?=$title?>"></td>
+          <td><input type="text" style="font-size:15px; height:30px;width:100%;" name="title" value="<?=$title?>"></td>
         </tr>
         <tr style="height:400px;">
           <th>내용</th>

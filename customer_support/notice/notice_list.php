@@ -92,7 +92,7 @@ $view_num = $total_record - $start_record;
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css">
-    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/customer_support/notice/css/notice_list.css?ver=0">
+    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/customer_support/notice/css/notice_list.css?ver=5">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/side_bar.css">
     <title>공지사항</title>
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
@@ -113,7 +113,7 @@ $view_num = $total_record - $start_record;
     <section id="notice" style="height: 700px; max-height:2000px;">
       <form name="notice_form" action="notice_list?mode=search" method="post">
         <div class="notice_list_search">
-          <li id="total_title"><b>total <?=$total_record?></b></li>
+          <!-- <li id="total_title"><b>total <?=$total_record?></b></li> -->
           <li id="search_option">
             <select>
             <option value="">제목</option>

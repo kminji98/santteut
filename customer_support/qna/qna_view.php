@@ -46,7 +46,7 @@ if(isset($_GET["num"]) && !empty($_GET["num"])){
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css">
-    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/customer_support/qna/css/qna_view.css">
+    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/customer_support/qna/css/qna_view.css?ver=0.1">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/side_bar.css">
     <script type="text/javascript" src="./js/qna_view.js?ver=1"></script>
 
@@ -76,7 +76,7 @@ if(isset($_GET["num"]) && !empty($_GET["num"])){
       <table border="1">
         <tr>
           <th>작성자</th>
-          <td style="width:600px; text-align:center;"><?=$name?></td>
+          <td style="width:50%; text-align:center;"><?=$name?></td>
         </tr>
         <tr>
           <th>제목</th>

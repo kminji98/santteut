@@ -60,7 +60,7 @@ $view_num = $total_record - $start_record;
   <head>
     <meta charset="utf-8">
 
-    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/customer_support/qna/css/qna_list.css">
+    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/customer_support/qna/css/qna_list.css?ver=5">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/side_bar.css">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css">
     <title>문의하기</title>
@@ -136,7 +136,6 @@ $view_num = $total_record - $start_record;
       <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/custom_menu.php";?>
       <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/side_bar.php";?>
     </header>
-    <br><br><br>
     <section id="qna" style="height: 700px; max-height:2000px;">
       <div class="qna_list_search">
         <form name="board_form" action="qna_list.php?mode=search" method="post">
@@ -146,7 +145,7 @@ $view_num = $total_record - $start_record;
             <option value="name">작성자</option>
           </select>
           <input type="text" name="find_input">
-          <input type="submit" value="검색" style="width:53px; height:27px; background-color: #2F9D27; border: 1px solid #2F9D27; color: white;"></input>
+          <input id ="search_btn" type="submit" value="검색"></input>
         </form>
       </div>
       <br>
