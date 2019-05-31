@@ -2,14 +2,17 @@
 session_start();
 include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/create_table.php";
 ?>
+
 <!DOCTYPE html>
 <html lang="ko" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="./search.css?ver=0">
-    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css?ver=3">
+    <link rel="stylesheet" href="./search.css">
+    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css">
     <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
     <title>산뜻 :: 즐거운 산행</title>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+
   </head>
 
   <body>
@@ -59,7 +62,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/create_table.php";
           document.main_search_form.submit();
         }
       }
-      
+
     </script>
 
 <br>
