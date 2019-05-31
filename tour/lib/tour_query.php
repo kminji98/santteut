@@ -32,6 +32,7 @@ $row=mysqli_fetch_array($result);
 $p_name=$row['p_name'];
 $p_dp_date=$row['p_dp_date'];
 $p_dp_time=$row['p_dp_time'];
+$p_dp_city=$row['p_dp_city'];
 $p_arr_time=$row['p_arr_time'];
 $p_pay=$row['p_pay'];
 $p_main_img_copy1=$row['p_main_img_copy1'];
