@@ -1,5 +1,6 @@
 <?php
 session_start();
+include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
 
 if($_GET['id']){
  $id = $_GET['id'];
