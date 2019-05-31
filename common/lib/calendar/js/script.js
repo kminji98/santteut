@@ -83,7 +83,8 @@ function kCalendar(id, date) {
    calendar += '         <tr>';
    for(var k = 0; k < week; k++) {
       for(var l = 0; l < 7; l++, dateNum2++) {
-         if( dateNum2 < 1 || dateNum2 > currentLastDate ) {continue;   }
+         if( dateNum2 < 1 || dateNum2 > currentLastDate  ) {continue;   }
+         if(dateNum2 < 10){dateNum2 = '0' + dateNum2;}
          calendar += '            <td class="' + dateString[l] + '"><span><a href="package_list.php?mode='+currentYear+'-'+currentMonth+'-'+dateNum2 +'&divide='+divide+'">' + dateNum2 + '</a></span></td>';
       }
    }
