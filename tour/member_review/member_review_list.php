@@ -1,5 +1,35 @@
 
 <?php
+//**********************************************************************
+$satisfaction_grade = $schedule_grade = $cost_grade = $meal_grade = 0;
+//**********************************************************************
+$sql = "SELECT avg(satisfaction_grade), avg(schedule_grade), avg(cost_grade), avg(meal_grade), avg((satisfaction_grade+schedule_grade+cost_grade+meal_grade)/4) FROM `member_review` WHERE r_code = '$p_code';";
+$result = mysqli_query($conn,$sql) or die(mysqli_error($conn));
+$row = mysqli_fetch_array($result);
+$satisfaction_grade = $row['avg(satisfaction_grade)'];
+if($satisfaction_grade==NULL){
+  $satisfaction_grade=0;
+}
+$schedule_grade = $row['avg(schedule_grade)'];
+if($schedule_grade==NULL){
+  $schedule_grade=0;
+}
+$cost_grade = $row['avg(cost_grade)'];
+if($cost_grade==NULL){
+  $cost_grade=0;
+}
+$meal_grade = $row['avg(meal_grade)'];
+if($meal_grade==NULL){
+  $meal_grade=0;
+}
+$average_grade = $row['avg((satisfaction_grade+schedule_grade+cost_grade+meal_grade)/4)'];
+if($average_grade==NULL){
+  $average_grade=0;
+}else{
+  $average_grade = round($average_grade, 1);
+}
+
+
 $id=isset($_SESSION['id'])?$_SESSION['id']:'';
 $r_code = isset($_GET["code"]);
 
@@ -38,20 +68,47 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
 
 
 ?>
+<!-- Load the AJAX API -->
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<!--jQuery CDN -->
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script type="text/javascript">
+  //Load the Visualization API and the corechart package.
+  google.charts.load('current',{'packages' : ['corechart']});
+  //Set a callback to run when the Google Visualization API(Application Program Interface) is loaded
+  google.charts.setOnLoadCallback(drawChart);
+  function drawChart(){
+    var data = google.visualization.arrayToDataTable([
+     ['기준', '평점', { role: 'style' }],
+     ['만족도', <?=$satisfaction_grade?>, '#a7ffb3'],
+     ['일정', <?=$schedule_grade?>, '#a7ffb3'],
+     ['가격', <?=$cost_grade?>, '#a7ffb3'],
+     ['식사', <?=$meal_grade?>, '#a7ffb3' ],
+  ]);
+    var options = {
+    'title' : '평균 평점 : '+'<?=$average_grade?>'+'점',
+    'width': 1000, 'height' : 400,
+    'legend' : 'none',
+    'bar': {groupWidth: "31%"},
+    'vAxis': {
+            minValue: 0,
+            maxValue: 5
+          }
+    };
+    var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+    chart.draw(data,options);
+  }
+</script>
 <style media="screen">
 .page_button_group button{border-radius: 3px; margin-bottom:3%; width: 35px; height: 35px; font-weight: bold; margin-right: 17%; margin-top: 2%; cursor: pointer; border: 1px solid #464646; background-color: white;}
 .page_button_group button:hover{background-color: #2F9D27; color: white; border-radius: 3px; border: 1px solid #2F9D27;}
 .page_button_group{ position: relative; margin-top: auto; text-align:center; width: 100%; height: auto;}
 a{text-decoration: none;}
 </style>
-<br><br><br><br><br>
-<div class="" style=" margin-left:12% ;width: 56%; height:100px; background-color:red; ">
-  here!
- <!-- 누나 여기에 작업하시면 됩니다 height값 정해서 해주시면 되용~ -->
-</div>
 
 
-<br><br><br>
+<div id="chart_div" style="margin-left: 9.5%;height:auto;"></div>
+<br>
 
 <div class="" style="margin-left:12%">
 

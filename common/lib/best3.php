@@ -24,7 +24,7 @@ $divide_flag='';
   $best3_sql = "SELECT * ,sum(`r_adult`+`r_kid`+`r_baby`) from `reserve` join `package` on `reserve`.`r_code`=`package`.`p_code` $divide_flag group by `r_code` order by sum(`r_adult`+`r_kid`+`r_baby`) desc limit 3;";
   $best3_result=mysqli_query($conn,$best3_sql);
 
-  for ($best3_record=0; $best3_record < SCALE ; $best3_record++) {
+  for ($best3_record=0; $best3_record < 3 ; $best3_record++) {
     $row = mysqli_fetch_array($best3_result);
     $p_code[$best3_record]=$row['p_code'];
     $p_name[$best3_record]=$row['p_name'];

@@ -7,9 +7,6 @@
 =================================================================
 */
 if(!session_id()) {session_start();}
-
-$alert = ($reserve_flag==0) ? "해당 게시물이 없습니다." : "취소내역이 없습니다.";
-
 ?>
 <!DOCTYPE html>
 <html lang="ko" dir="ltr">
