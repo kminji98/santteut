@@ -83,7 +83,7 @@ setcookie("cookie1",$p_code,time() + 3600);
 
         <tr>
           <td class="left" id="arr" >출발지</td>
-          <td id="arr_mt"><?=$p_dp_city?> (종합버스터미널)</td>
+          <td id="arr_mt"><?=$p_dp_city?> (<?=$city?>종합버스터미널)</td>
         </tr>
 
         <tr>

@@ -44,6 +44,7 @@ $p_detail_content=$row['p_detail_content'];
 $timestamp = strtotime("$p_dp_date +$p_period days");
 $p_arr_date1 = date('y-m-d', $timestamp);
 $p_arr_date2 = "20".$p_arr_date1;
+$city = substr($p_dp_city, 0,6);
 
 $yoil = array("일","월","화","수","목","금","토");
 $day = $yoil[date('w', strtotime($p_dp_date))];
