@@ -52,7 +52,7 @@ $find_input = $_GET["find_input"];
 
   <body>
     <!--로그인 회원가입 로그아웃-->
-    <div id="wrap">
+    <div id="wrap" style="height:1000px; max-height:2500px;">
     <header>
       <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/login_menu.php";?>
     </header>
@@ -284,4 +284,4 @@ $find_input = $_GET["find_input"];
 <footer>
   <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/footer.php";?>
 </footer>
-</html>4
+</html>

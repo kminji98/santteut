@@ -100,7 +100,7 @@ $view_num = $total_record - $start_record;
     <hr>
     <h2 id="member_title">회원관리</h2>
     <hr>
-    <section id="notice">
+    <section id="notice" style="height:700px; max-height:1500px;">
       <form name="notice_form" action="member_admin_list.php?mode=search" method="post">
         <div class="notice_list_search">
           <li id="total_title"><b>총 <?=$total_record?> 명</b></li>

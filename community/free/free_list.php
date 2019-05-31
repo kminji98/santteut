@@ -51,7 +51,7 @@ $number = $total_record - $start;
       <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/commu_menu.php";?>
       <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/side_bar.php";?>
     </header>
-<section>
+<section style="height:700px; max-height:2000px;">
     <form class="" action="free_list.php?mode=search" method="post">
       <div class="">
         <ul>
