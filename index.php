@@ -1,9 +1,5 @@
 <?php
-
-  session_start();
-
-
-
+session_start();
 include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/create_table.php";
 ?>
 

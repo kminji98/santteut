@@ -10,6 +10,7 @@ if(isset($_GET['mode']) && $_GET['mode']=='pass'){
   $row=mysqli_fetch_array($result);
   $real_pw=$row['pw'];
   $hit=$row['hit'];
+  $hit = $hit +1;
   if($pw==$real_pw){
     echo "<script>location.href='./qna_view.php?num=$num&hit=$hit';</script>";
   }else{

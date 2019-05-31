@@ -89,9 +89,7 @@ $view_num = $total_record - $start_record;
       function modal_close(){
         var modal = document.getElementById('myModal');
         modal.style.display="none";
-
       }
-
       function modal_alert_cancel(msg1,msg2,msg3){
         var modal = document.getElementById('myModal');
         modal.style.display="block";
@@ -126,11 +124,8 @@ $view_num = $total_record - $start_record;
     </script>
   </head>
   <body>
-    <div id="myModal" class="modal">
-       <div class="modal-content" id="modal-content">
-        </div>
-        </div>
-    </div>
+  
+
     <header>
       <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/login_menu.php";?>
       <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/custom_menu.php";?>
@@ -218,7 +213,7 @@ $view_num = $total_record - $start_record;
 
                 }
               </script>
-              <a onclick="view_pw(<?=$num?>,<?=$page?>,<?=$hit?>)"><?=$space.$title?></a>
+              <a onclick="view_pw(<?=$num?>,<?=$page?>,<?=$hit+1?>)"><?=$space.$title?></a>
             </td>
             <!--작성자-->
             <td><?=$name?></td>

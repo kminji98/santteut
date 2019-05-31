@@ -105,7 +105,7 @@ if(isset($_GET['mode'])){
       }else{
        ?>
       <div id="list2" style="margin-top: 10px;"><?=$send_name."님"?>&nbsp<?="( ".$send_id." ) 에게 받은  메세지 "?>&nbsp</a></div>
-   		<div id="list2" style="margin-top: 10px;"><a id="messageLink" href="#" onclick="chat_view('message_view.php?item_num=<?=$item_num ?>')" style="text-decoration: none; color: black;"><?=$message_cont?></a></div>
+   		<div id="list2" style="margin-top: 10px;"><a id="messageLink" href="" onclick="chat_view('message_view.php?item_num=<?=$item_num ?>')" style="text-decoration: none; color: black;"><?=$message_cont?></a></div>
    		<div id="list_item4" style="margin-top: 10px;" ><?=$item_date?> 읽음 </div>
       <?php
       }

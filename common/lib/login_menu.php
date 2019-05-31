@@ -1,7 +1,186 @@
-
 <?php
-if(isset($_SESSION['id'])){$id=$_SESSION['id'];}
- ?>
+  if(isset($_SESSION['id'])){$id=$_SESSION['id'];}
+  if(!isset($conn)){
+    include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
+  }
+  $mode = "receive";
+  if(isset($_GET['mode'])){ $mode = $_GET['mode'];}
+  if(isset($_GET['send_id'])){
+    $receive_id = $_GET['send_id'];
+  }else{
+    $receive_id = "";
+  }
+  if($mode=="receive"){
+    $sql = "SELECT * FROM `message` WHERE recv_id = '$id' ORDER BY num DESC;";
+    $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
+    $total_record = mysqli_num_rows($result);
+  }else{
+    $sql = "SELECT * FROM `message` WHERE send_id = '$id' ORDER BY num DESC;";
+    $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
+    $total_record = mysqli_num_rows($result);
+  }
+
+?>
+  <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/message.css">
+    <script type="text/javascript">
+    $(document).ready(function() {
+      var receive_id = '<?=json_encode($receive_id)?>';
+      $("#message").click(function(event) {
+        message_list();
+      });
+      $("#self_write").click(function(event) {
+        var check = document.getElementById('self_write');
+        check = check.checked;
+        var receive_id = document.getElementById('receive_id');
+        if(check){
+          receive_id.value = '<?=$id?>';
+        }else{
+          receive_id.value = receive_id;
+        }
+      });
+
+      //
+      // document.getElementById('self_write').onclick = function(){
+      //   var check = document.getElementById('self_write');
+      //   check = check.checked;
+      //   var receive_id = document.getElementById('receive_id');
+      //   if(check){
+      //     receive_id.value = '<?=$id?>';
+      //   }else{
+      //     receive_id.value = receive_id;
+      //   }
+      // }
+
+
+    });
+    function message_list(){
+      var div_val = $("#div_val").html();
+      var modal = document.getElementById('myModal');
+      $("#modal-content").html("");
+      $("#modal-content").append("<h2>메세지</h2><hr>");
+      $("#modal-content").append("<div style='height:400px; overflow:scroll;'>"+div_val+"</div>");
+      $("#modal-content").append('<div class="button-8" id="button-3"><br>');
+      $("#button-3").append("<a class='btn' onclick='message_form(\"\");'><span>글쓰기</span></a>");
+      $("#button-3").append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class='btn' onclick='modal_close();'><span>취소</span></a>");
+      $("#modal-content").append("</div>");
+
+      modal.style.display="block";
+    }
+    function message_form(receive_id){
+      modal_close();
+      var p = $("#div_val").html();
+      var modal = document.getElementById('myModal');
+      $("#modal-content").html("");
+      $("#modal-content").append("<h2>메세지</h2><hr>");
+      $("#modal-content").append("<form name='message_form' id='message_form' action='message_check.php' method='post'>");
+      $("#message_form").append("<h3>보내는 메세지</h3>");
+      $("#message_form").append("<textarea name='message_content' rows='10' cols='67' style='margin-top:10px;'></textarea>");
+      $("#message_form").append("<div style='margin-top: 9px; text-align: right;'><b>내게 쓰기</b> : <input type='checkbox' id='self_write' name='self_write'>");
+      $("#message_form").append("<b>받는 사람</b> : <input type='text' size='12px;' id='receive_id' name='receive_id' value='"+receive_id+"' style='height: 19px;'></div>");
+
+
+      $("#message_form").append('<div class="button-8" id="button-3">');
+      $("#button-3").append('<div class="eff-8"></div>');
+      $("#button-3").append("<a class='btn' onclick='document.message_form.submit()' ><span>확인</span></a>");
+      $("#button-3").append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class='btn' onclick='modal_close();' ><span>취소</span></a>");
+      $("#message_form").append("</div>");
+      $("#modal-content").append("</form>");
+      modal.style.display="block";
+    }
+    function modal_close(){
+      var modal = document.getElementById('myModal');
+      modal.style.display="none";
+    }
+    function modal_alert_cancel(msg1,msg2,msg3){
+      var modal = document.getElementById('myModal');
+      modal.style.display="block";
+
+      $("#modal-content").html("<i class='fas fa-exclamation-circle 9x'></i>");
+      $("#modal-content").append("<h2>"+msg1+"</h2>");
+      $("#modal-content").append("<h3>"+msg2+"</h3>");
+      $("#modal-content").append("<div class='button-8' id='button-3' onclick='alert_confirm(\""+msg3+"\")'>");
+      $("#button-3").append("<div class='eff-8'></div>");
+      $("#button-3").append("<a href='#'><span>확인</span></a>");
+      $("#modal-content").append("</div>");
+      $("#modal-content").append("<div class='button-8' id='button-4'>");
+      $("#button-3").append("<div class='eff-8'></div>");
+      $("#button-3").append("<a href='#'><span>취소</span></a>");
+      $("#modal-content").append("</div>");
+    }
+
+    function alert_confirm(local){
+      var modal = document.getElementById('myModal');
+      modal.style.display = "none";
+      if(local!="undefined"){
+        window.location.href=local;
+      }
+    }
+
+    window.onclick = function(event) {
+      if (event.target == "modal") {
+        var modal = document.getElementById('myModal');
+        modal.style.display = "none";
+      }
+    };
+  </script>
+<div style="display:none;" id="div_val" >
+  <?php
+  for($i=0; $i<$total_record; $i++){
+
+    $row = mysqli_fetch_array($result);
+    $item_num = $row["num"];
+    $recv_id = $row["recv_id"];
+    $send_id = $row["send_id"];
+    $send_name = $row["name"];
+    $message_cont = $row["message"];
+    $recv_read = $row["recv_read"];
+    $item_date = $row["regist_day"];
+    $item_date = substr($item_date, 0 ,10);
+  ?>
+  <div id="list0" style="display:inline;">
+  <?php
+  if($mode == "receive"){
+    if($recv_read == "N"){
+   ?>
+  <div id="list2" style="margin-top: 10px;"><b><?=$send_name."님"?></b>&nbsp;<b><?="( ".$send_id." ) 에게 받은 메세지"?></b>&nbsp;</div>
+  <div id="list2" style="margin-top: 10px;"><a id="messageLink" href="" onclick="chat_view('message_view.php?item_num=<?=$item_num?>')" style="text-decoration: none; color:black;"><b><?=$message_cont?></b></a></div>
+  <div id="list_item4" style="margin-top: 10px;"><b><?=$item_date?> 안읽음</b></div>
+  <?php
+  }else{
+   ?>
+  <div id="list2" style="margin-top: 10px;"><?=$send_name."님"?>&nbsp<?="( ".$send_id." ) 에게 받은  메세지 "?>&nbsp</a></div>
+  <div id="list2" style="margin-top: 10px;"><a id="messageLink" href="" onclick="chat_view('message_view.php?item_num=<?=$item_num ?>')" style="text-decoration: none; color: black;"><?=$message_cont?></a></div>
+  <div id="list_item4" style="margin-top: 10px;" ><?=$item_date?> 읽음 </div>
+  <?php
+  }
+  }else{
+    if($recv_read == "N"){
+  ?>
+  <div id="list2" style="margin-top: 10px;"><?=$recv_id."님"?> 에게 보낸 메세지&nbsp;</div>
+  <div id="list2" style="margin-top: 10px;"><?=$message_cont?></div>
+  <div id="list_item4" style="margin-top:10px;"><?=$item_date?> <b>안읽음</b></div>
+  <?php
+  }else{
+   ?>
+   <div id="list2" style="margin-top: 10px;"><?=$recv_id."님"?> 에게 보낸 메세지 &nbsp;</a></div>
+   <div id="list2" style="margin-top: 10px;"><?=$message_cont?></div>
+   <div id="list_item4" style="margin-top: 10px;" ><?=$item_date?> 읽음</div>
+   <?php
+  }
+  }
+  ?>
+  </div><!--end of list0  -->
+  <hr>
+  <?php
+  }
+  ?>
+
+</div>
+
+<div id="myModal" class="modal">
+  <div class="modal-content" id="modal-content" >
+  </div>
+</div>
 
 <div id="logo" >
   <a href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/index.php">
@@ -45,6 +224,7 @@ if(isset($_SESSION['id'])){$id=$_SESSION['id'];}
               <li><a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/customer_support/qna/qna_list.php" class="hov">답변글관리</a></li>
               <li><a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/revenue/revenue_management.php" class="hov">매출관리</a></li>
               <li><a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/member/admin/member_admin_list.php" class="hov">회원관리</a></li>
+              <li><a id="message" class="hov">쪽지</a></li>
             </ul>
           </div>
         </li>&nbsp;&nbsp;');
@@ -70,7 +250,7 @@ if(isset($_SESSION['id'])){$id=$_SESSION['id'];}
               <li><a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/tour/cart/cart_list.php" class="hov">장바구니</a></li>
               <li><a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/mypage/myboard/myboard.php" class="hov">참여내역</a></li>
               <li><a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/customer_support/qna/qna_form.php" class="hov">상담문의</a></li>
-              <li><a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/?" class="hov">쪽지</a></li> 
+              <li><a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/?" class="hov">쪽지</a></li>
               <li><a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/member/join/join_edit.php?id='.$id.'" class="hov">정보수정</a></li>
             </ul>
           </div>
