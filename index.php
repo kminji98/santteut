@@ -1,5 +1,9 @@
 <?php
-session_start();
+
+  session_start();
+
+
+
 include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/create_table.php";
 ?>
 <!DOCTYPE html>
@@ -35,8 +39,21 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/create_table.php";
 
               <!-- <button type="button" name="button" onclick="main_search()">검색</button> -->
             </div>
-            <b style="color: white; margin-left: 3%; font-weight:normal;">추천산행 : 수락산, 지리산</b>
-          </div>
+            <b style="color: white; margin-left: 3%; font-weight:normal;">추천산행 :</b>
+            <?php
+            define('SCALE', 3);
+            $divide_flag="";
+            $best3_sql = "SELECT * ,sum(`r_adult`+`r_kid`+`r_baby`) from `reserve` join `package` on `reserve`.`r_code`=`package`.`p_code` $divide_flag group by `r_code` order by sum(`r_adult`+`r_kid`+`r_baby`) desc limit 3;";
+            $best3_result=mysqli_query($conn,$best3_sql);
+            for ($best3_record=0; $best3_record < SCALE ; $best3_record++) {
+              $row = mysqli_fetch_array($best3_result);
+              $p_arr_mt=$row['p_arr_mt'];
+              $p_code=$row['p_code'];
+              echo '<a id="recomend_mt"  href="http://'.$_SERVER['HTTP_HOST'].'/santteut/tour/package/package_view.php?mode='.$p_code.'">'.$p_arr_mt.'</a>&nbsp;&nbsp;';
+            }
+              ?>
+
+          </div >
 
         </form>
         </div>
@@ -59,7 +76,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/create_table.php";
           document.main_search_form.submit();
         }
       }
-      
+
     </script>
 
 <br>

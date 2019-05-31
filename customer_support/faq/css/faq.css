@@ -1,6 +1,17 @@
-#table1{margin-left:26%; font-size: 18px; border-collapse: collapse; width:51%;}
-#table1 td:first-child{font-size: 24px;padding-left: 10%;padding-bottom:1%;}
+#table1{margin-left:13%;font-size: 18px; border-collapse: collapse;width: 75%;}
+#table1 td:first-child{font-size: 24px;padding-bottom:1%; }
 #faq td{border-bottom: 1px solid #464646;}
 #faq_main {height: 500px;}
-#li1{cursor:pointer;}
-#table1 td:hover{opacity: 0.65; cursor:pointer;}
+/* #li1{cursor:pointer;} */
+#li1_1:hover{cursor:pointer;}
+#li1 td:hover{color: black;}
+
+#li1_1 small{cursor: context-menu}
+#li2_1 small{cursor: context-menu}
+#li3_1 small{cursor: context-menu}
+#li4_1 small{cursor: context-menu}
+#li5_1 small{cursor: context-menu}
+#li6_1 small{cursor: context-menu}
+#li7_1 small{cursor: context-menu}
+#li8_1 small{cursor: context-menu}
+#li1{}
