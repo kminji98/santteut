@@ -530,7 +530,7 @@
          </td></tr>
          <tr>
            <td colspan="2" id="insert_btn_td">
-             <input type="button" id="insert_btn" onclick="check_input()" value="패키지등록하기">
+             <input type="button" id="insert_btn" onclick="check_input()" value="등록하기">
            </td>
          </tr>
         </table><br><br><br>

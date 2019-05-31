@@ -1,8 +1,4 @@
-<!-- =================================================================
-+ [DESC] 로그인 메뉴 수정
-+ [DATE] 2019-05-27
-+ [NAME] 이우주
-================================================================= -->
+
 <?php
 if(isset($_SESSION['id'])){$id=$_SESSION['id'];}
  ?>
@@ -43,8 +39,8 @@ if(isset($_SESSION['id'])){$id=$_SESSION['id'];}
         echo ('<li id="top_my" class="hov">관리자모드<small style="font-size:10px;"> ▼</small>
           <div id="top_my_content">
             <ul id="top_my_content_ul">
-              <li><a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/tour/admin/admin_add_package.php" class="hov">상품등록</a></li>
-              <li><a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/tour/admin/admin_manage_package.php" class="hov">상품관리</a></li>
+              <li><a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/tour/admin/admin_add_package.php" class="hov">패키지등록</a></li>
+              <li><a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/tour/admin/admin_manage_package.php" class="hov">패키지관리</a></li>
               <li><a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/tour/reserve/reserve_list.php" class="hov">예약/결제목록</a></li>
               <li><a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/customer_support/qna/qna_list.php" class="hov">답변글관리</a></li>
               <li><a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/revenue/revenue_management.php" class="hov">매출관리</a></li>
@@ -70,12 +66,12 @@ if(isset($_SESSION['id'])){$id=$_SESSION['id'];}
         echo ('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<li id="top_my" class="hov">My<small style="font-size:10px;">▼</small>
           <div id="top_my_content">
             <ul id="top_my_content_ul">
-              <li><a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/?" class="hov">쪽지</a></li>
-              <li><a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/member/join/join_edit.php?id='.$id.'" class="hov">정보수정</a></li>
-              <li><a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/mypage/myboard/myboard.php" class="hov">참여내역</a></li>
               <li><a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/tour/reserve/reserve_list.php" class="hov">예약/결제내역</a></li>
-              <li><a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/customer_support/qna/qna_form.php" class="hov">상담문의</a></li>
               <li><a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/tour/cart/cart_list.php" class="hov">장바구니</a></li>
+              <li><a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/mypage/myboard/myboard.php" class="hov">참여내역</a></li>
+              <li><a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/customer_support/qna/qna_form.php" class="hov">상담문의</a></li>
+              <li><a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/?" class="hov">쪽지</a></li> 
+              <li><a href="http://'.$_SERVER['HTTP_HOST'].'/santteut/member/join/join_edit.php?id='.$id.'" class="hov">정보수정</a></li>
             </ul>
           </div>
         </li> ');

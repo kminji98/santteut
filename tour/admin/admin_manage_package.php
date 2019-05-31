@@ -47,6 +47,8 @@ $find_input = $_GET["find_input"];
     .page_button_group button:hover{background-color: #2F9D27; color: white; border-radius: 3px; border: 1px solid #2F9D27;}
     .page_button_group{ position: relative; margin-top: auto; margin-left: auto;text-align:center; margin-left: 12%; width: 100%; height: auto;}
     a{text-decoration: none;}
+    #search_find input:hover {background-color: #42d137; border: 1px solid #42d137;}
+
     </style>
   </head>
 
@@ -59,29 +61,34 @@ $find_input = $_GET["find_input"];
     <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/side_bar.php";?>
     <hr>
     <div id="head_text">
-      <h2>전체상품관리
-        <form style="display:inline" class="" action="admin_manage_package.php?mode=search&find_option=<?=$find_option?>&find_input=<?=$find_input?>" method="get">
-          <select style="padding-bottom:8px; padding-top:3px;margin-left:480px;"name="find_option">
-            <option value="p_code">코드명</option>
-            <option value="p_name">상품명</option>
-            <option value="p_dp_date">출발날짜</option>
-          </select>
-          <input style="padding:5px; margin-right:0px;"type="text" name="find_input" value="">
-          <input style="font-weight:bold; width:70px; height:28px;"type="submit" value="검색">
-          <input type="hidden" name="mode" value="search">
-      </form>
-      <?php
-      if($_GET['mode']=="search"){
-        echo '
-        <form style="display:inline" class="" action="admin_manage_package.php?" method="post">
-        <input style="font-weight:bold; width:70px; height:28px;"type="submit" value="새로고침">
-        </form>
-        ';
-      }
-       ?>
+      <h2>패키지관리
+
     </h2>
     </div>
 
+    <form style="display:inline;" class="" action="admin_manage_package.php?mode=search&find_option=<?=$find_option?>&find_input=<?=$find_input?>" method="get">
+<div class="search_div">
+
+      <select style="padding-bottom:8px; padding-top:3px;margin-left:60.5%;"name="find_option">
+        <option value="p_code">코드명</option>
+        <option value="p_name">상품명</option>
+        <option value="p_dp_date">출발날짜</option>
+      </select>
+      <input style="padding:5px; margin-right:0px;"type="text" name="find_input" value="">
+      <input id="search_find" style="color:white; border-radius: 3px; margin-bottom:0.5%; width: 85px; height: 32px; font-weight: bold; margin-right: 5px; cursor: pointer; border: 1px solid #2F9D27; background-color: #2F9D27;" type="submit" value="검색">
+      <input type="hidden" name="mode" value="search">
+
+    </div>
+    </form>
+    <?php
+    if($_GET['mode']=="search"){
+    echo '
+    <form style="display:inline" class="" action="admin_manage_package.php?" method="post">
+    <input style="font-weight:bold; width:70px; height:28px;"type="submit" value="새로고침">
+    </form>
+    ';
+    }
+    ?>
       <div id="package_list_view">
         <table id="package_list_view_table">
           <tr>

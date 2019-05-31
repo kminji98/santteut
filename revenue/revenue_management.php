@@ -2,7 +2,6 @@
 session_start();
 //********************************************************************
 $sql1=$sql2=$sql3=$sql4=$sql5=$sql6=$sql7=$sql8=$sql9=$sql10=$sql11=$sql12="";
-
 //********************************************************************
 include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
 
@@ -221,9 +220,9 @@ while($row=mysqli_fetch_array($result)){
   <header>
     <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/login_menu.php";?>
   </header>
-    <h1 style="padding-top:40px; margin:0 auto; margin-top:20px; text-align: center;">매출관리</h1>
+    <!-- <h1 style="padding-top:40px; margin:0 auto; margin-top:20px; text-align: center;">매출관리</h1> -->
     <div id="ticket_box45">
-    <div id="select_ticket"><h4>매출 내역</h4></div>
+    <div id="select_ticket" style="margin-top:10%;"><h4>매출 관리</h4></div>
     <form name="month_form" action="revenue_management.php" method="post">
       <select name="find" style="width: 100px; height:30px;">
         <option value="" hidden>년도</option>

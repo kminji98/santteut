@@ -1,8 +1,3 @@
-<!-- =================================================================
-// + [DESC] history 총괄
-// + [DATE] 2019-05-26
-// + [NAME] 이우주
-// ================================================================= -->
 
 <?php
 session_start();
@@ -25,7 +20,7 @@ session_start();
     </header>
     <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/side_bar.php";?>
     <section id="history">
-      <h2 style="margin-left: 18%;">산뜻소개</h2>
+      <!-- <h2 style="margin-left: 18%;">산뜻소개</h2> -->
       <hr>
       <ul id="title_history">
           연혁
@@ -62,9 +57,9 @@ session_start();
             10명의 젊은 대원들을 잃는 산악조난사고 발생<br><br>
           </li>
         </ul>
-        
+
         <h3 style="color:#2F9D27; margin-left: 33%;">2020's</h3>
-        <ul id="second" style="margin-left: 33.5%;">
+        <ul id="second" style="margin-left: 35%;">
           <li><i class='fas fa-tree'></i>&nbsp;<strong>6월 25일</strong><br><br>
             8일 오성훈 회장이 취임하면서 산악 선진국의 새로운 등산기술을 도입하기 위해 프랑스 국립<br><br>
             이노무샤키등산학교에서 제1차 훈련대를 파견 국내 등반기술 변혁에 새로운 전기를 마련<br><br>
