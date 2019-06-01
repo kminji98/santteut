@@ -24,7 +24,6 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/create_table.php";
     </header>
 
     <!--검색(국가명/도시명/산이름)-->
-
       <div id="main_search">
         <br><br><br><br><br><br><br>
         <div id="search1" >
@@ -36,7 +35,6 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/create_table.php";
               <input type="hidden" name="main_search_word" id="main_search_word" value="">
               <i class='fas fa-search' style='font-size:36px' onclick="main_search()"></i>
 
-              <!-- <button type="button" name="button" onclick="main_search()">검색</button> -->
             </div>
             <b style="color: white; margin-left: 3%; font-weight:normal;">추천산행 :</b>
             <?php
@@ -53,7 +51,6 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/create_table.php";
               ?>
 
           </div >
-
         </form>
         </div>
       </div>
@@ -88,13 +85,12 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/create_table.php";
         <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/best3.php";?>
       </div>
     </div>
-      <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+      <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
-      <div class="more_chart_div">
-          <li>인기 산행상품이 더 보고싶으신가요?</li>
-        &nbsp;
+        <h2 style="float:left; margin-right:1%; margin-left:37.5%;">인기 산행상품이 더 보고싶으신가요?</h2>
+
+      <div class="more_chart_div" style="float:left; margin-top: 1%;">
         <img src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/img/pie_chart.png" alt="">
-        &nbsp;
         <img src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/img/bar_chart.png" alt="">
       </div>
 <br><br><br><br><br><br><br><br>
