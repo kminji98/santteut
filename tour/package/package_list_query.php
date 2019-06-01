@@ -67,6 +67,9 @@ if(isset($_GET['mode'])){
     case 'order':
     // $_POST['order'] =>  'desc' / 'asc'
     // ex) $sql="SELECT * from `package` order by num desc";
+    // 현재 default 가 order by `p_dp_date` asc 으로 되어있기 때문에 제거하기 위해 실행.
+    $sql_array =explode(" order by", $sql);
+    $sql = $sql_array[0];
     $sql= $sql." order by";
     $order_btn = $_POST['order_btn'];
     $order_condition = $_POST['order_condition'];
@@ -102,7 +105,6 @@ if(isset($_GET['mode'])){
         break;
     }
     $sql= $sql." ".$_POST['order_option'];
-
   }
 
 }
