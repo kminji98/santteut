@@ -48,6 +48,6 @@ if($type[0]=='image'){
 
 //7. 임시저장소에 있는 파일을 서버에 지정한 위치로 이동한다.
 if(!move_uploaded_file($upfile_tmp_name, $uploaded_file)){
-  alert_back('4. 서버 전송에러!!');
+  alert_back('1. 서버 전송에러!!');
 }
 ?>

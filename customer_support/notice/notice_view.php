@@ -64,7 +64,7 @@ if(isset($_GET["num"]) && !empty($_GET["num"])){
   //   $image_height=0;
   //   $image_type="";
   // }
-    mysqli_close($conn);
+  
 }
 
 ?>
