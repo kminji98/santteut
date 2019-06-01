@@ -23,10 +23,9 @@ $divide_flag='';
   }
   $best3_sql = "SELECT * ,sum(`r_adult`+`r_kid`+`r_baby`) from `reserve` join `package` on `reserve`.`r_code`=`package`.`p_code` $divide_flag group by `r_code` order by sum(`r_adult`+`r_kid`+`r_baby`) desc limit 3;";
   $best3_result=mysqli_query($conn,$best3_sql);
-
   for ($best3_record=0; $best3_record < 3 ; $best3_record++) {
     $row = mysqli_fetch_array($best3_result);
-    $p_code[$best3_record]=$row['p_code'];
+    $p_code1[$best3_record]=$row['p_code'];
     $p_name[$best3_record]=$row['p_name'];
     $p_dp_date[$best3_record]=$row['p_dp_date'];
     $p_pay[$best3_record]=$row['p_pay'];
@@ -60,7 +59,8 @@ $divide_flag='';
        </div>
        <br>
        <div class="button1">
-         <a href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/tour/package/package_view.php?mode=<?=$p_code[$best3_record]?>"><button style="margin-top: 1%;padding:3%; border: 1px solid #2F9D27; font-size: 12px; color: white; background-color: #2F9D27; cursor: pointer; border-radius: 5px;" type="button" name="button">상품보기</button></a>
+
+         <a href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/tour/package/package_view.php?mode=<?=$p_code1[$best3_record]?>"><button style="margin-top: 1%;padding:3%; border: 1px solid #2F9D27; font-size: 12px; color: white; background-color: #2F9D27; cursor: pointer; border-radius: 5px;" type="button" name="button">상품보기</button></a>
        </div>
      </div>
    </div>
