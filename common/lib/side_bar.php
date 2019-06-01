@@ -42,7 +42,6 @@
   }
  ?>
 <script type="text/javascript">
-  // alert(<?=json_encode($sql_side1)?>);
 </script>
 <!-- 사이드바 컨트롤러 -->
 <div id="side_bar_control">

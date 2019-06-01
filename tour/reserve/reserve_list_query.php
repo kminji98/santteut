@@ -16,6 +16,7 @@ if(isset($_GET["r_pk"])){
   }
   $del_sql2 = "DELETE from `bus` where `b_pk`= '$cancel_r_pk';";
   $del_result2 = mysqli_query($conn,$del_sql2);
+
   $up_sql = "UPDATE `reserve` SET `r_cancel` = '1',`r_adult`=0,`r_kid`=0,`r_baby`=0 where `r_pk`= '$cancel_r_pk';";
   $up_result = mysqli_query($conn,$up_sql);
   $cancel_date_sql = "UPDATE `reserve` SET `r_cancel_date` = '$date' where `r_pk`= '$cancel_r_pk';";
