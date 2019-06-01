@@ -283,10 +283,6 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
     $date2 =date("Y-m-d");
     $name2 = $_SESSION['name'];
     $id2 = $_SESSION['id'];
-    $title=str_replace("\n", "<br>",$title);
-    $title=str_replace(" ", "&nbsp;",$title);
-    $content=str_replace("\n", "<br>",$content);
-    $content=str_replace(" ", "&nbsp;",$content);
 
     ?>
 
@@ -400,7 +396,7 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
   <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/side_bar.php";?>
     <hr>
     <!--예약 리스트 페이지-->
-    <div id="reserve_list">
+    <div id="reserve_list" style="height:1500px;max-height:5000px;">
       <h3 id="title" >예약 및 결제 확인</h3>
       <fieldset id="i_field">
         <div id="i"><b>ⓘ</b></div><!-- end of div "i" -->
@@ -656,7 +652,7 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
               if(empty(mysqli_num_rows($review_result))){
                 $disabled = '';
                 //@@@@@ MINJI test 0530
-                // if($p_arr_date2>= date("Y-m-d")){ $disabled = 'disabled';}
+                if($p_arr_date2>= date("Y-m-d")){ $disabled = 'disabled';}
                 if($_SESSION['id']=="admin"){
                   $disabled="disabled";
                 }

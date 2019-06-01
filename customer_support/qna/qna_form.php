@@ -40,7 +40,7 @@ if((isset($_GET["mode"])&&$_GET["mode"]=="update") || (isset($_GET["mode"])&&$_G
       $title="[re]".$title;
       $content="";
     }
-    mysqli_close($conn);
+    
 }
 ?>
 
