@@ -396,7 +396,7 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
   <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/side_bar.php";?>
     <hr>
     <!--예약 리스트 페이지-->
-    <div id="reserve_list">
+    <div id="reserve_list" style="height:1500px;max-height:5000px;">
       <h3 id="title" >예약 및 결제 확인</h3>
       <fieldset id="i_field">
         <div id="i"><b>ⓘ</b></div><!-- end of div "i" -->
