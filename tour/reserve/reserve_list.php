@@ -283,7 +283,7 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
     $date2 =date("Y-m-d");
     $name2 = $_SESSION['name'];
     $id2 = $_SESSION['id'];
-    
+
     ?>
 
     <div id="myModal" class="modal">
@@ -652,7 +652,7 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
               if(empty(mysqli_num_rows($review_result))){
                 $disabled = '';
                 //@@@@@ MINJI test 0530
-                // if($p_arr_date2>= date("Y-m-d")){ $disabled = 'disabled';}
+                if($p_arr_date2>= date("Y-m-d")){ $disabled = 'disabled';}
                 if($_SESSION['id']=="admin"){
                   $disabled="disabled";
                 }
