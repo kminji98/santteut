@@ -156,7 +156,11 @@ $divide = "";
 <html>
 <head>
 <meta charset="utf-8">
-<title> TOP10 </title>
+<style media="screen">
+#submit{border-radius: 5px; width: 60px; height: 30px; font-weight: bold; margin-left: 0.5%; cursor: pointer; border: 1px solid #464646; background-color: white;}
+#submit:hover{background-color: #2F9D27; color: white; border-radius: 5px; border: 1px solid #2F9D27;}
+</style>
+<title>패키지예약TOP10 </title>
 <!-- Load the AJAX API -->
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <!--jQuery CDN -->
@@ -185,7 +189,14 @@ $divide = "";
 
   ]);
     // 차트 설정 옵션
-    var options = {'title' : '<?=$str_title?> 가장 핫한 패키지 TOP 10', 'width' :1300, 'height' : 1000};
+    var options = {'title' : '[<?=$str_title?>] 가장 핫한 패키지 TOP 10',
+                  'titleTextStyle': {
+                    fontSize: 20,
+                    bold: true    
+                  },
+                  'width' :1300,
+                  'height' : 800
+                  };
 
     var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
 
@@ -199,14 +210,14 @@ $divide = "";
 </head>
 <body>
   <section style="margin-left: 700px; margin-top: 50px;">
-  <form name="form" action="best10.php" method="post">
+  <form name="form" action="best10_reserve.php" method="post">
     <select name="divide" style="width: 100px; height:30px;">
       <option value="" hidden>선택</option>
       <option value="domestic">국내</option>
       <option value="abroad">해외</option>
       <option value="">국내외</option>
     </select>
-    <input type="submit" value="검색" style="width: 60px; height:30px; background-color: #2F9D27; border: 1px solid #2F9D27; color: white;">
+    <input type="submit" id="submit" value="검색">
   </form>
 </section>
   <!--파이 차트를 저장할 div-->
