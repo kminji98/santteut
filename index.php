@@ -48,7 +48,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/create_table.php";
               $row = mysqli_fetch_array($best3_result);
               $p_arr_mt=$row['p_arr_mt'];
               $p_code=$row['p_code'];
-              echo '<a id="recomend_mt"  href="http://'.$_SERVER['HTTP_HOST'].'/santteut/tour/package/package_view.php?mode='.$p_code.'">'.$p_arr_mt.'</a>&nbsp;&nbsp;';
+              echo '<a id="recomend_mt" href="http://'.$_SERVER['HTTP_HOST'].'/santteut/tour/package/package_view.php?mode='.$p_code.'">'.$p_arr_mt.'</a>&nbsp;&nbsp;';
             }
               ?>
 
@@ -88,7 +88,16 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/create_table.php";
         <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/best3.php";?>
       </div>
     </div>
-      <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+      <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+      <div class="more_chart_div">
+          <li>인기 산행상품이 더 보고싶으신가요?</li>
+        &nbsp;
+        <img src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/img/pie_chart.png" alt="">
+        &nbsp;
+        <img src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/img/bar_chart.png" alt="">
+      </div>
+<br><br><br><br><br><br><br><br>
     <footer id="foo">
       <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/footer.php";?>
     </footer>
