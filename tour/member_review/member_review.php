@@ -32,11 +32,11 @@ if((isset($_GET["mode"])&&$_GET["mode"]=="view") ){
 
     $id=$row['id'];
     $title= htmlspecialchars($row['title']);
-    $title=str_replace("\n", "<br>",$title);
-    $title=str_replace(" ", "&nbsp;",$title);
+    // $title=str_replace("\n", "<br>",$title);
+    // $title=str_replace(" ", "&nbsp;",$title);
     $content= htmlspecialchars($row['content']);
-    $content=str_replace("\n", "<br>",$content);
-    $content=str_replace(" ", "&nbsp;",$content);
+    // $content=str_replace("\n", "<br>",$content);
+    // $content=str_replace(" ", "&nbsp;",$content);
     $date=$row['write_date'];
     $satisfaction_grade=$row['satisfaction_grade'];
     $schedule_grade=$row['schedule_grade'];
