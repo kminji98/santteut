@@ -35,7 +35,7 @@ if(isset($_GET["num"]) && !empty($_GET["num"])){
     $hit=$row['hit'];
     $pw=$row['pw'];
     $id=$row['id'];
-    $name=$row['name'];
+    $name1=$row['name'];
     $title= htmlspecialchars($row['title']);
     $content= $row['content'];
     $title=str_replace("\n", "<br>",$title);
@@ -79,7 +79,7 @@ if(isset($_GET["num"]) && !empty($_GET["num"])){
       <table border="1">
         <tr>
           <th>작성자</th>
-          <td style=><?=$name?></td>
+          <td style=><?=$name1?></td>
         </tr>
         <tr>
           <th>제목</th>
