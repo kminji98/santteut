@@ -11,9 +11,6 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/tour/package/css/package_list.css">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/side_bar.css">
     <link href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/lib/calendar/css/style.css" rel="stylesheet">
-    <script type="text/javascript">
-      var divide=<?=json_encode($divide)?>;
-    </script>
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
     <script src="../../common/lib/calendar/js/script.js"></script>
     <style media="screen">
@@ -25,11 +22,12 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
     <script type="text/javascript">
     window.onscroll = function() {
       window.onscroll = function() {
-      check_offsetTop();
+        check_offsetTop();
       };
     }
 
     window.onload = function () {
+      var divide=<?=json_encode($divide)?>;
       kCalendar('kCalendar');
       default_detail_value('period_div');
       default_detail_value('pay_div');
@@ -45,16 +43,14 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
       var order_btn = <?=json_encode($order_btn)?>;
       document.getElementsByName('output')[0].value=output;
       document.getElementsByName('sql')[0].value=sql;
-      document.getElementsByName('order_condition')[0].value=order_condition;
-      document.getElementsByName('order_option')[0].value=order_option;
-      document.getElementsByName('order_btn')[0].value=order_btn;
+      if(  document.getElementsByName('order_condition')[0].value != null){
+        document.getElementsByName('order_condition')[0].value=order_condition;
+        document.getElementsByName('order_option')[0].value=order_option;
+        document.getElementsByName('order_btn')[0].value=order_btn;
+      }
+      if(order_condition != null){ document.getElementById(order_condition).value=<?=json_encode($order_btn)?>; }
 
-      // 최신순/요금순/ 조건에 따른 결과
-      var order_condition = <?=json_encode($order_condition)?>;
-      var order_option = <?=json_encode($order_option)?>;
-      var order_btn = <?=json_encode($order_btn)?>;
-      document.getElementById(order_condition).value=<?=json_encode($order_btn)?>;
-
+      // 예약마감 구분
       var list_status = document.getElementById('list_status');
       if(list_status.innerHTML=="예약마감"){
         list_status.style.color ="grey";
@@ -64,7 +60,6 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
 
     function detail_search_function(){
       var period_value="";var pay_value="";var time_value="";var day_value="";var add_value="";var free_value="";var after_pay_value="";
-
       var period_div=document.getElementsByName('period_div');
       var pay_div=document.getElementsByName('pay_div');
       var time_div=document.getElementsByName('time_div');
@@ -466,8 +461,6 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
           </tr>
 
           <?php
-
-
 
           mysqli_data_seek($result,$start_record);
 

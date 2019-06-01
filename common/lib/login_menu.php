@@ -11,13 +11,13 @@
     $receive_id = "";
   }
   if($mode=="receive"){
-    $sql = "SELECT * FROM `message` WHERE recv_id = '$id' ORDER BY num DESC;";
-    $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
-    $total_record = mysqli_num_rows($result);
+    $message_sql = "SELECT * FROM `message` WHERE recv_id = '$id' ORDER BY num DESC;";
+    $message_result = mysqli_query($conn, $message_sql) or die(mysqli_error($conn));
+    $message_total_record = mysqli_num_rows($message_result);
   }else{
-    $sql = "SELECT * FROM `message` WHERE send_id = '$id' ORDER BY num DESC;";
-    $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
-    $total_record = mysqli_num_rows($result);
+    $message_sql = "SELECT * FROM `message` WHERE send_id = '$id' ORDER BY num DESC;";
+    $message_result = mysqli_query($conn, $message_sql) or die(mysqli_error($conn));
+    $message_total_record = mysqli_num_rows($message_result);
   }
 
 ?>
@@ -38,18 +38,6 @@
           receive_id.value = receive_id;
         }
       });
-
-      //
-      // document.getElementById('self_write').onclick = function(){
-      //   var check = document.getElementById('self_write');
-      //   check = check.checked;
-      //   var receive_id = document.getElementById('receive_id');
-      //   if(check){
-      //     receive_id.value = '<?=$id?>';
-      //   }else{
-      //     receive_id.value = receive_id;
-      //   }
-      // }
 
 
     });
@@ -125,9 +113,9 @@
   </script>
 <div style="display:none;" id="div_val" >
   <?php
-  for($i=0; $i<$total_record; $i++){
+  for($i=0; $i<$message_total_record; $i++){
 
-    $row = mysqli_fetch_array($result);
+    $row = mysqli_fetch_array($message_result);
     $item_num = $row["num"];
     $recv_id = $row["recv_id"];
     $send_id = $row["send_id"];
