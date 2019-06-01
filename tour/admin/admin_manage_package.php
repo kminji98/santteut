@@ -54,7 +54,7 @@ $find_input = $_GET["find_input"];
 
   <body>
     <!--로그인 회원가입 로그아웃-->
-    <div id="wrap" style="height:1000px; max-height:2500px;">
+    <div id="wrap" style="height:1200px; max-height:2500px;">
     <header>
       <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/login_menu.php";?>
     </header>
@@ -286,7 +286,7 @@ background-color: #2F9D27; color: white; border-radius: 3px; border: 1px solid #
     </div>
     <br><br><br>
 
-      <br><br><br><br><br><br><br><br><br><br>
+
 </div>
 </body>
 <footer>

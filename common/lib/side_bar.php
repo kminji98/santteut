@@ -41,7 +41,8 @@
     $color3="color:blue;";
   }
  ?>
-
+<script type="text/javascript">
+</script>
 <!-- 사이드바 컨트롤러 -->
 <div id="side_bar_control">
   <button title="산뜻바 열기" id="side_bar_open_btn" type="button" name="button" onclick="control_display()"><b>+</b></button><br>
