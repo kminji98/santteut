@@ -283,11 +283,7 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
     $date2 =date("Y-m-d");
     $name2 = $_SESSION['name'];
     $id2 = $_SESSION['id'];
-    $title=str_replace("\n", "<br>",$title);
-    $title=str_replace(" ", "&nbsp;",$title);
-    $content=str_replace("\n", "<br>",$content);
-    $content=str_replace(" ", "&nbsp;",$content);
-
+    
     ?>
 
     <div id="myModal" class="modal">
