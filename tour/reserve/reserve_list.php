@@ -99,6 +99,33 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/tour/reserve/css/reserve_list.css?ver=0">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/side_bar.css?ver=0">
+    <style media="screen">
+      a{color:#000;}
+      .modal {
+      display: none; /* Hidden by default */
+      position: fixed; /* Stay in place */
+      z-index: 10; /* Sit on top */
+      left: 0;
+      top: 0;
+      width: 1000px; /* Full width */
+      height: 100%; /* Full height */
+      overflow: auto; /* Enable scroll if needed */
+      background-color: rgb(0,0,0); /* Fallback color */
+      background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+      }
+
+      /* Modal Content/Box */
+      .modal-content {
+      text-align: center;
+      background-color: #fefefe;
+      margin: 10% auto; /* 15% from the top and centered */
+      padding: 20px;
+      border: 1px solid #888;
+      width: 500px; /* Could be more or less, depending on screen size */
+      height: auto;
+      border-radius: 10px;
+      }
+    </style>
     <title>산뜻 :: 즐거운 산행</title>
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
     <script type="text/javascript">
@@ -158,9 +185,12 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
           $("#day2").append("<option value="+i+">"+i+"</option>");
           }
         });
+
+
+
         $("input[name='review_btn']").click(function(event) {
-          var popupX = (window.screen.width / 2) - (800 / 2);
-          var popupY= (window.screen.height /2) - (500 / 2);
+
+          var modal = document.getElementById('myModal');
           var r_pk = $(this).attr('id');
           //후기작성 or 후기확인
           var flag = $(this).val();
@@ -177,17 +207,187 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
                 break;
             }
           }
-          window.open("../member_review/member_review.php?mode="+mode+"&r_pk="+r_pk, '', 'status=no, width=800, height=500, left='+ popupX + ', top='+ popupY + ', screenX='+ popupX + ', screenY= '+ popupY);
+          if(mode=="view"){
+            $.ajax({
+              url: '../member_review/member_review.php',
+              type: 'GET',
+              data: {
+                mode:mode,
+                r_pk:r_pk
+              }
+            })
+            .done(function(result){
+              var review_output=$.parseJSON(result);
+              document.getElementById('name').innerHTML = review_output[0].id;
+              document.getElementById('title').value = review_output[0].title;
+              document.getElementById('date').innerHTML = review_output[0].write_date;
+              document.getElementById('satisfaction_grade').value = review_output[0].satisfaction_grade;
+              document.getElementById('schedule_grade').value = review_output[0].schedule_grade;
+              document.getElementById('cost_grade').value = review_output[0].cost_grade;
+              document.getElementById('meal_grade').value = review_output[0].meal_grade;
+              document.getElementById('content').value = review_output[0].content;
+              document.getElementById('title').disabled=true;
+              document.getElementById('satisfaction_grade').disabled=true;
+              document.getElementById('schedule_grade').disabled=true;
+              document.getElementById('cost_grade').disabled=true;
+              document.getElementById('meal_grade').disabled=true;
+              document.getElementById('content').disabled=true;
+
+            })
+            .fail(function() {
+              console.log("error");
+            })
+            .always(function() {
+              console.log("complete");
+
+            });
+          }
+          var review_section = $("#review_section").html();
+          $("#modal-content").html("");
+          $("#modal-content").append("<h2>후기작성</h2><hr>");
+          // $("#modal-content").append("<div name='message_content' style='margin-top:10px; height: 400px;'></div>");
+          $("#modal-content").append("<form id='member_review_insert_form' name='member_review_insert_form' action='../member_review/member_review_query.php?mode=insert&r_pk="+r_pk+"' method='post'>");
+          $("#member_review_insert_form").append(review_section);
+          $("#member_review_insert_form").append('<div class="button-8" id="button-3">');
+
+          $("#button-3").append('<div class="btn" onclick="modal_close()"><span>확인</span></div>');
+          if(mode=="insert"){
+            $("#member_review_insert_form").append('<div class="btn" onclick="document.getElementById(\'member_review_insert_form\').submit();"><span>등록</span></div>');
+          }
+          $("#member_review_insert_form").append("</div>");
+          $("#modal-content").append("</form>");
+          modal.style.display="block";
+
+
         });
+
+
+
       });
       function lastday(year, month){
         var res = new Date(year, month,0);
         res = res.getDate();
         return res;
       }
+
+
+
+
+
+
     </script>
   </head>
   <body>
+
+    <?php
+    $date2 =date("Y-m-d");
+    $name2 = $_SESSION['name'];
+    $id2 = $_SESSION['id'];
+
+    ?>
+
+    <div id="myModal" class="modal">
+       <div class="modal-content" id="modal-content" style="width: 670px;">
+
+        </div>
+      </div>
+
+      <form name="member_review_insert_form" action="member_review_query.php?mode=<?php if(isset($mode)) echo $mode;?>" method="post">
+      <section id="review_section" style="display:none;" >
+          <input type="hidden" name="r_pk" id="r_pk" value="<?php if(isset($r_pk)) echo $r_pk;?>">
+        <table id="review_tbl" border="1">
+          <tr>
+            <th style="padding:8px">작성자</th>
+            <td colspan="3" id="name"><?php if(isset($name)) echo $name;else{echo $name2;}?></td>
+          </tr>
+          <tr>
+            <th style="padding:0">제목</th>
+            <td colspan="3"><input type="text" id="title" name="title" value="<?php if(isset($title)) echo $title;?>"  maxlength="30"></td>
+          </tr>
+          <tr>
+            <th style="padding:0">작성일</th>
+            <td colspan="3" id="date"><?php if(isset($date)) echo $date;else{echo $date2;}?></td>
+
+          </tr>
+          <tr>
+            <th  style="padding:0"><b>평점</b></th>
+            <td colspan="3">
+              만족도:<select class="" name="satisfaction_grade" id="satisfaction_grade" style="margin:2% 1%; padding:1%;width:80px;" >
+                <?php
+                define('GRADE',5);
+                for ($g=GRADE; $g > 0; $g--) {
+                  $selected='';
+                  if(isset($satisfaction_grade) && $satisfaction_grade==$g){
+                    $selected='selected';
+                  }
+                  echo '<option value="'.$g.'" '.$selected.'>'.$g.'</option>';
+
+                }
+                 ?>
+              </select>
+
+              일정:<select class="" name="schedule_grade" id="schedule_grade" style="margin:2% 1%; padding:1%; width:80px;">
+                <?php
+                define('GRADE',5);
+                for ($g=GRADE; $g > 0; $g--) {
+                  $selected='';
+                  if(isset($schedule_grade) && $schedule_grade==$g){
+                    $selected='selected';
+                  }
+                  echo '<option value="'.$g.'" '.$selected.'>'.$g.'</option>';
+
+                }
+                 ?>
+              </select>
+
+              가격:<select class="" name="cost_grade" id="cost_grade" style="margin:2% 1%; padding:1%; width:80px;">
+                <?php
+                define('GRADE',5);
+                for ($g=GRADE; $g > 0; $g--) {
+                  $selected='';
+                  if(isset($cost_grade) && $cost_grade==$g){
+                    $selected='selected';
+                  }
+                  echo '<option value="'.$g.'" '.$selected.'>'.$g.'</option>';
+
+                }
+                 ?>
+              </select>
+
+              식사:<select class="" name="meal_grade" id="meal_grade" style="margin:2% 1%; padding:1%; width:80px;">
+                <?php
+                define('GRADE',5);
+                for ($g=GRADE; $g > 0; $g--) {
+                  $selected='';
+                  if(isset($meal_grade) && $meal_grade==$g){
+                    $selected='selected';
+                  }
+                  echo '<option value="'.$g.'" '.$selected.'>'.$g.'</option>';
+
+                }
+                 ?>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <th>내용</th>
+            <td colspan="3"><textarea name="content" id="content" cols="80" rows="10" maxlength="100" placeholder="100자 이내로 입력해주세요."><?php if(isset($content)) echo $content;?></textarea></td>
+          </tr>
+        </table>
+        <br>
+          <div>
+
+          </div>
+      </section>
+    </form>
+
+
+
+
+
+
+
+
     <form name="reserve_flag_form" action="reserve_list.php" method="post">
       <input type="hidden" name="reserve_flag" id="reserve_flag">
     </form>

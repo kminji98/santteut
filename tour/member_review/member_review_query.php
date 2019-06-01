@@ -12,14 +12,15 @@ $date =date("Y-m-d");
 
 //mode가 insert일때
 if(isset($_GET["mode"]) && $_GET["mode"]=="insert"){
+
     $title = trim($_POST["title"]);
     $content = trim($_POST["content"]);
-    $code = $_POST["code"];
-    $r_pk = $_POST["r_pk"];
+    $r_pk = $_GET["r_pk"];
     $satisfaction_grade = $_POST["satisfaction_grade"];
     $schedule_grade = $_POST["schedule_grade"];
     $cost_grade = $_POST["cost_grade"];
     $meal_grade = $_POST["meal_grade"];
+
 
     if(empty($content)||empty($title)){
       alert_back('1. 내용이나제목입력요망!');
@@ -33,23 +34,23 @@ if(isset($_GET["mode"]) && $_GET["mode"]=="insert"){
 
     //r_code 를 r_pk 로 찾아서 삽입
 
-    $sql="SELECT `r_code` from reserve where `r_pk`= '$r_pk';";
-    $result = mysqli_query($conn,$sql);
-    if (!$result) {alert_back('Error: 6' . mysqli_error($conn));}
+    $sql1="SELECT `r_code` from reserve where `r_pk`= '$r_pk';";
+    $result1 = mysqli_query($conn,$sql1);
+    if (!$result1) {alert_back('Error: 6' . mysqli_error($conn));}
 
-    $row=mysqli_fetch_array($result);
-    $r_code=$row['r_code'];
-
-
-    $sql="INSERT INTO `member_review` VALUES (null,'$r_code','$r_pk','$q_title','$q_content','$id','$name','$date','$satisfaction_grade','$schedule_grade','$cost_grade','$meal_grade');";
-
-    $result = mysqli_query($conn,$sql);
-    if (!$result) {alert_back('Error:5 ' . mysqli_error($conn));}
+    $row1=mysqli_fetch_array($result1);
+    $r_code=$row1['r_code'];
 
 
-    echo "<script>alert('후기등록완료! 소중한 후기 감사합니다.');";
-    echo "opener.location.replace('../reserve/reserve_list.php');";
-    echo "window.close();</script>";
+    $sql2="INSERT INTO `member_review` VALUES (null,'$r_code','$r_pk','$q_title','$q_content','$id','$name','$date','$satisfaction_grade','$schedule_grade','$cost_grade','$meal_grade');";
+
+    $result2 = mysqli_query($conn,$sql2);
+    if (!$result2) {alert_back('Error:5 ' . mysqli_error($conn));}
+
+
+    echo "<script>alert('후기등록완료! 소중한 후기 감사합니다.');history.go(-1);</script>";
+    // // echo "opener.location.replace('../reserve/reserve_list.php');";
+    // echo "window.close();</script>";
 
 }else if(isset($_GET["mode"]) && $_GET["mode"]=="delete"){
     //1. 삭제할 해당 게시물의 넘버
