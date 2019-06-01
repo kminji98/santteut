@@ -20,6 +20,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
     a{text-decoration: none;}
     </style>
     <script type="text/javascript">
+    var divide=<?=json_encode($divide)?>;
     window.onscroll = function() {
       window.onscroll = function() {
         check_offsetTop();
@@ -27,7 +28,6 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
     }
 
     window.onload = function () {
-      var divide=<?=json_encode($divide)?>;
       kCalendar('kCalendar');
       default_detail_value('period_div');
       default_detail_value('pay_div');
