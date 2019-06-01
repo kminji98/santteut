@@ -23,3 +23,5 @@ border-radius: 10px;
 }
 .btn{cursor: pointer;}
 .btn:hover{ text-decoration: underline;}
+#messageLink{cursor:pointer;}
+#messageLink:hover{text-decoration: bolder; color:#1ae134;}

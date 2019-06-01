@@ -8,7 +8,9 @@ if(!isset($_SESSION['id'])){
 }
 $name = $_SESSION['name'];
 //0-0. 인클루드 디비
-include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
+if(!isset($conn)){
+  include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
+}
 //1. 게시물수 정의
 define('ROW_SCALE', 10);
 define('PAGE_SCALE', 5);
@@ -90,31 +92,6 @@ $view_num = $total_record - $start_record;
         var modal = document.getElementById('myModal');
         modal.style.display="none";
       }
-      function modal_alert_cancel(msg1,msg2,msg3){
-        var modal = document.getElementById('myModal');
-        modal.style.display="block";
-
-        $("#modal-content").html("<i class='fas fa-exclamation-circle 9x'></i>");
-        $("#modal-content").append("<h2>"+msg1+"</h2>");
-        $("#modal-content").append("<h3>"+msg2+"</h3>");
-        $("#modal-content").append("<div class='button-8' id='button-3' onclick='alert_confirm(\""+msg3+"\")'>");
-        $("#button-3").append("<div class='eff-8'></div>");
-        $("#button-3").append("<a href='#'><span>확인</span></a>");
-        $("#modal-content").append("</div>");
-        $("#modal-content").append("<div class='button-8' id='button-4'>");
-        $("#button-3").append("<div class='eff-8'></div>");
-        $("#button-3").append("<a href='#'><span>취소</span></a>");
-        $("#modal-content").append("</div>");
-      }
-
-      function alert_confirm(local){
-        var modal = document.getElementById('myModal');
-        modal.style.display = "none";
-        if(local!="undefined"){
-          window.location.href=local;
-        }
-      }
-
       window.onclick = function(event) {
         if (event.target == "modal") {
           var modal = document.getElementById('myModal');
@@ -124,7 +101,7 @@ $view_num = $total_record - $start_record;
     </script>
   </head>
   <body>
-  
+
 
     <header>
       <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/login_menu.php";?>

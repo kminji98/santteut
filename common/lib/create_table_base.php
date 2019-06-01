@@ -259,8 +259,8 @@ function create_table($conn, $table_name){
       case 'message' :
       $sql = "CREATE TABLE `message` (
           `num` int not null auto_increment,
-          `recv_id` varchar(15) not null,
-          `send_id` varchar(15) not null,
+          `recv_id` varchar(20) not null,
+          `send_id` varchar(20) not null,
           `name` char(10) not null,
           `message` text not null,
           `recv_read` char(2) not null default 'N',

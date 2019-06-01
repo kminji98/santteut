@@ -15,7 +15,6 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
 $num=$name=$title=$content=$regist_day=$hit="";
 // $secret_ok="공개";
 $mode="insert";
-
 $name= $_SESSION['name'];
 
 // 모드가 수정 or 답글일때

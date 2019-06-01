@@ -7,7 +7,9 @@ if(!isset($_SESSION['id'])){
   echo "<script>alert('회원가입 후 이용해주세요.');history.go(-1);</script>";
   exit;
 }
-include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
+if(!isset($conn)){
+  include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
+}
 
 $num=$name=$title=$content=$regist_day=$hit="";
 $secret="";
@@ -39,7 +41,7 @@ if(isset($_GET["num"]) && !empty($_GET["num"])){
     $title=str_replace("\n", "<br>",$title);
     $title=str_replace(" ", "&nbsp;",$title);
     $regist_day=$row['regist_day'];
-    mysqli_close($conn);
+
 }
 ?>
 <!DOCTYPE html>
