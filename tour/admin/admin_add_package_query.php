@@ -162,7 +162,7 @@ if(!empty($_FILES['p_main_img1'])){
         }
     }else{
         //5 업로드된 파일사이즈(500kb)를 체크해서 넘어버리면 돌려보낸다.
-        if($main_img_copy_size1>500000){
+        if($main_img_copy_size1>2000000){
             alert_back('2. 파일사이즈가 500KB이상입니다.');
         }
     }
@@ -233,7 +233,7 @@ if(!empty($_FILES['p_main_img2'])){
         }
     }else{
         //5 업로드된 파일사이즈(500kb)를 체크해서 넘어버리면 돌려보낸다.
-        if($main_img_copy_size2>500000){
+        if($main_img_copy_size2>2000000){
             alert_back('2. 파일사이즈가 500KB이상입니다.');
         }
     }
@@ -300,7 +300,7 @@ if(!empty($_FILES['p_main_img3'])){
         }
     }else{
         //5 업로드된 파일사이즈(500kb)를 체크해서 넘어버리면 돌려보낸다.
-        if($main_img_copy_size3>500000){
+        if($main_img_copy_size3>2000000){
             alert_back('2. 파일사이즈가 500KB이상입니다.');
         }
     }

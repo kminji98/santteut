@@ -18,8 +18,8 @@ if(isset($divide) && $divide=="domestic"){
   $pay_3="6~10만원"; $pay_3_query="and `p_pay` between 60000 and 109999";
   $pay_4="11~20만원"; $pay_4_query="and `p_pay` between 110000 and 209999";
   $pay_5="21~30만원"; $pay_5_query="and `p_pay` between 210000 and 309999";
-  $pay_6="31~40만원"; $pay_6_query="and `p_pay` between 210000 and 409999";
-  $pay_7="41~50만원"; $pay_7_query="and `p_pay` between 310000 and 509999";
+  $pay_6="31~40만원"; $pay_6_query="and `p_pay` between 310000 and 409999";
+  $pay_7="41~50만원"; $pay_7_query="and `p_pay` between 410000 and 509999";
   $pay_8="51만원↑"; $pay_8_query="and `p_pay` >=510000";
   $won="";
 }else if(isset($divide) && $divide=="abroad"){

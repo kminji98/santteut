@@ -1132,7 +1132,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
             var status = output[0].status;
             var r_pk = output[0].r_pk;
             alert(status);
-            alert(r_pk);
+            // alert(r_pk);
             if(status=="결제가능"){
               location.href='../bill/bill_view.php?r_pk='+r_pk;
             }else{

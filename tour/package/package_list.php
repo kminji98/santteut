@@ -143,7 +143,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
           }
         })
         .done(function(result) {
-          alert(result);
+          // alert(result);
          var sql=document.getElementById('sql');
          sql.value=result;
          document.query_form.submit();
@@ -353,14 +353,14 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
           <tr >
             <td class="package_search_detail_option">여행기간</td>
             <td   onclick="detail_function('period_all','period_div','')"><div  id="period_all" name="period_div" class="package_search_detail_option_all"><p id="전체" name="여행기간" style="display:inline;">전체</p></div></td>
-            <td   onclick="detail_function('period_1','period_div','and `p_period` =1')" ><div  id="period_1" name="period_div" class="package_search_detail_option_all"><p id="당일" name="여행기간" style="display:inline;">당일</p></div></td>
-            <td   onclick="detail_function('period_2','period_div','and `p_period` =2')" ><div  id="period_2" name="period_div" class="package_search_detail_option_all"><p id="2일" name="여행기간" style="display:inline;">2일</p></div></td>
-            <td   onclick="detail_function('period_3','period_div','and `p_period` =3')" ><div  id="period_3" name="period_div" class="package_search_detail_option_all"><p id="3일" name="여행기간" style="display:inline;">3일</p></div></td>
-            <td   onclick="detail_function('period_4','period_div','and `p_period` =4')" ><div  id="period_4" name="period_div" class="package_search_detail_option_all"><p id="4일" name="여행기간" style="display:inline;">4일</p></div></td>
-            <td   onclick="detail_function('period_5','period_div','and `p_period` =5')" ><div  id="period_5" name="period_div" class="package_search_detail_option_all"><p id="5일" name="여행기간" style="display:inline;">5일</p></div></td>
-            <td   onclick="detail_function('period_6','period_div','and `p_period` =6')" ><div  id="period_6" name="period_div" class="package_search_detail_option_all"><p id="6일" name="여행기간" style="display:inline;">6일</p></div></td>
-            <td   onclick="detail_function('period_7_9','period_div','and `p_period` between 7 and 9')" ><div  id="period_7_9" name="period_div" class="package_search_detail_option_all"><p id="7일~9일" name="여행기간" style="display:inline;">7일~9일</p></div></td>
-            <td   onclick="detail_function('period_10','period_div','and `p_period` =10')" ><div  id="period_10" name="period_div" class="package_search_detail_option_all"><p id="10일↑" name="여행기간" style="display:inline;">10일<b>↑</b></p></div></td>
+            <td   onclick="detail_function('period_1','period_div','and `p_period` =1')" ><div  id="period_1" name="period_div" class="package_search_detail_option_all"><p id="당일" name="여행기간" style="display:inline;cursor:pointer;">당일</p></div></td>
+            <td   onclick="detail_function('period_2','period_div','and `p_period` =2')" ><div  id="period_2" name="period_div" class="package_search_detail_option_all"><p id="2일" name="여행기간" style="display:inline;cursor:pointer;">2일</p></div></td>
+            <td   onclick="detail_function('period_3','period_div','and `p_period` =3')" ><div  id="period_3" name="period_div" class="package_search_detail_option_all"><p id="3일" name="여행기간" style="display:inline;cursor:pointer;">3일</p></div></td>
+            <td   onclick="detail_function('period_4','period_div','and `p_period` =4')" ><div  id="period_4" name="period_div" class="package_search_detail_option_all"><p id="4일" name="여행기간" style="display:inline;cursor:pointer;">4일</p></div></td>
+            <td   onclick="detail_function('period_5','period_div','and `p_period` =5')" ><div  id="period_5" name="period_div" class="package_search_detail_option_all"><p id="5일" name="여행기간" style="display:inline;cursor:pointer;">5일</p></div></td>
+            <td   onclick="detail_function('period_6','period_div','and `p_period` =6')" ><div  id="period_6" name="period_div" class="package_search_detail_option_all"><p id="6일" name="여행기간" style="display:inline;cursor:pointer;">6일</p></div></td>
+            <td   onclick="detail_function('period_7_9','period_div','and `p_period` between 7 and 9')" ><div  id="period_7_9" name="period_div" class="package_search_detail_option_all"><p id="7일~9일" name="여행기간" style="display:inline;cursor:pointer;">7일~9일</p></div></td>
+            <td   onclick="detail_function('period_10','period_div','and `p_period` =10')" ><div  id="period_10" name="period_div" class="package_search_detail_option_all"><p id="10일↑" name="여행기간" style="display:inline;cursor:pointer;">10일<b>↑</b></p></div></td>
             </td><td id="nbsp"></td>
           </tr>
         <!-- 상세검색 함수 -->
@@ -385,48 +385,48 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
           <tr>
             <td class="package_search_detail_option">상품가격</td>
             <td onclick="detail_function('pay_1','pay_div','')"><div id="pay_1" name="pay_div" class="package_search_detail_option_all"><p id="전체" name="상품가격" style="display:inline;">전체</p></div></td>
-            <td onclick="detail_function('pay_2','pay_div','<?=$pay_2_query?>')"><div id="pay_2" name="pay_div" class="package_search_detail_option_all"><p id="<?=$pay_2?>" name="상품가격" style="display:inline;"><?=$pay_2?></p></div></td>
-            <td onclick="detail_function('pay_3','pay_div','<?=$pay_3_query?>')"><div id="pay_3" name="pay_div" class="package_search_detail_option_all"><p id="<?=$pay_3?>" name="상품가격" style="display:inline;"><?=$pay_3?></p></div></td>
-            <td onclick="detail_function('pay_4','pay_div','<?=$pay_4_query?>')"><div id="pay_4" name="pay_div" class="package_search_detail_option_all"><p id="<?=$pay_4?>" name="상품가격" style="display:inline;"><?=$pay_4?></p></div></td>
-            <td onclick="detail_function('pay_5','pay_div','<?=$pay_5_query?>')"><div id="pay_5" name="pay_div" class="package_search_detail_option_all"><p id="<?=$pay_5?>" name="상품가격" style="display:inline;"><?=$pay_5?></p></div></td>
-            <td onclick="detail_function('pay_6','pay_div','<?=$pay_6_query?>')"><div id="pay_6" name="pay_div" class="package_search_detail_option_all"><p id="<?=$pay_6?>" name="상품가격" style="display:inline;"><?=$pay_6?></p></div></td>
-            <td onclick="detail_function('pay_7','pay_div','<?=$pay_7_query?>')"><div id="pay_7" name="pay_div" class="package_search_detail_option_all"><p id="<?=$pay_7?>" name="상품가격" style="display:inline;"><?=$pay_7?><b></b></p></div></td>
-            <td onclick="detail_function('pay_8','pay_div','<?=$pay_8_query?>')"><div id="pay_8" name="pay_div" class="package_search_detail_option_all"><p id="<?=$pay_8?>" name="상품가격" style="display:inline;"><?=$pay_8?></p></div></td>
+            <td onclick="detail_function('pay_2','pay_div','<?=$pay_2_query?>')"><div id="pay_2" name="pay_div" class="package_search_detail_option_all"><p id="<?=$pay_2?>" name="상품가격" style="display:inline; cursor:pointer;"><?=$pay_2?></p></div></td>
+            <td onclick="detail_function('pay_3','pay_div','<?=$pay_3_query?>')"><div id="pay_3" name="pay_div" class="package_search_detail_option_all"><p id="<?=$pay_3?>" name="상품가격" style="display:inline; cursor:pointer;"><?=$pay_3?></p></div></td>
+            <td onclick="detail_function('pay_4','pay_div','<?=$pay_4_query?>')"><div id="pay_4" name="pay_div" class="package_search_detail_option_all"><p id="<?=$pay_4?>" name="상품가격" style="display:inline; cursor:pointer;"><?=$pay_4?></p></div></td>
+            <td onclick="detail_function('pay_5','pay_div','<?=$pay_5_query?>')"><div id="pay_5" name="pay_div" class="package_search_detail_option_all"><p id="<?=$pay_5?>" name="상품가격" style="display:inline; cursor:pointer;"><?=$pay_5?></p></div></td>
+            <td onclick="detail_function('pay_6','pay_div','<?=$pay_6_query?>')"><div id="pay_6" name="pay_div" class="package_search_detail_option_all"><p id="<?=$pay_6?>" name="상품가격" style="display:inline;cursor:pointer;"><?=$pay_6?></p></div></td>
+            <td onclick="detail_function('pay_7','pay_div','<?=$pay_7_query?>')"><div id="pay_7" name="pay_div" class="package_search_detail_option_all"><p id="<?=$pay_7?>" name="상품가격" style="display:inline;cursor:pointer;"><?=$pay_7?><b></b></p></div></td>
+            <td onclick="detail_function('pay_8','pay_div','<?=$pay_8_query?>')"><div id="pay_8" name="pay_div" class="package_search_detail_option_all"><p id="<?=$pay_8?>" name="상품가격" style="display:inline;cursor:pointer;"><?=$pay_8?></p></div></td>
           </td><td id="nbsp"><b><?=$won?></b></td></td></td><td id="nbsp"></td></td></td><td id="nbsp"></td>
           </tr>
 
           <tr>
             <td class="package_search_detail_option">출발시간</td>
             <td onclick="detail_function('time_1','time_div','')"><div id="time_1" name="time_div" class="package_search_detail_option_all"><p id="전체" name="출발시간" style="display:inline;">전체</p></div></td>
-            <td onclick="detail_function('time_2','time_div','and `p_dp_time` between 6 and 12')"><div id="time_2" name="time_div" class="package_search_detail_option_all"><p id="오전" name="출발시간" style="display:inline;">오전</p></div></td>
-            <td onclick="detail_function('time_3','time_div','and `p_dp_time` between 12 and 18')"><div id="time_3" name="time_div" class="package_search_detail_option_all"><p id="오후" name="출발시간" style="display:inline;">오후</p></div></td>
-            <td onclick="detail_function('time_4','time_div','and `p_dp_time` between 18 and 0')"><div id="time_4" name="time_div" class="package_search_detail_option_all"><p id="저녁" name="출발시간" style="display:inline;">저녁</p></div></td>
-            <td onclick="detail_function('time_5','time_div','and `p_dp_time` between 0 and 6')"><div id="time_5" name="time_div" class="package_search_detail_option_all"><p id="심야" name="출발시간" style="display:inline;">심야</p></div></td>
+            <td onclick="detail_function('time_2','time_div','and `p_dp_time` between 6 and 12')"><div id="time_2" name="time_div" class="package_search_detail_option_all"><p id="오전" name="출발시간" style="display:inline;cursor:pointer;">오전</p></div></td>
+            <td onclick="detail_function('time_3','time_div','and `p_dp_time` between 12 and 18')"><div id="time_3" name="time_div" class="package_search_detail_option_all"><p id="오후" name="출발시간" style="display:inline;cursor:pointer;">오후</p></div></td>
+            <td onclick="detail_function('time_4','time_div','and `p_dp_time` between 18 and 0')"><div id="time_4" name="time_div" class="package_search_detail_option_all"><p id="저녁" name="출발시간" style="display:inline;cursor:pointer;">저녁</p></div></td>
+            <td onclick="detail_function('time_5','time_div','and `p_dp_time` between 0 and 6')"><div id="time_5" name="time_div" class="package_search_detail_option_all"><p id="심야" name="출발시간" style="display:inline;cursor:pointer;">심야</p></div></td>
             </td><td id="nbsp"></td></td><td id="nbsp"></td></td><td id="nbsp"></td></td><td id="nbsp"></td>
             </td></td><td id="nbsp"></td>
           </tr>
           <tr>
             <td class="package_search_detail_option">출발요일</td>
             <td onclick="detail_function('day_1','day_div','')"><div id="day_1" name="day_div" class="package_search_detail_option_all"><p id="전체" name="출발요일" style="display:inline;">전체</p></div></td>
-            <td onclick="detail_function('day_2','day_div','and `p_dp_day` = 1')"><div id="day_2" name="day_div" class="package_search_detail_option_all"><p id="월" name="출발요일" style="display:inline;">월</p></div></td>
-            <td onclick="detail_function('day_3','day_div','and `p_dp_day` = 2')"><div id="day_3" name="day_div" class="package_search_detail_option_all"><p id="화" name="출발요일" style="display:inline;">화</p></div></td>
-            <td onclick="detail_function('day_4','day_div','and `p_dp_day` = 3')"><div id="day_4" name="day_div" class="package_search_detail_option_all"><p id="수" name="출발요일" style="display:inline;">수</p></div></td>
-            <td onclick="detail_function('day_5','day_div','and `p_dp_day` = 4')"><div id="day_5" name="day_div" class="package_search_detail_option_all"><p id="목" name="출발요일" style="display:inline;">목</p></div></td>
-            <td onclick="detail_function('day_6','day_div','and `p_dp_day` = 5')"><div id="day_6" name="day_div" class="package_search_detail_option_all"><p id="금" name="출발요일" style="display:inline;">금</p></div></td>
-            <td onclick="detail_function('day_7','day_div','and `p_dp_day` = 6')"><div id="day_7" name="day_div" class="package_search_detail_option_all"><p id="토" name="출발요일" style="display:inline;">토</p></div></td>
-            <td onclick="detail_function('day_8','day_div','and `p_dp_day` = 0')"><div id="day_8" name="day_div" class="package_search_detail_option_all"><p id="일" name="출발요일" style="display:inline;">일</p></div></td>
+            <td onclick="detail_function('day_2','day_div','and `p_dp_day` = 1')"><div id="day_2" name="day_div" class="package_search_detail_option_all"><p id="월" name="출발요일" style="display:inline;cursor:pointer;">월</p></div></td>
+            <td onclick="detail_function('day_3','day_div','and `p_dp_day` = 2')"><div id="day_3" name="day_div" class="package_search_detail_option_all"><p id="화" name="출발요일" style="display:inline;cursor:pointer;">화</p></div></td>
+            <td onclick="detail_function('day_4','day_div','and `p_dp_day` = 3')"><div id="day_4" name="day_div" class="package_search_detail_option_all"><p id="수" name="출발요일" style="display:inline;cursor:pointer;">수</p></div></td>
+            <td onclick="detail_function('day_5','day_div','and `p_dp_day` = 4')"><div id="day_5" name="day_div" class="package_search_detail_option_all"><p id="목" name="출발요일" style="display:inline;cursor:pointer;">목</p></div></td>
+            <td onclick="detail_function('day_6','day_div','and `p_dp_day` = 5')"><div id="day_6" name="day_div" class="package_search_detail_option_all"><p id="금" name="출발요일" style="display:inline;cursor:pointer;">금</p></div></td>
+            <td onclick="detail_function('day_7','day_div','and `p_dp_day` = 6')"><div id="day_7" name="day_div" class="package_search_detail_option_all"><p id="토" name="출발요일" style="display:inline;cursor:pointer;">토</p></div></td>
+            <td onclick="detail_function('day_8','day_div','and `p_dp_day` = 0')"><div id="day_8" name="day_div" class="package_search_detail_option_all"><p id="일" name="출발요일" style="display:inline;cursor:pointer;">일</p></div></td>
             </td></td><td id="nbsp"></td></td></td><td id="nbsp"></td>
           </tr>
           <tr>
             <td class="package_search_detail_option">추가경비</td>
             <td onclick="detail_function('add_1','add_div','')"><div id="add_1" name="add_div" class="package_search_detail_option_all"><p id="전체" name="추가경비" style="display:inline;">전체</p></div></td>
-            <td onclick="detail_function('add_2','add_div','and `p_add_pay` = 1')"><div id="add_2" name="add_div" class="package_search_detail_option_all"><p id="포함" name="추가경비" style="display:inline;">포함</p></div></td>
-            <td onclick="detail_function('add_3','add_div','and `p_add_pay` = 2')"><div id="add_3" name="add_div" class="package_search_detail_option_all"><p id="불포함" name="추가경비" style="display:inline;">불포함</p></div></td>
+            <td onclick="detail_function('add_2','add_div','and `p_add_pay` = 1')"><div id="add_2" name="add_div" class="package_search_detail_option_all"><p id="포함" name="추가경비" style="display:inline;cursor:pointer;">포함</p></div></td>
+            <td onclick="detail_function('add_3','add_div','and `p_add_pay` = 2')"><div id="add_3" name="add_div" class="package_search_detail_option_all"><p id="불포함" name="추가경비" style="display:inline;cursor:pointer;">불포함</p></div></td>
             <td id="nbsp">
             <td class="package_search_detail_option">자유일정</td>
             <td onclick="detail_function('free_1','free_div','')"><div id="free_1" name="free_div" class="package_search_detail_option_all"><p id="전체" name="자유일정" style="display:inline;">전체</p></div></td>
-            <td onclick="detail_function('free_2','free_div','and `p_free_time` = 1')"><div id="free_2" name="free_div" class="package_search_detail_option_all"><p id="포함" name="자유일정" style="display:inline;">포함</p></div></td>
-            <td onclick="detail_function('free_3','free_div','and `p_free_time` = 2')"><div id="free_3" name="free_div" class="package_search_detail_option_all"><p id="불포함" name="자유일정" style="display:inline;">불포함</p></div></td>
+            <td onclick="detail_function('free_2','free_div','and `p_free_time` = 1')"><div id="free_2" name="free_div" class="package_search_detail_option_all"><p id="포함" name="자유일정" style="display:inline;cursor:pointer;">포함</p></div></td>
+            <td onclick="detail_function('free_3','free_div','and `p_free_time` = 2')"><div id="free_3" name="free_div" class="package_search_detail_option_all"><p id="불포함" name="자유일정" style="display:inline;cursor:pointer;">불포함</p></div></td>
             <td id="nbsp"></td><td id="nbsp">
           </tr>
         </table>

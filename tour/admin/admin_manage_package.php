@@ -52,9 +52,9 @@ $find_input = $_GET["find_input"];
     </style>
   </head>
 
-  <body>
+  <body >
     <!--로그인 회원가입 로그아웃-->
-    <div id="wrap" style="height:1200px; max-height:2500px;">
+    <div id="wrap" style="height:1800px; max-height:2500px;">
     <header>
       <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/login_menu.php";?>
     </header>
@@ -65,9 +65,9 @@ $find_input = $_GET["find_input"];
 
     </h2>
     </div>
-
+<div class="search_div" >
     <form style="display:inline;" class="" action="admin_manage_package.php?mode=search&find_option=<?=$find_option?>&find_input=<?=$find_input?>" method="get">
-<div class="search_div">
+
 
       <select style="padding-bottom:8px; padding-top:3px;margin-left:50%;"name="find_option">
         <option value="p_code">코드명</option>
@@ -77,20 +77,23 @@ $find_input = $_GET["find_input"];
       <input style="padding:5px; margin-right:0px;"type="text" name="find_input" value="">
       <input id="search_find" style="color:white; border-radius: 3px; margin-bottom:0.5%; width: 85px; height: 32px; font-weight: bold; margin-right: 5px; cursor: pointer; border: 1px solid #2F9D27; background-color: #2F9D27;" type="submit" value="검색">
       <input type="hidden" name="mode" value="search">
-    </div>
+
+
+
     </form>
-    <?php
-    if($_GET['mode']=="search"){
-    echo '
-    <form style="display:inline" class="" action="admin_manage_package.php?" method="post">
-    <input style="font-weight:bold; width:70px; height:28px;
-background-color: #2F9D27; color: white; border-radius: 3px; border: 1px solid #2F9D27;
-    "type="submit" value="새로고침">
-    </form>
-    ';
-    }
-    ?>
-      <div id="package_list_view">
+            <?php
+            if($_GET['mode']=="search"){
+            echo '
+            <form style="display:inline" class="" action="admin_manage_package.php?" method="post">
+            <input style="font-weight:bold; width:70px; height:28px;
+            background-color: #2F9D27; color: white; border-radius: 3px; border: 1px solid #2F9D27;
+            "type="submit" value="새로고침">
+            </form>
+            ';
+            }
+            ?>
+                </div>
+      <div id="package_list_view" style="height:1200px; max-height:2000px;">
         <table id="package_list_view_table">
           <tr>
             <td id="package_list_view_img">사진</td>
@@ -286,7 +289,7 @@ background-color: #2F9D27; color: white; border-radius: 3px; border: 1px solid #
     </div>
     <br><br><br>
 
-
+      <br><br><br><br><br><br><br><br><br><br>
 </div>
 </body>
 <footer>
