@@ -48,7 +48,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
        <tr id="faq"><td id="faq_td1"></td><td ><br></td></tr>
        <tr><td></br></td><td></td></tr>
        <!-- slidetoggle 액션  -->
-       <tr><td id="li1" style="cursor: pointer;">Q.&nbsp;등산 시 속도를 못 쫓아갈까바 걱정이 됩니다. 괜찮을까요?</td></tr>
+       <tr><td id="li1" style="cursor: pointer;">Q.&nbsp;등산 시 속도를 못 쫓아갈까봐 걱정이 됩니다. 괜찮을까요?</td></tr>
        <tr id="li1_1" style="display:none;"><td>
           &nbsp;<small>&nbsp;&nbsp;&nbsp;&nbsp;<b>A. </b>사람들마다 각자 산행의 속도 차이가 있습니다.<br>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;그래서 보통 선두 그룹과 후미 그룹으로 나뉘어 진행되는 경우가 많으며, 일정표상의 소요시간은 후미그룹을 기준으로 패키지정보에 기재되어 있습니다.<br>
@@ -58,12 +58,12 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
         &nbsp;<small>&nbsp;&nbsp;&nbsp;&nbsp;<b>A. </b>산악회 직원이 인솔자로 동행하게 됩니다.</small></td></tr>
        <tr><td id="li3"  style="cursor: pointer;">Q.&nbsp;등산 중 화장실은 어떻게 사용 하나요?</td></tr>
        <tr id="li3_1" style="display:none;"><td >
-        &nbsp;<small>&nbsp;&nbsp;&nbsp;&nbsp;<b>A. </b>지역에 따라 상이 하나 보통 산장 또는 간이 화장실을 사용하며, 1회용 휴대 화장실을 사용해야 하는 경우도 있습니다.</small></td></tr>
+        &nbsp;<small>&nbsp;&nbsp;&nbsp;&nbsp;<b>A. </b>지역에 따라 상이하나 보통 산장 또는 간이 화장실을 사용하며, 1회용 휴대 화장실을 사용해야 하는 경우도 있습니다.</small></td></tr>
        <tr><td id="li4"  style="cursor: pointer;">Q.&nbsp;신용 불량자도 해외여행을 할 수 있나요?</td></tr>
        <tr id="li4_1" style="display:none;"><td >
         &nbsp;<small>&nbsp;&nbsp;&nbsp;&nbsp;<b>A. </b>신용 불량자는 금융 불량자입니다.<br>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;그래서 단지 신용 불량자라고 해서 출국까지 금지 되는 것은 아닙니다.<br>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;다만 신용 불량자가 되면서 거액으로 또는 민,형사 고소가 남아 있든지 하는 관계로 상대자가 출국금지를 요청 을 했을 때는 제외 사항입니다.<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;그러나 단지 신용 불량자라고 해서 출국까지 금지 되는 것은 아닙니다.<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;다만 신용 불량자가 되면서 거액으로 또는 민,형사 고소가 남아 있든지 하는 관계로 상대자가 출국금지를 요청 했을 때는 제외 사항입니다.<br>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;참고로, 출국금지여부는 본인이 직접 가까운 출입국관리사무소를 방문하시면 확인이 가능함을 말씀 드립니다.</small></td></tr>
        <tr><td id="li5" style="cursor: pointer;">Q.&nbsp;회원탈퇴는 어떻게 하나요?</td></tr>
        <tr id="li5_1" style="display:none;"><td >
