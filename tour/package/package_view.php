@@ -357,7 +357,7 @@ setcookie("cookie1",$p_code,time() + 3600,'/');
         <p class="subtext1">※ 아동, 유아요금은 성인 2인과 같은 방 사용조건이며,</p>
         <p class="subtext1">미충족시 아동추가 요금이 발생합니다.</p>
         <p class="subtext1">※ 1인 객실 사용시 추가요금 발생</p>
-        <p id="line">-------------------------------------------------------------------</p>
+        <p id="line">------------------------------------------</p>
       </div>
       <div id="button">
         <div id="reserve_status" onclick="people_submit()" <?php if(isset($disabled)){ echo $disabled;} ?>> <b id="status"><?=$status?></b></div><br>
