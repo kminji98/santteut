@@ -422,9 +422,9 @@ if($_GET['id']){
            join_detail.value="";
            return false;
          }
-         alert("정보수정이 완료되었습니다. 다시 로그인해주세요");
-         document.join_member_form.submit();
 
+         document.join_member_form.submit();
+         // alert("성공");
       }
     </script>
 
@@ -477,7 +477,7 @@ if($_GET['id']){
             <tr>
               <th><label>이름</label>&nbsp;<span>*</span></th>
               <?php
-              $name = $row['name'];
+                $name = $row['name'];
                ?>
               <td colspan="3"><input value="<?=$name?>" placeholder="2~5글자" id="join_name" type="text" name="join_name" size="40"></td>
             </tr>
