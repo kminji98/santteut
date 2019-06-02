@@ -42,7 +42,7 @@ if(isset($_GET["num"]) && !empty($_GET["num"])){
     $title=str_replace("\n", "<br>",$title);
     $title=str_replace(" ", "&nbsp;",$title);
     $file_name=$row['file_name'];
-    $file_copied=$row['file_copied'];
+    if(isset($file_copied))   $file_copied=$row['file_copied'];
     $file_type=$row['file_type'];
     $regist_day=$row['regist_day'];
 
@@ -60,7 +60,7 @@ if(isset($_GET["num"]) && !empty($_GET["num"])){
   //   $image_height=0;
   //   $image_type="";
   // }
-    mysqli_close($conn);
+
 }
 
 ?>
@@ -107,8 +107,9 @@ if(isset($_GET["num"]) && !empty($_GET["num"])){
               //1. 해당된 가입자이고, 파일이 있으면, 파일명, 파일사이즈, 실제위치 정보확인
               if(!empty($_SESSION['id']) && !empty($file_copied)){
                 $file_path = "./data/".$file_copied;
-                $file_size = filesize($file_path);
+                if(isset($file_size)) {$file_size = filesize($file_path);}
               }
+              if(!isset($file_size))$file_size=0;
             ?>
             <!--다른 내용 보여줌-->
             <?=$content?>

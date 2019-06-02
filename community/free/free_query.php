@@ -6,12 +6,12 @@ session_start();
 
 // isset함수는 불리언값을 리턴 true or false
 // 회원 or 비회원이면 권한없음, 관리자일때만 입장
-if(!(isset($_SESSION['id']) &&  $_SESSION['id']=="admin")){
-  echo "<script>alert('권한없음!');history.go(-1);</script>";
+if(!isset($_SESSION['id'])){
+  echo "<script>history.go(-1);</script>";
   exit;
 }
 ?>
-<meta charset="utf-8">
+
 <?php
 // 변수선언
 $content = $sql= $result = $name="";
@@ -38,7 +38,7 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="insert"){
     include $_SERVER['DOCUMENT_ROOT']."/santteut/community/free/free_file_upload.php";
 
     // 파일의 실제명과 저장되는 명을 삽입한다. 디비변수명 적지x
-    $sql="INSERT INTO `free` VALUES (null,'$q_title','$q_content','$file_name','$file_extension','$file_copied','$regist_day','$regist_day','$hit');";
+    $sql="INSERT INTO `free` VALUES (null,'$q_title','$q_content','$file_name','$file_extension','$file_copied','$regist_day','$hit');";
 
     $result = mysqli_query($conn,$sql);
     if (!$result) {
@@ -79,9 +79,16 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="insert"){
     if(!$result){
       die('Error: ' . mysqli_error($conn));
     }
+    $sql="SELECT hit from `free` where num = $parent;";
+    $result = mysqli_query($conn,$sql);
+    if (!$result) {
+      alert_back('Error: 6' . mysqli_error($conn));
+    }
+    $row=mysqli_fetch_array($result);
+    $hit=$row['hit'];
     mysqli_close($conn);
-    echo "<script>location.href='./free_view.php?num=$parent';</script>";
-
+    echo "<script>location.href='./free_view.php?num=$parent&hit=$hit';</script>";
+}
 // 댓글삭제
   }else if(isset($_GET["mode"]) && $_GET["mode"] == "delete_ripple"){
     $ripple_num = $_POST['num'];

@@ -142,7 +142,7 @@ if (isset($_GET["mode"]) && $_GET["mode"]=="update") {
               $action='document.getElementById("del_file").disabled=false;';
             }
            ?>
-          <button id="admin_write_btn" style="margin-left: 8.5%;" onclick='<?=$action?> document.notice_insert_form.submit();" type="button" name="button'>완료</button>
+          <button id="admin_write_btn" style="margin-left: 64%;" onclick='<?=$action?> document.notice_insert_form.submit();" type="button" name="button'>완료</button>
           <a href="./notice_list.php"><button id="admin_write_btn" type="button" name="button">목록</button></a>
         </div>
       </form>

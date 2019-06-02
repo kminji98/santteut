@@ -99,6 +99,7 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="insert"){
     echo "<script>alert('내용이나제목수정요망!');history.go(-1);</script>";
     exit;
   }
+
   $title = test_input($_POST["title"]);
   $q_content = $_POST["content"];
   $name = test_input($name);

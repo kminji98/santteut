@@ -833,7 +833,7 @@ SK플래닛, 슈어엠주식회사	광고성 메시지 발송업무 대행	계�
           <br>
           <button id="end_btn" type="button" name="button" onclick="goto_join()">가입</button>
           &nbsp;&nbsp;
-          <button id="end_btn2" type="button" name="button">취소</button>
+          <a href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/index.php"><button id="end_btn2" type="button" name="button">취소</button></a> 
         </div><!--end of join_form div-->
       </form>
     </section>

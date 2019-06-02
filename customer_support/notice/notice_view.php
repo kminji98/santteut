@@ -8,10 +8,6 @@ session_start();
 
 // isset함수는 불리언값을 리턴 true or false
 // 회원 or 비회원이면 권한없음, 관리자일때만 입장
-if(!isset($_SESSION['id'])){
-  echo "<script>alert('권한없음!');history.go(-1);</script>";
-  exit;
-}
 
 include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
 
@@ -64,7 +60,7 @@ if(isset($_GET["num"]) && !empty($_GET["num"])){
   //   $image_height=0;
   //   $image_type="";
   // }
-  
+
 }
 
 ?>
@@ -133,10 +129,20 @@ if(isset($_GET["num"]) && !empty($_GET["num"])){
         </tr>
       </table>
     <div class="admin">
-      <a href="./notice_form.php?mode=update&num=<?=$num?>"><button id="admin_write_btn" type="button" name="button">수정</button></a>
-      <button id="admin_write_btn" type="button" name="button" onclick="check_delete(<?=$num?>)">삭제</button>
-      <a href="./notice_list.php?page=<?=$page?>"><button id="admin_write_btn" type="button" name="button">목록</button></a>
+      <?php
+      //관리자일경우 수정,삭제가 가능하도록 설정
+      if(!empty($_SESSION['id']) && ($_SESSION['id']=="admin")){
+        echo ('<a href="./notice_form.php?mode=update&num='.$num.'"><input id="admin_write_btn" type="button" value="수정">&nbsp;</a>&nbsp;');
+        echo ('<input id="admin_write_btn" type="button" value="삭제" onclick="check_delete('.$num.')">&nbsp;</a>&nbsp;');
+        echo ('<a href="./notice_list.php?page='.$page.'"><input id="admin_write_btn" type="button" value="목록">&nbsp;</a>');
+      }else{
+        echo ('<div class="notice_list" style="margin-left: 25.5%;">
+        <a href="./notice_list.php?page='.$page.'"><input type="button" value="목록">&nbsp;</a>
+        </div>');
+      }
+      ?>
     </div>
+
     </section>
     <br>
     <br>
