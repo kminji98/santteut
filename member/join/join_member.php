@@ -493,31 +493,31 @@
             <!--아이디-->
             <tr>
               <th><label>아이디</label>&nbsp;<span>*</span></th>
-              <td  colspan="3"><input id="join_id" type="text" name="join_id" placeholder="대/소문자/숫자 3글자 이상 15글자이하" size="40"><p id="possibility" style="display:inline; font-size:13px;"></p></td>
+              <td  colspan="3"><input id="join_id" type="text" name="join_id" placeholder="대/소문자/숫자 3글자 이상 15글자이하" value="santteut2" size="40"><p id="possibility" style="display:inline; font-size:13px;"></p></td>
             </tr>
 
             <!--비밀번호-->
             <tr>
               <th><label>비밀번호</label>&nbsp;<span>*</span></th>
-              <td  colspan="3"><input id="join_passwd" type="password" name="join_passwd" placeholder="특수문자/문자/숫자 모두포함(8~15)" size="40"><p id="possibility_pw1" style="display:inline; font-size:13px;"></td>
+              <td  colspan="3"><input id="join_passwd" type="password" name="join_passwd" placeholder="특수문자/문자/숫자 모두포함(8~15)" value="santteut2%" size="40"><p id="possibility_pw1" style="display:inline; font-size:13px;"></td>
             </tr>
 
             <!--비밀번호확인-->
             <tr>
               <th>&nbsp;<label>비밀번호확인</label>&nbsp;<span>*</span></th>
-              <td colspan="3"><input id="join_passwdconfirm" type="password" name="join_passwdconfirm" placeholder="특수문자/문자/숫자 모두포함(8~15)" size="40"><p id="possibility_pw2" style="display:inline; font-size:13px;"></p>
+              <td colspan="3"><input id="join_passwdconfirm" type="password" name="join_passwdconfirm" placeholder="특수문자/문자/숫자 모두포함(8~15)" value="santteut2%" size="40"><p id="possibility_pw2" style="display:inline; font-size:13px;"></p>
             </tr>
 
             <!--이름-->
             <tr>
               <th><label>이름</label>&nbsp;<span>*</span></th>
-              <td colspan="3"><input placeholder="2~5글자" id="join_name" type="text" name="join_name" size="40"></td>
+              <td colspan="3"><input placeholder="2~5글자" id="join_name" value="산뜻이" type="text" name="join_name" size="40"></td>
             </tr>
 
             <!--주소_우편번호-->
             <tr>
               <th rowspan="3"><label>주소</label>&nbsp;<span>*</span></th>
-              <td colspan="3" id="td_this"><input readonly id="join_zip" type="text" name="join_zip" size="10">
+              <td colspan="3" id="td_this"><input readonly id="join_zip" type="text" value="17890" name="join_zip" size="10">
                 <button type="button" name="button" id="zip_btn" onclick="execDaumPostcode()" >우편번호</button>
               </td>
 
@@ -525,17 +525,17 @@
 
             <!--주소_기본-->
             <tr>
-              <td colspan="3"><input readonly id="join_foundational" type="text" name="join_foundational" placeholder="기본주소" size="40"></td>
+              <td colspan="3"><input readonly id="join_foundational" type="text" name="join_foundational" value="주소입니다" placeholder="기본주소" size="40"></td>
             </tr>
 
             <!--주소_상세-->
             <tr>
-              <td colspan="3"><input id="join_detail" type="text" name="join_detail" placeholder="상세주소" size="40"></td>
+              <td colspan="3"><input id="join_detail" type="text" value="111" name="join_detail" placeholder="상세주소" size="40"></td>
             </tr>
             <tr>
               <th><label>이메일</label></th>
               <td id="e_mail_box">
-                <input id="e_mail_id" type="text" name="e_mail_id" size="17"> @
+                <input id="e_mail_id" type="text" name="e_mail_id" size="17" value="di0625"> @
                 <select onclick="choice_email()" id="e_mail_adress_1" class="" name="e_mail_adress_1" style=" padding: 9px; font-size:13px;">
                   <option value="naver.com" >naver.com</option>
                   <option value="gmail.com" >gmail.com</option>
@@ -574,7 +574,7 @@
                   <option value="019">019</option>
                 </select>
 
-              <input id="join_phone_write" type="tel" name="join_cellphone" size="19" maxlength="8">
+              <input id="join_phone_write" type="tel" name="join_cellphone" size="19" maxlength="8" value="68575506">
               <input type="hidden" name="hidden_phone">
               <button id="hp_btn" type="button" name="button" >인증하기</button> <br>
               <input id="cellphone_authentication" type="text" name="cellphone_authentication" placeholder="인증번호를 입력하세요." size="25" style="display:none; ">

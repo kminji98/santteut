@@ -128,7 +128,7 @@ mysqli_data_seek($after_result,$start_record);
 for ($record = $start_record; $record  < $start_record+ROW_SCALE && $record<$total_record; $record++){
   //예약날짜/ 예약 코드/ 상품명/ 총 결제금액/ 인원/ 출발일*귀국일 / 예약/결제상태 /취소 / 후기
   $row = mysqli_fetch_array($after_result);
-  $num = $row['num'];
+  $num = $record+1;
   $writer_id = $row['id'];
   $title = $row['title'];
   $w_date = $row['write_date'];

@@ -106,10 +106,14 @@ if(isset($_GET["num"]) && !empty($_GET["num"])){
         </tr>
 
       </table>
-    <div class="admin">
+      <div class="admin">
+      <?php
+      if($_SESSION['id']=="admin"){
+        echo "<a href='./qna_form.php?mode=response&num=$num' ><button id='admin_write_btn' type='button' name='button' >답글</button></a>";
+      }
+      ?>
       <a href="./qna_form.php?mode=update&num=<?=$num?>"><button id="admin_write_btn" type="button" name="button">수정</button></a>
       <button id="admin_write_btn" type="button" name="button" onclick="check_delete(<?=$num?>)">삭제</button>
-      <a href="./qna_form.php?mode=response&num=<?=$num?>"><button id="admin_write_btn" type="button" name="button">답글</button></a>
       <a href="./qna_list.php?page=<?=$page?>"><button id="admin_write_btn" type="button" name="button">목록</button></a>
     </div>
 
