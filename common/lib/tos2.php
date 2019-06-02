@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css?ver=2">
-    <title>산뜻 :: 즐거운 산행</title>
+    <title>개인정보 처리방침</title>
   </head>
 
   <body>
