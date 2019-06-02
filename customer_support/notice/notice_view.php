@@ -92,7 +92,7 @@ if(isset($_GET["num"]) && !empty($_GET["num"])){
       <table border="1">
         <tr>
           <th>작성자</th>
-          <td style="width:600px; text-align:center;"><?=$_SESSION['name']?></td>
+          <td style="width:600px; text-align:center;">관리자</td>
         </tr>
         <tr>
           <th>제목</th>

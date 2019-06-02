@@ -422,9 +422,9 @@ if($_GET['id']){
            join_detail.value="";
            return false;
          }
-
+         alert("정보수정이 완료되었습니다. 다시 로그인해주세요");
          document.join_member_form.submit();
-         // alert("성공");
+
       }
     </script>
 

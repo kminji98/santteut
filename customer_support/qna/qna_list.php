@@ -190,7 +190,13 @@ $view_num = $total_record - $start_record;
 
                 }
               </script>
-              <a onclick="view_pw(<?=$num?>,<?=$page?>,<?=$hit+1?>)"><?=$space.$title?></a>
+              <?php
+                if($depth==0){
+                  echo '<a style="font-weight:bold;" onclick="view_pw('.$num.','.$page.','.$hit+1.')">'.$space.$title.'</a>';
+                }else{
+                  echo '<a onclick="view_pw('.$num.','.$page.','.$hit+1.')">'.$space.$title.'</a>';
+                }
+               ?>
             </td>
             <!--작성자-->
             <td><?=$name?></td>
