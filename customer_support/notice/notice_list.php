@@ -148,7 +148,7 @@ $view_num = $total_record - $start_record;
           $title=$row['title'];
           $regist_day= substr($row['regist_day'],0,10);
           $hit=$row['hit'];
-          // $name = $row['name'];
+          $name = $row['name']="관리자";
 
           $title=str_replace("\n", "<br>",$title);
           $title=str_replace(" ", "&nbsp;",$title);
