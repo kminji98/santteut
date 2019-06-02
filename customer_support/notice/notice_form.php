@@ -64,7 +64,7 @@ if (isset($_GET["mode"]) && $_GET["mode"]=="update") {
   $file_type=$row['file_type'];
   $regist_day=$row['regist_day'];
   $hit=$row['hit'];
-  mysqli_close($conn);
+  
 }
 ?>
 <!DOCTYPE html>

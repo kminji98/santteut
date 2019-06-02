@@ -193,6 +193,7 @@ if(!empty($_POST['divide'])){
 <!DOCTYPE html>
 <html>
   <head>
+    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css">
     <style media="screen">
     #submit{border-radius: 5px; width: 60px; height: 30px; font-weight: bold; margin-left: 1%; cursor: pointer; border: 1px solid #464646; background-color: white;}
     #submit:hover{background-color: #2F9D27; color: white; border-radius: 5px; border: 1px solid #2F9D27;}
@@ -227,7 +228,7 @@ if(!empty($_POST['divide'])){
         var options = {
         'title' : '[<?=$divide_title?>] 패키지 <?=$standard_title?> TOP 10 ',
         'titleTextStyle': {
-          fontSize: 20, 
+          fontSize: 20,
           bold: true
         },
         'width': 1200, 'height' : 700,
@@ -247,7 +248,10 @@ if(!empty($_POST['divide'])){
     </script>
   </head>
   <body>
-    <section style="margin-left: 40%; margin-top: 3%;">
+    <header>
+      <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/login_menu.php";?>
+    </header>
+    <section style="margin-left: 42%; margin-top: 6%;">
     <form name="form" action="best10_review.php" method="post">
       <select name="divide" style="width: 100px; height:30px;">
         <option value="" hidden>선택</option>
@@ -268,5 +272,8 @@ if(!empty($_POST['divide'])){
   </section>
     <!--파이 차트를 저장할 div-->
     <div id="chart_div" style="margin-left: 14%;"></div>
+    <footer id="foo">
+      <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/footer.php";?>
+    </footer>
   </body>
 </html>

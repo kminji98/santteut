@@ -153,7 +153,7 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="insert"){
   if (!$result) {
     die('Error: ' . mysqli_error($conn));
   }
-  echo "<script>location.href='./notice_view.php?num=$num&hit=$hit';</script>";
+  echo "<script>location.href='./notice_form.php?num=$num&hit=$hit';</script>";
 }//end of if insert
 
 ?>
