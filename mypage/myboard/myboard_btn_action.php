@@ -32,7 +32,7 @@ if(isset($_POST['category'])){
   }
   $id = $_SESSION['id'];
   $sql = "SELECT * FROM `$tbl` where id = '$id' order by `$date` desc";
-  echo $sql;
+
   $result=mysqli_query($conn,$sql);
   $total_record=mysqli_num_rows($result);
 

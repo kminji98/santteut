@@ -22,7 +22,7 @@ if(!session_id()) {session_start();}
     function review_form(pk){
       var popupX = (window.screen.width/2) - (600/2);
       var popupY = (window.screen.height/2) - (400/2);
-      pk = "'"+pk + "'";
+
       window.open('../../tour/member_review/member_review2.php?mode=view&r_pk='+ pk ,'','left='+popupX+',top='+popupY+', width=800, height=430, status=no, scrollbars=no');
     }
       $(document).ready(function() {
@@ -49,7 +49,6 @@ if(!session_id()) {session_start();}
               $("#no_result").html('');
               $("#list_tbl_body").append('<tr><td style="width:60%;">'+output[0].th1+'</td><td>'+output[0].th2+'</td><td>'+output[0].th3+'</td></tr>');
               $("#list_tbl_body").append(output[0].output);
-              alert(output[0].output);
               if(output[0].output == ''){
                 $("#no_result").html('<p id="no_result" style="text-align:center; padding:2%;margin-bottom:3%;">해당 게시물의 내역이 없습니다.</p><hr><br>');
               }
