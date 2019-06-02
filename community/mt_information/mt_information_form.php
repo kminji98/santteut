@@ -49,7 +49,6 @@ if(isset($_GET["mode"]) && $_GET["mode"]=='update'){
 
   $content = $row['content'];
   $regist_day = $row['regist_day'];
-  mysqli_close($conn);
 }
 ?>
 <!DOCTYPE html>

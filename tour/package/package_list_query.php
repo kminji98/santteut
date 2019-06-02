@@ -58,7 +58,6 @@ if(isset($_GET['mode'])){
     case 'detail':
     $sql=$_POST['sql'];
     $output=$_POST['output'];
-
     $page=$_POST['page'];
     break;
 

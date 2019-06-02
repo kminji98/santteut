@@ -198,7 +198,6 @@ if(isset($_GET["num"])&&!empty($_GET["num"])){
             </div>
             <?php
             }//end of while
-            mysqli_close($conn);
             ?>
             <form name="ripple_form" action="mt_information_query.php?mode=insert_ripple" method="post">
             <input type="hidden" name="parent" value="<?=$q_num?>">
