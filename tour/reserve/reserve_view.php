@@ -848,14 +848,14 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
           <b id="reserve_money"><?=$p_pay*1?></b> <p id="won">원</p>
           <p class="subtext2">유류할증료,제세공과금 포함</p>
           <p class="subtext2">※발권일/환율에 따라 변경 가능합니다</p>
-          <p class="line">-------------------------------------------------</p>
+          <p class="line">---------------------------------------</p>
           <div id="side_div" style="overflow-y: scroll; height:100px;" >
 
             <div style="display:inline">
               <p style="display:inline">&nbsp;<b>성인</b></p>
               <b id="adult_val" style="font-size:25px;">&nbsp;&nbsp;&nbsp;&nbsp;<?=$p_pay?>원</b><br>
               <p style="font-size:6px; margin:0px; display:inline;">&nbsp;(만 12세 이상)</p>
-              <p style="display:inline-block; margin:0px; color:gray;">-------------------------------</p>
+              <p style="display:inline-block; margin:0px; color:gray;">--------------------</p>
               <p style="display:inline-block; margin:0px; color:gray;font-size:10px; "><b width:300px;>기본상품가격</b> <b style="text-align:center;"><?=$p_pay*0.922?>원</b></p><br>
               <p style="display:inline-block; margin:0px; color:gray;font-size:10px; "><b width:300px;>유류할증료</b> <b style="text-align:center;">&nbsp;&nbsp;&nbsp;<?=$p_pay*0.078?>원</b> </p>
               <hr style="border-color: #5D5D5D;">
@@ -866,7 +866,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
               <p style="display:inline">&nbsp;<b>아동</b></p>
               <b style="font-size:25px;">&nbsp;&nbsp;&nbsp;&nbsp;<?=$p_pay*0.7?>원</b><br>
               <p style="font-size:6px; margin:0px; display:inline;">&nbsp;(만 12세 미만)</p>
-              <p style="display:inline-block; margin:0px; color:gray;">-------------------------------</p>
+              <p style="display:inline-block; margin:0px; color:gray;">--------------------</p>
               <p style="display:inline-block; margin:0px; color:gray;font-size:10px; "><b width:300px;>기본상품가격</b> <b style="text-align:center;"><?=$p_pay*0.922*0.7?>원</b></p><br>
               <p style="display:inline-block; margin:0px; color:gray;font-size:10px; "><b width:300px;>유류할증료</b> <b style="text-align:center;">&nbsp;&nbsp;&nbsp;<?=$p_pay*0.078*0.7?>원</b> </p>
               <hr style="border-color: #5D5D5D;">
@@ -879,7 +879,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
               <p style="display:inline">&nbsp;<b>유아</b></p>
               <b style="font-size:25px;">&nbsp;&nbsp;&nbsp;&nbsp;<?=$p_pay*0.5?>원</b><br>
               <p style="font-size:6px; margin:0px; display:inline;">&nbsp;(만2세 미만)</p>
-              <p style="display:inline-block; margin:0px; color:gray;">-------------------------------</p>
+              <p style="display:inline-block; margin:0px; color:gray;">--------------------</p>
               <p style="display:inline-block; margin:0px; color:gray;font-size:10px; "><b width:300px;>기본상품가격</b> <b style="text-align:center;"><?=$p_pay*0.922*0.5?>원</b></p><br>
               <p style="display:inline-block; margin:0px; color:gray;font-size:10px; "><b width:300px;>유류할증료</b> <b style="text-align:center;">&nbsp;&nbsp;&nbsp;<?=$p_pay*0.078*0.5?>원</b> </p>
               <hr style="border-color: #5D5D5D;">
