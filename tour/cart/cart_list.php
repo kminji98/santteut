@@ -58,7 +58,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/cart/cart_list_query.php";
         </table>
         <?php
           if(empty($total_record)){
-            echo '<p id="no_result" style="text-align:center; padding:2%;margin-bottom:3%;">예약된 산행 내역이 없습니다.</p>';
+            echo '<p id="no_result" style="text-align:center; padding:2%;margin-bottom:3%;"> 장바구니 내역이 없습니다.</p>';
           }
         ?>
         <script type="text/javascript">
