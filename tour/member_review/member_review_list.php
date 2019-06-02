@@ -152,7 +152,7 @@ for ($record = $start_record; $record  < $start_record+ROW_SCALE && $record<$tot
  </script>
     <tr>
       <td class="td1"><?=$num?></td>
-      <td class="td2"><a onclick="message_form()"><?=$title?></a></td>
+      <td class="td2"><a id="point_hover" onclick="message_form()" style="cursor:pointer;"><?=$title?></a></td>
       <td class="td3"><?=$writer_id?></td>
       <td class="td4"><?=$w_date?></td>
       <td class="td5"><?=$avg_grade?></td>
