@@ -1,8 +1,8 @@
 <?php
 include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
-  $id     = $_POST['id2'];
-  $email1 = $_POST['email1'];
-  $email2 = $_POST['email2'];
+  if(isset($_POST['id2'])){$id= $_POST['id2'];}else{$id='';}
+  if(isset($_POST['email1'])){$email1= $_POST['email1'];}else{$email1='';}
+  if(isset($_POST['email2'])){$email2= $_POST['email2'];}else{$email2='';}
   $email = $email1."@".$email2;
   if(isset($email1)&&isset($email2)&&empty($id)){
     $sql = "select * from member where email='$email'";
@@ -39,7 +39,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css">
-    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/member/login/css/forgot_id_pw.css?ver=1">
+    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/member/login/css/forgot_id_pw.css?ver=9">
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
     <title>아이디/비밀번호 찾기</title>
     <script type="text/javascript">
@@ -85,7 +85,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
     <header>
       <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/login_menu.php";?>
     </header>
-    <section id="forgot_id_pw">
+    <section id="forgot_id_pw" >
       <div class="forgot_id_pw_form">
         <br><br><br><br><br><br><br><br><br><br>
         <table id="id_pw_tbl">
@@ -101,7 +101,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
               이메일
               <input type="text" name="email1" value="" size="7" id="email1">  @
               <input type="text" name="email2" value="" size="7" id="email2">
-              <button type="button" name="button" id="sub" >인증하기</button>
+              <button type="button" name="button" id="sub" style="width:120px" >인증하기</button>
               </form>
             </td>
           </tr>
