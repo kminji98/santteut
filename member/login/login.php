@@ -61,8 +61,7 @@ if(isset($_COOKIE["cookie_id"])){
             var login_id =document.getElementById('login_id');
             var save_id =document.getElementById('save_id');
 
-            // alert(save_id.checked);
-            // alert(login_id.value);
+
 
             if(save_id.checked==true){
               $.ajax({

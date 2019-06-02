@@ -4,7 +4,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
   if(isset($_POST['email1'])){$email1= $_POST['email1'];}else{$email1='';}
   if(isset($_POST['email2'])){$email2= $_POST['email2'];}else{$email2='';}
   $email = $email1."@".$email2;
-  if(isset($email1)&&isset($email2)&&empty($id)){
+  if(!empty($email1)&&!empty($email2)&&empty($id)){
     $sql = "select * from member where email='$email'";
     $result = mysqli_query($conn,$sql) or die("실패원인 : ".mysqli_error($con));
     if(mysqli_num_rows($result)==0){
@@ -18,7 +18,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
           alert('아이디는 ".$row['id']."입니다.');
         </script>";
     }
-  }else if(isset($email1)&&isset($email2)&&!empty($id)){
+  }else if(!empty($email1)&&!empty($email2)&&!empty($id)){
     $sql = "select * from member where id='$id'";
     $result = mysqli_query($conn,$sql) or die("실패원인 : ".mysqli_error($con));
     if(mysqli_num_rows($result)==0){

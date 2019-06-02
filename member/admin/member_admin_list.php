@@ -226,9 +226,9 @@ $view_num = $total_record - $start_record;
             if ( $i == $page ){
               echo( '<a href="#"><button type="button" name="button" style="background-color: #2F9D27; border: 1px solid #2F9D27; color: white;">'.$i.'</button></a>' );
             }else if(isset($_GET['mode']) && $_GET['mode']=="search"){
-              echo( '<a href="qna_list.php?mode=search&find_option=$find_option&find_input=$find_input&page='.$i.'"><button type="button" name="button">'.$i.'</button></a>' );
+              echo( '<a href="member_admin_list.php?mode=search&find_option=$find_option&find_input=$find_input&page='.$i.'"><button type="button" name="button">'.$i.'</button></a>' );
             }else{
-              echo( '<a href="qna_list.php?page='.$i.'"><button type="button" name="button">'.$i.'</button></a>' );
+              echo( '<a href="member_admin_list.php?page='.$i.'"><button type="button" name="button">'.$i.'</button></a>' );
             }
         }
 
