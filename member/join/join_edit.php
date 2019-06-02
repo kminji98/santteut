@@ -563,7 +563,7 @@ if($_GET['id']){
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <button id="end_btn" type="button" name="button" onclick="goto_join()">수정</button>
           &nbsp;&nbsp;
-          <button id="end_btn2" type="button" name="button">취소</button>
+          <a href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/member/admin/member_admin_list.php"> <button id="end_btn2" type="button" name="button">취소</button></a>
         </div><!--end of join_form div-->
       </form>
       <br><br><br><br><br>

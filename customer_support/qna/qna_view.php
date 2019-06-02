@@ -112,20 +112,7 @@ if(isset($_GET["num"]) && !empty($_GET["num"])){
       <a href="./qna_form.php?mode=response&num=<?=$num?>"><button id="admin_write_btn" type="button" name="button">답글</button></a>
       <a href="./qna_list.php?page=<?=$page?>"><button id="admin_write_btn" type="button" name="button">목록</button></a>
     </div>
-<!--  -->
-    <?php
-      // if(isset($_SESSION['id'])){
-      //   if($_SESSION['id']=="admin" || $_SESSION['id']==$id){
-          // echo('<a href="./qna_form.php?mode=update&num='.$num.'"> <button id="admin_write_btn" type="button" name="button">목록</button></a>');
-          // echo('<img src="../img/delete.png" onclick="check_delete('.$num.')">&nbsp;'); 삭제
-      //   }
-      // }
-      // if(!empty($_SESSION['id'])){
-        // echo '<a href="qna_form.php?mode=response&num='.$num.'">답글</a>';
-        // echo '<a href="qna_form.php"><img src="../img/write.png"></a>';
-      // }
-    ?>
-<!--  -->
+
     </section>
     <br>
     <br>
