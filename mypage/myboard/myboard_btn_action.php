@@ -54,7 +54,7 @@ if(isset($_POST['category'])){
       $date = $row['write_date'];
       $field = $row['r_code'];
       $pk = $row['r_pk'];
-  
+
       break;
       case 'free':
       $tbl = 'free';
