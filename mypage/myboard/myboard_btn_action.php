@@ -53,7 +53,8 @@ if(isset($_POST['category'])){
       $title = $row['title'];
       $date = $row['write_date'];
       $field = $row['r_code'];
-
+      $pk = $row['r_pk'];
+  
       break;
       case 'free':
       $tbl = 'free';
@@ -66,7 +67,8 @@ if(isset($_POST['category'])){
       $tbl = '';
       break;
     }
-    $output = $output."<tr><td>$title</td><td>$date</td><td>$field</td></tr>";
+    $output = $output."<tr><td><a onclick='review_form($pk)'>$title</a></td><td>$date</td><td>$field</td></tr>";
+
   }//end of for
 
 }

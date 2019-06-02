@@ -476,6 +476,9 @@ if($_GET['id']){
             <!--이름-->
             <tr>
               <th><label>이름</label>&nbsp;<span>*</span></th>
+              <?php
+              $name = $row['name'];
+               ?>
               <td colspan="3"><input value="<?=$name?>" placeholder="2~5글자" id="join_name" type="text" name="join_name" size="40"></td>
             </tr>
 
