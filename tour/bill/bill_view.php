@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/bill/bil_query.php";
 
 ?>

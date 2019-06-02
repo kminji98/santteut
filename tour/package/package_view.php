@@ -407,7 +407,8 @@ setcookie("cookie1",$p_code,time() + 3600,'/');
               location.href='../../index.php';
               return false;
             }else{
-              location.href='../cart/cart_list.php?mode=insert&code=<?=json_encode($p_code)?>';
+              var code = <?=json_encode($p_code)?>;
+              location.href='../cart/cart_list.php?mode=insert&code='+code;
             }
           }
         </script>
