@@ -84,13 +84,13 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/create_table.php";
         <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/best3.php";?>
       </div>
     </div>
-      <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+      <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
         <h2 style="float:left; margin-right:1%; margin-left:37.5%;">인기 산행상품이 더 보고싶으신가요?</h2>
 
       <div class="more_chart_div" style="float:left; margin-top: 1%;">
-        <img src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/img/pie_chart.png" alt="">
-        <img src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/img/bar_chart.png" alt="">
+        <a href="./common/lib/best10_reserve.php"><img src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/img/pie_chart.png" alt="예약TOP10" title="예약TOP10"></a>
+        <a href="./common/lib/best10_review.php"><img src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/img/bar_chart.png" alt="평점TOP10" title="평점TOP10"></a>
       </div>
 <br><br><br><br><br><br><br><br>
     <footer id="foo">
