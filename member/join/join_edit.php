@@ -455,9 +455,9 @@ if($_GET['id']){
             <!--아이디-->
             <tr>
               <th><label>아이디</label>&nbsp;<span>*</span></th>
-              <?php
+              <!-- <?php
               $id = $_GET['id'];
-               ?>
+               ?> -->
               <td  colspan="3"><input id="join_id" type="text" name="join_id" placeholder="대/소문자/숫자 3글자 이상 15글자이하" disabled size="40"  value="<?=$id?>"><p id="possibility" style="display:inline; font-size:13px;"></p></td>
             </tr>
 
@@ -476,9 +476,6 @@ if($_GET['id']){
             <!--이름-->
             <tr>
               <th><label>이름</label>&nbsp;<span>*</span></th>
-              <?php
-                var_dump($name1);
-               ?>
               <td colspan="3"><input value="<?=$name1?>" placeholder="2~5글자" id="join_name" type="text" name="join_name" size="40"></td>
             </tr>
 
