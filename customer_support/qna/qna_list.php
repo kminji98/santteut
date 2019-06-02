@@ -171,6 +171,12 @@ $view_num = $total_record - $start_record;
                     }
                   })
                   .done(function(result) {
+                  // php코드를 자바스크립트에서 쓰고 싶을때 json_encode
+                    var id = <?=json_encode($_SESSION['id'])?>;
+                    if(id=="admin"){
+                      location.href="./qna_view.php?num="+num_val+"&hit="+hit;
+                      return false;
+                    }
                     switch (result) {
                       case 'public':
                       location.href="./qna_view.php?num="+num_val+"&hit="+hit;
@@ -190,11 +196,12 @@ $view_num = $total_record - $start_record;
 
                 }
               </script>
+              <!--메인글의 경우(depth가 0일 경우) bold두껍게 처리-->
               <?php
                 if($depth==0){
-                  echo '<a style="font-weight:bold;" onclick="view_pw('.$num.','.$page.','.$hit+1.')">'.$space.$title.'</a>';
+                  echo '<a style="font-weight:bold;" onclick="view_pw('.$num.','.$page.','.($hit+1).')">'.$space.$title.'</a>';
                 }else{
-                  echo '<a onclick="view_pw('.$num.','.$page.','.$hit+1.')">'.$space.$title.'</a>';
+                  echo '<a onclick="view_pw('.$num.','.$page.','.($hit+1).')">'.$space.$title.'</a>';
                 }
                ?>
             </td>
