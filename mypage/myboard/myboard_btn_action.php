@@ -60,7 +60,7 @@ if(isset($_POST['category'])){
       $tbl = 'free';
       $title = $row['title'];
       $date = $row['regist_day'];
-      $hit = $row['hit'];
+      $field = $row['hit'];
 
       break;
       default:
@@ -69,6 +69,9 @@ if(isset($_POST['category'])){
     }
     if(isset($pk)){
       $output = $output."<tr><td><a id='$pk' onclick='review_form(this.id);'>$title</a></td><td>$date</td><td>$field</td></tr>";
+    }else{
+      $output = $output."<tr><td><a>$title</a></td><td>$date</td><td>$field</td></tr>";
+
     }
   }//end of for
 
