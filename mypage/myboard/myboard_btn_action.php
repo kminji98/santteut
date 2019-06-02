@@ -32,7 +32,7 @@ if(isset($_POST['category'])){
   }
   $id = $_SESSION['id'];
   $sql = "SELECT * FROM `$tbl` where id = '$id' order by `$date` desc";
-
+  echo $sql;
   $result=mysqli_query($conn,$sql);
   $total_record=mysqli_num_rows($result);
 
@@ -54,7 +54,7 @@ if(isset($_POST['category'])){
       $date = $row['write_date'];
       $field = $row['r_code'];
       $pk = $row['r_pk'];
-  
+
       break;
       case 'free':
       $tbl = 'free';
@@ -67,8 +67,9 @@ if(isset($_POST['category'])){
       $tbl = '';
       break;
     }
-    $output = $output."<tr><td><a onclick='review_form($pk)'>$title</a></td><td>$date</td><td>$field</td></tr>";
-
+    if(isset($pk)){
+      $output = $output."<tr><td><a id='$pk' onclick='review_form(this.id);'>$title</a></td><td>$date</td><td>$field</td></tr>";
+    }
   }//end of for
 
 }

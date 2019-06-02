@@ -14,7 +14,6 @@
 #list_tbl_head td{font-weight: 600; height:37px; background-color: #f2f2f2; border-right:1px solid #dedede;}
 #list_tbl_head td:first-child{background-color: white;border:1px solid #3d3d3d; border-bottom-color: white;}
 #list_tbl_head td:hover {cursor: pointer; text-decoration: underline;}
-
 #list_tbl_body {width:100%; -webkit-border-horizontal-spacing: 0px;-webkit-border-vertical-spacing: 0px;border-top-width: 0px;border-right-width: 0px;border-bottom-width: 0px;border-left-width: 0px;font-size: 0.89em; margin: 20px 0; border-collapse: separate; border: 1px solid #3d3d3d; border-bottom-color:#dedede; text-align: center;}
 #list_tbl_body tr:first-child{font-weight:bolder; color:#3d3d3d; background-color:#f2f2f2; }
 #list_tbl_body td{width: 120px; padding:1%; border-left:1px solid #dedede;border-bottom:1px solid #dedede;}
@@ -22,3 +21,4 @@
 #list_tbl_body tr td:first-child{border-left:none;}
 #list_tbl_body tr td:last-child{border-right:none;}
 .symbol_greater_than{margin-right: 3px;background-color:#1ae134; color:white; padding-bottom: 1px; font-size: 12px; padding-left:4px; padding-right:4px; border-radius:3px;}
+a{cursor:pointer;}
