@@ -66,10 +66,13 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
       })
       .done(function(result) {
         code=result;
-        alert(code);
+
         if(result!="등록되지않은 이메일입니다."){
+          alert("인증번호가 전송되었습니다.");
         check_email1.setAttribute('type', 'text');
         check_email2.setAttribute('type', 'button');
+        }else{
+          alert("등록되지않은 이메일입니다.");
         }
       })
       .fail(function() {alert("인증 번호 발송실패!"); console.log("error");})

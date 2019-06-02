@@ -129,7 +129,7 @@ if(isset($_COOKIE["cookie_id"])){
           login_form.login_passwd.focus();
           return false;
         }
-
+        save_id();
         document.login_form.submit();
       }
     </script>
