@@ -162,7 +162,7 @@ $view_num = $total_record - $start_record;
       </table>
 
 <?php
-if($_SESSION['id']=="admin"){
+if(!empty($_SESSION['id'])){
   echo '<a href="free_form.php"><button id="admin_write_btn" type="button" name="button">
   글쓰기</button></a>';
 }
