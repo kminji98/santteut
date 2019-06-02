@@ -157,7 +157,7 @@ $view_num = $total_record - $start_record;
           <!--번호-->
           <td><?=$view_num?></td>
           <!--제목-->
-          <td style="text-align: center; height:50px;"><a style="text-decoration: none; color:black;" href="./notice_view.php?num=<?=$num?>&present_page=<?=$page?>&hit=<?=$hit+1?>"><?=$title?></a></td>
+          <td style="text-align: left; height:50px;"><a style="text-decoration: none; color:black;" href="./notice_view.php?num=<?=$num?>&present_page=<?=$page?>&hit=<?=$hit+1?>"><?=$title?></a></td>
           <!--작성자-->
           <td><?=$name?></td>
           <!--작성일-->

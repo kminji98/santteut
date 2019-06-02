@@ -160,7 +160,7 @@ $view_num = $total_record - $start_record;
             <!--보여지는번호-->
             <td><?=$view_num?></td>
             <!--제목-->
-            <td>
+            <td style="text-align:left;">
               <script type="text/javascript">
                 function view_pw(num_val,page,hit){
                   $.ajax({
