@@ -13,7 +13,7 @@ $sql=$result=$total_record=$total_pages=$start_record=$row="";
 $total_record=0;
 $alert = '';
 
-define('ROW_SCALE', 20);
+define('ROW_SCALE', 10);
 define('PAGE_SCALE', 10);
 //r_cancel=0 -> 예약내역
 //r_cancel=1 -> 취소내역
@@ -47,15 +47,15 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="search"){
   $search_start = $year1."-".$month1."-".$day1;
   $search_end = $year2."-".$month2."-".$day2;
   if($id=="admin"){
-    $sql="SELECT * from `reserve` join `package` on `reserve`.`r_code` = `package`.`p_code` where `package`.`p_dp_date` between '$search_start' and '$search_end' and `reserve`.`r_cancel`='$reserve_flag';";
+    $sql="SELECT * from `reserve` join `package` on `reserve`.`r_code` = `package`.`p_code` where `package`.`p_dp_date` between '$search_start' and '$search_end' and `reserve`.`r_cancel`='$reserve_flag' order by `r_date` desc;";
   }else{
-    $sql="SELECT * from `reserve` join `package` on `reserve`.`r_code` = `package`.`p_code` where `package`.`p_dp_date` between '$search_start' and '$search_end' and `reserve`.`r_id` = '$id' and `reserve`.`r_cancel`='$reserve_flag';";
+    $sql="SELECT * from `reserve` join `package` on `reserve`.`r_code` = `package`.`p_code` where `package`.`p_dp_date` between '$search_start' and '$search_end' and `reserve`.`r_id` = '$id' and `reserve`.`r_cancel`='$reserve_flag' order by `r_date` desc;";
   }
 }else{
   if($id=="admin"){
-    $sql="SELECT * from `reserve` join `package` on `reserve`.`r_code` = `package`.`p_code` where `reserve`.`r_cancel`='$reserve_flag';";
+    $sql="SELECT * from `reserve` join `package` on `reserve`.`r_code` = `package`.`p_code` where `reserve`.`r_cancel`='$reserve_flag' order by `r_date` desc;";
   }else{
-    $sql="SELECT * from `reserve` join `package` on `reserve`.`r_code` = `package`.`p_code` where `reserve`.`r_id` = '$id' and `reserve`.`r_cancel`='$reserve_flag';";
+    $sql="SELECT * from `reserve` join `package` on `reserve`.`r_code` = `package`.`p_code` where `reserve`.`r_id` = '$id' and `reserve`.`r_cancel`='$reserve_flag' order by `r_date` desc;";
   }
 
 }
@@ -97,8 +97,8 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css">
-    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/tour/reserve/css/reserve_list.css?ver=0">
-    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/side_bar.css?ver=0">
+    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/tour/reserve/css/reserve_list.css">
+    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/side_bar.css">
     <style media="screen">
       a{color:#000;}
       .modal {
@@ -709,8 +709,58 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
       if(empty($total_record)){
         echo '<p id="no_result" style="text-align:center; padding:2%;margin-bottom:3%;">'.$alert.'</p><hr><br>';
       }
-
        ?>
+       <!--$page 는 현재페이지를 의미 x / 각 페이지를 의미-->
+      <div class="page_button_group">
+        <?php
+        //현재 블럭의 시작 페이지가 페이지 스케일 보다 클 때 -> 처음으로 버튼 생성 + 이전 블럭 존재
+        //[ex]  page가 9개 있고 현재 페이지가 6페이지인 경우  / 12345/ 6789     =>  <<(처음으로) <(이전) 6 7 8 9
+        if( $start_page > PAGE_SCALE ){
+          // echo( '<a href='reserve_list.php?page=1'> << </a>' );
+          echo( '<a href="reserve_list.php?page=1"><button type="button" name="button" title="처음으로"><<</button></a>' );
+
+          // 이전 블럭 클릭 시 -> 현재 블럭의 시작 페이지 - 페이지 스케일
+          // 현재 6 page 인 경우 '<(이전블럭)' 클릭 -> $pre_page = 6-PAGE_SCALE  -> 1 페이지로 이동
+          $pre_block= $start_page - PAGE_SCALE;
+          if(isset($_GET['mode']) && $_GET['mode']=="search"){
+            echo( '<a href="reserve_list.php?mode=search&find_option=$find_option&find_input=$find_input&page='.$pre_block.'"><button type="button" name="button" title="이전"><</button></a>' );
+          }else{
+            echo( '<a href="reserve_list.php?page='.$pre_block.'"><button type="button" name="button" title="이전"><</button></a>' );
+          }
+        }
+
+        //현재 블럭에 해당하는 페이지 나열
+        for( $i = $start_page; $i <= $end_page; $i++ ){
+            //현재 블럭에 현재 페이지인 버튼
+            if ( $i == $page ){
+              echo( '<a href="#"><button type="button" name="button" style="background-color: #2F9D27; border: 1px solid #2F9D27; color: white;">'.$i.'</button></a>' );
+            }else if(isset($_GET['mode']) && $_GET['mode']=="search"){
+              echo( '<a href="reserve_list.php?mode=search&find_option=$find_option&find_input=$find_input&page='.$i.'"><button type="button" name="button">'.$i.'</button></a>' );
+            }else{
+              echo( '<a href="reserve_list.php?page='.$i.'"><button type="button" name="button">'.$i.'</button></a>' );
+            }
+        }
+
+        // 현재 블럭의 마지막 페이지 보다 총 페이지 수가 큰 경우, >(다음) 버튼 / >>(맨끝으로) 버튼 생성
+        //[ex]  page가 9개 있고 현재 페이지가 6페이지인 경우  / 12345/ 6789     =>  <<(처음으로) <(이전) 6 7 8 9
+        //[ex]  page가 9개 있고 현재 페이지가 1페이지인 경우  / 12345/ 6789     =>  1 2 3 4 5 >(다음) >>(맨끝으로)
+        if( $total_pages > $end_page ){
+          // 다음블럭 => 현재 블럭의 시작페이지 + 스케일
+          // 클릭 시 다음 블럭의 첫 번째 페이지로 이동
+          // [ex]  총 page 9개 있고 페이지가 3인  경우 / >(다음) 버튼 누르면 '6'으로 이동
+          $next_block= $start_page + PAGE_SCALE;
+
+          if(isset($_GET['mode']) && $_GET['mode']=="search"){
+            echo( '<a href="reserve_list.php?mode=search&find_option=$find_option&find_input=$find_input&page='.$next_block.'"><button type="button" name="button">></button></a>' );
+          }else{
+            echo( '<a href="reserve_list.php?page='.$next_block.'"><button type="button" name="button" title="다음">></button></a>' );
+          }
+
+          //맨끝페이지로 이동
+          echo( '<a href="reserve_list.php?page='.$total_pages.'"><button type="button" name="button" title="맨끝으로">>></button></a>' );
+        }
+        ?>
+      </div>
     </div> <!-- end of div "reserve_list" -->
     <footer> <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/footer.php";?> </footer>
     </div>  <!-- end of div "wrap" -->

@@ -25,3 +25,6 @@
 .cancel_btn:hover{border: 1px solid black; color: black; cursor: pointer;}
 .review_btn{background-color: white; border: 1px solid #bdbdbd; color: #3e3e3e; padding: 3% 9%; font-weight: bold; border-radius: 2px;}
 .review_btn:hover{border: 1px solid black; color: black; cursor: pointer;}
+.page_button_group button{border-radius: 3px; margin-bottom:3%; width: 35px; height: 35px; font-weight: bold; margin-right: 5px; cursor: pointer; border: 1px solid #464646; background-color: white;}
+.page_button_group button:hover{background-color: #2F9D27; color: white; border-radius: 3px; border: 1px solid #2F9D27;}
+.page_button_group{ position: relative; margin-top: auto; margin-left: auto;text-align:center;}
