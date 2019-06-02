@@ -142,9 +142,16 @@ for ($record = $start_record; $record  < $start_record+ROW_SCALE && $record<$tot
 
 
  ?>
+ <script type="text/javascript">
+ function message_form(){
+   var popupX = (window.screen.width/2) - (600/2);
+   var popupY = (window.screen.height/2) - (400/2);
+   window.open('../member_review/member_review2.php?mode=view&r_pk=<?=json_encode($pk)?>','','left='+popupX+',top='+popupY+', width=800, height=430, status=no, scrollbars=no');
+ }
+ </script>
     <tr>
       <td class="td1"><?=$num?></td>
-      <td class="td2"><a href="../member_review/member_review2.php?mode=view&r_pk=<?=$pk?>"><?=$title?></a></td>
+      <td class="td2"><a onclick="message_form()"><?=$title?></a></td>
       <td class="td3"><?=$writer_id?></td>
       <td class="td4"><?=$w_date?></td>
       <td class="td5"><?=$avg_grade?></td>

@@ -14,3 +14,5 @@
 .notice_list_search h4{margin-left: 20%;}
 .notice_list_search li{display: inline;}
 #search_option{margin-left: 49.5%;}
+#search_btn{border-radius: 3px; font-size: 14px; width: 80px; height: 30px; font-weight: bold; cursor: pointer; border: 1px solid #464646; background-color: white;}
+#search_btn:hover{background-color: #2F9D27; color: white; border-radius: 3px; border: 1px solid #2F9D27;}

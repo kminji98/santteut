@@ -164,12 +164,14 @@
             })
             .done(function(result) {
               code=result;
-              alert(code);
+              // alert(code);
               if(result!="존재하는 이메일입니다."){
               check_email1.setAttribute('type', 'text');
               check_email2.setAttribute('type', 'button');
-              // alert('이메일로 코드가 발송 되었습니다.');
-              }
+              alert('이메일로 코드가 발송 되었습니다.');
+            }else{
+              alert('이미 등록된 이메일 입니다.');
+            }
             })
             .fail(function() {
               alert("인증 번호 발송실패!");
@@ -234,7 +236,7 @@
             })
             .done(function(result) {
               h_code=result;
-              alert(h_code);
+              // alert(h_code);
               alert("문자인증 번호가 발송되었습니다.");
               $("#hp_btn_done").css('display', 'inline');
               $("#cellphone_authentication").css('display', 'inline');
@@ -249,7 +251,7 @@
          });
          $("#hp_btn_done").click(function(e){
            var cellphone_authentication = document.getElementById("cellphone_authentication");
-           alert(h_code);
+           // alert(h_code);
            if(cellphone_authentication.value==h_code){
              alert("인증 완료");
              final_phone_check=true;
@@ -459,7 +461,7 @@
          // 여기1
 
          document.join_member_form.submit();
-         alert("성공");
+         alert("회원가입이 완료되었습니다.");
       }
     </script>
 
@@ -833,7 +835,7 @@ SK플래닛, 슈어엠주식회사	광고성 메시지 발송업무 대행	계�
           <br>
           <button id="end_btn" type="button" name="button" onclick="goto_join()">가입</button>
           &nbsp;&nbsp;
-          <a href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/index.php"><button id="end_btn2" type="button" name="button">취소</button></a> 
+          <a href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/index.php"><button id="end_btn2" type="button" name="button">취소</button></a>
         </div><!--end of join_form div-->
       </form>
     </section>

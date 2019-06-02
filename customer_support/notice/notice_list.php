@@ -51,6 +51,13 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="search"){
   $sql="SELECT * from `notice` order by num desc";
 }
 
+//검색시
+//   $sql="SELECT num, title, content, regist_day, hit from `notice` where $find_option like '%$q_find_input%' order by num desc;";
+// }else{
+//   //"select num, groupnum, depth, ord, name, title, content, regist_day, hit FROM qna inner join member on qna.id = member.id;"
+//   $sql="SELECT num, title, content, regist_day, hit FROM `notice` order by `groupnum` desc, `ord` asc;";
+// }
+
 // 쿼리문실행문장
 $result=mysqli_query($conn,$sql);
 
@@ -110,14 +117,14 @@ $view_num = $total_record - $start_record;
     <section id="notice" style="height: 700px; max-height:2000px;">
       <form name="notice_form" action="notice_list?mode=search" method="post">
         <div class="notice_list_search">
-          <!-- <li id="total_title"><b>total <?=$total_record?></b></li> -->
+        <!-- <li id="total_title"><b>total <?//$total_record?></b></li> -->
           <li id="search_option">
-            <select>
-            <option value="">제목</option>
-            <option value="">내용</option>
+            <select name="find_option">
+            <option value="title">제목</option>
+            <option value="content">내용</option>
           </select>
-          <input type="text" name="" value="">
-          <button type="button" name="button">검색</button>
+          <input type="text" name="find_input" value="">
+          <input id ="search_btn" type="submit" value="검색"></input>
         </li>
       </div>
       </form>
@@ -141,6 +148,8 @@ $view_num = $total_record - $start_record;
           $title=$row['title'];
           $regist_day= substr($row['regist_day'],0,10);
           $hit=$row['hit'];
+          // $name = $row['name'];
+
           $title=str_replace("\n", "<br>",$title);
           $title=str_replace(" ", "&nbsp;",$title);
       ?>
@@ -148,7 +157,7 @@ $view_num = $total_record - $start_record;
           <!--번호-->
           <td><?=$view_num?></td>
           <!--제목-->
-          <td style="text-align: left;"><a style="text-decoration: none;" href="./notice_view.php?num=<?=$num?>&present_page=<?=$page?>&hit=<?=$hit+1?>"><?=$title?></a></td>
+          <td style="text-align: center; height:50px;"><a style="text-decoration: none; color:black;" href="./notice_view.php?num=<?=$num?>&present_page=<?=$page?>&hit=<?=$hit+1?>"><?=$title?></a></td>
           <!--작성자-->
           <td><?=$name?></td>
           <!--작성일-->
