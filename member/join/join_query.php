@@ -11,18 +11,17 @@ $join_name= $_POST["join_name"];
 $join_zip= $_POST["join_zip"];
 $join_foundational= $_POST["join_foundational"];
 $join_detail= $_POST["join_detail"];
-// var_export($id);
-// var_export($join_passwd);
-// var_export($join_passwdconfirm);
-// var_export($join_name);
-// var_export($join_zip);
-// var_export($join_foundational);
-// var_export($join_detail);
-// exit;
 
 $sql="UPDATE `member` SET `passwd`='$join_passwd', `passwd_confirm` ='$join_passwdconfirm' , `name` ='$join_name', `zip` ='$join_zip' , `address1` ='$join_foundational' , `address2` ='$join_detail' WHERE `id`='$id';";
+
 $result = mysqli_query($conn,$sql);
 
+//이우주 6를 지운다
+session_destroy();
+mysqli_close($conn);
+header('Location:http://'.$_SERVER['HTTP_HOST'].'/santteut/member/login/login.php');
+
+exit;
 }else{
   $id = $_POST['join_id'];
   $join_passwd = $_POST["join_passwd"];
