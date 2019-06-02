@@ -76,7 +76,7 @@ if(isset($_GET["mode"]) && $_GET["mode"]=='update'){
     <script src="./js/official_review_form.js?ver=0"></script>
     <script type="text/javascript">
     </script>
-    <title>명산정보</title>
+    <title>공식산행후기</title>
   </head>
   <body>
     <header>

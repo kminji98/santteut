@@ -196,12 +196,17 @@ while($row=mysqli_fetch_array($result)){
       ]);
 
       var options = {
-        chart: {
-          title: 'Monthly revenue history',
-          subtitle: 'in won (KRW)'
-        },
-        width: 770,
-        height: 500
+        'title': 'Monthly revenue history',
+        'subtitle': 'in won (KRW)',
+        //'legend': 'none',
+        //'lineWidth': 50,
+        'colors': 'green',
+        'hAxis': {
+                minValue: 1,
+                maxValue: 12
+              },
+        'width': 770,
+        'height': 500
       };
 
       var chart = new google.charts.Line(document.getElementById('linechart'));

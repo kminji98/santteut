@@ -62,7 +62,7 @@ $view_num = $total_record - $start_record;
 <html lang="ko" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>명산정보</title>
+    <title>공식산행후기</title>
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/community/official_review/css/official_review_list.css?ver=0">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/side_bar.css">
