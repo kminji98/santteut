@@ -186,7 +186,7 @@ if(!empty($_FILES['p_main_img1']['name'])){
 
     //7. 임시저장소에 있는 파일을 서버에 지정한 위치로 이동한다.
     if(!move_uploaded_file($main_img_copy_tmp_name1, $uploaded_file1)){
-      alert_back($main_img1);
+      // alert_back($main_img1);
     }
 
 
@@ -347,7 +347,7 @@ if(!empty($_POST['p_bus'])){
           $package_str .= chr($capi);
       }
   $package_num = mt_rand(100000, 999999);
-echo "<script>alert($p_place)</script>";
+// echo "<script>alert($p_place)</script>";
   if($p_place=="1"){
     $airplane_number="0";
   }else if($p_place=="2"){
