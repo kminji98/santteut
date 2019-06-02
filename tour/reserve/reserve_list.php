@@ -13,7 +13,7 @@ $sql=$result=$total_record=$total_pages=$start_record=$row="";
 $total_record=0;
 $alert = '';
 
-define('ROW_SCALE', 10);
+define('ROW_SCALE', 20);
 define('PAGE_SCALE', 10);
 //r_cancel=0 -> 예약내역
 //r_cancel=1 -> 취소내역
