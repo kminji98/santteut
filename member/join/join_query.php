@@ -3,7 +3,6 @@ session_start();
 include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
 if($_GET['mode']=="update"){
 
-
 $id = $_GET['id'];
 $join_passwd = $_POST["join_passwd"];
 $join_passwdconfirm = $_POST["join_passwdconfirm"];
@@ -19,9 +18,11 @@ $result = mysqli_query($conn,$sql);
 //이우주 6를 지운다
 session_destroy();
 mysqli_close($conn);
-header('Location:http://'.$_SERVER['HTTP_HOST'].'/santteut/member/login/login.php');
 
-exit;
+
+header('Location:http://'.$_SERVER['HTTP_HOST'].'/santteut/member/login/login.php?mode=update');
+
+
 }else{
   $id = $_POST['join_id'];
   $join_passwd = $_POST["join_passwd"];

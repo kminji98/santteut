@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <?php
+if($_GET['mode']=="update"){
+  echo '<script>alert("완료. 다시 로그인해주세요.");</script>';
+}
 if(!session_id()) {
     session_start();
 }

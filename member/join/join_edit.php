@@ -8,7 +8,7 @@ if($_GET['id']){
  $sql="SELECT * from `member` where `id`= '$id';";
  $result = mysqli_query($conn,$sql) or die("실패원인1: ".mysqli_error($conn));
  $row = mysqli_fetch_array($result);
- $name = $row['name'];
+ $name1 = $row['name'];
  $zip = $row['zip'];
  $address1 = $row['address1'];
  $address2 = $row['address2'];
@@ -477,9 +477,9 @@ if($_GET['id']){
             <tr>
               <th><label>이름</label>&nbsp;<span>*</span></th>
               <?php
-                $name = $row['name'];
+                var_dump($name1);
                ?>
-              <td colspan="3"><input value="<?=$name?>" placeholder="2~5글자" id="join_name" type="text" name="join_name" size="40"></td>
+              <td colspan="3"><input value="<?=$name1?>" placeholder="2~5글자" id="join_name" type="text" name="join_name" size="40"></td>
             </tr>
 
             <!--주소_우편번호-->
