@@ -28,22 +28,6 @@ if (!$result) {
   die('Error: ' . mysqli_error($conn));
 }
 
-  $sql="SELECT * from `free` where num ='$num';";
-  $result = mysqli_query($conn,$sql);
-  if (!$result) {
-    die('Error: ' . mysqli_error($conn));
-  }
-  $row=mysqli_fetch_array($result);
-  $id=$row['id'];
-  $name=$row['name'];
-  $title=$row['title'];
-  $content= $row['content'];
-  $destination= $row['destination'];
-  $file_name= $row['file_name'];
-  $update= $row['del'];
-  $day=$row['regist_day'];
-  $hit=$row['hit'];
-
  ?>
   <head>
     <meta charset="utf-8">
@@ -70,14 +54,29 @@ if (!$result) {
     <header>
       <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/login_menu.php";?>
       <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/commu_menu.php";?>
-      <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/side_bar.php";?>4
+      <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/side_bar.php";?>
     </header>
+    <?php $sql="SELECT * from `free` where num ='$q_num';";
+    $result = mysqli_query($conn,$sql);
+    if (!$result) {
+      die('Error: ' . mysqli_error($conn));
+    }
+    $row=mysqli_fetch_array($result);
+    $id=$row['id'];
+    $name=$row['name'];
+    $title=$row['title'];
+    $content= $row['content'];
+    $destination= $row['destination'];
+    $file_name= $row['file_name'];
+    $update= $row['del'];
+    $day=$row['regist_day'];
+    $hit=$row['hit']; ?>
 
     <section id="free">
       <table border="1">
         <tr>
           <th>작성자</th>
-          <td style="width:600px; text-align:center;"><?=$_SESSION['name']?></td>
+          <td style="width:600px; text-align:center;"><?=$name?></td>
         </tr>
         <tr>
           <th>제목</th>

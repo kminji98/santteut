@@ -9,7 +9,6 @@ if(!isset($_SESSION['id'])){
   exit;
 }
 
-$name = $_SESSION['name'];
 
 //0-0. 인클루드 디비
 include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
@@ -40,8 +39,8 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="search"){
   $q_find_input = mysqli_real_escape_string($conn, $find_input);
 
   if(empty($find_input)){
-    echo ("<script>window.alert('검색할 단어를 입력해 주세요')history.go(-1)</script>");
-    exit;
+  echo "<script>alert('검색어를 입력하세요');history.go(-1);</script>";
+
   }
 
   $sql="SELECT * from `free` where $find_option like '%$q_find_input%';";
@@ -106,7 +105,7 @@ $view_num = $total_record - $start_record;
     </header>
 
     <section id="free" style="height: 700px; max-height:2000px;">
-      <form name="free_form" action="free_list?mode=search" method="post">
+      <form name="free_form" action="free_list.php?mode=search" method="post">
         <div class="free_list_search">
           <!-- <li id="total_title"><b>total <?=$total_record?></b></li> -->
           <li id="search_option">
@@ -115,7 +114,7 @@ $view_num = $total_record - $start_record;
             <option value="content">내용</option>
             <option value="name">작성자</option>
           </select>
-          <input type="text" name="" value="">
+          <input type="text" name="find_input" value="">
           <button type="submit" name="button">검색</button>
         </li>
       </div>
@@ -137,6 +136,7 @@ $view_num = $total_record - $start_record;
           mysqli_data_seek($result,$record);
           $row=mysqli_fetch_array($result);
           $num=$row['num'];
+          $name=$row['name'];
           $title=$row['title'];
           $regist_day= substr($row['regist_day'],0,10);
           $hit=$row['hit'];

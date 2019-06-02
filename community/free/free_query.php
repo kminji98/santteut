@@ -35,10 +35,17 @@ if ($_FILES['upfile']['name']){
           alert_back('Error: ' . mysqli_error($conn));
           // die('Error: ' . mysqli_error($conn));
         }
-
+        $sql="SELECT num from `free` where id ='$userid' order by num desc limit 1;";
+        $result = mysqli_query($conn,$sql);
+        if (!$result) {
+          alert_back('Error: 6' . mysqli_error($conn));
+          // die('Error: ' . mysqli_error($conn));
+        }
+        $row=mysqli_fetch_array($result);
+        $num=$row['num'];
         mysqli_close($conn);
 
-        echo "<script>location.href='./free_list.php';</script>";
+        echo "<script>location.href='./free_view.php?num=$num&hit=0';</script>";
       }else if(isset($_GET["mode"])&&$_GET["mode"]=="update"){
         $num = $_POST["num"];
         $sql="SELECT `destination` from `free` where num ='$num';";
@@ -63,7 +70,7 @@ if ($_FILES['upfile']['name']){
           die('Error: ' . mysqli_error($conn));
         }
       }
-        echo "<script>location.href='./free_list.php?num=$num';</script>";
+        echo "<script>location.href='./free_view.php?num=$num&hit=$hit';</script>";
 
 
       }else if(isset($_GET["mode"])&&$_GET["mode"]=="delete"){
