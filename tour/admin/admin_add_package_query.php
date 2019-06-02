@@ -364,7 +364,7 @@ if(!empty($_POST['p_bus'])){
           $package_str .= chr($capi);
       }
   $package_num = mt_rand(100000, 999999);
-echo "<script>alert($p_place)</script>";
+// echo "<script>alert($p_place)</script>";
   if($p_place=="1"){
     $airplane_number="0";
   }else if($p_place=="2"){
