@@ -251,7 +251,7 @@ if(!empty($_POST['divide'])){
     <header>
       <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/login_menu.php";?>
     </header>
-    <section style="margin-left: 42%; margin-top: 6%;">
+    <section style="margin-left: 44%; margin-top: 6%;">
     <form name="form" action="best10_review.php" method="post">
       <select name="divide" style="width: 100px; height:30px;">
         <option value="" hidden>선택</option>
@@ -271,7 +271,7 @@ if(!empty($_POST['divide'])){
     </form>
   </section>
     <!--파이 차트를 저장할 div-->
-    <div id="chart_div" style="margin-left: 14%;"></div>
+    <div id="chart_div" style="margin-left: 22%;"></div>
     <footer id="foo">
       <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/footer.php";?>
     </footer>

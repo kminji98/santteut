@@ -1,5 +1,4 @@
 <?php
-session_start();
 
 include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php";
 ?>

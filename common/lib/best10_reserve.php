@@ -213,7 +213,7 @@ $divide = "";
   <header>
     <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/login_menu.php";?>
   </header>
-  <section style="margin-left: 42%; margin-top: 6%;">
+  <section style="margin-left: 44.5%; margin-top: 6%;">
   <form name="form" action="best10_reserve.php" method="post">
     <select name="divide" style="width: 100px; height:30px;">
       <option value="" hidden>선택</option>
@@ -225,7 +225,7 @@ $divide = "";
   </form>
 </section>
   <!--파이 차트를 저장할 div-->
-  <div id="chart_div" style="margin-left: 230px; margin-top: 2.5%;"></div>
+  <div id="chart_div" style="margin-left: 22%; margin-top: 2.5%;"></div>
   <footer id="foo">
     <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/footer.php";?>
   </footer>
