@@ -13,7 +13,7 @@ if(!session_id()) {session_start();}
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css">
-    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/mypage/myboard/css/myboard.css?ver=0">
+    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/mypage/myboard/css/myboard.css?ver=0.1">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/side_bar.css">
     <title>산뜻 :: 즐거운 산행</title>
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
@@ -71,7 +71,7 @@ if(!session_id()) {session_start();}
           $("#list_tbl_body").html('');
           $("#list_tbl_body").append('<tr><td style="width:60%;">'+output[0].th1+'</td><td>'+output[0].th2+'</td><td>'+output[0].th3+'</td></tr>');
           $("#list_tbl_body").append(output[0].output);
-          
+
           if(output[0].output == ''){
             $("#no_result").html('<p id="no_result" style="text-align:center; padding:2%;margin-bottom:3%;">해당 게시물의 내역이 없습니다.</p><hr><br>');
           }

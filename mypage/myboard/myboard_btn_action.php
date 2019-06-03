@@ -43,6 +43,7 @@ if(isset($_POST['category'])){
     switch ($tbl) {
       case 'qna':
       $tbl = 'qna';
+      $num = $row['num'];
       $title = $row['title'];
       $date = $row['regist_day'];
       $field = $row['hit'];
@@ -58,6 +59,7 @@ if(isset($_POST['category'])){
       break;
       case 'free':
       $tbl = 'free';
+      $num = $row['num'];
       $title = $row['title'];
       $date = $row['regist_day'];
       $field = $row['hit'];
@@ -69,9 +71,10 @@ if(isset($_POST['category'])){
     }
     if(isset($pk)){
       $output = $output."<tr><td><a id='$pk' onclick='review_form(this.id);'>$title</a></td><td>$date</td><td>$field</td></tr>";
-    }else{
-      $output = $output."<tr><td><a>$title</a></td><td>$date</td><td>$field</td></tr>";
-
+    }else if(isset($tbl) && $tbl == 'free'){
+      $output = $output."<tr><td><a href='../../community/free/free_view.php?num=".$num."&hit=".($field+1)."' >$title</a></td><td>$date</td><td>$field</td></tr>";
+    }else if(isset($tbl) && $tbl == 'qna'){
+      $output = $output."<tr><td><a href='../../customer_support/qna/qna_view.php?num=".$num."&hit=".($field+1)."' >$title</a></td><td>$date</td><td>$field</td></tr>";
     }
   }//end of for
 
