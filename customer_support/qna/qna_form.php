@@ -1,47 +1,41 @@
 <?php
-session_start();
+  session_start();
 
-// isset함수는 불리언값을 리턴 true or false
-// 비회원이면 권한없음
-if(!isset($_SESSION['id'])){
-  echo "<script>alert('회원가입 후 이용해주세요.');history.go(-1);</script>";
-  exit;
-}
+  if(!isset($_SESSION['id'])){
+    echo "<script>alert('회원가입 후 이용해주세요.');history.go(-1);</script>";
+    exit;
+  }
 
-// 인클루드 디비코넥터
-include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
+  include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
 
-// 변수선언(번호 이름 제목 내용 작성일 조회수 비밀여부)
-$num=$name=$title=$content=$regist_day=$hit="";
-// $secret_ok="공개";
-$mode="insert";
-$name= $_SESSION['name'];
+  $num=$name=$title=$content=$regist_day=$hit="";
+  $mode="insert";
+  $name= $_SESSION['name'];
 
-// 모드가 수정 or 답글일때
-if((isset($_GET["mode"])&&$_GET["mode"]=="update") || (isset($_GET["mode"])&&$_GET["mode"]=="response") ){
+  // 모드가 수정 or 답글일때
+  if((isset($_GET["mode"])&&$_GET["mode"]=="update") || (isset($_GET["mode"])&&$_GET["mode"]=="response") ){
 
-    $mode=$_GET["mode"];//update 또는 response $mode="update"or"response"
-    $num = test_input($_GET["num"]);
-    $q_num = mysqli_real_escape_string($conn, $num);
+      $mode=$_GET["mode"];//update 또는 response $mode="update"or"response"
+      $num = test_input($_GET["num"]);
+      $q_num = mysqli_real_escape_string($conn, $num);
 
-    //update 이면 해당된글, response이면 부모의 해당된글을 가져옴.
-    $sql="SELECT * from `qna` where num ='$q_num';";
-    $result = mysqli_query($conn,$sql);
-    if (!$result) {die('Error: ' . mysqli_error($conn));}
-    $row=mysqli_fetch_array($result);
-    $id=$row['id'];
-    $pw=$row['pw'];
-    $title= $row['title'];
-    $content= $row['content'];
-    $regist_day=$row['regist_day'];
-    $hit=$row['hit'];
+      //update 이면 해당된글, response이면 부모의 해당된글을 가져옴.
+      $sql="SELECT * from `qna` where num ='$q_num';";
+      $result = mysqli_query($conn,$sql);
+      if (!$result) {die('Error: ' . mysqli_error($conn));}
+      $row=mysqli_fetch_array($result);
+      $id=$row['id'];
+      $pw=$row['pw'];
+      $title= $row['title'];
+      $content= $row['content'];
+      $regist_day=$row['regist_day'];
+      $hit=$row['hit'];
 
-    if($mode == "response"){
-      $title="[re]".$title;
-      $content="";
-    }
-
-}
+      if($mode == "response"){
+        $title="[re]".$title;
+        $content="";
+      }
+  }
 ?>
 
 <!DOCTYPE html>
@@ -56,10 +50,10 @@ if((isset($_GET["mode"])&&$_GET["mode"]=="update") || (isset($_GET["mode"])&&$_G
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/side_bar.css">
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
     <script type="text/javascript">
-    $(document).ready(function() {
-      $("#qna_mini").css("font-weight","bold");
-      $("#qna_mini").css("color","black");
-    });
+      $(document).ready(function() {
+        $("#qna_mini").css("font-weight","bold");
+        $("#qna_mini").css("color","black");
+      });
     </script>
     <!-- include libraries(jQuery, bootstrap) -->
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
@@ -70,20 +64,20 @@ if((isset($_GET["mode"])&&$_GET["mode"]=="update") || (isset($_GET["mode"])&&$_G
     <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.js"></script>
     <script src="./js/qna_form.js?ver=0"></script>
     <script type="text/javascript">
-    window.onload = function(){
-      document.getElementById('secret_ok').onclick = function(){
-        var check = document.getElementById('secret_ok');
-        check = check.checked;
-        var pw = document.getElementById('pw');
-        if(check){
-          pw.type = 'password';
-        }else{
-          pw.type = 'hidden';
+      window.onload = function(){
+        document.getElementById('secret_ok').onclick = function(){
+          var check = document.getElementById('secret_ok');
+          check = check.checked;
+          var pw = document.getElementById('pw');
+          if(check){
+            pw.type = 'password';
+          }else{
+            pw.type = 'hidden';
+          }
         }
       }
-    }
     </script>
-    <title>문의하기</title>
+  <title>문의하기</title>
   </head>
   <body>
     <header>
@@ -92,7 +86,6 @@ if((isset($_GET["mode"])&&$_GET["mode"]=="update") || (isset($_GET["mode"])&&$_G
       <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/side_bar.php";?>
     </header>
     <br><br><br>
-
     <section id="qna">
       <form class="qna_insert_form" action="qna_query.php?mode=<?php echo $mode; ?>" method="post" enctype="multipart/form-data">
         <input type="hidden" name="num" value="<?=$num?>">

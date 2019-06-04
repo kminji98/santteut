@@ -10,10 +10,10 @@
     $row=mysqli_fetch_array($result);
     $pw=$row['pw'];
     if(empty($pw)){
-      ?>
-      <script>window.opener.location.href="./qna_view.php?num=<?=$num?>&page=<?=$page?>&hit=<?=$hit+1?>";
-      window.close();
-      </script>
+?>
+<script>window.opener.location.href="./qna_view.php?num=<?=$num?>&page=<?=$page?>&hit=<?=$hit+1?>";
+  window.close();
+</script>
 <?php
     }
 ?>
@@ -40,6 +40,6 @@
         </tr>
       </table>
     </form>
-    </section>
+  </section>
   </body>
 </html>

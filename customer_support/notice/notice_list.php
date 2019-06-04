@@ -1,23 +1,10 @@
-<!-- =================================================================
-// + [DESC] notice_list 총괄
-// + [DATE] 2019-05-26
-// + [NAME] 이우주
-// ================================================================= -->
-
 <?php
 session_start();
-
-// isset함수는 불리언값을 리턴 true or false
-// 회원 or 비회원이면 권한없음, 관리자일때만 입장
-
 
 $name = $_SESSION['name'];
 
 //0-0. 인클루드 디비
 include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
-
-//0-1. 인클루드 크리테이블
-include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/create_table_base.php";
 
 //1. 게시물수 정의
 define('ROW_SCALE', 10);

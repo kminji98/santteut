@@ -1,19 +1,9 @@
-<!-- =================================================================
-// + [DESC] notice_view 총괄
-// + [DATE] 2019-05-26
-// + [NAME] 이우주
-// ================================================================= -->
-<?php
+s<?php
 session_start();
-
-// isset함수는 불리언값을 리턴 true or false
-// 회원 or 비회원이면 권한없음, 관리자일때만 입장
 
 include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
 
 $num=$name=$title=$content=$regist_day=$hit="";
-
-// $image_width="";
 
 // 페이지가 없으면 디폴트 페이지 1페이지
 if(empty($_GET['page'])){$page=1;}else{$page=$_GET['page'];}
@@ -45,22 +35,6 @@ if(isset($_GET["num"]) && !empty($_GET["num"])){
     $file_copied=$row['file_copied'];
     $file_type=$row['file_type'];
     $regist_day=$row['regist_day'];
-
-// 이미지 연관부분
-  //숫자 0 " " '0' null 0.0   $a = array()
-  // if(!empty($file_copied)){
-  //   //이미지 정보를 가져오기 위한 함수 width, height, type
-  //   $image_info=getimagesize("./data/".$file_copied);
-  //   $image_width=$image_info[0];
-  //   $image_height=$image_info[1];
-  //   $image_type=$image_info[2];
-  //   if($image_width>400) $image_width = 400;
-  // }else{
-  //   $image_width=0;
-  //   $image_height=0;
-  //   $image_type="";
-  // }
-
 }
 
 ?>
@@ -78,7 +52,7 @@ if(isset($_GET["num"]) && !empty($_GET["num"])){
         $("#not_mini").css("font-weight","bold");
         $("#not_mini").css("color","black");
       });
-      </script>
+    </script>
     <title>공지사항</title>
   </head>
   <body>
@@ -87,20 +61,11 @@ if(isset($_GET["num"]) && !empty($_GET["num"])){
       <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/custom_menu.php";?>
       <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/side_bar.php";?>
     </header>
-
     <section id="notice">
       <table border="1">
-        <tr>
-          <th>작성자</th>
-          <td style="width:600px; text-align:center;">관리자</td>
-        </tr>
-        <tr>
-          <th>제목</th>
-          <td><?=$title?></td>
-        </tr>
-
-        <tr style="height:400px;">
-          <th>내용</th>
+        <tr><th>작성자</th><td style="width:600px; text-align:center;">관리자</td></tr>
+        <tr><th>제목</th><td><?=$title?></td></tr>
+        <tr style="height:400px;"><th>내용</th>
           <td>
             <!--이미지면 보여줌-->
             <?php
@@ -117,32 +82,31 @@ if(isset($_GET["num"]) && !empty($_GET["num"])){
         <tr>
           <th>파일</th>
           <td style="text-align:center; text-decoration: none;">
-<?php
-//2. 업로드된 이름을 보여주고 [저장] 할것인지 선택한다.
-            echo ("
-              첨부파일 : $file_name &nbsp; [ $file_size Byte ]
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>
-              <a style='text-decoration: none; color:black;' href='notice_download.php?mode=download&num=$q_num'>[저장]</a></b><br>
-            ");
-             ?>
+            <?php
+              //2. 업로드된 이름을 보여주고 [저장] 할것인지 선택한다.
+              echo ("
+                첨부파일 : $file_name &nbsp; [ $file_size Byte ]
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>
+                <a style='text-decoration: none; color:black;' href='notice_download.php?mode=download&num=$q_num'>[저장]</a></b><br>
+              ");
+            ?>
           </td>
         </tr>
       </table>
-    <div class="admin">
-      <?php
-      //관리자일경우 수정,삭제가 가능하도록 설정
-      if(!empty($_SESSION['id']) && ($_SESSION['id']=="admin")){
-        echo ('<a href="./notice_form.php?mode=update&num='.$num.'"><input id="admin_write_btn" type="button" value="수정">&nbsp;</a>&nbsp;');
-        echo ('<input id="admin_write_btn" type="button" value="삭제" onclick="check_delete('.$num.')">&nbsp;</a>&nbsp;');
-        echo ('<a href="./notice_list.php?page='.$page.'"><input id="admin_write_btn" type="button" value="목록">&nbsp;</a>');
-      }else{
-        echo ('<div class="notice_list" style="margin-left: 25.5%;">
-        <a href="./notice_list.php?page='.$page.'"><input type="button" value="목록">&nbsp;</a>
-        </div>');
-      }
-      ?>
-    </div>
-
+      <div class="admin">
+        <?php
+        //관리자일경우 수정,삭제가 가능하도록 설정
+        if(!empty($_SESSION['id']) && ($_SESSION['id']=="admin")){
+          echo ('<a href="./notice_form.php?mode=update&num='.$num.'"><input id="admin_write_btn" type="button" value="수정">&nbsp;</a>&nbsp;');
+          echo ('<input id="admin_write_btn" type="button" value="삭제" onclick="check_delete('.$num.')">&nbsp;</a>&nbsp;');
+          echo ('<a href="./notice_list.php?page='.$page.'"><input id="admin_write_btn" type="button" value="목록">&nbsp;</a>');
+        }else{
+          echo ('<div class="notice_list" style="margin-left: 25.5%;">
+          <a href="./notice_list.php?page='.$page.'"><input type="button" value="목록">&nbsp;</a>
+          </div>');
+        }
+        ?>
+      </div>
     </section>
     <br>
     <br>

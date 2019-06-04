@@ -1,14 +1,8 @@
- <!-- =================================================================
-// + [DESC] notice_download 총괄
-// + [DATE] 2019-05-26
-// + [NAME] 이우주
-// ================================================================= -->
-
 <?php
 session_start();
 
 // isset함수는 불리언값을 리턴 true or false
-// 회원 or 비회원이면 권한없음, 관리자일때만 입장
+// 비회원이면 권한없음
 if(!isset($_SESSION['id'])){
   echo "<script>alert('권한없음!');history.go(-1);</script>";
   exit;
@@ -39,7 +33,7 @@ if(isset($_GET["mode"]) && $_GET["mode"]=="download"){
 
 // 1. 테이블에서 파일명이 있는지 점검
 if(empty($file_copied)){
-    alert_back(' 테이블에 파일명이 존재 하지 않습니다.!');
+  alert_back(' 테이블에 파일명이 존재 하지 않습니다.!');
 }
 $file_path = "./data/$file_copied";
 
@@ -54,8 +48,8 @@ if(file_exists($file_path)){
     Header("Content-Transfer-Encoding: binary");
     Header("Content-Description: File Transfer");
     Header("Expires: 0");
-  //지정된 파일타입이 아닌경우
 
+  //지정된 파일타입이 아닌경우
   }else{
     //타입이 알려지지 않았을때 익스플러러 프로토콜 통신방식
     if(eregi("(MSIE 5.0|MSIE 5.1|MSIE 5.5|MSIE 6.0)",$_SERVER['HTTP_USER_AGENT'])){
@@ -72,11 +66,9 @@ if(file_exists($file_path)){
       Header("Expires: 0");
     }
   }
-
   fpassthru($fp);
   fclose($fp);
 }else{
-    alert_back(' 서버에 실제 파일이 존재 하지 않습니다.!');
+  alert_back(' 서버에 실제 파일이 존재 하지 않습니다.!');
 }
-
 ?>
