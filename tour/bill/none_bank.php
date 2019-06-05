@@ -1,10 +1,8 @@
 <?php
-
-include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/bill/bil_query.php";
-include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/bill/bill_insert_query.php";
-
-$b_seat1=str_replace("/", ",", $b_seat);
-$b_seat1=substr($b_seat1, 1);
+  include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/bill/bil_query.php";
+  include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/bill/bill_insert_query.php";
+  $b_seat1=str_replace("/", ",", $b_seat);
+  $b_seat1=substr($b_seat1, 1);
 ?>
 <!DOCTYPE html>
 <html lang="ko" dir="ltr">
@@ -44,12 +42,10 @@ $b_seat1=substr($b_seat1, 1);
     <button onclick="bye();" type="button" name="button"  style="margin-left:30%; width:100px; height:30px; margin-top:10px; ">완료</button>
     <script type="text/javascript">
       function bye(){
-
         alert('결제가완료되었습니다.');
         // self.opener = self;
         opener.location.href="../../index.php";
         window.close();
-
       }
     </script>
     </div>

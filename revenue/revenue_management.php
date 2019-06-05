@@ -1,159 +1,157 @@
 <?php
-session_start();
-//********************************************************************
-$sql1=$sql2=$sql3=$sql4=$sql5=$sql6=$sql7=$sql8=$sql9=$sql10=$sql11=$sql12="";
-//********************************************************************
-include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
+  session_start();
+  //********************************************************************
+  $sql1=$sql2=$sql3=$sql4=$sql5=$sql6=$sql7=$sql8=$sql9=$sql10=$sql11=$sql12="";
+  //********************************************************************
+  include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
 
   if(!empty($_SESSION['id'])){
     $id = $_SESSION['id'];
   }else{
     $id = "";
   }
-
   if(!empty($_POST['find'])){
     $find = $_POST['find'];
   }else{
     $find = "";
   }
+  $jan = "01";
+  $feb = "02";
+  $mar = "03";
+  $apr = "04";
+  $may = "05";
+  $jun = "06";
+  $jul = "07";
+  $aug = "08";
+  $sep = "09";
+  $oct = "10";
+  $nov = "11";
+  $dec = "12";
 
-$jan = "01";
-$feb = "02";
-$mar = "03";
-$apr = "04";
-$may = "05";
-$jun = "06";
-$jul = "07";
-$aug = "08";
-$sep = "09";
-$oct = "10";
-$nov = "11";
-$dec = "12";
+  $jan_price = 0;
+  $feb_price = 0;
+  $mar_price = 0;
+  $apr_price = 0;
+  $may_price = 0;
+  $jun_price = 0;
+  $jul_price = 0;
+  $aug_price = 0;
+  $sep_price = 0;
+  $oct_price = 0;
+  $nov_price = 0;
+  $dec_price = 0;
 
-$jan_price = 0;
-$feb_price = 0;
-$mar_price = 0;
-$apr_price = 0;
-$may_price = 0;
-$jun_price = 0;
-$jul_price = 0;
-$aug_price = 0;
-$sep_price = 0;
-$oct_price = 0;
-$nov_price = 0;
-$dec_price = 0;
-
-$current_date = 2019; //현재년도
-if(!empty($find)){
-  $sql = "SELECT * FROM `bill` WHERE b_date like '$find%';";
-}else{
-  $sql = "SELECT * FROM `bill` WHERE b_date like '$current_date%';";
-}
-
-$result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
-
-while($row=mysqli_fetch_array($result)){
-  $b_pay = $row['b_pay'];
-  $b_date = $row['b_date'];
-
-  $b_date = substr($b_date, 0,5);
-
-  $sql1 = "SELECT sum(b_pay) FROM `bill` WHERE b_date like '$b_date$jan%'";
-  $result1 = mysqli_query($conn, $sql1) or die(mysqli_error($conn));
-  $row = mysqli_fetch_array($result1);
-  $jan_price = $row[0];
-  if(!$jan_price){
-    $jan_price = 0;
+  $current_date = 2019; //현재년도
+  if(!empty($find)){
+    $sql = "SELECT * FROM `bill` WHERE b_date like '$find%';";
+  }else{
+    $sql = "SELECT * FROM `bill` WHERE b_date like '$current_date%';";
   }
 
-  $sql2 = "SELECT sum(b_pay) FROM `bill` WHERE b_date like '$b_date$feb%'";
-  $result2 = mysqli_query($conn, $sql2) or die(mysqli_error($conn));
-  $row = mysqli_fetch_array($result2);
-  $feb_price = $row[0];
-  if(!$feb_price){
-    $feb_price = 0;
-  }
+  $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
 
-  $sql3 = "SELECT sum(b_pay) FROM `bill` WHERE b_date like '$b_date$mar%'";
-  $result3 = mysqli_query($conn, $sql3) or die(mysqli_error($conn));
-  $row = mysqli_fetch_array($result3);
-  $mar_price = $row[0];
-  if(!$mar_price){
-    $mar_price = 0;
-  }
+  while($row=mysqli_fetch_array($result)){
+    $b_pay = $row['b_pay'];
+    $b_date = $row['b_date'];
 
-  $sql4 = "SELECT sum(b_pay) FROM `bill` WHERE b_date like '$b_date$apr%'";
-  $result4 = mysqli_query($conn, $sql4) or die(mysqli_error($conn));
-  $row = mysqli_fetch_array($result4);
-  $apr_price = $row[0];
-  if(!$apr_price){
-    $apr_price = 0;
-  }
+    $b_date = substr($b_date, 0,5);
 
-  $sql5 = "SELECT sum(b_pay) FROM `bill` WHERE b_date like '$b_date$may%'";
-  $result5 = mysqli_query($conn, $sql5) or die(mysqli_error($conn));
-  $row = mysqli_fetch_array($result5);
-  $may_price = $row[0];
-  if(!$may_price){
-    $may_price = 0;
-  }
+    $sql1 = "SELECT sum(b_pay) FROM `bill` WHERE b_date like '$b_date$jan%'";
+    $result1 = mysqli_query($conn, $sql1) or die(mysqli_error($conn));
+    $row = mysqli_fetch_array($result1);
+    $jan_price = $row[0];
+    if(!$jan_price){
+      $jan_price = 0;
+    }
 
-  $sql6 = "SELECT sum(b_pay) FROM `bill` WHERE b_date like '$b_date$jun%'";
-  $result6 = mysqli_query($conn, $sql6) or die(mysqli_error($conn));
-  $row = mysqli_fetch_array($result6);
-  $jun_price = $row[0];
-  if(!$jun_price){
-    $jun_price = 0;
-  }
+    $sql2 = "SELECT sum(b_pay) FROM `bill` WHERE b_date like '$b_date$feb%'";
+    $result2 = mysqli_query($conn, $sql2) or die(mysqli_error($conn));
+    $row = mysqli_fetch_array($result2);
+    $feb_price = $row[0];
+    if(!$feb_price){
+      $feb_price = 0;
+    }
 
-  $sql7 = "SELECT sum(b_pay) FROM `bill` WHERE b_date like '$b_date$jul%'";
-  $result7 = mysqli_query($conn, $sql7) or die(mysqli_error($conn));
-  $row = mysqli_fetch_array($result7);
-  $jul_price = $row[0];
-  if(!$jul_price){
-    $jul_price = 0;
-  }
+    $sql3 = "SELECT sum(b_pay) FROM `bill` WHERE b_date like '$b_date$mar%'";
+    $result3 = mysqli_query($conn, $sql3) or die(mysqli_error($conn));
+    $row = mysqli_fetch_array($result3);
+    $mar_price = $row[0];
+    if(!$mar_price){
+      $mar_price = 0;
+    }
 
-  $sql8 = "SELECT sum(b_pay) FROM `bill` WHERE b_date like '$b_date$aug%'";
-  $result8 = mysqli_query($conn, $sql8) or die(mysqli_error($conn));
-  $row = mysqli_fetch_array($result8);
-  $aug_price = $row[0];
-  if(!$aug_price){
-    $aug_price = 0;
-  }
+    $sql4 = "SELECT sum(b_pay) FROM `bill` WHERE b_date like '$b_date$apr%'";
+    $result4 = mysqli_query($conn, $sql4) or die(mysqli_error($conn));
+    $row = mysqli_fetch_array($result4);
+    $apr_price = $row[0];
+    if(!$apr_price){
+      $apr_price = 0;
+    }
 
-  $sql9 = "SELECT sum(b_pay) FROM `bill` WHERE b_date like '$b_date$sep%'";
-  $result9 = mysqli_query($conn, $sql9) or die(mysqli_error($conn));
-  $row = mysqli_fetch_array($result9);
-  $sep_price = $row[0];
-  if(!$sep_price){
-    $sep_price = 0;
-  }
+    $sql5 = "SELECT sum(b_pay) FROM `bill` WHERE b_date like '$b_date$may%'";
+    $result5 = mysqli_query($conn, $sql5) or die(mysqli_error($conn));
+    $row = mysqli_fetch_array($result5);
+    $may_price = $row[0];
+    if(!$may_price){
+      $may_price = 0;
+    }
 
-  $sql10 = "SELECT sum(b_pay) FROM `bill` WHERE b_date like '$b_date$oct%'";
-  $result10 = mysqli_query($conn, $sql10) or die(mysqli_error($conn));
-  $row = mysqli_fetch_array($result10);
-  $oct_price = $row[0];
-  if(!$oct_price){
-    $oct_price = 0;
-  }
+    $sql6 = "SELECT sum(b_pay) FROM `bill` WHERE b_date like '$b_date$jun%'";
+    $result6 = mysqli_query($conn, $sql6) or die(mysqli_error($conn));
+    $row = mysqli_fetch_array($result6);
+    $jun_price = $row[0];
+    if(!$jun_price){
+      $jun_price = 0;
+    }
 
-  $sql11 = "SELECT sum(b_pay) FROM `bill` WHERE b_date like '$b_date$nov%'";
-  $result11 = mysqli_query($conn, $sql11) or die(mysqli_error($conn));
-  $row = mysqli_fetch_array($result11);
-  $nov_price = $row[0];
-  if(!$nov_price){
-    $nov_price = 0;
-  }
+    $sql7 = "SELECT sum(b_pay) FROM `bill` WHERE b_date like '$b_date$jul%'";
+    $result7 = mysqli_query($conn, $sql7) or die(mysqli_error($conn));
+    $row = mysqli_fetch_array($result7);
+    $jul_price = $row[0];
+    if(!$jul_price){
+      $jul_price = 0;
+    }
 
-  $sql12 = "SELECT sum(b_pay) FROM `bill` WHERE b_date like '$b_date$dec%'";
-  $result12 = mysqli_query($conn, $sql12) or die(mysqli_error($conn));
-  $row = mysqli_fetch_array($result12);
-  $dec_price = $row[0];
-  if(!$dec_price){
-    $dec_price = 0;
+    $sql8 = "SELECT sum(b_pay) FROM `bill` WHERE b_date like '$b_date$aug%'";
+    $result8 = mysqli_query($conn, $sql8) or die(mysqli_error($conn));
+    $row = mysqli_fetch_array($result8);
+    $aug_price = $row[0];
+    if(!$aug_price){
+      $aug_price = 0;
+    }
+
+    $sql9 = "SELECT sum(b_pay) FROM `bill` WHERE b_date like '$b_date$sep%'";
+    $result9 = mysqli_query($conn, $sql9) or die(mysqli_error($conn));
+    $row = mysqli_fetch_array($result9);
+    $sep_price = $row[0];
+    if(!$sep_price){
+      $sep_price = 0;
+    }
+
+    $sql10 = "SELECT sum(b_pay) FROM `bill` WHERE b_date like '$b_date$oct%'";
+    $result10 = mysqli_query($conn, $sql10) or die(mysqli_error($conn));
+    $row = mysqli_fetch_array($result10);
+    $oct_price = $row[0];
+    if(!$oct_price){
+      $oct_price = 0;
+    }
+
+    $sql11 = "SELECT sum(b_pay) FROM `bill` WHERE b_date like '$b_date$nov%'";
+    $result11 = mysqli_query($conn, $sql11) or die(mysqli_error($conn));
+    $row = mysqli_fetch_array($result11);
+    $nov_price = $row[0];
+    if(!$nov_price){
+      $nov_price = 0;
+    }
+
+    $sql12 = "SELECT sum(b_pay) FROM `bill` WHERE b_date like '$b_date$dec%'";
+    $result12 = mysqli_query($conn, $sql12) or die(mysqli_error($conn));
+    $row = mysqli_fetch_array($result12);
+    $dec_price = $row[0];
+    if(!$dec_price){
+      $dec_price = 0;
+    }
   }
-}
 
 ?>
 <!DOCTYPE html>

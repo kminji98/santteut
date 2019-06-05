@@ -6,14 +6,11 @@ if(!empty($_POST['standard'])){
 }else{
   $standard = '';
 }
-
 if(!empty($_POST['divide'])){
   $divide = $_POST['divide'];
 }else{
   $divide = '';
 }
-
-
   switch($standard){
     case 'average' :
     $standard_flag = "avg((`satisfaction_grade`+`schedule_grade`+`cost_grade`+`meal_grade`)/4)";
@@ -62,12 +59,8 @@ if(!empty($_POST['divide'])){
     $divide_title = "국내외";
     break;
   }
-  // var_export($divide_flag);
-  // var_export($standard_flag);
   $sql = "SELECT `r_code`, `package`.`p_arr_mt`, $standard_flag FROM `member_review` JOIN `package` ON `member_review`.`r_code` = `package`.`p_code` $divide_flag GROUP BY `r_code` ORDER BY $standard_flag DESC LIMIT 10;";
   $result = mysqli_query($conn,$sql) or die(mysqli_error($conn));
-  // $total_record = mysqli_num_rows($result);
-  // var_export($total_record);
   mysqli_data_seek($result, 0);
   $row = mysqli_fetch_array($result);
     $p_code0 = $row[0];
@@ -76,10 +69,6 @@ if(!empty($_POST['divide'])){
     if($sum0==NULL){
       $sum0=0;
     }
-    // var_export($p_code0);
-    // var_export($p_name0);
-    // var_export($sum0);
-
   mysqli_data_seek($result, 1);
   $row = mysqli_fetch_array($result);
     $p_code1 = $row[0];
@@ -88,9 +77,6 @@ if(!empty($_POST['divide'])){
     if($sum1==NULL){
       $sum1=0;
     }
-    // var_export($p_code1);
-    // var_export($p_name1);
-    // var_export($sum1);
 
   mysqli_data_seek($result, 2);
     $row = mysqli_fetch_array($result);
@@ -100,9 +86,6 @@ if(!empty($_POST['divide'])){
     if($sum2==NULL){
       $sum2=0;
     }
-    // var_export($p_code2);
-    // var_export($p_name2);
-    // var_export($sum2);
 
   mysqli_data_seek($result, 3);
   $row = mysqli_fetch_array($result);
@@ -112,9 +95,6 @@ if(!empty($_POST['divide'])){
   if($sum3==NULL){
     $sum3=0;
   }
-  // var_export($p_code3);
-  // var_export($p_name3);
-  // var_export($sum3);
 
   mysqli_data_seek($result, 4);
   $row = mysqli_fetch_array($result);
@@ -124,9 +104,6 @@ if(!empty($_POST['divide'])){
   if($sum4==NULL){
     $sum4=0;
   }
-  // var_export($p_code4);
-  // var_export($p_name4);
-  // var_export($sum4);
 
   mysqli_data_seek($result, 5);
   $row = mysqli_fetch_array($result);
@@ -136,10 +113,6 @@ if(!empty($_POST['divide'])){
   if($sum5==NULL){
     $sum5=0;
   }
-  // var_export($p_code5);
-  // var_export($p_name5);
-  // var_export($sum5);
-
   mysqli_data_seek($result, 6);
   $row = mysqli_fetch_array($result);
   $p_code6 = $row[0];
@@ -148,9 +121,6 @@ if(!empty($_POST['divide'])){
   if($sum6==NULL){
     $sum6=0;
   }
-  // var_export($p_code6);
-  // var_export($p_name6);
-  // var_export($sum6);
 
   mysqli_data_seek($result, 7);
   $row = mysqli_fetch_array($result);
@@ -160,10 +130,6 @@ if(!empty($_POST['divide'])){
   if($sum7==NULL){
     $sum7=0;
   }
-  // var_export($p_code7);
-  // var_export($p_name7);
-  // var_export($sum7);
-
   mysqli_data_seek($result, 8);
   $row = mysqli_fetch_array($result);
   $p_code8 = $row[0];
@@ -172,9 +138,6 @@ if(!empty($_POST['divide'])){
   if($sum8==NULL){
     $sum8=0;
   }
-  // var_export($p_code8);
-  // var_export($p_name8);
-  // var_export($sum8);
 
   mysqli_data_seek($result, 9);
   $row = mysqli_fetch_array($result);
@@ -184,9 +147,6 @@ if(!empty($_POST['divide'])){
   if($sum9==NULL){
     $sum9=0;
   }
-  // var_export($p_code9);
-  // var_export($p_name9);
-  // var_export($sum9);
 
  ?>
 

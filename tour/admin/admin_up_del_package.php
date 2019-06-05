@@ -9,15 +9,12 @@ include '../../common/lib/db_connector.php';
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/tour/admin/css/admin_add_package.css?ver=1">
     <title>산뜻 :: 즐거운 산행</title>
-
     <script type="text/javascript">
       function check_input(){
         saveContent();
       }
     </script>
-
   </head>
-
   <body>
     <!--로그인 회원가입 로그아웃-->
     <div id="wrap">
@@ -33,8 +30,6 @@ include '../../common/lib/db_connector.php';
     <footer>
       <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/footer.php";?>
     </footer>
-
     </div>
-
   </body>
 </html>

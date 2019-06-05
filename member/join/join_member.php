@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/member/join/css/join_member.css">
     <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
-
     <!-- 약관모두체크 -->
     <script type="text/javascript">
       var check_val=false;
@@ -31,12 +30,8 @@
           check_3.checked=false;
           check_val=false;
         }
-
       }
-
     </script>
-
-
     <!-- 아이디/비밀번호중복확인 -->
     <script type="text/javascript">
     $(document).ready(function(){
@@ -57,7 +52,6 @@
            id_check=false;
            return false;
          }
-
        }
        $.ajax({
          url: 'check_id.php',
@@ -85,7 +79,6 @@
          console.log("complete");
        });
      });
-
      //비밀번호 자동확인
      $("#join_passwd").keyup(function(e){
        var possibility_pw1 = document.getElementById("possibility_pw1");
@@ -101,7 +94,6 @@
            return false;
          }
        });
-
        //비밀번호확인 자동확인
        $("#join_passwdconfirm").keyup(function(e){
          var possibility_pw2 = document.getElementById("possibility_pw2");
@@ -126,8 +118,6 @@
 
      });
     </script>
-
-
     <!-- 이메일인증 -->
     <script type="text/javascript">
     var code="";
@@ -154,9 +144,6 @@
               e_mail_adress_1.focus();
               return false;
             }
-
-
-            // alert(email1.value);
             $.ajax({
               url: 'check_email.php',
               type: 'POST',
@@ -181,7 +168,6 @@
               console.log("complete");
            });
          });
-
          $("#check_email2").click(function(e){
            var email1 = document.getElementById("check_email1");
            if(email1.value==code){
@@ -198,7 +184,6 @@
            });
         });
     </script>
-
 
   <!-- 휴대폰 인증 -->
     <script type="text/javascript">
@@ -228,7 +213,6 @@
               join_phone_write.focus();
               return false;
             }
-
             $.ajax({
               url: 'send_message.php',
               type: 'POST',
@@ -266,15 +250,12 @@
            });
         });
     </script>
-
-
     <!-- 다음 주소찾기 -->
     <script>
       function execDaumPostcode() {/* 폼은 다음 주소찾기 빌리면서 입력값은 여기서 받고 처리하네?  */
             new daum.Postcode({
                 oncomplete: function(data) {
                     // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-
                     // 각 주소의 노출 규칙에 따라 주소를 조합한다.
                     // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
                     var fullAddr = ''; // 최종 주소 변수
@@ -287,7 +268,6 @@
                     } else { // 사용자가 지번 주소를 선택했을 경우(J)
                         fullAddr = data.jibunAddress;
                     }
-
                     // 사용자가 선택한 주소가 도로명 타입일때 조합한다.
                     if(data.userSelectedType === 'R'){
                         //법정동명이 있을 경우 추가한다.
@@ -301,7 +281,6 @@
                         // 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
                         fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
                     }
-
                     // // 우편번호와 주소 정보를 해당 필드에 넣는다.
                     document.getElementById('join_zip').value = data.zonecode; //5자리 새우편번호 사용
                     document.getElementById('join_foundational').value = fullAddr; //실제 주소
@@ -312,8 +291,6 @@
             }).open();
         }
     </script>
-
-
     <!-- 이메일함수 선택 -->
     <script type="text/javascript">
     function choice_email(){
@@ -329,12 +306,8 @@
         e_mail_adress_2.readOnly=false;
 
       }
-
-
     }
     </script>
-
-
     <!-- 패턴검사 -->
     <script type="text/javascript">
       function goto_join(){
@@ -456,17 +429,10 @@
            check_3.focus();
            return false;
          }
-
-
-         // 여기1
-
          document.join_member_form.submit();
          alert("회원가입이 완료되었습니다.");
       }
     </script>
-
-
-
   </head>
   <body>
     <!--로그인 회원가입 로그아웃-->
@@ -477,57 +443,46 @@
     <h2 id="join_title">회원가입</h2>
     <hr>
     <section>
-      <!-- <form name="member_form" action="check_id.php?mode=insert" method="post"> -->
-
       <form name="join_member_form" action="join_query.php" method="post">
         <input type="hidden" name="mode" value="id_check">
         <div class="join_form">
           <h3>회원가입</h3>
-
           <table  id="table1">
             <!--필수입력사항-->
             <tr>
               <td id="join_tr1" colspan="4"><span>*</span> 필수입력사항</td>
             </tr>
-
             <!--아이디-->
             <tr>
               <th><label>아이디</label>&nbsp;<span>*</span></th>
               <td  colspan="3"><input id="join_id" type="text" name="join_id" placeholder="대/소문자/숫자 3글자 이상 15글자이하" value="santteut2" size="40"><p id="possibility" style="display:inline; font-size:13px;"></p></td>
             </tr>
-
             <!--비밀번호-->
             <tr>
               <th><label>비밀번호</label>&nbsp;<span>*</span></th>
               <td  colspan="3"><input id="join_passwd" type="password" name="join_passwd" placeholder="특수문자/문자/숫자 모두포함(8~15)" value="santteut2%" size="40"><p id="possibility_pw1" style="display:inline; font-size:13px;"></td>
             </tr>
-
             <!--비밀번호확인-->
             <tr>
               <th>&nbsp;<label>비밀번호확인</label>&nbsp;<span>*</span></th>
               <td colspan="3"><input id="join_passwdconfirm" type="password" name="join_passwdconfirm" placeholder="특수문자/문자/숫자 모두포함(8~15)" value="santteut2%" size="40"><p id="possibility_pw2" style="display:inline; font-size:13px;"></p>
             </tr>
-
             <!--이름-->
             <tr>
               <th><label>이름</label>&nbsp;<span>*</span></th>
               <td colspan="3"><input placeholder="2~5글자" id="join_name" value="산뜻이" type="text" name="join_name" size="40"></td>
             </tr>
-
             <!--주소_우편번호-->
             <tr>
               <th rowspan="3"><label>주소</label>&nbsp;<span>*</span></th>
               <td colspan="3" id="td_this"><input readonly id="join_zip" type="text" value="17890" name="join_zip" size="10">
                 <button type="button" name="button" id="zip_btn" onclick="execDaumPostcode()" >우편번호</button>
               </td>
-
             </tr>
-
             <!--주소_기본-->
             <tr>
               <td colspan="3"><input readonly id="join_foundational" type="text" name="join_foundational" value="주소입니다" placeholder="기본주소" size="40"></td>
             </tr>
-
             <!--주소_상세-->
             <tr>
               <td colspan="3"><input id="join_detail" type="text" value="111" name="join_detail" placeholder="상세주소" size="40"></td>
@@ -573,7 +528,6 @@
                   <option value="018">018</option>
                   <option value="019">019</option>
                 </select>
-
               <input id="join_phone_write" type="tel" name="join_cellphone" size="19" maxlength="8" value="68575506">
               <input type="hidden" name="hidden_phone">
               <button id="hp_btn" type="button" name="button" >인증하기</button> <br>
@@ -583,21 +537,16 @@
             </tr>
           </table>
           <!--인증번호입력-->
-
-
           <br>
-
           <table id="table2">
             <!--이용약관-->
             <tr>
               <td id="table_tr1" colspan="4"><b><span>필수</span>약관동의</b></td>
             </tr>
-
             <!--이용약관_모두동의-->
             <tr>
               <td id="table_tr1" colspan="4"> <input id="check_all" type="checkbox" name="check_all" value="" onclick="all_choice_value()"> <b>약관 모두 동의</b></td>
             </tr>
-
             <!--이용약관1-->
             <tr>
               <td colspan="4">

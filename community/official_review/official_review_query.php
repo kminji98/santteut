@@ -16,9 +16,6 @@ for($i=0;$i<5;$i++){
 //*************************************************************************
   include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
   session_start();
-// $id = $_SESSION['id'];
-// $name = $_SESSION['name'];
-
 if(isset($_GET["mode"])&&$_GET["mode"]=="insert"){
   $title = trim($_POST["title"]);
   $content = trim($_POST["content"]);

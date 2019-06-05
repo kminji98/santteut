@@ -1,7 +1,6 @@
 <?php
 if(!session_id()) { session_start();}
 include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
-
 if(isset($_POST['category'])){
   switch ($_POST['category']) {
     case 'list_head1':
@@ -32,11 +31,8 @@ if(isset($_POST['category'])){
   }
   $id = $_SESSION['id'];
   $sql = "SELECT * FROM `$tbl` where id = '$id' order by `$date` desc";
-
   $result=mysqli_query($conn,$sql);
   $total_record=mysqli_num_rows($result);
-
-
   $output="";
   for ($i = 0; $i < $total_record; $i++){
     $row=mysqli_fetch_array($result);
@@ -77,8 +73,6 @@ if(isset($_POST['category'])){
       $output = $output."<tr><td><a href='../../customer_support/qna/qna_view.php?num=".$num."&hit=".($field+1)."' >$title</a></td><td>$date</td><td>$field</td></tr>";
     }
   }//end of for
-
 }
-
 echo '[{"th1":"'.$th1.'","th2":"'.$th2.'","th3":"'.$th3.'","output":"'.$output.'"}]';
  ?>

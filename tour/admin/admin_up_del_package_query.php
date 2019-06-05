@@ -23,7 +23,6 @@ if($_GET['mode']=="update"){
 
 }
 
-// echo "<script>alert($_POST['p_code']);history.go(-1);</script>";
 //--------------------------------------
 if(!empty($_POST['p_place'])){
     $p_place = $_POST['p_place'];
@@ -189,13 +188,9 @@ if(!empty($_FILES['p_main_img1']['name'])){
       // alert_back($main_img1);
     }
 
-
-
-
 }else{
     $main_img_copy_name1=$main_img_copy_name1;
 }
-
 
 if(!empty($_FILES['p_main_img2']['name'])){
     //1. $_FILES['upfile']로부터 5가지 배열명을 가져와서 저장한다.
@@ -248,10 +243,6 @@ if(!empty($_FILES['p_main_img2']['name'])){
     if(!move_uploaded_file($main_img_copy_tmp_name2, $uploaded_file2)){
       alert_back('2. 서버 전송에러!!');
     }
-
-
-
-
 
 }else{
     $main_img_copy_name2=$main_img_copy_name2;
@@ -322,24 +313,6 @@ if(!empty($_POST['p_bus'])){
     echo "<script>alert('버스를 선택하세요');history.go(-1);</script>";
     return false;
 }
-
-  // echo "코드".$code; echo "<br>";
-  // echo "패키지명 ".$name; echo "<br>";
-  // echo "기간".$period; echo "<br>";
-  // echo "출발일".$dp_date; echo "<br>";
-  // echo "출발시간".$dp_time; echo "<br>";
-  // echo "도착시간".$arr_time; echo "<br>";
-  // echo "요금".$pay; echo "<br>";
-  // echo "추가요금".$add_pay; echo "<br>";
-  // echo "자유시간".$free_time; echo "<br>";
-  // echo "출발도시".$dp_city; echo "<br>";
-  // echo "도착도시".$arr_mt;echo "<br>";
-  // echo "내용".$detail_content; echo "<br>";
-  // echo "메인이미지1".$main_img1; echo "<br>";
-  // echo "메인이미지2".$main_img2; echo "<br>";
-  // echo "메인이미지3".$main_img3; echo "<br>";
-  // echo "버스".$bus; echo "<br>";
-
 
   $package_str = "";
       for($i=0;$i<2;$i++) {
@@ -431,11 +404,6 @@ $result = mysqli_query($conn,$sql);
 if (!$result) {
   die('Error: ' . mysqli_error($conn));
 }
-
-
-
-
-
 
 mysqli_close($conn);
 echo "<script>alert('패키지가 수정되었습니다.')</script>";

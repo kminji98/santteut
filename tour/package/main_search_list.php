@@ -1,8 +1,6 @@
 <?php
-
 include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php";
 ?>
-
 <!DOCTYPE html>
 <html lang="ko" dir="ltr">
   <head>
@@ -10,9 +8,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/tour/package/css/package_list.css?ver=2">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/side_bar.css">
-
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
-
     <style media="screen">
     .page_button_group button{border-radius: 3px; margin-bottom:3%; width: 35px; height: 35px; font-weight: bold; margin-right: 5px; cursor: pointer; border: 1px solid #464646; background-color: white;}
     .page_button_group button:hover{background-color: #2F9D27; color: white; border-radius: 3px; border: 1px solid #2F9D27;}
@@ -24,9 +20,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
       check_offsetTop();
       };
     }
-
     window.onload = function () {
-
       default_detail_value('period_div');
       default_detail_value('pay_div');
       default_detail_value('time_div');
@@ -45,17 +39,13 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
       var order_option = <?=json_encode($order_option)?>;
       var order_btn = <?=json_encode($order_btn)?>;
       document.getElementById(order_condition).value=<?=json_encode($order_btn)?>;
-
       var list_status = document.getElementById('list_status');
       if(list_status.innerHTML=="예약마감"){
         list_status.style.color ="grey";
       }
     };
-
-
     function detail_search_function(){
       var period_value="";var pay_value="";var time_value="";var day_value="";var add_value="";var free_value="";var after_pay_value="";
-
       var period_div=document.getElementsByName('period_div');
       var pay_div=document.getElementsByName('pay_div');
       var time_div=document.getElementsByName('time_div');
@@ -71,8 +61,6 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
       var after_add_value =document.getElementsByName('추가경비');
       var after_free_value =document.getElementsByName('자유일정');
       var output = '※해당 게시물의 검색조건 → | ';
-
-
         for(var i=0;i<=period_div.length-1;i++){
           id = after_period_value[i].id;
           if(period_div[i].style.backgroundColor!='white'){
@@ -151,7 +139,6 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
         });
 
       }
-
     //[PAGE BUTTON ACTION]
     function detail_search_mv_page(p){
         $.ajax({
@@ -171,7 +158,6 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
         .always(function() {
           console.log("complete");
         });
-
   }
     //[PAGE BUTTON ACTION]
     function order_mv_page(p){
@@ -192,18 +178,10 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
         .always(function() {
           console.log("complete");
         });
-
   }
-
-
-
-
     function default_detail_value(name){
       var detail_name=document.getElementsByName(name);
       for(var i=0;i<=detail_name.length-1;i++){
-        // if(detail_name[0].value!="전체"){
-        //   detail_name[0].value="";
-        // }
         detail_name[i].style.backgroundColor='white';
         detail_name[i].style.color='black';
         detail_name[i].style.border='none';
@@ -222,7 +200,6 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
     </script>
     <title>산뜻 :: 즐거운 산행</title>
   </head>
-
   <body>
     <!--로그인 회원가입 로그아웃-->
     <div id="wrap">
@@ -245,23 +222,18 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
             <td id="package_list_view_pay">가격</td>
             <td id="package_list_view_state">상태</td>
           </tr>
-
           <?php
-
           if(isset($_POST['main_search_word'])){
             $word=$_POST['main_search_word'];
             $sql = "SELECT * FROM `package` where `p_name` like '%$word%' or `p_dp_city` like '%$word%' or `p_arr_mt` like '%$word%';";
             $main_search_result=mysqli_query($conn,$sql);
           }
-
           $total_record=mysqli_num_rows($main_search_result);
-
           if($total_record==0){
             echo "<script>alert('검색결과가 없습니다.');
                 history.go(-1);
                 </script>";
           }
-
           for ($i = 0; $i  < $total_record; $i++){
             $row=mysqli_fetch_array($main_search_result);
             $p_code=$row['p_code'];
@@ -279,7 +251,6 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
             $day = $yoil[date('w', strtotime($p_dp_date))];
             $day2 = $yoil[date('w', strtotime($p_arr_date2))];
             $p_pay=number_format($p_pay);
-
             $total=0;
             $status ="예약가능";
             $reserve_status_sql = "SELECT sum(`r_adult`+`r_kid`+`r_baby`),`p_bus` from `package` inner join `reserve` on `package`.`p_code` = `reserve`.`r_code` where `package`.`p_code` = '$p_code';";
@@ -296,9 +267,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
             if($total==$p_bus){
               $status="예약마감";
             }
-
            ?>
-
           <tr class="package_list_view_value">
             <td>
               <img class="package_list_view_img_value" src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/lib/editor/data/<?=$p_main_img_copy1?>">
@@ -319,10 +288,8 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
           }
            ?>
         </table>
-
     </div>
     <br><br><br>
-
       <br><br><br><br><br><br><br><br><br><br>
 </div>
 </body>

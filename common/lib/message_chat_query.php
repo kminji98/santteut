@@ -40,7 +40,5 @@ if(isset($_GET['message_mode'])){
     default:
     break;
   }
-
 }
-
  ?>

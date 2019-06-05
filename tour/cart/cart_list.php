@@ -18,7 +18,6 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/cart/cart_list_query.php";
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/side_bar.css">
   <title>산뜻 :: 즐거운 산행</title>
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
-
   </head>
   <body>
     <div id="wrap">
@@ -93,11 +92,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/cart/cart_list_query.php";
             document.delete_form.submit();
           }
         </script>
-
-
       </fieldset>
-
-
     </div> <!-- end of div "reserve_list" -->
     <footer> <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/footer.php";?> </footer>
     </div>  <!-- end of div "wrap" -->

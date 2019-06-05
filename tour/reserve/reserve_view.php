@@ -2,9 +2,6 @@
 session_start();
 $id = $_SESSION['id'];
 include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
-
-
-
 ?>
 <!DOCTYPE html>
 <html lang="ko" dir="ltr">
@@ -15,7 +12,6 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/side_bar.css?ver=0">
     <title>산뜻 :: 즐거운 산행</title>
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
-
   <script type="text/javascript">
   var count=0;
   var a=450;
@@ -23,8 +19,6 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
   var c=1;
   var scroll_count =0;
       var prevScrollpos = window.pageYOffset;
-
-
       window.onscroll = function() {
         var side_div =document.getElementById('side_div');
         var reserve_detail_menu =document.getElementById('reserve_detail_menu');
@@ -66,29 +60,18 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
         $("#reserve_detail_menu").css('height', b);
         $("#reserve_detail_menu").css('min-height', '430px');
         $("#reserve_finish").css('margin-top', d);
-          // $("#reserve_button").css('padding-bottom', '20px');
-        // $("#reserve_button").css('margin-bottom', '20px');
-
       }
-
-        // alert(b);
-
     }
     $(document).ready(function() {
-
       if($("#last_seat").val()=="28"){
         $("#seat_box").css('margin-left', '200px');
         $("#seat_box").css('padding-top', '35px');
-
       }else{
         $("#seat_box").css('margin-left', '160px');
         $("#seat_box").css('padding-top', '30px');
       }
-
-
     });
   </script>
-
   <script type="text/javascript">
     window.onload = function() {
       var insert_seat="";
@@ -109,20 +92,16 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
       text_kid=parseInt(text_kid.value);
       text_baby=parseInt(text_baby.value);
       reserve_money.innerHTML=((pay*text_adult)+(pay*text_kid*0.7)+(pay*text_baby*0.5)).toLocaleString();
-
       if(kid>0){
         kid_side_div.style.display="inline";
       }
       if(baby>0){
         baby_side_div.style.display="inline";
       }
-
   }
   </script>
 
-
   </head>
-
   <body >
     <input type="hidden" name="" value="">
     <!--로그인 회원가입 로그아웃-->
@@ -132,7 +111,6 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
     </header>
     <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/side_bar.php";?>
     <div id="middle2">
-
     <div id="top_text"><b>예약하기</b></div>
     <div id="tbl_div1">
       <div id="top_text2"><b>선택 상품정보</b></div>
@@ -153,12 +131,9 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
 
         <tr>
           <td id="go"><div class="gb2" style="display:inline-block;">한국출발</div>  <?php echo $dp_date[0]."년 ".$dp_date[1]."월 ".$dp_date[2]."일 "." (".$day.") ".$p_dp_time ?></td>
-
         </tr>
-
         <tr>
           <td id="back"><div class="gb2" style="display:inline-block;">한국도착</div> <?php echo $dp_date2[0]."년 ".$dp_date2[1]."월 ".$dp_date2[2]."일 "." (".$day2.") ".$p_arr_time ?></td>
-
         </tr>
       </table>
     </div>
@@ -182,8 +157,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
             <option value="" <?php if(isset($email[1]) && $email[1]==="hanmail.net") echo "selected";?>>hanmail.net</option>
             <option value="" <?php if(isset($email[1]) && $email[1]==="google.com") echo "selected";?>>google.com</option>
             <option value="" <?php if(isset($email[1]) && $email[1]==="nate.com") echo "selected";?>>nate.com</option>
-          </select> </td>
-
+          </select></td>
         </tr>
       </table>
     </div>
@@ -225,18 +199,14 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
         </tr>
       </table>
 
-
-
         <!-- 실행되는것 : 어른값 아동값 유아값 height 값 증가,감소  -->
       <script type="text/javascript">
         var adult_num=<?=json_encode($adult_val)?>;
         var kid_num=<?=json_encode($kid_val)?>;
         var baby_num=<?=json_encode($baby_val)?>;
         var wrap = document.getElementById('wrap');
-
         var height=wrap.style.height;
         var realheight=0;
-
         // 어른 수 함수
         function adult_control_btn(control,id,set){
           // alert(wrap.style.height);
@@ -274,7 +244,6 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
                 test_table.style.display="none";
             }
           }
-
           if(id2.value==11){
             id2.value=10;
           }else if(id=='text_adult'&&id2.value==0){
@@ -291,9 +260,6 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
             var test_table=document.getElementsByName('test_table')[i];
             test_table.style.display="block";
           }
-
-
-
           var a = parseInt(text_adult.value);
           var b = parseInt(text_kid.value);
           var c = parseInt(text_baby.value);
@@ -303,15 +269,11 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
           reserve_money.innerHTML=((pay*a)+(pay*b*0.7)+(pay*c*0.5)).toLocaleString();
             // alert(wrap.style.height);
         }
-
-
         // 아동 수 함수
         function kid_control_btn(control,id,set){
           // alert(wrap.style.height);
           realheight=height.substring(0,4);
           realheight=parseInt(realheight);
-
-
           var id2 = document.getElementById(id);
           var text=id2.value;
           text=parseInt(text);
@@ -323,7 +285,6 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
               }else{
                 kid_side_div.style.display="inline";
               }
-
             }else{
             id2.value=text+1;
             if(id=='text_kid'){
@@ -354,7 +315,6 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
                 test_table2.style.display="none";
             }
           }
-
           if(id2.value==11){
             id2.value=10;
           }else if(id=='kid_num'&&id2.value==0){
@@ -366,12 +326,10 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
           }else if(id2.value==-1){
             id2.value=0;
           }
-
           for(var i=0;i<kid_num;i++){
             var test_table2=document.getElementsByName('test_table2')[i];
             test_table2.style.display="block";
           }
-
           var a = parseInt(text_adult.value);
           var b = parseInt(text_kid.value);
           var c = parseInt(text_baby.value);
@@ -379,16 +337,11 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
           var pay = <?= json_encode($p_pay)?>;
           pay=parseInt(pay);
           reserve_money.innerHTML=((pay*a)+(pay*b*0.7)+(pay*c*0.5)).toLocaleString();
-          // alert(wrap.style.height);
         }
-
       // 유아 수 함수
       function baby_control_btn(control,id,set){
-
-        // alert(wrap.style.height);
         realheight=height.substring(0,4);
         realheight=parseInt(realheight);
-
         var id2 = document.getElementById(id);
         var text=id2.value;
         text=parseInt(text);
@@ -427,7 +380,6 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
               test_table3.style.display="none";
           }
         }
-
         if(id2.value==11){
           id2.value=10;
         }else if(id=='baby_num'&&id2.value==0){
@@ -444,7 +396,6 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
           var test_table3=document.getElementsByName('test_table3')[i];
           test_table3.style.display="block";
         }
-
         var a = parseInt(text_adult.value);
         var b = parseInt(text_kid.value);
         var c = parseInt(text_baby.value);
@@ -452,11 +403,8 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
         var pay = <?= json_encode($p_pay)?>;
         pay=parseInt(pay);
         reserve_money.innerHTML=((pay*a)+(pay*b*0.7)+(pay*c*0.5)).toLocaleString();
-        // alert(wrap.style.height);
-
       }
       </script>
-
 
       <div id="check_eql">
         <input type="checkbox" id="box1" onclick="set_info()"><label for="box1"><p>성인1이 예약자와 동일</p></label>
@@ -500,9 +448,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
           <td class="inputs"> <input name="adult_ph_1" type="text" id="phone_num" value=""></td>
         </tr>
       </table>
-
       <?php
-
       for($i=2;$i<=10;$i++){
         echo '
         <table class="test_table1"name="test_table">
@@ -551,8 +497,6 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
         </table>';
       }
 
-
-
       for($i=1;$i<=10;$i++){
         echo '
         <table class="test_table1"name="test_table3">
@@ -578,14 +522,12 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
       }
        ?>
     </div>
-
       <div id="tour_text3">  <b class="label_img">></b>  <b id="sel_seat">좌석선택</b> </div>
       <!-- <img src="img/bus.jpg" alt="" id="bus_form"> -->
       <div id="bus_seat">
         <div id="seat_box">
         <?php
         //우등버스인지 일반버스인지 넘겨주는 값
-
         $bus=$p_bus;
         if($bus==="28"){
           define('row', 2);
@@ -598,12 +540,10 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
           define('margin', 375);
           define('last', 41);
         }
-
         //****************************버스 좌석 생성
       for ($i=0; $i <=row ; $i++) {
         for ($j=0; $j <=col ; $j++) {
           $checked ='';
-
             if(isset($seat[((row+1)*$j+$i+1)])){
               $style='style="color:#CFCFCF;"';
               $checked ='style="color:#35cc2b;" checked disabled';
@@ -628,9 +568,6 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
         <!-- 좌석시트 함수  -->
         <script type="text/javascript">
           function check_seat(seat){
-
-
-
           var seat=document.getElementById(seat);
           var text_adult=document.getElementById('text_adult');
           var text_kid=document.getElementById('text_kid');
@@ -639,7 +576,6 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
           var b=parseInt(text_kid.value);
           var c=parseInt(text_baby.value);
           var limit =a+b+c;
-
           if(count<limit){
             if(seat.checked==true){
               count++;
@@ -654,12 +590,8 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
             seat.checked=false;
             }
           }
-
-
-
         }
         </script>
-
 <!-- style="color:#35cc2b;" -->
         <div id="terms_view">
           <div id="all_agree">
@@ -705,7 +637,6 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
         </div>
 
         <div id="term_box">
-
         <div id="Home" class="tabcontent" >
           <h3>여행표준약관</h3>
           <p  ><b>제1조 (목적)</b></p>
@@ -745,8 +676,6 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
           <p  >2) 질병 기타 사유로 여행이 어렵다고 인정될 때</p>
           <p  >3) 명시한 최대 행사 인원이 초과되었을 때</p>
           <p  >4) 일정표에 최저 행사 인원이 미달되었을 때</p><br> <br>
-
-
         </div>
 
         <div id="News" class="tabcontent" >
@@ -776,7 +705,6 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
           <p  ><b>제 5 조 (서비스 이용요금)</b></p>
           <p  >회사가 제공하는 서비스는 기본적으로 무료입니다.</p>
             <br><br>
-
         </div>
 
         <div id="Contact" class="tabcontent" >
@@ -812,7 +740,6 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
         </div>
         </div>
         <script>
-
         function openPage(pageName,elmnt,color,choiceName) {
           var i, tabcontent, tablinks;
           tabcontent = document.getElementsByClassName("tabcontent");
@@ -829,13 +756,9 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
           document.getElementById(choiceName).style.display = "block";
           elmnt.style.backgroundColor = color;
         }
-
-        // Get the element with id="defaultOpen" and click on it
         document.getElementById("defaultOpen").click();
         </script>
         </div>
-
-
       </div>
       <!-- end of middle2 -->
       </div>
@@ -861,7 +784,6 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
               <hr style="border-color: #5D5D5D;">
             </div>
 
-
             <div id="kid_side_div" style="display:none;">
               <p style="display:inline">&nbsp;<b>아동</b></p>
               <b style="font-size:25px;">&nbsp;&nbsp;&nbsp;&nbsp;<?=$p_pay*0.7?>원</b><br>
@@ -872,9 +794,6 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
               <hr style="border-color: #5D5D5D;">
             </div>
 
-
-
-
             <div id="baby_side_div" style="display:none;">
               <p style="display:inline">&nbsp;<b>유아</b></p>
               <b style="font-size:25px;">&nbsp;&nbsp;&nbsp;&nbsp;<?=$p_pay*0.5?>원</b><br>
@@ -884,15 +803,11 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
               <p style="display:inline-block; margin:0px; color:gray;font-size:10px; "><b width:300px;>유류할증료</b> <b style="text-align:center;">&nbsp;&nbsp;&nbsp;<?=$p_pay*0.078*0.5?>원</b> </p>
               <hr style="border-color: #5D5D5D;">
             </div>
-
           </div>
         </div>
-        <div id="increase_box" >
-
-        </div>
+        <div id="increase_box" ></div>
         <div id="reserve_button">
           <div id="reserve_finish" onclick="check_form()" > <b id="status"><?=$status2?></b></div><br>
-          <!-- <input type="button" id="reserve_finish" value="예약마감"> -->
         </div>
         <div id="right_footer"></div>
       </div>
@@ -905,8 +820,6 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
             reserve_status.style.backgroundColor = "#aaaaaa";
           }
         }
-
-
 
         function check_form(){
 
@@ -978,11 +891,6 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
             return false;
           }
 
-
-
-
-
-
           for(var i=0;i<8;i++){
             if(bus_seat_check[i].style.display=="block"){
               var name1=document.getElementsByName('name1_'+(i+2));
@@ -991,7 +899,6 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
               var gen1_=document.getElementsByName('gen1_'+(i+2));
               var bir1_=document.getElementsByName('bir1_'+(i+2));
               var ph1_=document.getElementsByName('ph1_'+(i+2));
-
               if(name1[0].value==false){
                 alert("성인"+(i+2)+"의 이름을 입력해주세요");
                 return false;
@@ -1017,9 +924,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
                 return false;
               }
             }
-            // alert(bus_seat_check[i].style.display);
           }
-
           for(var i=0;i<=9;i++){
             if(bus_seat_check2[i].style.display=="block"){
               var name2=document.getElementsByName('name2_'+(i+1));
@@ -1055,8 +960,6 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
               }
             }
           }
-
-
           for(var i=0;i<=9;i++){
             if(bus_seat_check3[i].style.display=="block"){
               var name3=document.getElementsByName('name3_'+(i+1));
@@ -1111,8 +1014,6 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
           }
           var reserve_money=document.getElementById('reserve_money');
             reserve_money.innerHTML
-          // return false;
-
 
           $.ajax({
             url: 'reserve_query.php',
@@ -1144,18 +1045,13 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/lib/tour_query.php";
           })
           .always(function() {
             console.log("complete");
-
           });
-
         }
       </script>
-
   <!-- end of wrap -->
   </div>
   <footer>
       <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/footer.php";?>
   </footer>
   </body>
-
-
 </html>

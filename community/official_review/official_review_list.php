@@ -6,18 +6,14 @@ $total_pages=$start_record=$end_page=$start_page="";
 $total_record=0;
 //******************************************************************
 session_start();
-
 include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
-
 //1. 게시물수 정의
 define('ROW_SCALE', 3);
 define('PAGE_SCALE', 5);
-
 //2. 변수정의
 // $view_num 보여지는번호, $num은 DB에서 프라이머리키 번호
 // $total_record 전체 게시물수, $start_record 한 페이지의 처음 게시물
 // $record 는 게시물1개, $total_pages는 전체 페이지를 의미
-
 if(isset($_GET["mode"])&&$_GET["mode"]=="search"){
   //find_option 은 select의 값들을 문자열로 받아옴
   $find_option = test_input($_POST["find_option"]);
@@ -131,9 +127,6 @@ $view_num = $total_record - $start_record;
       글쓰기</button></a>';
     }
      ?>
-
-
-
     <div class="page_button_group">
       <?php
       //현재 블럭의 시작 페이지가 페이지 스케일 보다 클 때 -> 처음으로 버튼 생성 + 이전 블럭 존재
@@ -141,7 +134,6 @@ $view_num = $total_record - $start_record;
       if( $start_page > PAGE_SCALE ){
         // echo( '<a href='notice_list.php?page=1'> << </a>' );
         echo( '<a href="official_review_list.php?page=1"><button type="button" name="button" title="처음으로"><<</button></a>' );
-
         // 이전 블럭 클릭 시 -> 현재 블럭의 시작 페이지 - 페이지 스케일
         // 현재 6 page 인 경우 '<(이전블럭)' 클릭 -> $pre_page = 6-PAGE_SCALE  -> 1 페이지로 이동
         $pre_block= $start_page - PAGE_SCALE;
@@ -151,8 +143,6 @@ $view_num = $total_record - $start_record;
           echo( '<a href="official_review_list.php?page='.$pre_block.'"><button type="button" name="button" title="이전"><</button></a>' );
         }
       }
-
-
       //현재 블럭에 해당하는 페이지 나열
       for( $j = $start_page; $j <= $end_page; $j++ ){
           //현재 블럭에 현재 페이지인 버튼
@@ -164,9 +154,6 @@ $view_num = $total_record - $start_record;
             echo( '<a href="official_review_list.php?page='.$j.'"><button type="button" name="button">'.$j.'</button></a>' );
           }
       }
-
-
-
       // 현재 블럭의 마지막 페이지 보다 총 페이지 수가 큰 경우, >(다음) 버튼 / >>(맨끝으로) 버튼 생성
       //[ex]  page가 9개 있고 현재 페이지가 6페이지인 경우  / 12345/ 6789     =>  <<(처음으로) <(이전) 6 7 8 9
       //[ex]  page가 9개 있고 현재 페이지가 1페이지인 경우  / 12345/ 6789     =>  1 2 3 4 5 >(다음) >>(맨끝으로)
@@ -181,7 +168,6 @@ $view_num = $total_record - $start_record;
         }else{
           echo( '<a href="official_review_list.php?page='.$next_block.'"><button type="button" name="button" title="다음">></button></a>' );
         }
-
         //맨끝페이지로 이동
         echo( '<a href="official_review_list.php?page='.$total_pages.'"><button type="button" name="button" title="맨끝으로">>></button></a>' );
       }

@@ -1,15 +1,14 @@
 <?php
-session_start();
-include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
+  session_start();
+  include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
 
-if(isset($_SESSION['id'])){
-  $id = $_SESSION['id'];
-}
-$mode = "receive";
-if(isset($_GET['mode'])){
-  $mode = $_GET['mode'];
-}
-
+  if(isset($_SESSION['id'])){
+    $id = $_SESSION['id'];
+  }
+  $mode = "receive";
+  if(isset($_GET['mode'])){
+    $mode = $_GET['mode'];
+  }
 ?>
 <!DOCTYPE html>
 <html>
@@ -26,30 +25,21 @@ if(isset($_GET['mode'])){
       $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
       $total_record = mysqli_num_rows($result);
     }
-
     //페이지 당 글수, 블럭당 페이지 수
     $rows_scale = 3;
     $pages_scale = 5;
-
     // 전체 페이지 수 ($total_page) 계산
     $total_pages = ceil($total_record/$rows_scale);
-
     if(empty($_GET['page'])){
       $page =1;
     }else{
       $page = $_GET['page'];
     }
-
     $start_row =$rows_scale * ($page -1);
-
     $pre_page= $page>1 ? $page-1 : NULL;
-
     $next_page= $page < $total_pages ? $page+1 : NULL;
-
     $start_page= (ceil($page / $pages_scale ) -1 ) * $pages_scale +1 ;
-
     $end_page= ($total_pages >= ($start_page + $pages_scale)) ? $start_page + $pages_scale-1 : $total_pages;
-
     $number=$total_record- $start_row;
     ?>
     <link rel="stylesheet" href="./css/message_list.css?ver=0">

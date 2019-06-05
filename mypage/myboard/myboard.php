@@ -18,11 +18,9 @@ if(!session_id()) {session_start();}
     <title>산뜻 :: 즐거운 산행</title>
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
     <script type="text/javascript">
-
     function review_form(pk){
       var popupX = (window.screen.width/2) - (600/2);
       var popupY = (window.screen.height/2) - (400/2);
-
       window.open('../../tour/member_review/member_review2.php?mode=view&r_pk='+ pk ,'','left='+popupX+',top='+popupY+', width=800, height=430, status=no, scrollbars=no');
     }
       $(document).ready(function() {
@@ -71,14 +69,12 @@ if(!session_id()) {session_start();}
           $("#list_tbl_body").html('');
           $("#list_tbl_body").append('<tr><td style="width:60%;">'+output[0].th1+'</td><td>'+output[0].th2+'</td><td>'+output[0].th3+'</td></tr>');
           $("#list_tbl_body").append(output[0].output);
-
           if(output[0].output == ''){
             $("#no_result").html('<p id="no_result" style="text-align:center; padding:2%;margin-bottom:3%;">해당 게시물의 내역이 없습니다.</p><hr><br>');
           }
         })
       });
     </script>
-
   </head>
   <body >
     <div id="wrap">
@@ -98,10 +94,8 @@ if(!session_id()) {session_start();}
             <td id="list_head3">자유게시판</td>
           </tr></table>
         <table id="list_tbl_body">
-
         </table>
           <output id="no_result">
-
          </output>
       </fieldset>
     </div> <!-- end of div "reserve_list" -->

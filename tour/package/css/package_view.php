@@ -55,19 +55,6 @@ setcookie("cookie1",$p_code,time() + 3600,'/');
 
     }
 
-
-    // window.onscroll = function() {
-    //     window.onscroll = function() {
-    //   var detail_view1=document.getElementById('detail_view1');
-    //   var wrap=document.getElementById('wrap');
-    //   var middle=document.getElementById('middle');
-    //   // wrap.style.height=detail_view1.offsetHeight+"px";
-    //
-    //   // middle.style.height=detail_view1.offsetHeight+"px";
-    //   // alert(wrap.style.height);
-    //   }
-    // }
-
     </script>
 
 
@@ -259,8 +246,6 @@ setcookie("cookie1",$p_code,time() + 3600,'/');
       </div>
 
     </div>
-
-
     <div id="detail_menu">
       <div id="select_people">
         <p id="adult">성인</p>
@@ -415,13 +400,7 @@ setcookie("cookie1",$p_code,time() + 3600,'/');
         <div id="go_cart" onclick="back()" style="cursor:pointer;"> <b>장바구니</b></div>
       </div>
     </div>
-
-
-
-
-    </div>
-
-
+  </div>
     <div class="" style="max-height:20000px;">
           <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/member_review/member_review_list.php";?>
     </div>

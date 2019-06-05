@@ -1,11 +1,9 @@
-<?php
-include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php";
-
-?>
-
-<!DOCTYPE html>
-<html lang="ko" dir="ltr">
-  <head>
+  <?php
+  include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php";
+  ?>
+  <!DOCTYPE html>
+  <html lang="ko" dir="ltr">
+    <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/tour/package/css/package_list.css">
@@ -26,7 +24,6 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
         check_offsetTop();
       };
     }
-
     window.onload = function () {
       kCalendar('kCalendar');
       default_detail_value('period_div');
@@ -49,15 +46,12 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
         document.getElementsByName('order_btn')[0].value=order_btn;
       }
       if(order_condition != null){ document.getElementById(order_condition).value=<?=json_encode($order_btn)?>; }
-
       // 예약마감 구분
       var list_status = document.getElementById('list_status');
       if(list_status.innerHTML=="예약마감"){
         list_status.style.color ="grey";
       }
     };
-
-
     function detail_search_function(){
       var period_value="";var pay_value="";var time_value="";var day_value="";var add_value="";var free_value="";var after_pay_value="";
       var period_div=document.getElementsByName('period_div');
@@ -75,8 +69,6 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
       var after_add_value =document.getElementsByName('추가경비');
       var after_free_value =document.getElementsByName('자유일정');
       var output = '※해당 게시물의 검색조건 → | ';
-
-
         for(var i=0;i<=period_div.length-1;i++){
           id = after_period_value[i].id;
           if(period_div[i].style.backgroundColor!='white'){
@@ -157,7 +149,6 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
         });
 
       }
-
     //[PAGE BUTTON ACTION]
     function detail_search_mv_page(p){
         $.ajax({
@@ -213,8 +204,6 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
       default_detail_value('add_div');
       default_detail_value('free_div');
     }
-
-
     function default_detail_value(name){
       var detail_name=document.getElementsByName(name);
       for(var i=0;i<=detail_name.length-1;i++){
@@ -365,7 +354,6 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
           </tr>
         <!-- 상세검색 함수 -->
           <script type="text/javascript">
-
             function detail_function(id, name ,value){
               var detail_id =document.getElementById(id);
               var detail_name=document.getElementsByName(name);
@@ -379,7 +367,6 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
               detail_id.style.border="1px solid #2F9D27";
               detail_id.value=value;
             }
-
           </script>
 
           <tr>
@@ -523,22 +510,6 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
           }
            ?>
         </table>
-        <!-- 쿠키값 저장 함수 -->
-      <!-- <script type="text/javascript">
-        var num=0;
-        function cookie_start(id){
-          var id=document.getElementById(id);
-          document.cookie = id.id+"="+id.id;
-          alert(document.cookie);
-          // var val = document.cookie.split(';');
-          // val[1]=val[0];
-          // vla[2]=val[1];
-          // val[0]=id_val.id;
-          // alert(val[0]);
-          // alert(val[1]);
-          // alert(val[2]);
-        }
-      </script> -->
     </div>
     <br><br><br>
     <!--$page 는 현재페이지를 의미 x / 각 페이지를 의미-->
@@ -575,8 +546,6 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/package/package_list_query.php
                  echo( '<a href="package_list.php?page='.$pre_block.'&divide='.$divide.'"><button type="button" name="button" title="이전"><</button></a>');
                }
             }
-
-
             //현재 블럭에 해당하는 페이지 나열
             for( $i = $start_page; $i <= $end_page; $i++ ){
                 //현재 블럭에 현재 페이지인 버튼

@@ -28,8 +28,6 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="download"){
 if(empty($destination)){
     alert_back(' 테이블에 파일명이 존재 하지 않습니다.!');
 }
-
-
 //2. 서버에 Data영역에 실제 파일이 있는지 점검
 if(file_exists($destination)){
   $fp=fopen($destination,"rb");  //$fp 파일 핸들값
@@ -42,7 +40,6 @@ if(file_exists($destination)){
     Header("Content-Description: File Transfer");
     Header("Expires: 0");
   //지정된 파일타입이 아닌경우
-
   }else{
     //타입이 알려지지 않았을때 익스플러러 프로토콜 통신방식
     if(eregi("(MSIE 5.0|MSIE 5.1|MSIE 5.5|MSIE 6.0)",$_SERVER['HTTP_USER_AGENT'])){
@@ -59,7 +56,6 @@ if(file_exists($destination)){
       Header("Expires: 0");
     }
   }
-
   fpassthru($fp);
   fclose($fp);
 }else{

@@ -1,7 +1,4 @@
 <?php
-
-
-
 if($_POST['mode']=="detail"){
 
   if($_POST['divide']=="domestic"){
@@ -9,9 +6,6 @@ if($_POST['mode']=="detail"){
   }else if($_POST['divide']=="abroad"){
     $divide="!= '0'";
   }
-
-
-
   if(isset($_POST['period_value'])){
     $period_value =$_POST['period_value'];
   }else{
@@ -53,8 +47,6 @@ if($_POST['mode']=="detail"){
   }else{
     $dp_date_value="";
   }
-  // echo  $city.','.$dp_date_value.','.$period_value.','.$pay_value.','.$time_value.','.$day_value.','.$add_value.','.$free_value;
-
   $sql="SELECT * from `package` where `p_dp_city` ='$city' and `p_airplane_num`$divide $dp_date_value $day_value $period_value $pay_value $time_value $add_value $free_value;";
   echo  $sql;
 }

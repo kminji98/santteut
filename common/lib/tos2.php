@@ -6,7 +6,6 @@
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css?ver=2">
     <title>개인정보 처리방침</title>
   </head>
-
   <body>
     <!--로그인 회원가입 로그아웃-->
     <div id="wrap">
@@ -100,15 +99,10 @@
       <p>- 경찰청 사이버테러대응센터</p>
       <p>(www.ctrc.go.kr/02-392-0330)</p>
       <br><br><br><br><br>
-
     </div>
-
-
     <footer id="foo">
       <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/footer.php";?>
     </footer>
-
     </div>
-
   </body>
 </html>

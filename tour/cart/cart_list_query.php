@@ -1,11 +1,7 @@
 <?php
 session_start();
 include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
-
 $c_id=$_SESSION['id'];
-
-
-
 if(isset($_GET["mode"]) && isset($_GET["code"]) && $_GET["mode"]=="insert"){
   $c_code=$_GET["code"];
   $check_sql = "SELECT * FROM `cart` where `c_code`='$c_code' and `c_id`='$c_id';";
@@ -33,8 +29,6 @@ if(isset($_GET["mode"]) && isset($_GET["code"]) && $_GET["mode"]=="insert"){
     }
   }
 }
-
-
 if(isset($_POST['output'])){
   $output=$_POST['output'];
   $explode = explode("/", $output);
@@ -49,8 +43,6 @@ if(isset($_POST['output'])){
     echo "<script>alert('체크해주세요.');location.href='cart_list.php';</script>";
   }
 }
-
-
 $select_sql ="SELECT * from `package` join `cart` on `package`.`p_code`=`cart`.`c_code` where `cart`.`c_id`='$c_id';";
 $s_result = mysqli_query($conn,$select_sql);
 $total_record=mysqli_num_rows($s_result);

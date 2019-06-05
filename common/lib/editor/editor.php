@@ -28,18 +28,14 @@
 
             </td>
           </tr>
-
           <tr>
             <td><p>메인 이미지</p></td>
             <td>  <input type="file" class="up_img" name="p_main_img1"> <input type="file" class="up_img" name="p_main_img2"> <input type="file" class="up_img" name="p_main_img3"> </td>
           </tr>
-
           <tr>
             <td><p>패키지 이름</p></td>
             <td> <input type="text" name="p_name" value="" size="50"> </td>
-
           </tr>
-
           <tr>
             <td><p>패키지 기간</p></td>
             <td> <select  name="p_period">
@@ -58,7 +54,6 @@
               ?>
             </select> </td>
           </tr>
-
           <tr>
             <td><p>출발일</p></td>
             <td> <input type="date" name="p_dp_date" value="" > </td>
@@ -103,10 +98,6 @@
             <td><p>버스선택</p></td>
             <td><b>일반</b><input type="radio" name="p_bus" value="41"><b>우등</b><input type="radio" name="p_bus" value="28"></td>
           </tr>
-
-
-
-
 
     <!-- 다음에디터 -->
       <tr><td><p>상세페이지</p></td><td>
@@ -173,7 +164,6 @@
     				@decsription
     				툴바 버튼의 그룹핑의 변경이 필요할 때는 위치(왼쪽, 가운데, 오른쪽) 에 따라 <li> 아래의 <div>의 클래스명을 변경하면 된다.
     				tx-btn-lbg: 왼쪽, tx-btn-bg: 가운데, tx-btn-rbg: 오른쪽, tx-btn-lrbg: 독립적인 그룹
-
     				드롭다운 버튼의 크기를 변경하고자 할 경우에는 넓이에 따라 <li> 아래의 <div>의 클래스명을 변경하면 된다.
     				tx-slt-70bg, tx-slt-59bg, tx-slt-42bg, tx-btn-43lrbg, tx-btn-52lrbg, tx-btn-57lrbg, tx-btn-71lrbg
     				tx-btn-48lbg, tx-btn-48rbg, tx-btn-30lrbg, tx-btn-46lrbg, tx-btn-67lrbg, tx-btn-49lbg, tx-btn-58bg, tx-btn-46bg, tx-btn-49rbg
@@ -589,7 +579,6 @@
     	});
 
     </script>
-
     <!-- Sample: Saving Contents -->
     <script type="text/javascript">
     var map_window;
@@ -603,7 +592,6 @@
     	function saveContent() {
     		Editor.save(); // 이 함수를 호출하여 글을 등록하면 된다
     	}
-
     	/**
     	 * Editor.save()를 호출한 경우 데이터가 유효한지 검사하기 위해 부르는 콜백함수로
     	 * 상황에 맞게 수정하여 사용한다.
@@ -614,7 +602,6 @@
     	 */
     	function validForm(editor) {
     		// Place your validation logic here
-
     		// sample : validate that content exists
     		var validator = new Trex.Validator();
     		var content = editor.getContent();
@@ -625,7 +612,6 @@
 
     		return true;
     	}
-
     	/**
     	 * Editor.save()를 호출한 경우 validForm callback 이 수행된 이후
     	 * 실제 form submit을 위해 form 필드를 생성, 변경하기 위해 부르는 콜백함수로
@@ -674,7 +660,6 @@
     </script>
     <!-- <div><button onclick='saveContent()' id="btn_submit">저장</button></div> -->
     <!-- End: Saving Contents -->
-
     <!-- Sample: Loading Contents -->
     <textarea id="sample_contents_source" style="display:none;">
     	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
@@ -686,45 +671,7 @@
     	</p>
     </textarea>
     <script type="text/javascript">
-    	// function loadContent() {
-    	// 	var attachments = {};
-    	// 	attachments['image'] = [];
-    	// 	attachments['image'].push({
-    	// 		'attacher': 'image',
-    	// 		'data': {
-    	// 			'imageurl': 'http://cfile273.uf.daum.net/image/2064CD374EE1ACCB0F15C8',
-    	// 			'filename': 'github.gif',
-    	// 			'filesize': 59501,
-    	// 			'originalurl': 'http://cfile273.uf.daum.net/original/2064CD374EE1ACCB0F15C8',
-    	// 			'thumburl': 'http://cfile273.uf.daum.net/P150x100/2064CD374EE1ACCB0F15C8'
-    	// 		}
-    	// 	});
-    	// 	attachments['file'] = [];
-    	// 	attachments['file'].push({
-    	// 		'attacher': 'file',
-    	// 		'data': {
-    	// 			'attachurl': 'http://cfile297.uf.daum.net/attach/207C8C1B4AA4F5DC01A644',
-    	// 			'filemime': 'image/gif',
-    	// 			'filename': 'editor_bi.gif',
-    	// 			'filesize': 640
-    	// 		}
-    	// 	});
-    	// 	/* 저장된 컨텐츠를 불러오기 위한 함수 호출 */
-    	// 	Editor.modify({
-    	// 		"attachments": function () { /* 저장된 첨부가 있을 경우 배열로 넘김, 위의 부분을 수정하고 아래 부분은 수정없이 사용 */
-    	// 			var allattachments = [];
-    	// 			for (var i in attachments) {
-    	// 				allattachments = allattachments.concat(attachments[i]);
-    	// 			}
-    	// 			return allattachments;
-    	// 		}(),
-    	// 		"content": document.getElementById("sample_contents_source") /* 내용 문자열, 주어진 필드(textarea) 엘리먼트 */
-    	// 	});
-    	// }
     </script>
-    <!-- <div><button onclick='loadContent()'>SAMPLE - load contents to editor</button></div> -->
-    <!-- End: Loading Contents -->
-
   </body>
 
 </html>

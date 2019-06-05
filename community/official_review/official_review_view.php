@@ -9,13 +9,11 @@ session_start();
 include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/create_table.php";
 include $_SERVER['DOCUMENT_ROOT']."/santteut/community/official_review/lib/official_review_func.php";
 create_table($conn, 'official_review_ripple');
-
 if(empty($_GET['page'])){
   $page=1;
 }else{
   $page=$_GET['page'];
 }
-
 if(isset($_GET["num"])&&!empty($_GET["num"])){
   $num = test_input($_GET["num"]);
   $q_num = mysqli_real_escape_string($conn, $num);
@@ -163,9 +161,6 @@ if(isset($_GET["num"])&&!empty($_GET["num"])){
       }
         ?>
       </div><!--end of view_button -->
-
-
-
       <table id="ripple_tb" border="1">
         <th>댓글</th>
         <td>

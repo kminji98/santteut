@@ -68,7 +68,6 @@ $find_input = $_GET["find_input"];
 <div class="search_div" >
     <form style="display:inline;" class="" action="admin_manage_package.php?mode=search&find_option=<?=$find_option?>&find_input=<?=$find_input?>" method="get">
 
-
       <select style="padding-bottom:8px; padding-top:3px;margin-left:50%;"name="find_option">
         <option value="p_code">코드명</option>
         <option value="p_name">상품명</option>
@@ -77,8 +76,6 @@ $find_input = $_GET["find_input"];
       <input style="padding:5px; margin-right:0px;"type="text" name="find_input" value="">
       <input id="search_find" style="color:white; border-radius: 3px; margin-bottom:0.5%; width: 85px; height: 32px; font-weight: bold; margin-right: 5px; cursor: pointer; border: 1px solid #2F9D27; background-color: #2F9D27;" type="submit" value="검색">
       <input type="hidden" name="mode" value="search">
-
-
 
     </form>
             <?php
@@ -174,8 +171,6 @@ $find_input = $_GET["find_input"];
 
            ?>
 
-
-
           <tr class="package_list_view_value">
             <td>
               <img class="package_list_view_img_value" src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/lib/editor/data/<?=$p_main_img_copy1?>">
@@ -195,21 +190,17 @@ $find_input = $_GET["find_input"];
             </td>
           </tr>
           <?php
-
           }
            ?>
         </table>
 
     </div>
     <div class="page_button_group" style="margin-top: 50px;margin-left:0px;">
-
       <?php
       //현재 블럭의 시작 페이지가 페이지 스케일 보다 클 때 -> 처음으로 버튼 생성 + 이전 블럭 존재
       //[ex]  page가 9개 있고 현재 페이지가 6페이지인 경우  / 12345/ 6789     =>  <<(처음으로) <(이전) 6 7 8 9
       if( $start_page > PAGE_SCALE ){
-
         // echo( '<a href='admin_manage_package.php?page=1'> << </a>' );
-
         // 이전 블럭 클릭 시 -> 현재 블럭의 시작 페이지 - 페이지 스케일
         // 현재 6 page 인 경우 '<(이전블럭)' 클릭 -> $pre_page = 6-PAGE_SCALE  -> 1 페이지로 이동
         $pre_block= $start_page - PAGE_SCALE;
@@ -235,7 +226,6 @@ $find_input = $_GET["find_input"];
            echo( '<a href="admin_manage_package.php?page='.$pre_block.'&divide='.$divide.'"><button type="button" name="button" title="이전"><</button></a>');
          }
       }
-
 
       //현재 블럭에 해당하는 페이지 나열
       for( $i = $start_page; $i <= $end_page; $i++ ){

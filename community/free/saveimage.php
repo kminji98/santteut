@@ -1,5 +1,4 @@
 <?php
-
 if ($_FILES['file']['name']) {
             if (!$_FILES['file']['error']) {
                 $name = md5(rand(100, 200));
@@ -15,5 +14,4 @@ if ($_FILES['file']['name']) {
               echo  $message = 'Ooops!  Your upload triggered the following error:  '.$_FILES['file']['error'];
             }
         }
-
 ?>

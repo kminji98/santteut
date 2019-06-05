@@ -60,7 +60,6 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="update"){
                callbacks: {
                  onImageUpload : function(files, editor, welEditable){
                   sendFile(files[0], editor, welEditable);
-
                 }
                }
              });
@@ -81,13 +80,10 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="update"){
                      var html = '<img src="'+url+'">';
                      $('#summernote').summernote('pasteHTML', html);
                      $('#summernote').summernote('insertImage', url, filename);
-
                    }
        });
      }
-
     });
-
     </script>
   </head>
     <title>자유게시판</title>

@@ -1,33 +1,25 @@
 
 <?php
 session_start();
-
 // isset함수는 불리언값을 리턴 true or false
 // 회원 or 비회원이면 권한없음, 관리자일때만 입장
 if(!isset($_SESSION['id'])){
   echo "<script>alert('권한없음.');history.go(-1);</script>";
   exit;
 }
-
-
 //0-0. 인클루드 디비
 include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
-
 //0-1. 인클루드 크리테이블
 include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/create_table_base.php";
-
 //1. 게시물수 정의
 define('ROW_SCALE', 10);
 define('PAGE_SCALE', 5);
-
 //2. 변수정의
 // $view_num 보여지는번호, $num은 DB에서 프라이머리키 번호
 // $total_record 전체 게시물수, $start_record 한 페이지의 처음 게시물
 // $record 는 게시물1개, $total_pages는 전체 페이지를 의미
 $sql=$result=$total_record=$total_pages=$start_record=$row="";
 $total_record=0;
-
-
 //3. 검색모드를 세팅(제목,내용)
 if(isset($_GET["mode"])&&$_GET["mode"]=="search"){
 

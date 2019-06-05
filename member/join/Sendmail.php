@@ -12,7 +12,6 @@
  (싸이트 URL) http://b.redinfo.co.kr
  =================================================================================
  */
-
 class Sendmail {
     /* smtp 의 호스트 설정 : 아래는 naver 일경우 */
     var $host="ssl://smtp.gmail.com";
@@ -27,17 +26,12 @@ class Sendmail {
     var $charset="UTF-8";
     /* 메일의 기본 타입을 설정 */
     var $ctype="text/plain";
-
-
     /* 아래 3개의 변수는 수정 금지 */
     var $fp;
     var $lastmsg;
     var $parts=array();
-
-
     /* 기본설정대신 초기화 할 값이 있다면 클래스 초기화시 배열로 값을넘겨준다. */
     function Sendmail($data=false) {
-
         if($data!=false)
         {
             if(is_array($data)){
@@ -95,18 +89,11 @@ class Sendmail {
     }
     /*  메시지를 보낸다. */
     function smtp_send($email, $from, $data,$cc_mail,$bcc_mail,$rel_to=false) {
-
         $id = $this->smtp_id;
         $pwd = $this->smtp_pw;
-
-
-
         /* 이메일 형식 검사 구간*/
         if(!$mail_from = $this->get_email($from)) return false;
         if(!$rcpt_to = $this->get_email($email)) return false;
-
-
-
         /* smtp  검사 구간 */
         if(!$this->dialogue(334, "AUTH LOGIN")) { return false; }
         if(!$this->dialogue(334, base64_encode($id)))  return false;
@@ -118,32 +105,20 @@ class Sendmail {
             $this->dialogue(250, ".");
             return false;
         }
-
         if($rel_to==false){ $rel_to=$email;}
-
         $this->dialogue(354, "DATA");
         $mime = "Message-ID: <".$this->get_message_id().">\r\n";
         $mime .= "From: ".$from."\r\n";
         $mime .= "To: ".$rel_to."\r\n";
-
         /* CC 메일 이 있을경우 */
         if($cc_mail!=false){
-
             $mime .= "Cc: ".$cc_mail. "\r\n";
-
         }
         /* BCC 메일 이 있을경우 */
         if($bcc_mail!=false) $mime .= "Bcc: ".$bcc_mail. "\r\n";
-
-
-
         fputs($this->fp, $mime);
         fputs($this->fp, $data);
         $this->dialogue(250, ".");
-
-
-
-
     }
     /* Message ID 를 얻는다. */
     function get_message_id() {
@@ -169,8 +144,6 @@ class Sendmail {
             $message = fread($fp, filesize($path));
             fclose($fp);
             $this->parts[] = array ("ctype" => $ctype, "message" => $message, "name" => $name);
-
-
         } else return false;
     }
     /*  Multipart 메시지를 생성시킨다. */
@@ -182,7 +155,6 @@ class Sendmail {
         $msg .= chunk_split(base64_encode($part['message']));
         return $msg;
     }
-
     /*  SMTP에 보낼 DATA를 생성시킨다. */
     function build_data($subject, $body) {
         $boundary = $this->get_boundary();

@@ -20,7 +20,6 @@
     </tr>
   </table>
 
-
   <table style="margin:0; margin-left:5%;display:inline-block;">
     <tr>
       <td>
@@ -38,7 +37,6 @@
       <td>&nbsp;</td>
     </tr>
   </table>
-
 
   <table style="margin:0; margin-left:5%; display:inline-block;">
     <tr>
@@ -79,8 +77,6 @@
       </td>
     </tr>
   </table>
-
-
 
 <br><br>
 </fieldset>

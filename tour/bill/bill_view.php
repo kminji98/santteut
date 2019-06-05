@@ -1,18 +1,14 @@
 <?php
-
 include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/bill/bil_query.php";
-
 ?>
 <!DOCTYPE html>
 <html lang="ko" dir="ltr">
   <head>
-
     <meta charset="utf-8">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/login_menu.css">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/tour/package/css/package_list.css">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/tour/bill/css/bill_view.css">
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/side_bar.css">
-
     <script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
     <script  src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
   <!-- 카카오페이 -->
@@ -20,7 +16,6 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/bill/bil_query.php";
     function payment(){
       var IMP = window.IMP; // 생략가능
       IMP.init('imp16652312'); //가맹점 식별 코드
-
      //아래 입력된 정보는 테스트를 위한것.
      //원래는 주문자 정보를 가져와서 넣어야함.
       IMP.request_pay({
@@ -72,12 +67,7 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/bill/bil_query.php";
 
       });
       }
-
     </script>
-
-
-
-
     <title>산뜻 :: 즐거운 산행</title>
     <!--보험/결제   -->
     <script type="text/javascript">
@@ -94,7 +84,6 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/bill/bil_query.php";
             con2.style.display='none'
         }
     }
-
     function payment_imformation_field_click(){
         var con = document.getElementById("insurance_field");
         var con2 = document.getElementById("payment_imformation_field");
@@ -107,7 +96,6 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/bill/bil_query.php";
             con.style.display='none'
         }
     }
-
     function payment_choice_direct_radiobtn_click(){
         var con = document.getElementById("payment_choice_direct_detail_1");
         var con2 = document.getElementById("payment_choice_direct_detail_2");
@@ -120,11 +108,8 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/bill/bil_query.php";
         con.innerHTML="입금은행 선택";
         con2.innerHTML='<select id="select_bank"><option>선택해주세요</option><option>국민은행</option><option>하나은행</option><option>신한은행</option><option>기업은행</option></select>';
         con3.innerHTML=var3;
-
     }
-
     function kakopay_radiobtn_click(){
-
         var con = document.getElementById("payment_choice_direct_detail_1");
         var con2 = document.getElementById("payment_choice_direct_detail_2");
         var con3 = document.getElementById("payment_choice_direct_detail_3");
@@ -133,7 +118,6 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/bill/bil_query.php";
         con.innerHTML="카카오페이";
         con2.innerHTML='<img class="kakopay_img" src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/img/kakaopay.jpg">';
         con3.innerHTML=var3;
-
     }
     </script>
   </head>
@@ -145,7 +129,6 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/bill/bil_query.php";
     </header>
     </div>
     <div id="top_text"><b>결제하기</b></div>
-
     <div id="detail_menu">
       <div id="select_people" >
         <p id="adult">성인</p>&nbsp;
@@ -238,18 +221,10 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/bill/bil_query.php";
 
           }
         </script>
-
-
-
-
         <a href="../reserve/reserve_list.php" style="text-decoration:none;"><div id="go_cart" > <b>예약목록 보기</b></div></a>
       </div>
       <div id="right_footer"></div>
     </div>
-
-
-
-
     <div id="tbl_div1">
       <div id="top_text2"><b>선택 상품정보</b></div>
       <table id="tbl1">
@@ -257,7 +232,6 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/bill/bil_query.php";
           <td class="left2" id="pac_name" >상품명</td>
           <td id="pac_name2"><?=$p_name?></td>
         </tr>
-
         <tr>
           <td class="left2" id="pac_code">상품코드</td>
           <td id="pac_code2"><?=$p_code?></td>
@@ -266,15 +240,11 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/bill/bil_query.php";
           <td rowspan="3" class="left2" id="sch1">일정</td>
           <td id="period1"><?=$p_period?>일</td>
         </tr>
-
         <tr>
             <td id="go"><div class="gb2" style="display:inline-block;">한국출발</div>  <?php echo $dp_date[0]."년 ".$dp_date[1]."월 ".$dp_date[2]."일 "." (".$day.") ".$p_dp_time ?></td>
-
         </tr>
-
         <tr>
           <td id="back"><div class="gb2" style="display:inline-block;">한국도착</div> <?php echo $dp_date2[0]."년 ".$dp_date2[1]."월 ".$dp_date2[2]."일 "." (".$day2.") ".$p_arr_time ?></td>
-
         </tr>
       </table>
     </div>
@@ -288,7 +258,6 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/bill/bil_query.php";
           <td class="left2">휴대폰번호</td>
           <td> <input disabled type="text" id="res_phone" value="<?=$hp?>"> </td>
         </tr>
-
         <tr>
           <td class="left2">이메일</td>
           <td> <input disabled type="text" id="res_email1" value="<?=$m_email?>"></td>
@@ -296,7 +265,6 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/bill/bil_query.php";
         </tr>
       </table>
     </div>
-
     <!-- 상품가격 -->
     <div id="package_detail_pay_imformation">
       <div id="package_detail_imformation_text"><b>상품가격</b></div>
@@ -307,13 +275,6 @@ include $_SERVER['DOCUMENT_ROOT']."/santteut/tour/bill/bil_query.php";
           <td id="package_detail_imformation_child"><b>아동 <br>(만 12세미만)</b></td>
           <td id="package_detail_imformation_baby"><b>유아 <br>(만 2세미만)</b></td>
         </tr>
-        <!-- <tr>
-          <td rowspan="3" id="package_detail_imformation_pay"><b>상품 가격</b></td>
-          <td class="package_detail_imformation_pay_field"><b>기본상품가격</b></td>
-          <td class="package_detail_imformation_pay_field_value"><?=$p_pay?></td>
-          <td class="package_detail_imformation_pay_field_value"><?=$p_pay*0.7?></td>
-          <td class="package_detail_imformation_pay_field_value"><?=$p_pay*0.5?></td>
-        </tr> -->
         <?php
         $p_pay=str_replace(",","",$p_pay);
         $p_pay=$p_pay;

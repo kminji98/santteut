@@ -8,18 +8,14 @@ if(isset($_SESSION['id'])){
 if(isset($_GET['item_num'])){
   $num = $_GET['item_num'];
 }
-
 $sql = "SELECT * FROM `message` WHERE num='$num'";
 $result = mysqli_query($conn,$sql);
 $row = mysqli_fetch_array($result);
-
 $send_id = $row["send_id"];
 $send_name = $row["name"];
 $message_cont = $row["message"];
-
 $sql = "UPDATE `message` SET `recv_read` = 'Y' WHERE num = '$num'";
 mysqli_query($conn, $sql);
-
 ?>
 <!DOCTYPE html>
 <html>

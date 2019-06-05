@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <title></title>
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/lib/editor/css/editor.css">
+    <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/lib/editor/css/bus.css">
       <script src="../../common/lib/editor/js/editor_loader.js" type="text/javascript" charset="utf-8"></script>
   </head>
   <body>
@@ -168,9 +169,71 @@
             <td><b>일반</b><input type="radio" name="p_bus" value="41" <?=$checked5?>><b>우등</b><input type="radio" name="p_bus" value="28" <?=$checked6?>></td>
           </tr>
 
+          <tr>
+            <td><p>버스좌석</p></td>
+            <td style=" height: 220px;margin-left: 14%; margin-top: 30px; background-image: url('../../tour/reserve/img/bus2.jpg'); background-repeat: no-repeat;">
+              <div id="tour_text3">  <b class="label_img"></b>  <b id="sel_seat"></b> </div>
+                  <!-- <img src="img/bus.jpg" alt="" id="bus_form"> -->
+                  <div id="bus_seat" >
+                    <div id="seat_box" style="height: 220px;margin-left:22%; width:760px;">
+                    <?php
+                    //우등버스인지 일반버스인지 넘겨주는 값
 
+                    $bus_sql = "SELECT * from `bus` where `b_code`='$p_code';";
+                    $bus_result = mysqli_query($conn,$bus_sql) or die("실패원인1: ".mysqli_error($conn));
+                    while($row = mysqli_fetch_array($bus_result)){
+                      $b_seat = $row['b_seat'];       //좌석정보를 가져옴 /1/2
+                      $str .= $b_seat;      //예약된 좌석번호 누적해서 변수에 저장 ex) "/4/5/6" + "/1/2/3"+ "/65/78"
+                    }
 
+                    $b_seat = explode("/", $str);
 
+                      foreach ($b_seat as $key => $val) {
+                          $seat[$val] = $val;
+                      }
+                    $bus=$p_bus;
+                    if($bus==="28"){
+                      define('row', 2);
+                      define('col', 8);
+                      define('last', 28);
+                      define('margin', 610);
+                    }else{
+                      define('row', 3);
+                      define('col', 9);
+                      define('margin', 695);
+                      define('last', 41);
+                    }
+                    //****************************버스 좌석 생성
+                  for ($i=0; $i <=row ; $i++) {
+                    for ($j=0; $j <=col ; $j++) {
+                      $checked ='';
+                        if(isset($seat[((row+1)*$j+$i+1)])){
+                          $style='style="color:#CFCFCF;"';
+                          $checked ='style="color:#35cc2b;" checked disabled';
+                        }else{
+                          $style=' style="color:#000000;"';
+                          $checked ='disabled';
+                        }
+                        // 여기
+                        echo '<input id="'.((row+1)*$j+$i+1).'"  onclick="check_seat(\''.((row+1)*$j+$i+1).'\');" name="bus_seat_check" type="checkbox" value="'.((row+1)*$j+$i+1).'" '.$checked.'><b '.$style.'><label for="'.((row+1)*$j+$i+1).'">'.((row+1)*$j+$i+1).'</label></b>';
+                        echo "&nbsp;";
+                        if($j==col){
+                          echo "<br>";
+                          if($i==1){
+                            echo '<input  onclick="check_seat(\'last_seat\');" name="bus_seat_check" type="checkbox" id="last_seat" style="margin-left:'.margin.'px; margin-top:15px; margin-bottom:15px;" value="'.last.'" '.$checked.'><b '.$style.' ><label for="last_seat">'.last.'</label></b><br>';
+                          }
+                        }else if(((row+1)*$j+$i+1)==9 && !($bus=="1")){
+                           echo "&nbsp;&nbsp;";
+                        }
+                      }
+                    }
+                    ?>
+                    </div>
+                  </div>
+
+            </td>
+            <br><br><br><br><br><br><br><br><br>
+          </tr>
 
     <!-- 다음에디터 -->
       <tr><td><p>상세페이지</p></td><td>
@@ -751,39 +814,13 @@
     	</p>
     </textarea>
     <script type="text/javascript">
-    	// function loadContent() {
-    	// 	var attachments = {};
-    	// 	attachments['image'] = [];
-    	// 	attachments['image'].push({
-    	// 		'attacher': 'image',
-    	// 		'data': {
-    	// 			'imageurl': 'http://cfile273.uf.daum.net/image/2064CD374EE1ACCB0F15C8',
-    	// 			'filename': 'github.gif',
-    	// 			'filesize': 59501,
-    	// 			'originalurl': 'http://cfile273.uf.daum.net/original/2064CD374EE1ACCB0F15C8',
-    	// 			'thumburl': 'http://cfile273.uf.daum.net/P150x100/2064CD374EE1ACCB0F15C8'
-    	// 		}
-    	// 	});
-    	// 	attachments['file'] = [];
-    	// 	attachments['file'].push({
-    	// 		'attacher': 'file',
-    	// 		'data': {
-    	// 			'attachurl': 'http://cfile297.uf.daum.net/attach/207C8C1B4AA4F5DC01A644',
-    	// 			'filemime': 'image/gif',
-    	// 			'filename': 'editor_bi.gif',
-    	// 			'filesize': 640
-    	// 		}
-    	// 	});
-    	// 	/* 저장된 컨텐츠를 불러오기 위한 함수 호출 */
     		Editor.modify({
-
     			"content": document.getElementById("detail_content") /* 내용 문자열, 주어진 필드(textarea) 엘리먼트 */
     		});
     	// }
     </script>
     <!-- <div><button onclick='loadContent()'>SAMPLE - load contents to editor</button></div> -->
     <!-- End: Loading Contents -->
-
   </body>
 
 </html>

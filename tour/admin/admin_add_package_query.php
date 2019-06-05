@@ -172,22 +172,6 @@ if(!empty($_FILES['p_main_img1'])){
       alert_back('이미지가 없습니다!');
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }else{
     $main_img_copy1 = "";
 }
@@ -242,17 +226,6 @@ if(!empty($_FILES['p_main_img2'])){
     if(!move_uploaded_file($main_img_copy_tmp_name2, $uploaded_file2)){
       alert_back('이미지가 없습니다!');
     }
-
-
-
-
-
-
-
-
-
-
-
 
 }else{
     $main_img_copy2 = "";
@@ -310,24 +283,6 @@ if(!empty($_FILES['p_main_img3'])){
       alert_back('이미지가 없습니다!');
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }else{
     $main_img_copy3 = "";
     echo "<script>alert('메인 이미지3을 선택하세요');history.go(-1);</script>";
@@ -339,24 +294,6 @@ if(!empty($_POST['p_bus'])){
     echo "<script>alert('버스를 선택하세요');history.go(-1);</script>";
     return false;
 }
-
-  // echo "코드".$code; echo "<br>";
-  // echo "패키지명 ".$name; echo "<br>";
-  // echo "기간".$period; echo "<br>";
-  // echo "출발일".$dp_date; echo "<br>";
-  // echo "출발시간".$dp_time; echo "<br>";
-  // echo "도착시간".$arr_time; echo "<br>";
-  // echo "요금".$pay; echo "<br>";
-  // echo "추가요금".$add_pay; echo "<br>";
-  // echo "자유시간".$free_time; echo "<br>";
-  // echo "출발도시".$dp_city; echo "<br>";
-  // echo "도착도시".$arr_mt;echo "<br>";
-  // echo "내용".$detail_content; echo "<br>";
-  // echo "메인이미지1".$main_img1; echo "<br>";
-  // echo "메인이미지2".$main_img2; echo "<br>";
-  // echo "메인이미지3".$main_img3; echo "<br>";
-  // echo "버스".$bus; echo "<br>";
-
 
   $package_str = "";
       for($i=0;$i<2;$i++) {
@@ -373,16 +310,8 @@ if(!empty($_POST['p_bus'])){
   echo "<script>alert('종류를 입력하세요');history.go(-1);</script>";
   return false;
 }
-    // echo "항공".$airplane_number; echo "<br>";
-// alert($content);
-// alert($name);
+
 $bus_sql="INSERT INTO `santteut`.`bus`(`b_code`)VALUES('$code')";
-
-
-
-
-
-
 
 mysqli_query($conn, $bus_sql) or die(mysqli_error($conn));
 $sql= "INSERT INTO `package`
@@ -407,19 +336,13 @@ $sql= "INSERT INTO `package`
 `p_main_img_copy3`,
 `p_airplane_num`,
 `p_bus`)";
-// $sql.= "values ('$code', '$name', '$period', '$dp_date', '$dp_time', '$arr_time', '$pay', '$add_pay, '$free_time', '$dp_city',
-//  '$arr_mt', '$detail_content', '$main_img1', '$main_img2', '$main_img3', '$main_img_copy1', '$main_img_copy2', '$main_img_copy3', '$bus')";
+
 $sql.= "values ('$code', '$name', '$period', '$dp_date', '$dp_day', '$dp_time', '$arr_time', $pay, '$add_pay', '$free_time', '$dp_city','$arr_mt', '$detail_content', '$main_img_copy_name1', '$main_img_copy_name2', '$main_img_copy_name3', '$copied_file_name1', '$copied_file_name2', '$copied_file_name3', '$airplane_number', '$bus')";
 
-
-
 mysqli_query($conn, $sql) or die(mysqli_error($conn));
-
-
 
 mysqli_close($conn);
 echo "<script>alert('패키지가 등록되었습니다.')</script>";
 echo '<script>location.href="admin_add_package.php";</script>';
-
 
 ?>

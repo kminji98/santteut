@@ -59,7 +59,6 @@ if(isset($_GET["mode"])&&$_GET["mode"]=="search"){
   }
 
 }
-
 $result=mysqli_query($conn,$sql);
 $total_record=mysqli_num_rows($result);
 $total_pages=ceil($total_record/ROW_SCALE);
@@ -67,17 +66,13 @@ $page=(empty($_GET['page']))?1:$_GET['page'];
 if(isset($_POST['page'])){
   $page=(empty($_POST['page']))?1:$_POST['page'];
 }
-
 // 현재 블럭의 시작 페이지 = (ceil(현재페이지/블럭당 페이지 제한 수)-1) * 블럭당 페이지 제한 수 +1
 //[[  EX) 현재 페이지 5일 때 => ceil(5/3)-1 * 3  +1 =  (2-1)*3 +1 = 4 ]]
 $start_page= (ceil($page / PAGE_SCALE ) -1 ) * PAGE_SCALE +1 ;
-
 // 현재페이지 시작번호 계산함.
 //[[  EX) 현재 페이지 1일 때 => (1 - 1)*10 -> 0   ]]
 //[[  EX) 현재 페이지 5일 때 => (5 - 1)*10 -> 40  ]]
 $start_record=($page -1) * ROW_SCALE;
-
-
 // 현재 블럭 마지막 페이지
 // 전체 페이지가 (시작 페이지+페이지 스케일) 보다 크거나 같으면 마지막 페이지는 (시작페이지 + 페이지 스케일) -1 / 아니면 전체페이지 수 .
 //[[  EX) 현재 블럭 시작 페이지가 6/ 전체페이지 : 10 -> '10 >= (6+10)' 성립하지 않음 -> 10이 현재블럭의 가장 마지막 페이지 번호  ]]
@@ -186,8 +181,6 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
           }
         });
 
-
-
         $("input[name='review_btn']").click(function(event) {
 
           var modal = document.getElementById('myModal');
@@ -232,7 +225,6 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
               document.getElementById('cost_grade').disabled=true;
               document.getElementById('meal_grade').disabled=true;
               document.getElementById('content').disabled=true;
-
             })
             .fail(function() {
               console.log("error");
@@ -257,41 +249,25 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
           $("#member_review_insert_form").append("</div>");
           $("#modal-content").append("</form>");
           modal.style.display="block";
-
-
         });
-
-
-
       });
       function lastday(year, month){
         var res = new Date(year, month,0);
         res = res.getDate();
         return res;
       }
-
-
-
-
-
-
     </script>
   </head>
   <body>
-
     <?php
     $date2 =date("Y-m-d");
     $name2 = $_SESSION['name'];
     $id2 = $_SESSION['id'];
-
     ?>
-
     <div id="myModal" class="modal">
        <div class="modal-content" id="modal-content" style="width: 670px;">
-
         </div>
       </div>
-
       <form name="member_review_insert_form" action="member_review_query.php?mode=<?php if(isset($mode)) echo $mode;?>" method="post">
       <section id="review_section" style="display:none;" >
           <input type="hidden" name="r_pk" id="r_pk" value="<?php if(isset($r_pk)) echo $r_pk;?>">
@@ -321,7 +297,6 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
                     $selected='selected';
                   }
                   echo '<option value="'.$g.'" '.$selected.'>'.$g.'</option>';
-
                 }
                  ?>
               </select>
@@ -335,7 +310,6 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
                     $selected='selected';
                   }
                   echo '<option value="'.$g.'" '.$selected.'>'.$g.'</option>';
-
                 }
                  ?>
               </select>
@@ -349,7 +323,6 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
                     $selected='selected';
                   }
                   echo '<option value="'.$g.'" '.$selected.'>'.$g.'</option>';
-
                 }
                  ?>
               </select>
@@ -363,7 +336,6 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
                     $selected='selected';
                   }
                   echo '<option value="'.$g.'" '.$selected.'>'.$g.'</option>';
-
                 }
                  ?>
               </select>
@@ -380,13 +352,6 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
           </div>
       </section>
     </form>
-
-
-
-
-
-
-
 
     <form name="reserve_flag_form" action="reserve_list.php" method="post">
       <input type="hidden" name="reserve_flag" id="reserve_flag">
@@ -498,7 +463,6 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
       <input type="hidden" name="h_day1" id="h_day1" value="">
       <input type="hidden" name="h_day2" id="h_day2" value="">
       </form>
-
       <script type="text/javascript">
         function reserve_search_submit(){
           var year1 = document.getElementById('year1');
@@ -514,14 +478,12 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
           var h_month2 = document.getElementById('h_month2');
           var h_day1 = document.getElementById('h_day1');
           var h_day2 = document.getElementById('h_day2');
-
           h_year1.value = year1.value;
           h_year2.value = year2.value;
           h_month1.value = month1.value;
           h_month2.value = month2.value;
           h_day1.value = day1.value;
           h_day2.value = day2.value;
-
           document.reserve_search_form.submit();
         }
 
@@ -537,7 +499,6 @@ $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCA
       <fieldset id="list_field" >
          <h4 id="sub_title"><b class="symbol_greater_than">></b>산뜻 예약/결제</h4>
         <table id="list_tbl_head"><tr><td id="list_head_reserve">예약내역</td><td id="list_head_cancel">취소내역</td></tr></table>
-
         <table id="list_tbl_body">
           <?php
           if($id=="admin"){

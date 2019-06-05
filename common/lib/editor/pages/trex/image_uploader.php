@@ -6,10 +6,7 @@ $upfile_type= $_FILES['upload_file']['type'];
 $upfile_tmp_name= $_FILES['upload_file']['tmp_name'];
 $upfile_error= $_FILES['upload_file']['error'];
 $upfile_size= $_FILES['upload_file']['size'];
-
 $image_url = $url['root'].'files/' . $file_name;
-
-
 //2. 파일명과 확장자를 구분해서 저장한다.
 $file = explode(".", $upfile_name); //파일명과 확장자구분에서 배열저장
 $file_name = $file[0];              //파일명
@@ -17,7 +14,6 @@ $file_extension = $file[1];         //확장자
 
 //3.업로드될 폴더를 지정한다.
 $upload_dir ="../../data/"; //업로드된파일을 저장하는장소지정
-
 //4.파일업로드가성공되었는지 점검한다. 성공:0 실패:1
 //파일명이 중복되지 않도록 임의파일명을 정한다.
 if(!$upfile_error){
@@ -27,27 +23,17 @@ if(!$upfile_error){
   $uploaded_file = $upload_dir.$copied_file_name;
   // $uploaded_file = "./data/2019_04_22_15_09_30_0.jpg";
 }
-
 //5 업로드된 파일사이즈(2mb)를 체크해서 넘어버리면 돌려보낸다.
 if($upfile_size>2000000){
     alert_back('2. 파일사이즈가 500KB이상입니다.');
 }
-
 //6 업로드된 파일확장자를 체크한다.  "image/gif"
-// $type=explode("/", $upfile_type);
 $file_type = $upfile_type;
-// switch ($type[1]) {
-//   case 'gif': case 'jpg': case 'png': case 'jpeg':
-//   case 'pjpeg': break;
-//   default:alert_back('3. gif jpg png 확장자가아닙니다.');
-// }
-
 //7. 임시저장소에 있는 파일을 서버에 지정한 위치로 이동한다.
 if(!move_uploaded_file($upfile_tmp_name, $uploaded_file)){
   alert_back('4. 서버 전송에러!!');
 }
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -77,15 +63,11 @@ if(!move_uploaded_file($upfile_tmp_name, $uploaded_file)){
             'originalurl': '<?php echo "http://localhost/santteut/common/lib/editor/data/".$copied_file_name; ?>',
             'thumburl': '<?php echo "http://localhost/santteut/common/lib/editor/data/".$copied_file_name; ?>'
         };
-
         execAttach(_mockdata);
         closeWindow();
-
     }
-// ]]>
 </script>
 </head>
 <body onload="initUploader();">
-
 </body>
 </html>

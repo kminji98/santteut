@@ -7,7 +7,6 @@
 =================================================================
 */
 session_start();
-
   if(isset($_GET['p_code'])){
     $p_code=$_GET['p_code'];
     $p_name=$_GET['p_name'];
@@ -18,7 +17,6 @@ session_start();
   }else{
     echo "안됨";
   }
-
 ?>
 <!DOCTYPE html>
 <html lang="ko" dir="ltr">
@@ -29,7 +27,6 @@ session_start();
     <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/side_bar.css?ver=0">
   <title>산뜻 :: 즐거운 산행</title>
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
-
   </head>
   <body>
     <div id="wrap">
@@ -42,7 +39,6 @@ session_start();
     <div id="cart_list">
       <h2 id="title" >예약완료</h2>
       <div id="done_content">
-
       <h3 id="done_text">예약이 정상적으로 완료되었습니다</h3>
       <p id="p1">예약정보는 <b>예약 내역확인</b>에서 다시 확인하실 수 있으며, 이메일로도 확인 가능합니다.</p>
       <p id="p2">※고객님! 예금주가 산뜻인지 확인해주세요. 산뜻은 고객 직접입금을 권장합니다.</p>
@@ -59,14 +55,12 @@ session_start();
           <tr>
             <td class="tbl_left">예약인원</td>
             <td>"총 <?=$member_num?>명 (성인 <?=$adult_val?>명||아동 <?=$kid_val?>명||유아 <?=$baby_val?>명)"</td>
-
           </tr>
         </table>
         <br>
         <a href="./reserve_list.php"><input type="button" id="res_btn" value="예약내역 확인하기" ></a>
       </fieldset>
       </div>
-
     </div> <!-- end of div "reserve_list" -->
     <footer> <?php include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/footer.php";?> </footer>
     </div>  <!-- end of div "wrap" -->

@@ -1,8 +1,6 @@
 <?php
 session_start();
 include $_SERVER['DOCUMENT_ROOT']."/santteut/common/lib/db_connector.php";
-
-
 if($_GET['id']){
  $id = $_GET['id'];
  $sql="SELECT * from `member` where `id`= '$id';";
@@ -30,14 +28,9 @@ if($_GET['id']){
  }elseif ($h1=="019") {
    $selected9='selected';
  }
-
-
-
 }else{
   echo "오류";
 }
-
-
  ?>
 <!DOCTYPE html>
 <html lang="ko" dir="ltr">
@@ -372,10 +365,7 @@ if($_GET['id']){
         e_mail_adress_2.value=null;
         e_mail_adress_2.placeholder="";
         e_mail_adress_2.readOnly=false;
-
       }
-
-
     }
     </script>
 
@@ -388,7 +378,6 @@ if($_GET['id']){
          var join_zip = document.getElementById("join_zip");
          var join_foundational = document.getElementById("join_foundational");
          var join_detail = document.getElementById("join_detail");
-
 
          var join_id_Patt = /^[a-zA-Z0-9]{3,15}$/;
          var join_passwd_Patt = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
@@ -422,9 +411,7 @@ if($_GET['id']){
            join_detail.value="";
            return false;
          }
-
          document.join_member_form.submit();
-         // alert("성공");
       }
     </script>
 
@@ -445,13 +432,11 @@ if($_GET['id']){
         <input type="hidden" name="mode" value="id_check">
         <div class="join_form">
           <h3>정보수정</h3>
-
           <table  id="table1">
             <!--필수입력사항-->
             <tr>
               <td id="join_tr1" colspan="4"><span>*</span> 필수입력사항</td>
             </tr>
-
             <!--아이디-->
             <tr>
               <th><label>아이디</label>&nbsp;<span>*</span></th>
@@ -460,39 +445,32 @@ if($_GET['id']){
                ?> -->
               <td  colspan="3"><input id="join_id" type="text" name="join_id" placeholder="대/소문자/숫자 3글자 이상 15글자이하" disabled size="40"  value="<?=$id?>"><p id="possibility" style="display:inline; font-size:13px;"></p></td>
             </tr>
-
             <!--비밀번호-->
             <tr>
               <th><label>비밀번호</label>&nbsp;<span>*</span></th>
               <td  colspan="3"><input id="join_passwd" type="password" name="join_passwd" placeholder="특수문자/문자/숫자 모두포함(8~15)" size="40"><p id="possibility_pw1" style="display:inline; font-size:13px;"></td>
             </tr>
-
             <!--비밀번호확인-->
             <tr>
               <th>&nbsp;<label>비밀번호확인</label>&nbsp;<span>*</span></th>
               <td colspan="3"><input id="join_passwdconfirm" type="password" name="join_passwdconfirm" placeholder="특수문자/문자/숫자 모두포함(8~15)" size="40"><p id="possibility_pw2" style="display:inline; font-size:13px;"></p>
             </tr>
-
             <!--이름-->
             <tr>
               <th><label>이름</label>&nbsp;<span>*</span></th>
               <td colspan="3"><input value="<?=$name1?>" placeholder="2~5글자" id="join_name" type="text" name="join_name" size="40"></td>
             </tr>
-
             <!--주소_우편번호-->
             <tr>
               <th rowspan="3"><label>주소</label>&nbsp;<span>*</span></th>
               <td colspan="3" id="td_this"><input value="<?=$zip?>" readonly id="join_zip" type="text" name="join_zip" size="10">
                 <button type="button" name="button" id="zip_btn" onclick="execDaumPostcode()" >우편번호</button>
               </td>
-
             </tr>
-
             <!--주소_기본-->
             <tr>
               <td colspan="3"><input readonly id="join_foundational" type="text" name="join_foundational" value="<?=$address1?>" placeholder="기본주소" size="40"></td>
             </tr>
-
             <!--주소_상세-->
             <tr>
               <td colspan="3"><input id="join_detail" type="text" name="join_detail" value="<?=$address2?>" placeholder="상세주소" size="40"></td>
@@ -538,13 +516,8 @@ if($_GET['id']){
                   <option <?=$selected8?> id="join_select_5" value="018">018</option>
                   <option <?=$selected9?> id="join_select_6" value="019">019</option>
                 </select>
-
               <input disabled id="join_phone_write" type="tel" name="join_cellphone" size="19" maxlength="8">
               <input disabled type="hidden" name="hidden_phone">
-              <!-- <button id="hp_btn" type="button" name="button" >인증하기</button> <br>
-              <input id="cellphone_authentication" type="text" name="cellphone_authentication" placeholder="인증번호를 입력하세요." size="25" style="display:none; ">
-              <button id="hp_btn_done" type="button" name="button" style="display:none; ">확인</button><p id="final_phone_check" style="display:inline; "></p> -->
-              </td>
             </tr>
           </table>
           <!--인증번호입력-->

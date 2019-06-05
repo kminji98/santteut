@@ -6,7 +6,6 @@
 <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/santteut/common/css/best3.css?ver=3">
 <body>
 <?php
-
 $divide_flag='';
   if(isset($_GET['divide'])){
     switch ($_GET['divide']) {

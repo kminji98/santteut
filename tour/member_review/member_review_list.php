@@ -7,66 +7,50 @@ $sql = "SELECT avg(satisfaction_grade), avg(schedule_grade), avg(cost_grade), av
 $result = mysqli_query($conn,$sql) or die(mysqli_error($conn));
 $row = mysqli_fetch_array($result);
 $satisfaction_grade = $row['avg(satisfaction_grade)'];
-if($satisfaction_grade==NULL){
-  $satisfaction_grade=0;
-}
-$schedule_grade = $row['avg(schedule_grade)'];
-if($schedule_grade==NULL){
-  $schedule_grade=0;
-}
-$cost_grade = $row['avg(cost_grade)'];
-if($cost_grade==NULL){
-  $cost_grade=0;
-}
-$meal_grade = $row['avg(meal_grade)'];
-if($meal_grade==NULL){
-  $meal_grade=0;
-}
-$average_grade = $row['avg((satisfaction_grade+schedule_grade+cost_grade+meal_grade)/4)'];
-if($average_grade==NULL){
-  $average_grade=0;
-}else{
-  $average_grade = round($average_grade, 1);
-}
-
-
+  if($satisfaction_grade==NULL){
+    $satisfaction_grade=0;
+  }
+  $schedule_grade = $row['avg(schedule_grade)'];
+  if($schedule_grade==NULL){
+    $schedule_grade=0;
+  }
+  $cost_grade = $row['avg(cost_grade)'];
+  if($cost_grade==NULL){
+    $cost_grade=0;
+  }
+  $meal_grade = $row['avg(meal_grade)'];
+  if($meal_grade==NULL){
+    $meal_grade=0;
+  }
+  $average_grade = $row['avg((satisfaction_grade+schedule_grade+cost_grade+meal_grade)/4)'];
+  if($average_grade==NULL){
+    $average_grade=0;
+  }else{
+    $average_grade = round($average_grade, 1);
+  }
 $id=isset($_SESSION['id'])?$_SESSION['id']:'';
 $r_code = isset($_GET["code"]);
-
 define('ROW_SCALE', 5);
 define('PAGE_SCALE', 5);
-
-
 $after_sql = "SELECT * FROM `member_review` where `r_code`='$p_code';";
 $after_result = mysqli_query($conn,$after_sql);
 $total_record=mysqli_num_rows($after_result);
-
 // 조건?참:거짓
 $total_pages=ceil($total_record/ROW_SCALE);
-
-
 // 페이지가 없으면 디폴트 페이지 1페이지
 $page=(empty($_GET['page']))?1:$_GET['page'];
-
-
 
 // 현재 블럭의 시작 페이지 = (ceil(현재페이지/블럭당 페이지 제한 수)-1) * 블럭당 페이지 제한 수 +1
 //[[  EX) 현재 페이지 5일 때 => ceil(5/3)-1 * 3  +1 =  (2-1)*3 +1 = 4 ]]
 $start_page= (ceil($page / PAGE_SCALE ) -1 ) * PAGE_SCALE +1 ;
-
-
 // 현재페이지 시작번호 계산함.
 //[[  EX) 현재 페이지 1일 때 => (1 - 1)*10 -> 0   ]]
 //[[  EX) 현재 페이지 5일 때 => (5 - 1)*10 -> 40  ]]
 $start_record=($page -1) * ROW_SCALE;
-
-
 // 현재 블럭 마지막 페이지
 // 전체 페이지가 (시작 페이지+페이지 스케일) 보다 크거나 같으면 마지막 페이지는 (시작페이지 + 페이지 스케일) -1 / 아니면 전체페이지 수 .
 //[[  EX) 현재 블럭 시작 페이지가 6/ 전체페이지 : 10 -> '10 >= (6+10)' 성립하지 않음 -> 10이 현재블럭의 가장 마지막 페이지 번호  ]]
 $end_page= ($total_pages >= ($start_page + PAGE_SCALE)) ? $start_page + PAGE_SCALE-1 : $total_pages;
-
-
 ?>
 <!-- Load the AJAX API -->
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -124,7 +108,6 @@ a{text-decoration: none;}
   </tr>
 <?php
 mysqli_data_seek($after_result,$start_record);
-
 for ($record = $start_record; $record  < $start_record+ROW_SCALE && $record<$total_record; $record++){
   //예약날짜/ 예약 코드/ 상품명/ 총 결제금액/ 인원/ 출발일*귀국일 / 예약/결제상태 /취소 / 후기
   $row = mysqli_fetch_array($after_result);
@@ -139,12 +122,9 @@ for ($record = $start_record; $record  < $start_record+ROW_SCALE && $record<$tot
   $avg_grade = ($satisfaction_grade+$schedule_grade+$cost_grade+$meal_grade)/4;
   $avg_grade = round($avg_grade,1);
   $pk = $row['r_pk'];
-
-
  ?>
  <script type="text/javascript">
  function message_form(){
-
    var popupX = (window.screen.width/2) - (600/2);
    var popupY = (window.screen.height/2) - (400/2);
    window.open('../member_review/member_review2.php?mode=view&r_pk=<?=$pk?>','','left='+popupX+',top='+popupY+', width=800, height=430, status=no, scrollbars=no');
@@ -161,14 +141,11 @@ for ($record = $start_record; $record  < $start_record+ROW_SCALE && $record<$tot
   </table>
   <!--$page 는 현재페이지를 의미 x / 각 페이지를 의미-->
         <div class="page_button_group">
-
           <?php
           //현재 블럭의 시작 페이지가 페이지 스케일 보다 클 때 -> 처음으로 버튼 생성 + 이전 블럭 존재
           //[ex]  page가 9개 있고 현재 페이지가 6페이지인 경우  / 12345/ 6789     =>  <<(처음으로) <(이전) 6 7 8 9
           if( $start_page > PAGE_SCALE ){
-
             // echo( '<a href='package_list.php?page=1'> << </a>' );
-
             // 이전 블럭 클릭 시 -> 현재 블럭의 시작 페이지 - 페이지 스케일
             // 현재 6 page 인 경우 '<(이전블럭)' 클릭 -> $pre_page = 6-PAGE_SCALE  -> 1 페이지로 이동
             $pre_block= $start_page - PAGE_SCALE;
@@ -194,8 +171,6 @@ for ($record = $start_record; $record  < $start_record+ROW_SCALE && $record<$tot
                echo( '<a href="package_list.php?page='.$pre_block.'&divide='.$divide.'"><button type="button" name="button" title="이전"><</button></a>');
              }
           }
-
-
           //현재 블럭에 해당하는 페이지 나열
           for( $i = $start_page; $i <= $end_page; $i++ ){
               //현재 블럭에 현재 페이지인 버튼

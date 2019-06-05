@@ -5,13 +5,11 @@ if(isset($_SESSION['id'])){
 }else{
   $id = "";
 }
-
 if(isset($_SESSION['name'])){
   $name = $_SESSION['name'];
 }else{
   $name = "";
 }
-
 if(isset($_GET['send_id'])){
   $receive_id = $_GET['send_id'];
 }else{
@@ -37,7 +35,6 @@ if(isset($_GET['send_id'])){
           }
         }
       }
-
     </script>
   </head>
   <body>

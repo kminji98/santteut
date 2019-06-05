@@ -1,17 +1,17 @@
 <?php
 date_default_timezone_set("Asia/Seoul");
 
-// $servername = "localhost";
-// $username = "root";
-// $password = "123456";
+$servername = "localhost";
+$username = "root";
+$password = "123456";
 // $servername = "192.168.0.58";
 // $username = "santteut";
 // $password = "!@#$%^123456";
 
 
-$servername = "192.168.0.181";
-$username = "santteut";
-$password = "!@#$%^123456";
+// $servername = "192.168.0.181";
+// $username = "santteut";
+// $password = "!@#$%^123456";
 // 1 .Create connection mysql -u root -p 123456 -h 192.168.0.230
 $conn = mysqli_connect($servername, $username, $password);
 if (!$conn){ die("Connection failed: " . mysqli_connect_error());}

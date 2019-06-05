@@ -1,12 +1,10 @@
 <?php
-
   $mode = 'send';
   if(isset($_POST["phone"])){
     $phone =$_POST["phone"];
   }else{
     return false;
   }
-
 function SocketPost($posts) {
    $host = "jmunja.com";
    $target = "/sms/web/api.php";
@@ -17,7 +15,6 @@ function SocketPost($posts) {
       $postValues .= urlencode($name)."=".urlencode( $value )."&";
       $postValues = substr($postValues, 0, -1);
    }
-
    $postLength = strlen($postValues);
    $request = "POST $target HTTP/1.0\r\n";
    $request .= "Host: $host\r\n";
@@ -34,7 +31,6 @@ function SocketPost($posts) {
    $std_bar = ":header_stop:";
    return substr($ret,(strpos($ret,$std_bar)+strLen($std_bar)));
 }
-
 if($mode == "send") {
    //UTF-8로 데이터를 전송해야 합니다.
 
@@ -54,7 +50,6 @@ if($mode == "send") {
    $array['title']   = $title; //제목
    $array['message'] = $message; //내용
    $array['reqlist'] = $hp; //수신자: 휴대폰번호|휴대폰번호|휴대폰번호
-
    $ret = SocketPost($array);
    if($ret){
      echo $code;

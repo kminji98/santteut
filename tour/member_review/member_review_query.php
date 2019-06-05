@@ -9,10 +9,8 @@ $content = $sql= $result = $name=$q_title=$q_content=$regist_day=$hit=$secret_ok
 $name = $_SESSION['name'];
 $id = $_SESSION['id'];
 $date =date("Y-m-d");
-
 //mode가 insert일때
 if(isset($_GET["mode"]) && $_GET["mode"]=="insert"){
-
     $title = trim($_POST["title"]);
     $content = trim($_POST["content"]);
     $r_pk = $_GET["r_pk"];
@@ -20,43 +18,27 @@ if(isset($_GET["mode"]) && $_GET["mode"]=="insert"){
     $schedule_grade = $_POST["schedule_grade"];
     $cost_grade = $_POST["cost_grade"];
     $meal_grade = $_POST["meal_grade"];
-
-
     if(empty($content)||empty($title)){
       alert_back('1. 내용이나제목입력요망!');
       exit;
     }
-
     $q_title  = trim($_POST["title"]);
     $q_content = trim($_POST["content"]);
     $q_title = mysqli_real_escape_string($conn, $title);
     $q_content = mysqli_real_escape_string($conn, $content);
-
-    //r_code 를 r_pk 로 찾아서 삽입
-
     $sql1="SELECT `r_code` from reserve where `r_pk`= '$r_pk';";
     $result1 = mysqli_query($conn,$sql1);
     if (!$result1) {alert_back('Error: 6' . mysqli_error($conn));}
-
     $row1=mysqli_fetch_array($result1);
     $r_code=$row1['r_code'];
-
-
     $sql2="INSERT INTO `member_review` VALUES (null,'$r_code','$r_pk','$q_title','$q_content','$id','$name','$date','$satisfaction_grade','$schedule_grade','$cost_grade','$meal_grade');";
-
     $result2 = mysqli_query($conn,$sql2);
     if (!$result2) {alert_back('Error:5 ' . mysqli_error($conn));}
-
-
     echo "<script>alert('후기등록완료! 소중한 후기 감사합니다.');history.go(-1);</script>";
-    // // echo "opener.location.replace('../reserve/reserve_list.php');";
-    // echo "window.close();</script>";
-
 }else if(isset($_GET["mode"]) && $_GET["mode"]=="delete"){
     //1. 삭제할 해당 게시물의 넘버
     $num = test_input($_GET["num"]);
     $q_num = mysqli_real_escape_string($conn, $num);
-
     //2. 해당게시물의 ord/depth/groupnum 을 가져온다.
     $sql = "SELECT ord,depth,groupnum from qna where num = $q_num";
     // 쿼리문실행문장
@@ -65,8 +47,6 @@ if(isset($_GET["mode"]) && $_GET["mode"]=="insert"){
     $ord = $row['ord'];
     $depth = $row['depth'];
     $groupnum = $row['groupnum'];
-
-
     //3. 해당게시물의 답변글들의 범위 체크
     //3-1. 해당게시물과 같은 depth 가 있는 경우.
     //3-1-1. min(ord) = 삭제할 게시물의 depth 와 같고/ ord가 크고 / 그룹넘버가 같은 레코드 중 최소 ord 값
@@ -76,18 +56,14 @@ if(isset($_GET["mode"]) && $_GET["mode"]=="insert"){
     $min_ord = $row['min(ord)'];
     //3-1-2. 삭제할 게시물의 범위 : 해당게시물 이상 min(ord)미만
     $sql ="DELETE FROM `qna` WHERE `ord`>=$ord and `ord`<$min_ord;";
-
     //3-2. 해당게시물과 같은 depth 가 없는 경우.
     if(empty($min_ord)){
       $sql ="DELETE FROM `qna` WHERE `ord`>=$ord";
     }
-
       $result = mysqli_query($conn,$sql);
       if (!$result) {alert_back('Error: 6' . mysqli_error($conn));}
-
     mysqli_close($conn);
     echo "<script>location.href='./qna_list.php?page=1';</script>";
-
 }else if(isset($_GET["mode"])&&$_GET["mode"]=="update"){
   $content = trim($_POST["content"]);
   $title = trim($_POST["title"]);
